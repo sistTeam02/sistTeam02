@@ -100,3 +100,4 @@ target/
 *.project
 pom.xml
 pom.properties
+MANIFEST.MF
