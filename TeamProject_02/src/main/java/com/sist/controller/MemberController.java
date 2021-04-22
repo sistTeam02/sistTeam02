@@ -7,6 +7,7 @@ import java.util.*;
 import com.sist.vo.*;
 @Controller
 public class MemberController {
+	
 	@Autowired
 	private MemberDAO mDao;
 	

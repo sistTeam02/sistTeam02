@@ -1,8 +1,8 @@
 package com.sist.dao;
-/*
- * 	회원
- */
 
+import javax.annotation.Resource;
+
+@Resource
 public class MemberDAO {
 	
 }

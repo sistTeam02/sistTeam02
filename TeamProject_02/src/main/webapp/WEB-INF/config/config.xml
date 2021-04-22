@@ -5,8 +5,12 @@
 <configuration>
   <typeAliases>
     <typeAlias type="com.sist.vo.MemberVO" alias="MemberVO"/>
+    <typeAlias type="com.sist.vo.GoodsVO" alias="GoodsVO"/>
+    <typeAlias type="com.sist.vo.HometVO" alias="HometVO"/>
   </typeAliases>
   <mappers>
-    <mapper resource="com/sist/dao/member-mapper.xml"/>
+    <mapper resource="com/sist/mapper/member-mapper.xml"/>
+    <mapper resource="com/sist/mapper/goods-mapper.xml"/>
+    <mapper resource="com/sist/mapper/homet-mapper.xml"/>
   </mappers>
 </configuration>
