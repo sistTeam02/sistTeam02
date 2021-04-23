@@ -100,4 +100,4 @@ hs_err_pid*
 *.project
 pom.properties
 MANIFEST.MF
-
+pom.xml
