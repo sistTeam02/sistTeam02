@@ -26,6 +26,18 @@
      margin-top: 4em;
      background-color: #fdf3f4;
      overflow-y: auto;
+     overflow-x: hidden
+}
+.phone-button{
+	 background-color: #fdf3f4;
+	 height: 8em;
+	 border-bottom-left-radius: 22px;
+	 border-bottom-right-radius: 22px;
+}
+.select{
+	 border: 1px solid black;
+     height: 40em;
+     margin-top: 4em;
 }
 .phone ul{list-style: none; width: 100%;
 
@@ -36,19 +48,52 @@
 .message{
 	font-size: 18px;
 	word-break: break-all;
-	background-color: white;
 	border-radius: 10px;
     padding: 7px;
 		}
 .box{
-
 	max-width: 75%;
 	margin: 3px 17px;
 }
 #user{
 	float: right;
 }
+.pBtn{
+	      background-color: #fff;
+    border: 1px solid #8e8b8be8;
+    width: 165px;
+    display: inline-block;
+    margin-top: 5px;
+    border-radius: 50px;
+    margin-inline-start: 57px;
+}
+.pBtn:hover{
+	background-color: #e4898903;
+}
+#pbtn5{
+    margin-inline: 11em;
+}
 </style>
+<script type="text/javascript" src="https://code.jquery.com/jquery.js"></script>
+<script type="text/javascript">
+$(function () {
+	let id=admin;  /* 임시아이디 */
+	$('#pBtn1').click(function() {
+		$('#bot_msg').text('먹은걸 알려줘');
+		$('#bot_msg').css("background-color", "#FFF");
+		$.ajax({
+			type:'POST',
+			url:'chat/chat_userData.do',
+			data:{id:'id'},   /* 세션id */
+			success:function(result){
+				$('.select').html(result);
+			}
+		})
+	});
+});
+
+
+</script>
 </head>
 <body>
 	<div class="wrapper">
@@ -59,22 +104,38 @@
 					<!-- 봇 -->
 						<li class="left">
 							<div class="box" id="bot">
-								<span class="message">오늘 뭐먹었니</span>
+								<span class="message" id="bot_msg"></span>
 							</div>
 						</li>
 					<!-- 사용자 -->
-					<c:forEach begin="0" end="30" step="1">
+					
 						<li class="right">
 							<div class="box" id="user">			
-								<span class="message">몰라</span>
+								<span class="message"></span>
 							</div>
 						</li>		
-				</c:forEach>
+				
+					</ul>
+				</div>
+				<div class="phone-button">
+					<ul style="list-style: none;">
+						<li><button class="pBtn" id="pBtn1">나 뭐 먹었어</button>
+							<button class="pBtn" id="pBtn2">달력 보여줘?</button>
+						</li>
+						<li><button class="pBtn" id="pBtn3">안녕</button>
+							<button class="pBtn" id="pBtn4">뭐 먹지</button>
+						</li>
+						<li><button class="pBtn" id="pBtn5">몸무게 변경할래</button>
+						</li>
 					</ul>
 				</div>
 			</div>
 			<div class="col-sm-7">
+			  <div class="select">
+			  	
 			 	사용자 입력
+			
+			  </div>
 			</div>
 		</div>
 	</div>
