@@ -8,7 +8,7 @@ import com.sist.vo.*;
 @Controller
 public class MemberController {
 	
-	@Autowired
-	private MemberDAO mDao;
+//	@Autowired
+//	private MemberDAO mDao;
 	
 }
