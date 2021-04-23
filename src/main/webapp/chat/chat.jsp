@@ -77,18 +77,12 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
 $(function () {
-	let id=admin;  /* 임시아이디 */
 	$('#pBtn1').click(function() {
 		$('#bot_msg').text('먹은걸 알려줘');
 		$('#bot_msg').css("background-color", "#FFF");
-		$.ajax({
-			type:'POST',
-			url:'chat/chat_userData.do',
-			data:{id:'id'},   /* 세션id */
-			success:function(result){
-				$('.select').html(result);
+		
 			}
-		})
+		});
 	});
 });
 
@@ -132,9 +126,15 @@ $(function () {
 			</div>
 			<div class="col-sm-7">
 			  <div class="select">
-			  	
-			 	사용자 입력
-			
+			  <table class="table">
+			  	<tr>
+			  		<th>음식</th>
+			  		<th>칼로리</th>
+			  	</tr>
+			  	<tr>
+			  				
+			  	</tr>
+			  </table>
 			  </div>
 			</div>
 		</div>
