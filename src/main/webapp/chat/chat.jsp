@@ -34,7 +34,6 @@
 .phone ul li.left { text-align: left; }
 .phone ul li.right { text-align: right; }
 .message{
-	
 	font-size: 18px;
 	word-break: break-all;
 	background-color: white;
