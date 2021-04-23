@@ -26,7 +26,7 @@
                 <div class="row">
                     <div class="col-lg-2 col-md-2">
                         <div class="logo">
-                            <a href="./index.html">
+                            <a href="../main/main.do">
                                 <img src="../img/logo.png" alt="">
                             </a>
                         </div>
@@ -129,7 +129,7 @@
                                 <li><a href="#">Kid's</a></li>
                             </ul>
                         </li>
-                        <li><a href="./blog.html">Blog</a></li>
+                        <li><a href="../chat/chat_main.do">채팅</a></li>
                         <li><a href="./contact.html">Contact</a></li>
                         <li><a href="#">Pages</a>
                             <ul class="dropdown">
