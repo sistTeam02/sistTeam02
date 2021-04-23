@@ -98,7 +98,6 @@ hs_err_pid*
 */target/*
 *.classpath
 *.project
-pom.xml
 pom.properties
 MANIFEST.MF
 
