@@ -95,10 +95,10 @@ hs_err_pid*
 
 ### Java-Web ###
 ## ignoring target file
-target/
+*/target/*
 *.classpath
 *.project
 pom.xml
 pom.properties
 MANIFEST.MF
-/TeamProject_02/
+
