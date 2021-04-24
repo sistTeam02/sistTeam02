@@ -5,11 +5,20 @@ import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import com.sist.*;
+import com.sist.vo.ChatVO;
 import com.sist.vo.KcalVO;
 
 import java.util.*;
-
-public class ChatDAO{
-
+@Repository
+public class ChatDAO extends SqlSessionDaoSupport{
+	@Autowired
+	public void setSqlSessionFactory(SqlSessionFactory sqlSessionFactory) {
+		// TODO Auto-generated method stub
+		super.setSqlSessionFactory(sqlSessionFactory);
+	}
+	public void insertFoodData(ChatVO vo){
+		getSqlSession().insert("chatInsertData",vo);
+	}
+	
 	
 }
