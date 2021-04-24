@@ -6,6 +6,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+ <link href="https://fonts.googleapis.com/css?family=Muli:300,400,500,600,700,800,900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
 <style type="text/css">
 .wrapper{
 	margin: 0px auto;
@@ -79,6 +81,24 @@
     width: 10em;
     border: 1px dotted black;
 }
+th[class^=page]{
+	cursor: pointer;
+}
+table[class^=table]{
+	position: absolute;
+}
+.table2{
+	display: none;
+	width: 750px;
+	height: 26em;
+}
+.table2 tr td{
+	border: 1px solid #0000003b;
+	text-align: left;
+}
+.table2 tr td:hover{
+    background-color: #fdf3f46b;
+}
 </style>
 <script type="text/javascript" src="https://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
@@ -150,7 +170,35 @@ $(function(){
 		imgIndex++;
 		$('.phone').scrollTop($('.phone')[0].scrollHeight);
 	});
+	$('th[class^=page]').click(function() {
+		let classno=$(this).attr("class");
+		classno=classno.substr(4, 1);
+		$('table[class^=table]').hide();
+		$('.table'+classno).show();
+	});
+	let year=2022;
 	
+	let month=2;/* 나중에자바로처리 */
+
+	let daynum=year*365+(parseInt(year/4)-parseInt(year/100)+parseInt(year/400));
+	
+	  let monthArr=new Array(31,28,31,30,31,30,31,31,30,31,30,31);
+	  if(year%4==0 && year%100!=0 ||year%400==0){
+			monthArr[1]=29;
+		}
+	  let day=0;
+	  for(i=0;i<month-1;i++){
+		  day+=monthArr[i];
+	  }
+	  day=(daynum+day)%7; /* 월요일부터  첫째날 */
+	  if(day==6){  /* 일요일처리 */
+		  day=-1;
+	  }
+	  for(i=1;i<=monthArr[month-1];i++){
+		 $('#date'+parseInt(i+day)).text(i);
+		 
+	  }
+	  
 });
 </script>
 </head>
@@ -196,12 +244,13 @@ $(function(){
 			  <div class="select">
 			  <table class="category_user" style="width: 100%;">
 			  	<tr style="border-bottom: 1px solid black;">
-			  		<th>음식저장</th>
-			  		<th>달력</th>
-			  		<th>추천?</th>
+			  		<th class="page1">음식저장</th>
+			  		<th class="page2">달력</th>
+			  		<th class="page3">추천?</th>
 			  	</tr>
 			  </table>
-			    <table class="table">
+			  <div class="page_div">
+			    <table class="table1">
 			    	<tr>
 			    		<td width="40%">
 			    			<div id="img_span" name="image"></div>
@@ -211,7 +260,40 @@ $(function(){
 				  			<input type="button" value="등록" id="img_IBtn">
 				  		</td>
 			  	    </tr>
-			    </table>
+				</table>
+				<table class="table2">
+					<tr>
+					<c:forEach begin="1" end="7" step="1" varStatus="s">
+						<td id="date${s.index }"></td>
+					</c:forEach>
+					</tr>
+					<tr>
+					<c:forEach begin="8" end="14" step="1" varStatus="s">
+						<td id="date${s.index }"></td>
+					</c:forEach>
+					</tr>
+					<tr>
+					<c:forEach begin="15" end="21" step="1" varStatus="s">
+						<td id="date${s.index }"></td>
+					</c:forEach>
+					</tr>
+					<tr>
+					<c:forEach begin="22" end="28" step="1" varStatus="s">
+						<td id="date${s.index }"></td>
+					</c:forEach>
+					</tr>
+					<tr>
+					<c:forEach begin="29" end="35" step="1" varStatus="s">
+						<td id="date${s.index }"></td>
+					</c:forEach>
+					</tr>
+						<tr>
+					<c:forEach begin="36" end="42" step="1" varStatus="s">
+						<td id="date${s.index }"></td>
+					</c:forEach>
+					</tr>
+				</table>
+			    </div>
 			  </div>
 			</div>
 		</div>
