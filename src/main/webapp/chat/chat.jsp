@@ -51,11 +51,11 @@
 	font-size: 18px;
 	word-break: break-all;
 	border-radius: 10px;
-    padding: 7px;
+    padding: 4px;
     background-color: wheat;
 		}
 .box{
-	max-width: 75%;
+	max-width: 60%;
 	margin: 3px 17px;
 }
 #user,div[id^=user_img]{
@@ -85,7 +85,7 @@ th[class^=page]{
 	cursor: pointer;
 }
 table[class^=table]{
-	position: absolute;
+	
 }
 .table2{
 	display: none;
@@ -99,22 +99,54 @@ table[class^=table]{
 .table2 tr td:hover{
     background-color: #fdf3f46b;
 }
+.table1{
+	float: left;
+    width: 370px;
+    height: 100px;
+}
+.table1 tr{
+ height: 30px;
+}
+.table1 tr td{
+height: 30px;
+}
+.timeBtn{
+    background-color: rgb(84 91 99 / 14%);
+    border: none;
+    border-radius: 8px;
+    margin: 10px 5px 0px 6px;
+}
 </style>
 <script type="text/javascript" src="https://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
 $(function () {
-
+	/* 나 머먹었어 */
 	$('#pBtn1').click(function() {
 		$('.phone > ul').append(
 				"<li class='left'>"+
 				"<div class='box' id='bot'>"+
-					"<span class='message' id='bot_msg'>먹은걸 알려줘</span>"+
+					"<span class='message' id='bot_msg'>먹은걸 알려주세요</span>"+
 				"</div>"+
 			"</li>"
 		);
 		$('.massage').css("background-color", "#FFF");
 		
 		$('.phone').scrollTop($('.phone')[0].scrollHeight);	/* 스크롤처리 */
+	});
+	/* 안녕? */
+	$('#pBtn3').click(function() {
+		$('.phone > ul').append(
+				"<li class='right'>"+
+				"<div class='box' id='user'>"+			
+				"<span class='message' id='user_msg'>안녕?</span>"+
+				"</div>"+
+			"</li>"+
+			"<li class='left'>"+
+			"<div class='box' id='bot'>"+
+				"<span class='message' id='bot_msg'>안녕하세요! 앞으로 잘부탁해요  xx와함께 건강한 다이어트 해봐요</span>"+
+			"</div>"+
+		"</li>"
+		);
 	});
 });
 $(function(){
@@ -151,7 +183,12 @@ $(function(){
     }
     
     });
-
+    $('.timeBtn').click(function() {
+    	
+    	$('.timeBtn').css('background-color','rgb(84 91 99 / 14%)'); 
+    	$(this).css("background-color", "#fdf3f4");
+    	var time=$(this).attr('value');
+    });
 	$('#img_dBtn').click(function() {
 		$('#img_span').css("background-image","none");
 		$('#img_span').css("background-color", "#fff");
@@ -250,10 +287,25 @@ $(function(){
 			  	</tr>
 			  </table>
 			  <div class="page_div">
+			  	<table class="table1">
+			  		<tr>
+			  			<td>
+			  				<button class="timeBtn" value="1">아침</button>
+			  				<button class="timeBtn" value="2">점심</button>
+			  				<button class="timeBtn" value="3">저녁</button>
+			  				<button class="timeBtn" value="4">간식</button>
+			  			</td>
+			  		</tr>
+			  		<tr>
+			  			<td>
+			  			<input type="text" size=20>
+			  			</td>
+			  		</tr>
+			  	</table>
 			    <table class="table1">
 			    	<tr>
 			    		<td width="40%">
-			    			<div id="img_span" name="image"></div>
+			    			<div id="img_span" name="image" style="border-radius: 7px;"></div>
 			    		</td>
 				  		<td>
 				  			<input type="button" value="삭제" id="img_dBtn">
