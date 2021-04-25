@@ -116,6 +116,12 @@ height: 30px;
     border-radius: 8px;
     margin: 10px 5px 0px 6px;
 }
+i[class^=ti-angle]{
+cursor: pointer;
+}
+#calender_tr td{
+border: none;
+}
 </style>
 <script type="text/javascript" src="https://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
@@ -151,6 +157,8 @@ $(function () {
 });
 $(function(){
 	var fileurl="";
+	let year=2021;
+	let month=5;
     //드래그앤드랍
     $("#img_span").on("dragenter", function(e){
         e.preventDefault();
@@ -158,7 +166,7 @@ $(function(){
     }).on("dragover", function(e){
         e.preventDefault();
         e.stopPropagation();
-        $(this).css("background-color", "#FFD8D8");
+        $(this).css("background-color", "rgb(0 0 0 / 5%)");
     }).on("dragleave", function(e){
         e.preventDefault();
         e.stopPropagation();
@@ -213,10 +221,58 @@ $(function(){
 		$('table[class^=table]').hide();
 		$('.table'+classno).show();
 	});
-	let year=2022;
-	
-	let month=2;/* 나중에자바로처리 */
+	/* 월 감소 */
+	  $('.ti-angle-left').click(function() {
+		  $('td[id^=date]').text('');
+		if(month==1){
+			year--;
+			month=12;
+		}else{
+	  		month--;
+		}
+		let daynum=year*365+(parseInt(year/4)-parseInt(year/100)+parseInt(year/400));
+		
+		  let monthArr=new Array(31,28,31,30,31,30,31,31,30,31,30,31);
+		  if(year%4==0 && year%100!=0 ||year%400==0){
+				monthArr[1]=29;
+			}
+		  let day=0;
+		  for(i=0;i<month-1;i++){
+			  day+=monthArr[i];
+		  }
+		  day=(daynum+day)%7; /* 월요일부터  첫째날 */
 
+		  for(i=1;i<=monthArr[month-1];i++){
+			 $('#date'+parseInt(i+day)).text(i);	 
+		  }
+		  $('#calender').text(year+'.'+month);
+	  });
+	/* 월증가 */
+	  $('.ti-angle-right').click(function() {
+		  $('td[id^=date]').text('');
+		 	if(month==12){
+		 		year++;
+		 		month=1;
+		 	}else{
+		  		month++;		 		
+		 	}
+		 	let daynum=year*365+(parseInt(year/4)-parseInt(year/100)+parseInt(year/400));
+			
+			  let monthArr=new Array(31,28,31,30,31,30,31,31,30,31,30,31);
+			  if(year%4==0 && year%100!=0 ||year%400==0){
+					monthArr[1]=29;
+				}
+			  let day=0;
+			  for(i=0;i<month-1;i++){
+				  day+=monthArr[i];
+			  }
+			  day=(daynum+day)%7; /* 월요일부터  첫째날 */
+
+			  for(i=1;i<=monthArr[month-1];i++){
+				 $('#date'+parseInt(i+day)).text(i);	 
+			  }
+			  $('#calender').text(year+'.'+month);
+		  });
 	let daynum=year*365+(parseInt(year/4)-parseInt(year/100)+parseInt(year/400));
 	
 	  let monthArr=new Array(31,28,31,30,31,30,31,31,30,31,30,31);
@@ -228,14 +284,11 @@ $(function(){
 		  day+=monthArr[i];
 	  }
 	  day=(daynum+day)%7; /* 월요일부터  첫째날 */
-	  if(day==6){  /* 일요일처리 */
-		  day=-1;
-	  }
+
 	  for(i=1;i<=monthArr[month-1];i++){
-		 $('#date'+parseInt(i+day)).text(i);
-		 
+		 $('#date'+parseInt(i+day)).text(i);	 
 	  }
-	  
+	  $('#calender').text(year+'.'+month);
 });
 </script>
 </head>
@@ -309,9 +362,25 @@ $(function(){
 			    		</td>
 				  		<td>
 				  			<input type="button" value="삭제" id="img_dBtn">
-				  			<input type="button" value="등록" id="img_IBtn">
+				  			<input type="button" value="사진보여주기" id="img_IBtn">
 				  		</td>
 			  	    </tr>
+				</table>
+				<table class="table1">
+					<tr>
+						<td>음식출력</td>
+					</tr>
+					<tr>
+						<td>음식출력</td>
+					</tr>
+				</table>
+				<!-- 달력 -->
+				<table class="table2" style="height: 1em;">
+					<tr id="calender_tr">
+						<td style="height: 3em;text-align: right;"><i class="ti-angle-left"></i></td>
+						<td style="height: 3em;text-align: center;width: 6em;"id="calender"></td>
+						<td style="height: 3em;text-align: left;"><i class="ti-angle-right"></i></td>
+					</tr>
 				</table>
 				<table class="table2">
 					<tr>
