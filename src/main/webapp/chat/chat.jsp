@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" %>
  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -122,12 +122,24 @@ cursor: pointer;
 #calender_tr td{
 border: none;
 }
+#date1,#date8,#date15,#date22,#date29,#date36{
+	color: red;
+}
+#pBtn10{
+    position: sticky;
+    top: 37em;
+    left: 10.5em;
+    display: none;
+}
+
 </style>
 <script type="text/javascript" src="https://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
+/* 왼쪽제어 */
 $(function () {
 	/* 나 머먹었어 */
 	$('#pBtn1').click(function() {
+		$('#pBtn10').hide();
 		$('.phone > ul').append(
 				"<li class='left'>"+
 				"<div class='box' id='bot'>"+
@@ -139,8 +151,84 @@ $(function () {
 		
 		$('.phone').scrollTop($('.phone')[0].scrollHeight);	/* 스크롤처리 */
 	});
+	/* 운동저장할래 */
+	$('#pBtn2').click(function() {
+		$('.phone >ul >li').remove();
+		$('.sport_memo_tr_clone').remove();
+		$('.sport_memo_input').val('');
+		$('#pBtn10').show();
+		$('.phone > ul').append(
+				"<li class='left'>"+
+				"<div class='box' id='bot'>"+
+					"<span class='message' id='bot_msg'>여기에 저장해주세요</span>"+
+				"</div>"+
+			"</li>"
+		);
+		$('.sport_memo').show();
+		
+	});
+	/* 운동량추가 */
+	let count=1;
+	$('.ti-arrow-circle-down').click(function(){
+		$('.sport_memo').append(
+				"<tr class='sport_memo_tr_clone'>"+	
+				"<td>"+
+					"<input type='text' size='10' id=sport_memo_name"+count+">"+
+				"</td>"+
+				"<td>"+
+					"<input type='text' size='5' id=sport_memo_number"+count+">"+
+				"</td>"+
+				"</tr>"
+		);
+		count++;
+	});
+	/* 운동량 제거 */
+	$('.ti-arrow-circle-up').click(function(){
+		$('.sport_memo_tr_clone:last').remove();
+	});
+	/* 운동저장버튼 */
+	$('#pBtn10').click(function() {
+		let row=$('#sport_memo_tr').length+$('.sport_memo_tr_clone').length;
+		let sportSum="";
+		for(i=0;i<row; i++){
+			let temp1=$('#sport_memo_name'+i).text();
+			let temp2=$('#sport_memo_number'+i).text();
+			if(temp1==''||temp2==''){
+				$('.phone > ul').append(
+						"<li class='left'>"+
+						"<div class='box' id='bot'>"+
+							"<span class='message' id='bot_msg'>빈칸을 확인해주세요</span>"+
+						"</div>"+
+					"</li>"
+				);
+				return;
+			}
+			sportSum+=$('#sport_memo_name'+i).val()+$('#sport_memo_number'+i).val()+"^";
+		}
+		sportSum=sportSum.substring(0, sportSum.lastIndexOf("^"))
+		 memo={
+			"id":"admin",/* id작업후수정 ======================*/	
+			"date":$('#sport_memo_date').val(),
+			"time":$('#sport_memo_time').val(),
+			"sport":sportSum
+		}
+		
+		$.ajax({
+			type:'post',
+			data:{'memo':JSON.stringify(memo)},
+			url:'../chat/sport_plan.do',
+			success: function (result) {
+				alert(result);
+			},error:function (error) {
+				alert("오류");
+			}	
+		})
+		
+		alert(JSON.stringify(memo));
+	});
 	/* 안녕? */
 	$('#pBtn3').click(function() {
+		$('#pBtn10').hide();
 		$('.phone > ul').append(
 				"<li class='right'>"+
 				"<div class='box' id='user'>"+			
@@ -154,7 +242,10 @@ $(function () {
 		"</li>"
 		);
 	});
+	
+	
 });
+/* 오른쪽 제어 */
 $(function(){
 	var fileurl="";
 	let year=2021;
@@ -231,7 +322,6 @@ $(function(){
 	  		month--;
 		}
 		let daynum=year*365+(parseInt(year/4)-parseInt(year/100)+parseInt(year/400));
-		
 		  let monthArr=new Array(31,28,31,30,31,30,31,31,30,31,30,31);
 		  if(year%4==0 && year%100!=0 ||year%400==0){
 				monthArr[1]=29;
@@ -297,6 +387,34 @@ $(function(){
 		<div class="row1">
 			<div class="col-sm-5">
 				<div class="phone">
+					<table class="sport_memo" style="display: none;margin: 90px;">
+						<tr>
+							<td>
+								<input type="date" size="10" id="sport_memo_date">
+							</td>
+							<td>
+								<select id="sport_memo_time">
+									<option>아침</option>
+									<option>점심</option>
+									<option>저녁</option>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<th>운동</th>
+							<th>세트수</th>
+						</tr>
+						<tr id="sport_memo_tr">	
+							<td>
+								<input type="text" size="10" class="sport_memo_input" id="sport_memo_name0">
+							</td>
+							<td>
+								<input type="text" size="5" class="sport_memo_input" id="sport_memo_number0">
+								<i class="ti-arrow-circle-down" style="cursor: pointer;"></i>
+								<i class="ti-arrow-circle-up" style="cursor: pointer;"></i>
+							</td>
+						</tr>
+					</table>
 					<ul>  
 					<!-- 봇 -->
 						<!-- <li class="left">
@@ -316,16 +434,17 @@ $(function(){
 						</li> -->		
 				
 					</ul>
+					<button class="pBtn" id="pBtn10" type="button">저장해줘</button>
 				</div>
 				<div class="phone-button">
 					<ul style="list-style: none;">
-						<li><button class="pBtn" id="pBtn1">나 뭐 먹었어</button>
-							<button class="pBtn" id="pBtn2">달력 보여줘?</button>
+						<li><button type="button" class="pBtn" id="pBtn1">나 뭐 먹었어</button>
+							<button type="button" class="pBtn" id="pBtn2">운동 저장할래</button>
 						</li>
-						<li><button class="pBtn" id="pBtn3">안녕</button>
-							<button class="pBtn" id="pBtn4">뭐 먹지</button>
+						<li><button type="button" class="pBtn" id="pBtn3">안녕</button>
+							<button type="button" class="pBtn" id="pBtn4">뭐 먹지</button>
 						</li>
-						<li><button class="pBtn" id="pBtn5">몸무게 변경할래</button>
+						<li><button type="button" class="pBtn" id="pBtn5">몸무게 변경할래</button>
 						</li>
 					</ul>
 				</div>
