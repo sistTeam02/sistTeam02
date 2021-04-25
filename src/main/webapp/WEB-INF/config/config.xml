@@ -9,6 +9,7 @@
     <typeAlias type="com.sist.vo.HometVO" alias="HometVO"/>
     <typeAlias type="com.sist.vo.ChatVO" alias="ChatVO"/>
      <typeAlias type="com.sist.vo.KcalVO" alias="KcalVO"/>
+     <typeAlias type="com.sist.vo.Chat_planVO" alias="Chat_planVO"/>
   </typeAliases>
   <mappers>
     <mapper resource="com/sist/mapper/member-mapper.xml"/>

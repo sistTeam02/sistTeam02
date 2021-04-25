@@ -23,18 +23,23 @@
 	height: 900px;
 }
 .phone{
- border: 1px solid black;
-     height: 40em;
-     margin-top: 4em;
-     background-color: #fdf3f4;
-     overflow-y: auto;
-     overflow-x: hidden
+	border: 7px solid #000000a8;
+    height: 40em;
+    margin-top: 4em;
+    background-color: #fdf3f4;
+    overflow-y: auto;
+    overflow-x: hidden;
+    border-radius: 21px;
 }
 .phone-button{
 	 background-color: #fdf3f4;
 	 height: 8em;
 	 border-bottom-left-radius: 22px;
 	 border-bottom-right-radius: 22px;
+	 border: 7px solid #000000a8;
+    border-top-left-radius: 15px;
+     border-top-right-radius: 15px;
+     border-top-style: hidden;
 }
 .select{
 	 border: 1px solid black;
@@ -131,7 +136,16 @@ border: none;
     left: 10.5em;
     display: none;
 }
-
+#calender_tr td:hover{
+	background-color: white;
+}
+.ti-align-left{
+    position: absolute;
+    left: 55px;
+    font-size: 23px;
+    color: #e2d534;
+    cursor: pointer;
+    }
 </style>
 <script type="text/javascript" src="https://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
@@ -190,9 +204,20 @@ $(function () {
 	$('#pBtn10').click(function() {
 		let row=$('#sport_memo_tr').length+$('.sport_memo_tr_clone').length;
 		let sportSum="";
+		let date=$('#sport_memo_date').val();
+		if(date==''){
+			$('.phone > ul').append(
+					"<li class='left'>"+
+					"<div class='box' id='bot'>"+
+						"<span class='message' id='bot_msg'>날짜를 입력해주세요</span>"+
+					"</div>"+
+				"</li>"
+			);
+			return;
+		}
 		for(i=0;i<row; i++){
-			let temp1=$('#sport_memo_name'+i).text();
-			let temp2=$('#sport_memo_number'+i).text();
+			let temp1=$('#sport_memo_name'+i).val();
+			let temp2=$('#sport_memo_number'+i).val();
 			if(temp1==''||temp2==''){
 				$('.phone > ul').append(
 						"<li class='left'>"+
@@ -223,8 +248,6 @@ $(function () {
 				alert("오류");
 			}	
 		})
-		
-		alert(JSON.stringify(memo));
 	});
 	/* 안녕? */
 	$('#pBtn3').click(function() {
@@ -378,7 +401,15 @@ $(function(){
 	  for(i=1;i<=monthArr[month-1];i++){
 		 $('#date'+parseInt(i+day)).text(i);	 
 	  }
+	  $('#date29').append(
+			  "<i class='ti-align-left'></i>"	  
+	  );
 	  $('#calender').text(year+'.'+month);
+	  $('.ti-align-left').click(function() {
+		  $('.phone >ul >li').remove();
+		  $('#pBtn10').hide();
+		  $('.sport_memo').hide();
+	  });
 });
 </script>
 </head>
@@ -524,7 +555,7 @@ $(function(){
 					</tr>
 					<tr>
 					<c:forEach begin="29" end="35" step="1" varStatus="s">
-						<td id="date${s.index }"></td>
+						<td id="date${s.index }"><i></i></td>
 					</c:forEach>
 					</tr>
 						<tr>
