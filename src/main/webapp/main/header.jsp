@@ -17,7 +17,8 @@
                   
                 </div>
                 <div class="ht-right">
-                         <a href="#" class="login-panel"><i class="fa fa-user"></i>Login</a>
+                         <a href="../member/login.do" class="login-panel"><i class="fa fa-user"></i>Login</a>
+                         <a href="../member/register.do" class="login-panel"><i class="fa fa-user"></i>Sign Up</a>
                 </div>
             </div>
         </div>
@@ -118,6 +119,7 @@
                         </ul>
                     </div>
                 </div>
+                <!-- 모바일 메뉴 주의 ################################## -->
                 <nav class="nav-menu mobile-menu">
                     <ul>
                         <li class="active"><a href="./index.html">Home</a></li>
@@ -143,6 +145,7 @@
                         </li>
                     </ul>
                 </nav>
+                 <!--  ################################## -->
                 <div id="mobile-menu-wrap"></div>
             </div>
         </div>
