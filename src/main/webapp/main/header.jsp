@@ -106,46 +106,34 @@
                 <div class="nav-depart">
                     <div class="depart-btn">
                         <i class="ti-menu"></i>
-                        <span>All departments</span>
+                        <span>쇼핑몰</span>
                         <ul class="depart-hover">
-                            <li class="active"><a href="#">Women’s Clothing</a></li>
-                            <li><a href="#">Men’s Clothing</a></li>
-                            <li><a href="#">Underwear</a></li>
-                            <li><a href="#">Kid's Clothing</a></li>
-                            <li><a href="#">Brand Fashion</a></li>
-                            <li><a href="#">Accessories/Shoes</a></li>
-                            <li><a href="#">Luxury Brands</a></li>
-                            <li><a href="#">Brand Outdoor Apparel</a></li>
+                            <li class="active"><a href="#">운동 기구 & 용품</a></li>
+                            <li><a href="#">다이어트 & 건강 식품</a></li>
                         </ul>
                     </div>
                 </div>
-                <!-- 모바일 메뉴 주의 ################################## -->
                 <nav class="nav-menu mobile-menu">
                     <ul>
-                        <li class="active"><a href="./index.html">Home</a></li>
+                        <li class="active"><a href="../main/main.do">Home</a></li>
                         <li><a href="./shop.html">Shop</a></li>
-                        <li><a href="#">Collection</a>
-                            <ul class="dropdown">
-                                <li><a href="#">Men's</a></li>
-                                <li><a href="#">Women's</a></li>
-                                <li><a href="#">Kid's</a></li>
-                            </ul>
-                        </li>
                         <li><a href="../chat/chat_main.do">채팅</a></li>
                         <li><a href="./contact.html">Contact</a></li>
-                        <li><a href="#">Pages</a>
+                        <li><a href="#">마이페이지</a>
                             <ul class="dropdown">
-                                <li><a href="./blog-details.html">Blog Details</a></li>
-                                <li><a href="./shopping-cart.html">Shopping Cart</a></li>
-                                <li><a href="./check-out.html">Checkout</a></li>
-                                <li><a href="./faq.html">Faq</a></li>
-                                <li><a href="./register.html">Register</a></li>
-                                <li><a href="./login.html">Login</a></li>
+                                <li><a href="./blog-details.html">운동&쇼핑몰 찜리스트</a></li>
+                                <li><a href="./shopping-cart.html">프로그램 신청 내역</a></li>
+                                <li><a href="./check-out.html">나만의 계획</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#">쇼핑</a>
+                            <ul class="dropdown">
+                                <li><a href="./blog-details.html">장바구니</a></li>
+                                <li><a href="./shopping-cart.html">주문확인</a></li>
                             </ul>
                         </li>
                     </ul>
                 </nav>
-                 <!--  ################################## -->
                 <div id="mobile-menu-wrap"></div>
             </div>
         </div>
