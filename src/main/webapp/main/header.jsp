@@ -121,7 +121,7 @@
                 <nav class="nav-menu mobile-menu">
                     <ul>
                         <li class="active"><a href="./index.html">Home</a></li>
-                        <li><a href="./shop.html">Shop</a></li>
+                        <li><a href="../shop/shop_list.do">Shop</a></li>
                         <li><a href="#">Collection</a>
                             <ul class="dropdown">
                                 <li><a href="#">Men's</a></li>
