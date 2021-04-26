@@ -130,6 +130,9 @@ border: none;
 #date1,#date8,#date15,#date22,#date29,#date36{
 	color: red;
 }
+td[id^=date]{
+	    width: 90px;
+}
 #pBtn10{
     position: sticky;
     top: 37em;
@@ -140,7 +143,7 @@ border: none;
 	background-color: white;
 }
 .ti-align-left{
-    position: absolute;
+
     left: 55px;
     font-size: 23px;
     color: #e2d534;
@@ -149,6 +152,10 @@ border: none;
 </style>
 <script type="text/javascript" src="https://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
+let today=new Date().toLocaleDateString();
+thismonth=0;
+thisday=0;
+let id="admin"; /* 임시데이터 ===========================*/
 /* 왼쪽제어 */
 $(function () {
 	/* 나 머먹었어 */
@@ -157,7 +164,7 @@ $(function () {
 		$('.phone > ul').append(
 				"<li class='left'>"+
 				"<div class='box' id='bot'>"+
-					"<span class='message' id='bot_msg'>먹은걸 알려주세요</span>"+
+					"<span class='message' id='bot_msg'>음식 저장탭에서 먹은걸 알려주세요</span>"+
 				"</div>"+
 			"</li>"
 		);
@@ -179,6 +186,8 @@ $(function () {
 			"</li>"
 		);
 		$('.sport_memo').show();
+		$('#sport_memo_date').val(today);
+		
 		
 	});
 	/* 운동량추가 */
@@ -272,6 +281,7 @@ $(function(){
 	var fileurl="";
 	let year=2021;
 	let month=5;
+	thismonth=month;
     //드래그앤드랍
     $("#img_span").on("dragenter", function(e){
         e.preventDefault();
@@ -353,11 +363,33 @@ $(function(){
 			  day+=monthArr[i];
 		  }
 		  day=(daynum+day)%7; /* 월요일부터  첫째날 */
-
-		  for(i=1;i<=monthArr[month-1];i++){
-			 $('#date'+parseInt(i+day)).text(i);	 
-		  }
 		  $('#calender').text(year+'.'+month);
+		  thismonth=month;
+		  let strday="";
+		  $.ajax({
+			  type:'post',
+		  	  url:'../chat/chat_dbday.do',
+		  	  data:{'month':thismonth,'id':id},
+		      async:false,
+		  	  success:function(result){
+		  		  strday=result;
+		  		
+		  	  },error:function(error){
+		  		  alert("에러");
+		  	  }
+		  });
+		  let arr=strday.split("^");
+		  for(i=1;i<=monthArr[month-1];i++){
+			 $('#date'+parseInt(i+day)).text(i);
+			 for(j=0;j<arr.length;j++){
+				 if(arr[j]==i){
+					 $('#date'+parseInt(i+day)).append(
+							  "&nbsp;&nbsp;<i class='ti-align-left'></i>"	  
+					  );
+				 }
+			 }
+		  }
+		  
 	  });
 	/* 월증가 */
 	  $('.ti-angle-right').click(function() {
@@ -379,11 +411,32 @@ $(function(){
 				  day+=monthArr[i];
 			  }
 			  day=(daynum+day)%7; /* 월요일부터  첫째날 */
-
-			  for(i=1;i<=monthArr[month-1];i++){
-				 $('#date'+parseInt(i+day)).text(i);	 
-			  }
 			  $('#calender').text(year+'.'+month);
+			  thismonth=month;
+			  let strday="";
+			  $.ajax({
+				  type:'post',
+			  	  url:'../chat/chat_dbday.do',
+			  	  data:{'month':thismonth,'id':id},
+			      async:false,
+			  	  success:function(result){
+			  		  strday=result;
+			  		
+			  	  },error:function(error){
+			  		  alert("에러");
+			  	  }
+			  });
+			  let arr=strday.split("^");
+			  for(i=1;i<=monthArr[month-1];i++){
+				 $('#date'+parseInt(i+day)).text(i);
+				 for(j=0;j<arr.length;j++){
+					 if(arr[j]==i){
+						 $('#date'+parseInt(i+day)).append(
+								  "&nbsp;&nbsp;<i class='ti-align-left'></i>"	  
+						  );
+					 }
+				 }
+			  }
 		  });
 	let daynum=year*365+(parseInt(year/4)-parseInt(year/100)+parseInt(year/400));
 	
@@ -396,43 +449,69 @@ $(function(){
 		  day+=monthArr[i];
 	  }
 	  day=(daynum+day)%7; /* 월요일부터  첫째날 */
-
-	  for(i=1;i<=monthArr[month-1];i++){
-		 $('#date'+parseInt(i+day)).text(i);	 
-	  }
-	  $('#date29').append(/* 임시데이터 */
-			  "<i class='ti-align-left'></i>"	  
-	  );
 	  $('#calender').text(year+'.'+month);
+	  thismonth=month;
+	  let strday="";
+	  $.ajax({
+		  type:'post',
+	  	  url:'../chat/chat_dbday.do',
+	  	  data:{'month':thismonth,'id':id},
+	      async:false,
+	  	  success:function(result){
+	  		  strday=result;
+	  		
+	  	  },error:function(error){
+	  		  alert("에러");
+	  	  }
+	  });
+	  let arr=strday.split("^");
+	  for(i=1;i<=monthArr[month-1];i++){
+		 $('#date'+parseInt(i+day)).text(i);
+		 for(j=0;j<arr.length;j++){
+			 if(arr[j]==i){
+				 $('#date'+parseInt(i+day)).append(
+						  "&nbsp;&nbsp;<i class='ti-align-left'></i>"	  
+				  );
+			 }
+		 }
+	  }
 	  /* 달력안에 내용클릭 */
 	  $('.ti-align-left').click(function() {
+		  thisday=$(this).parent().text();
 		  $('.phone >ul >li').remove();
 		  $('#pBtn10').hide();
 		  $('.sport_memo').hide();
-		  let date="2021-04-25";/* 임시데이터 */
-		  let id="admin";/* 임시데이터 */
+		  let date="2021.04.25";/* 임시데이터 클릭한 날짜*/
+		  if(thismonth<10&& !thismonth.toString().includes("0")){
+			thismonth="0"+thismonth;
+			
+		  }
+		  if(thisday<10&& !thisday.toString().includes("0")){
+			  thisday="0"+thisday;
+		  }
+		  thisday=thisday.trim();
 		  $.ajax({
 			  type:'post',
-				data:{'date':date,'id':id},
+				data:{'date':'2021.'+thismonth+'.'+thisday,'id':id},
 				url:'../chat/chat_total.do',
 				success: function (result) {
 					$('.phone > ul').append(
 							"<li class='left'>"+
 							"<div class='box' id='bot'>"+
-								"<span class='message' id='bot_msg'>"+date+"의 기록입니다</span>"+
+								"<span class='message' id='bot_msg'>"+thismonth+"월"+thisday+"일의 기록입니다</span>"+
 							"</div>"+
 						"</li>"
 					);
 					alert(result);
 					 let json=JSON.parse(result);
-					let ptime="";
+					
+					 let ptime="";
 					let psport="";
 					 for(i=0;i<json.length; i++){
 						psport=json[i].sport;
 						ptime=json[i].time;
 						psport=psport.replace(/\^/g, "세트<br>");
 						psport=psport.substring(0,psport.lastIndexOf("<"));
-						console.log(psport);
 						$('.phone > ul').append(
 								"<li class='left'>"+
 								"<div class='box' id='bot'>"+
@@ -462,7 +541,7 @@ $(function(){
 					<table class="sport_memo" style="display: none;margin: 90px;">
 						<tr>
 							<td>
-								<input type="date" size="10" id="sport_memo_date">
+								<input type="text" size="10" id="sport_memo_date" disabled="disabled">
 							</td>
 							<td>
 								<select id="sport_memo_time">
@@ -526,7 +605,7 @@ $(function(){
 			  <table class="category_user" style="width: 100%;">
 			  	<tr style="border-bottom: 1px solid black;">
 			  		<th class="page1">음식저장</th>
-			  		<th class="page2">달력</th>
+			  		<th class="page2">기록</th>
 			  		<th class="page3">추천?</th>
 			  	</tr>
 			  </table>

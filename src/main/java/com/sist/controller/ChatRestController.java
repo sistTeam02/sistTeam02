@@ -53,8 +53,6 @@ public class ChatRestController {
 	}
 	@PostMapping("chat/chat_total.do")
 	public String chat_total_data(String date,String id){
-		System.out.println(date);
-		System.out.println(id);
 		Chat_planVO vo=new Chat_planVO();
 		Chat_foodVO fvo=new Chat_foodVO();
 		vo.setId(id);
@@ -82,5 +80,22 @@ public class ChatRestController {
 		}*/
 		json=arr.toJSONString();
 		return json;
+	}
+	@PostMapping("chat/chat_dbday.do")
+	public String chat_dbday(String id,String month){
+		String dList="";
+		List<String> list=pdao.chat_dbDay(id);
+		for(int i=0; i<list.size(); i++){
+			String db_day=list.get(i);
+			int m=Integer.parseInt(month);
+			int db_m=Integer.parseInt(db_day.substring(5,7));
+			if(m==db_m){
+				db_day=db_day.substring(db_day.lastIndexOf(".")+1,db_day.length());
+				dList+=db_day+"^";
+			}
+		}
+		dList=dList.substring(0,dList.length());
+		
+		return dList;
 	}
 }

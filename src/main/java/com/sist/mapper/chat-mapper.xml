@@ -12,4 +12,10 @@
 		SELECT * from chat_plan 
 		WHERE plandate=#{plandate} and id=#{id}
 	</select>
+	<select id="chat_dbDay" resultType="String" parameterType="String">
+	SELECT fooddate from chat_food UNION 
+	SELECT plandate from chat_plan
+	where id=#{id}
+	order by fooddate
+	</select>
 </mapper>

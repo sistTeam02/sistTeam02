@@ -18,6 +18,7 @@ public class Chat_foodDAO extends SqlSessionDaoSupport{
 		super.setSqlSessionFactory(sqlSessionFactory);
 	}
 	public List<Chat_foodVO> chat_foodData(Chat_foodVO vo){
+
 		return getSqlSession().selectList("chat_foodData",vo);
 	}
 	
