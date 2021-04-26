@@ -72,14 +72,14 @@ public class ChatRestController {
 			obj.put("sport",pvo.getSport() );
 			arr.add(obj);
 		}
-		for(Chat_foodVO fovo:fList){
+		/*for(Chat_foodVO fovo:fList){ 사진 처리한후에 하자
 			JSONObject obj=new JSONObject();
 			obj.put("fooddate",fovo.getFooddate() );
 			obj.put("whenfood",fovo.getWhenfood() );
 			obj.put("foodname",fovo.getFoodname() );
 			obj.put("foodkcal",fovo.getFoodkcal() );
 			arr.add(obj);
-		}
+		}*/
 		json=arr.toJSONString();
 		return json;
 	}

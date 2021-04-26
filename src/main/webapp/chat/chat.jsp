@@ -230,7 +230,6 @@ $(function () {
 			}
 			sportSum+=$('#sport_memo_name'+i).val()+$('#sport_memo_number'+i).val()+"^";
 		}
-		sportSum=sportSum.substring(0, sportSum.lastIndexOf("^"))
 		 memo={
 			"id":"admin",/* id작업후수정 ======================*/	
 			"date":$('#sport_memo_date').val(),
@@ -425,10 +424,28 @@ $(function(){
 						"</li>"
 					);
 					alert(result);
-					/* let json=JSON.parse(result);
-					for(i=0;json.length; i++){
-						
-					} */
+					 let json=JSON.parse(result);
+					let ptime="";
+					let psport="";
+					 for(i=0;i<json.length; i++){
+						psport=json[i].sport;
+						ptime=json[i].time;
+						psport=psport.replace(/\^/g, "세트<br>");
+						psport=psport.substring(0,psport.lastIndexOf("<"));
+						console.log(psport);
+						$('.phone > ul').append(
+								"<li class='left'>"+
+								"<div class='box' id='bot'>"+
+									"<span class='message' id='bot_msg'>"+ptime+"</span>"+
+								"</div>"+
+								"</li>"+
+								"<li class='left'>"+
+								"<div class='box' id='bot'>"+
+									"<span class='message' id='bot_msg'>"+psport+"</span>"+
+								"</div>"+
+								"</li>"
+						);
+					} 
 				},error:function (error) {
 					alert("오류");
 				}	
