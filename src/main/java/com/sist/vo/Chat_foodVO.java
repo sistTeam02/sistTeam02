@@ -11,10 +11,10 @@ FOODKCAL    NUMBER
 
 import java.util.Date;
 
-public class ChatVO {
+public class Chat_foodVO {
 	private String id,filename,foodname;
-	private int whenfood;
-	private Date fooddate;
+	private String whenfood;
+	private String fooddate;
 	private double foodkcal;
 	public String getId() {
 		return id;
@@ -34,16 +34,17 @@ public class ChatVO {
 	public void setFoodname(String foodname) {
 		this.foodname = foodname;
 	}
-	public int getWhenfood() {
+
+	public String getWhenfood() {
 		return whenfood;
 	}
-	public void setWhenfood(int whenfood) {
+	public void setWhenfood(String whenfood) {
 		this.whenfood = whenfood;
 	}
-	public Date getFooddate() {
+	public String getFooddate() {
 		return fooddate;
 	}
-	public void setFooddate(Date fooddate) {
+	public void setFooddate(String fooddate) {
 		this.fooddate = fooddate;
 	}
 	public double getFoodkcal() {

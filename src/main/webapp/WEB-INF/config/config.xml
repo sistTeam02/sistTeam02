@@ -7,7 +7,7 @@
     <typeAlias type="com.sist.vo.MemberVO" alias="MemberVO"/>
     <typeAlias type="com.sist.vo.GoodsVO" alias="GoodsVO"/>
     <typeAlias type="com.sist.vo.HometVO" alias="HometVO"/>
-    <typeAlias type="com.sist.vo.ChatVO" alias="ChatVO"/>
+    <typeAlias type="com.sist.vo.Chat_foodVO" alias="Chat_foodVO"/>
      <typeAlias type="com.sist.vo.KcalVO" alias="KcalVO"/>
      <typeAlias type="com.sist.vo.Chat_planVO" alias="Chat_planVO"/>
   </typeAliases>

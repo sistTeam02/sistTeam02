@@ -4,7 +4,6 @@ import java.util.Date;
 
 public class Chat_planVO {
 	private String id,sport,time,plandate;
-
 	public String getId() {
 		return id;
 	}

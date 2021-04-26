@@ -401,14 +401,38 @@ $(function(){
 	  for(i=1;i<=monthArr[month-1];i++){
 		 $('#date'+parseInt(i+day)).text(i);	 
 	  }
-	  $('#date29').append(
+	  $('#date29').append(/* 임시데이터 */
 			  "<i class='ti-align-left'></i>"	  
 	  );
 	  $('#calender').text(year+'.'+month);
+	  /* 달력안에 내용클릭 */
 	  $('.ti-align-left').click(function() {
 		  $('.phone >ul >li').remove();
 		  $('#pBtn10').hide();
 		  $('.sport_memo').hide();
+		  let date="2021-04-25";/* 임시데이터 */
+		  let id="admin";/* 임시데이터 */
+		  $.ajax({
+			  type:'post',
+				data:{'date':date,'id':id},
+				url:'../chat/chat_total.do',
+				success: function (result) {
+					$('.phone > ul').append(
+							"<li class='left'>"+
+							"<div class='box' id='bot'>"+
+								"<span class='message' id='bot_msg'>"+date+"의 기록입니다</span>"+
+							"</div>"+
+						"</li>"
+					);
+					alert(result);
+					/* let json=JSON.parse(result);
+					for(i=0;json.length; i++){
+						
+					} */
+				},error:function (error) {
+					alert("오류");
+				}	
+		  })
 	  });
 });
 </script>
