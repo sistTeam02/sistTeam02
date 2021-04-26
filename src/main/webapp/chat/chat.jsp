@@ -443,7 +443,7 @@ $(function(){
 								"<div class='box' id='bot'>"+
 									"<span class='message' id='bot_msg'>"+psport+"</span>"+
 								"</div>"+
-								"</li>"
+								"</li>"  
 						);
 					} 
 				},error:function (error) {
