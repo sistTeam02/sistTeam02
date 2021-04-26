@@ -1,15 +1,17 @@
-package com.sist.vo;
+package com.sist.dao;
 /*
- *  NO        NUMBER        
-	TITLE     VARCHAR2(300) 
-	POSTER    VARCHAR2(400) 
-	PRICE     NUMBER        
+ *  NO               NUMBER        
+	TITLE            VARCHAR2(300) 
+	POSTER           VARCHAR2(400) 
+	PRICE            NUMBER        
+	DETAIL_POSTER    CLOB          
  */
-public class GoodsVO {
+public class GoodsDetailDAO {
 	private int no;
 	private String title;
 	private String poster;
 	private int price;
+	private String detail_poster;
 	public int getNo() {
 		return no;
 	}
@@ -33,6 +35,12 @@ public class GoodsVO {
 	}
 	public void setPrice(int price) {
 		this.price = price;
+	}
+	public String getDetail_poster() {
+		return detail_poster;
+	}
+	public void setDetail_poster(String detail_poster) {
+		this.detail_poster = detail_poster;
 	}
 	
 }

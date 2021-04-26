@@ -2,6 +2,28 @@
 <!DOCTYPE mapper
  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+	NO        NUMBER        
+	TITLE     VARCHAR2(300) 
+	POSTER    VARCHAR2(400) 
+	PRICE     NUMBER      
+ -->
 <mapper namespace="com.sist.mapper.goods-mapper">
-
+  <!-- goods 목록 -->
+  <select id="goodsListData" resultType="GoodsVO" parameterType="hashmap">
+    SELECT no,title,poster,price,num
+    FROM (SELECT no,title,poster,price,rownum as num
+    FROM (SELECT /*+ INDEX_ASC(goods_list gl_no_pk) */ no,title,poster,price
+    FROM goods_list))
+    WHERE num BETWEEN #{start} AND #{end}
+  </select>
+  <!-- goods 총페이지 -->
+  <select id="goodsTotalPage" resultType="int">
+    SELECT CEIL(COUNT(*)/9.0) FROM goods_list
+  </select>
+  <!-- goods 상세데이터 -->
+<!--   <select id="goodsDetailData" resultType="GoodsDetailVO" parameterType="int">
+    SELECT * FROM goods_detail
+    WHERE no=#{no}
+  </select> -->
 </mapper>
