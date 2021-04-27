@@ -11,6 +11,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Fashi | Template</title>
      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+       <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
      <style type="text/css">
      .table-hover{
      	font-size:large;
@@ -100,33 +103,7 @@
                                         <p>Fashion <span>- May 19, 2019</span></p>
                                     </div>
                                 </a>
-                                <a href="#" class="rb-item">
-                                    <div class="rb-pic">
-                                        <img src="img/blog/recent-2.jpg" alt="">
-                                    </div>
-                                    <div class="rb-text">
-                                        <h6>The Personality Trait That Makes...</h6>
-                                        <p>Fashion <span>- May 19, 2019</span></p>
-                                    </div>
-                                </a>
-                                <a href="#" class="rb-item">
-                                    <div class="rb-pic">
-                                        <img src="img/blog/recent-3.jpg" alt="">
-                                    </div>
-                                    <div class="rb-text">
-                                        <h6>The Personality Trait That Makes...</h6>
-                                        <p>Fashion <span>- May 19, 2019</span></p>
-                                    </div>
-                                </a>
-                                <a href="#" class="rb-item">
-                                    <div class="rb-pic">
-                                        <img src="img/blog/recent-4.jpg" alt="">
-                                    </div>
-                                    <div class="rb-text">
-                                        <h6>The Personality Trait That Makes...</h6>
-                                        <p>Fashion <span>- May 19, 2019</span></p>
-                                    </div>
-                                </a>
+                                
                             </div>
                         </div>
                         <div class="blog-tags">
@@ -246,6 +223,9 @@
 							    </tbody>
 							  </table>
 							</div>
+							<div class="container" align="right">
+							  <button type="button" class="btn btn-lg btn-default" onclick="location.href='buy_list.jsp'">지금 제품 구매하러 가기</button>
+							</div>
 							
 							<div style="height:50px"></div>
                        <div class="container">
@@ -277,6 +257,9 @@
 							      </tr>
 							    </tbody>
 							  </table>
+							</div>
+							<div class="container" align="right">
+							  <button type="button" class="btn btn-lg btn-default" onclick="location.href='buy_list.jsp'">지금 제품 구매하러 가기</button>
 							</div>
 							
                		 </div> 

@@ -100,33 +100,7 @@
                                         <p>Fashion <span>- May 19, 2019</span></p>
                                     </div>
                                 </a>
-                                <a href="#" class="rb-item">
-                                    <div class="rb-pic">
-                                        <img src="img/blog/recent-2.jpg" alt="">
-                                    </div>
-                                    <div class="rb-text">
-                                        <h6>The Personality Trait That Makes...</h6>
-                                        <p>Fashion <span>- May 19, 2019</span></p>
-                                    </div>
-                                </a>
-                                <a href="#" class="rb-item">
-                                    <div class="rb-pic">
-                                        <img src="img/blog/recent-3.jpg" alt="">
-                                    </div>
-                                    <div class="rb-text">
-                                        <h6>The Personality Trait That Makes...</h6>
-                                        <p>Fashion <span>- May 19, 2019</span></p>
-                                    </div>
-                                </a>
-                                <a href="#" class="rb-item">
-                                    <div class="rb-pic">
-                                        <img src="img/blog/recent-4.jpg" alt="">
-                                    </div>
-                                    <div class="rb-text">
-                                        <h6>The Personality Trait That Makes...</h6>
-                                        <p>Fashion <span>- May 19, 2019</span></p>
-                                    </div>
-                                </a>
+                               
                             </div>
                         </div>
                         <div class="blog-tags">
@@ -144,11 +118,13 @@
                     </div>
                 </div>
                 <div class="col-lg-9 order-1 order-lg-2">
+                 <h2>장바구니</h2>
                 <div class="col-lg-12">
                  <!-- Shopping Cart Section Begin -->
     <section class="shopping-cart spad">
         <div class="container">
             <div class="row">
+            <p>찜한 제품을 구매합니다</p>
                 <div class="col-lg-12">
                     <div class="cart-table">
                         <table>
