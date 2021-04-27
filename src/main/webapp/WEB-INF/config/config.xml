@@ -10,6 +10,7 @@
     <typeAlias type="com.sist.vo.Chat_foodVO" alias="Chat_foodVO"/>
      <typeAlias type="com.sist.vo.KcalVO" alias="KcalVO"/>
      <typeAlias type="com.sist.vo.Chat_planVO" alias="Chat_planVO"/>
+     <typeAlias type="com.sist.vo.Chat_recipeVO" alias="Chat_recipeVO"/>
   </typeAliases>
   <mappers>
     <mapper resource="com/sist/mapper/member-mapper.xml"/>

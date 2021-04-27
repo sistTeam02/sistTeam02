@@ -18,4 +18,13 @@
 	where id=#{id}
 	order by fooddate
 	</select>
+	<select id="chat_recipeList" resultType="Chat_recipeVO" parameterType="hashmap">
+		SELECT no,title,poster,num
+		FROM (SELECT no,title,poster,rownum as num
+		FROM (SELECT /*+INDEX_ASC(chat_recipe_list INDEX1) */no,title,poster from chat_recipe_list))
+		WHERE num Between #{start} and #{end}
+	</select>
+	<select id="chat_recipeTotalPage" resultType="int">
+		SELECT CEIL(count(*)/9.0) from chat_recipe_list
+	</select>
 </mapper>

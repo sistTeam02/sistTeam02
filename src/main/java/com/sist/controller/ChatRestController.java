@@ -3,8 +3,10 @@ package com.sist.controller;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -29,6 +31,7 @@ import com.sist.dao.Chat_planDAO;
 import com.sist.dao.KcalDAO;
 import com.sist.vo.Chat_foodVO;
 import com.sist.vo.Chat_planVO;
+import com.sist.vo.Chat_recipeVO;
 import com.sist.vo.KcalVO;
 
 @RestController
@@ -127,11 +130,42 @@ public class ChatRestController {
            } catch (Exception e) {
                System.out.println("postTempFile_ERROR======>"+fileFullPath);
                e.printStackTrace();
-           }
-                        
-      }
-        
+           }                
+      } 
        return "success";
-   
+	}
+	@PostMapping("chat/chat_recipeList.do")
+	public String chat_listdata(int page){
+		String json="";
+		try {
+
+			int rowSize=9;
+			int start=1+(page-1)*rowSize;
+			System.out.println(start);
+			int end=(page*rowSize);
+			Map map=new HashMap();
+			map.put("start", start);
+			map.put("end", end);
+			List<Chat_recipeVO> list=fdao.chat_recipeList(map);
+			int totalpage=fdao.chat_recipeTotalPage();
+				
+			JSONArray arr=new JSONArray();
+			for(Chat_recipeVO vo:list){
+				JSONObject obj=new JSONObject();
+				obj.put("no", vo.getNo());
+				obj.put("title", vo.getTitle());
+				obj.put("poster", vo.getPoster());
+				obj.put("page", page);
+				obj.put("totalpage", totalpage);
+				arr.add(obj);
+				
+			}
+		json=arr.toJSONString();
+			
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		
+		return json;
 	}
 }

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 import com.sist.*;
 import com.sist.vo.Chat_foodVO;
 import com.sist.vo.Chat_planVO;
+import com.sist.vo.Chat_recipeVO;
 import com.sist.vo.KcalVO;
 
 import java.util.*;
@@ -21,6 +22,10 @@ public class Chat_foodDAO extends SqlSessionDaoSupport{
 
 		return getSqlSession().selectList("chat_foodData",vo);
 	}
-	
-	
+	public List<Chat_recipeVO> chat_recipeList(Map map){
+		return getSqlSession().selectList("chat_recipeList",map);
+	}
+	public int chat_recipeTotalPage(){
+		return getSqlSession().selectOne("chat_recipeTotalPage");
+	}
 }

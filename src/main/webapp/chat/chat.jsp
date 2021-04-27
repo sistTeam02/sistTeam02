@@ -26,7 +26,7 @@
 	border: 7px solid #000000a8;
     height: 40em;
     margin-top: 4em;
-    background-color: #fdf3f4;
+    background-color: #fdf3f49c;
     overflow-y: auto;
     overflow-x: hidden;
     border-radius: 21px;
@@ -74,6 +74,7 @@
     margin-top: 5px;
     border-radius: 50px;
     margin-inline-start: 57px;
+        height: 28px;
 }
 .pBtn:hover{
 	background-color: #e4898903;
@@ -99,6 +100,12 @@ table[class^=table]{
 	width: 750px;
 	height: 26em;
 }
+.table3{
+	display: none;
+    width: 750px;
+    height: 600px;
+}
+
 .table2 tr td{
 	border: 1px solid #0000003b;
 	text-align: left;
@@ -150,7 +157,8 @@ td[id^=date]{
     font-size: 23px;
     color: #e2d534;
     cursor: pointer;
-    }
+}
+
 </style>
 <script type="text/javascript" src="https://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
@@ -278,8 +286,49 @@ $(function () {
 		"</li>"
 		);
 	});
+		let rBtnIndex=1;
+	$('#pBtn4').click(function() {
+		$('.phone >ul >li').remove();
+		$('.sport_memo_tr_clone').remove();
+		$('#pBtn10').hide();
+		  $('.sport_memo').hide();
+		$('.phone > ul').append(
+				"<li class='left'>"+
+				"<div class='box' id='bot'>"+
+					"<span class='message' id='bot_msg'>다이어트 식단을 추천해 드릴까요?</span>"+
+				"</div>"+
+			"</li>"+
+				"<li class='left'>"+
+				"<button type='button'id=recipe_Rbtn"+rBtnIndex+" class='pBtn'>추천해줘</button>"+
+				"</li>"	
+		);
+		rBtnIndex++;
+		recipe_list(page);
+	});
+	let page=1;
+	totalpage=0;
 	
-	
+	/* 레시피 리스트 호출함수 */
+	function recipe_list(page){
+	$('button[id^=recipe_Rbtn]').click(function() {
+		$.ajax({
+			type:'post',
+			data:{'page':page},
+			url:'../chat/chat_recipeList.do',
+			success:function(result){
+				alert(result);
+				let json=JSON.parse(result);
+				for(i=0;i<json.length;i++){
+					console.log(json[i])
+				}
+			},error:function(error){
+				alert("레시피 호출에러");
+			}
+			
+			
+		})
+	})
+	}
 });
 /* 오른쪽 제어 */
 $(function(){
@@ -427,7 +476,7 @@ $(function(){
 				 }
 			 }
 		  }
-		  iconclick(thismonth, thisday); 
+		  iconclick(thismonth, thisday,id); 
 	  });
 	/* 월증가 */
 	  $('.ti-angle-right').click(function() {
@@ -475,7 +524,7 @@ $(function(){
 					 }
 				 }
 			  }
-			  iconclick(thismonth, thisday);
+			  iconclick(thismonth, thisday,id);
 		  });
 	let daynum=year*365+(parseInt(year/4)-parseInt(year/100)+parseInt(year/400));
 	
@@ -515,9 +564,9 @@ $(function(){
 		 }
 	  }
 	  
-	  iconclick(thismonth, thisday);
+	  iconclick(thismonth, thisday,id);
 	  /* 달력안에 내용클릭함수 */
-	  function iconclick(thismonth,thisday){
+	  function iconclick(thismonth,thisday,id){
 	  $('.ti-align-left').click(function() {
 		  alert(1);
 		  thisday=$(this).parent().text();
@@ -650,7 +699,7 @@ $(function(){
 			  	<tr style="border-bottom: 1px solid black;">
 			  		<th class="page1">음식저장</th>
 			  		<th class="page2">기록</th>
-			  		<th class="page3">추천?</th>
+			  		<th class="page3">뭐먹지</th>
 			  	</tr>
 			  </table>
 			  <div class="page_div">
@@ -730,6 +779,24 @@ $(function(){
 						<td id="date${s.index }"></td>
 					</c:forEach>
 					</tr>
+				</table>
+				<table class="table3">
+				 	<tr>
+				 	<c:forEach begin="1" end="3" step="1" varStatus="s">
+				 		<td></td>
+				 	</c:forEach>
+				 	</tr>
+				 	<tr>
+				 	<c:forEach begin="4" end="6" step="1" varStatus="s">
+				 		<td></td>
+				 	</c:forEach>
+				 	</tr>
+				 	<tr>
+				 	<c:forEach begin="7" end="9" step="1" varStatus="s">
+				 		<td></td>
+				 	</c:forEach>
+				 	</tr>
+				 	
 				</table>
 			    </div>
 			  </div>
