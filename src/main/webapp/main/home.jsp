@@ -79,7 +79,7 @@
             </div>
         </div>
     </div>
-    <!-- Banner Section End ---->
+    <!-- Banner Section En d ---->
 
     <!-- Women Banner Section Begin -->
     <section class="women-banner spad">
