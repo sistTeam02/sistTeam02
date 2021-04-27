@@ -85,6 +85,8 @@
 	height: 10em;
     width: 10em;
     border: 1px dotted black;
+        text-align: center;
+    padding: 35px;
 }
 th[class^=page]{
 	cursor: pointer;
@@ -155,7 +157,7 @@ td[id^=date]{
 let today=new Date().toLocaleDateString();
 thismonth=0;
 thisday=0;
-var fileurl="";
+let fileurl="";
 let filename="";
 let file="";
 let id="admin"; /* 임시데이터 ===========================*/
@@ -285,7 +287,7 @@ $(function(){
 	let year=2021;
 	let month=5;
 	thismonth=month;
-	
+	let hoverSwitch=0;
     //드래그앤드랍
     $("#img_span").on("dragenter", function(e){
         e.preventDefault();
@@ -307,9 +309,11 @@ $(function(){
    		
    		fileurl=window.URL.createObjectURL(file[0]);
    		if(file[0].type.includes("image/")){
+   			hoverSwitch=1;
    			$('#img_span').css("background-image","url("+fileurl+")");
    			$('#img_span').css("background-size","100% 100%");
    		}else{
+   			hoverSwitch=0;
    			alert("이미지가 아닙니다");
    			return;
    			/*이미지가 아닐때 나중에처리 */
@@ -325,9 +329,20 @@ $(function(){
     	var time=$(this).attr('value');
     });
 	$('#img_dBtn').click(function() {
+		hoverSwitch=0;
 		$('#img_span').css("background-image","none");
 		$('#img_span').css("background-color", "#fff");
 	});
+	
+		$('#img_span').hover(function(){ /* 이미지칸 마우스호버 */
+			if(hoverSwitch==1){
+				$(this).text('');
+			}else if(hoverSwitch==0){
+			$(this).html('음식사진을 <br><br>넣어주세요')
+			}
+		},function(){
+			$(this).text('');
+		});
 	let imgIndex=1;
 	$('#img_IBtn').click(function() {/* 이미지전송버튼 */
 		$('.phone > ul').append(
@@ -412,7 +427,7 @@ $(function(){
 				 }
 			 }
 		  }
-		  
+		  iconclick(thismonth, thisday); 
 	  });
 	/* 월증가 */
 	  $('.ti-angle-right').click(function() {
@@ -460,6 +475,7 @@ $(function(){
 					 }
 				 }
 			  }
+			  iconclick(thismonth, thisday);
 		  });
 	let daynum=year*365+(parseInt(year/4)-parseInt(year/100)+parseInt(year/400));
 	
@@ -498,8 +514,12 @@ $(function(){
 			 }
 		 }
 	  }
-	  /* 달력안에 내용클릭 */
+	  
+	  iconclick(thismonth, thisday);
+	  /* 달력안에 내용클릭함수 */
+	  function iconclick(thismonth,thisday){
 	  $('.ti-align-left').click(function() {
+		  alert(1);
 		  thisday=$(this).parent().text();
 		  $('.phone >ul >li').remove();
 		  $('#pBtn10').hide();
@@ -553,6 +573,7 @@ $(function(){
 				}	
 		  })
 	  });
+	  }//아이콘 함수
 });
 </script>
 </head>
