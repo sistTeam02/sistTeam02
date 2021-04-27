@@ -18,4 +18,10 @@ public class WalkController {
 		model.addAttribute("main_jsp","../walk/walk.jsp");
 		return "main/main";
 	}
+	
+	@GetMapping("walk/walk_detail.do")
+	   public String walk_detail(String no,Model model)
+	   {
+		   return "walk/walk_detail";
+	   }
 }

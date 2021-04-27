@@ -6,6 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <style>
 .map_wrap, .map_wrap * {margin:0;padding:0;font-family:'Malgun Gothic',dotum,'돋움',sans-serif;font-size:12px;}
 .map_wrap a, .map_wrap a:hover, .map_wrap a:active{color:#000;text-decoration: none;}
@@ -55,6 +56,41 @@
     justify-content: space-around;
 }
 </style>
+<script src="https://code.jquery.com/jquery.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script type="text/javascript">
+$(function(){
+	$('.walk_img').css("cursor","pointer");
+	
+	$('.walk_img').click(function(){
+		let no=$(this).attr("value");
+		
+		$.ajax({
+			type:'GET',
+			url:'walk_detail.do',
+			data:{"no":no},
+			success:function(result)
+			{
+				$('#dialog').html(result);
+				$('#dialog').dialog({
+					autoOpen:true,
+					width:1300,
+					height:900,
+					modal:true
+				})
+				$('#dialog').show()
+			}
+		});
+		
+	});
+	
+	$('.loc').click(function(){
+		let loc=$(this).attr("value");
+		$('#keyword').val(loc);
+		$('#subutton').trigger("click");
+	});
+});
+</script>
 </head>
 <body>
 	 <!-- Breadcrumb Section Begin -->
@@ -78,7 +114,7 @@
     		         <div class="product-slider owl-carousel">
                         <div class="product-item">
                             <div class="pi-pic">
-                                <img src="../img/products/women-1.jpg" alt="">
+                                <img src="../img/products/women-1.jpg" alt="Lights" style="width:100%" class="walk_img" value="1">
                                 <div class="sale">Sale</div>
                                 <div class="icon">
                                     <i class="icon_heart_alt"></i>
@@ -100,7 +136,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="product-item">
+                        <!--  <div class="product-item">
                             <div class="pi-pic">
                                 <img src="../img/products/women-2.jpg" alt="">
                                 <div class="icon">
@@ -121,8 +157,8 @@
                                     $13.00
                                 </div>
                             </div>
-                        </div>
-                        <div class="product-item">
+                        </div>-->
+                        <!-- <div class="product-item">
                             <div class="pi-pic">
                                 <img src="../img/products/women-3.jpg" alt="">
                                 <div class="icon">
@@ -143,8 +179,8 @@
                                     $34.00
                                 </div>
                             </div>
-                        </div>
-                        <div class="product-item">
+                        </div> -->
+                        <!-- <div class="product-item">
                             <div class="pi-pic">
                                 <img src="../img/products/women-4.jpg" alt="">
                                 <div class="icon">
@@ -165,8 +201,12 @@
                                     $34.00
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
+    	</div>
+    	
+    	<div id="dialog" title="산책로" style="display:none">
+      
     	</div>
     </div>
 
@@ -174,12 +214,28 @@
 	
     <div class="container">
     	<div class="row" style="text-align: center;">
-    		<h6>더 많은 곳을 둘러보세요! </h6>
+    		<h3>더 많은 곳을 둘러보세요! </h3>
     	</div>
     </div>
     
     <div style="height:30px"></div>
+	
+	<div class="container">
+		<div class="row" style="text-align: center;">
+			<span class="btn btn-md btn-default loc" value="서울 공원">서울</span>
+			<span class="btn btn-md btn-default loc" value="인천 공원">인천</span>
+			<span class="btn btn-md btn-default loc" value="대전 공원">대전</span>
+			<span class="btn btn-md btn-default loc" value="세종 공원">세종</span>
+			<span class="btn btn-md btn-default loc" value="대구 공원">대구</span>
+			<span class="btn btn-md btn-default loc" value="울산 공원">울산</span>
+			<span class="btn btn-md btn-default loc" value="부산 공원">부산</span>
+			<span class="btn btn-md btn-default loc" value="광주 공원">광주</span>
+			<span class="btn btn-md btn-default loc" value="제주 공원">제주</span>
 
+		</div>
+	</div>
+	
+	 <div style="height:30px"></div>
 
     <!-- 카카오 API 맵 첨부 예정 -->
     <!-- <div class="map spad">
@@ -196,15 +252,15 @@
         </div>
     </div>-->
     
-    <div class="map_wrap" align="center" style="margin:0px auto;justify-content: space-around;align-content: center;">
+    <div class="map_wrap" align="center" style="margin:0px auto;justify-content: space-around; align-content: center;">
 	    <div id="map" style="width:70%;height:100%;position:relative;overflow:hidden;"></div>
 	
-	    <div id="menu_wrap" style="margin-left: 300px"class="bg_white">
+	    <div id="menu_wrap" style="margin-left: 300px"class="bg_white" align="left">
 	        <div class="option">
 	            <div>
 	                <form onsubmit="searchPlaces(); return false;">
-	                    키워드 : <input type="text" value="서울 산책로" id="keyword" size="15"> 
-	                    <button type="submit">검색하기</button> 
+	                    <input type="text" value="서울 산책로" id="keyword" size="15"  style="display:none"> 
+	                    <button type="submit" id=subutton  style="display:none"></button> 
 	                </form>
 	            </div>
 	        </div>
@@ -216,6 +272,9 @@
 
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8a5e5e4eddca40e65faccd16040cbc2a&libraries=services"></script>
 	<script>
+
+
+
 	// 마커를 담을 배열입니다
 	var markers = [];
 	
@@ -504,5 +563,8 @@
     </section>
      -->
     <!-- Contact Section End -->
+    
+    
+    
 </body>
 </html>
