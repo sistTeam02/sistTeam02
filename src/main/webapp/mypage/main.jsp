@@ -75,7 +75,7 @@
                         <div class="blog-catagory">
                             <h4>마이페이지</h4>
                             <ul>
-                                <li><a href="#">관심목록</a></li>
+                                <li><a href="mypage/main.jsp">관심목록</a></li>
                                 <li><a href="#">구매정보</a></li>
                                 <li><a href="#">채팅</a></li>
                                 <li><a href="#">회원정보수정</a></li>
