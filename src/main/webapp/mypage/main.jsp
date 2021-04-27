@@ -10,6 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Fashi | Template</title>
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css?family=Muli:300,400,500,600,700,800,900&display=swap" rel="stylesheet">
@@ -76,9 +77,9 @@
                             <h4>마이페이지</h4>
                             <ul>
                                 <li><a href="mypage/main.jsp">관심목록</a></li>
-                                <li><a href="#">구매정보</a></li>
-                                <li><a href="#">채팅</a></li>
-                                <li><a href="#">회원정보수정</a></li>
+                                <li><a href="buy_list.jsp">구매정보</a></li>
+                                <li><a href="schedule.jsp">채팅</a></li>
+                                <li><a href="update.jsp">회원정보수정</a></li>
                             </ul>
                         </div>
                         <div class="recent-post">
@@ -136,96 +137,17 @@
                         </div>
                     </div>
                 </div>
-                <!-- <div class="col-lg-9 order-1 order-lg-2">
-                    <div class="row">
-                        <div class="col-lg-6 col-sm-6">
-                            <div class="blog-item">
-                                <div class="bi-pic">
-                                    <img src="img/blog/blog-1.jpg" alt="">
-                                </div>
-                                <div class="bi-text">
-                                    <a href="./blog-details.html">
-                                        <h4>The Personality Trait That Makes People Happier</h4>
-                                    </a>
-                                    <p>travel <span>- May 19, 2019</span></p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-sm-6">
-                            <div class="blog-item">
-                                <div class="bi-pic">
-                                    <img src="img/blog/blog-2.jpg" alt="">
-                                </div>
-                                <div class="bi-text">
-                                    <a href="./blog-details.html">
-                                        <h4>This was one of our first days in Hawaii last week.</h4>
-                                    </a>
-                                    <p>Fashion <span>- May 19, 2019</span></p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-sm-6">
-                            <div class="blog-item">
-                                <div class="bi-pic">
-                                    <img src="img/blog/blog-3.jpg" alt="">
-                                </div>
-                                <div class="bi-text">
-                                    <a href="./blog-details.html">
-                                        <h4>Last week I had my first work trip of the year to Sonoma Valley</h4>
-                                    </a>
-                                    <p>travel <span>- May 19, 2019</span></p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-sm-6">
-                            <div class="blog-item">
-                                <div class="bi-pic">
-                                    <img src="img/blog/blog-4.jpg" alt="">
-                                </div>
-                                <div class="bi-text">
-                                    <a href="./blog-details.html">
-                                        <h4>Happppppy New Year! I know I am a little late on this post</h4>
-                                    </a>
-                                    <p>Fashion <span>- May 19, 2019</span></p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-sm-6">
-                            <div class="blog-item">
-                                <div class="bi-pic">
-                                    <img src="img/blog/blog-5.jpg" alt="">
-                                </div>
-                                <div class="bi-text">
-                                    <a href="./blog-details.html">
-                                        <h4>Absolue collection. The Lancome team has been one…</h4>
-                                    </a>
-                                    <p>Model <span>- May 19, 2019</span></p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-sm-6">
-                            <div class="blog-item">
-                                <div class="bi-pic">
-                                    <img src="img/blog/blog-6.jpg" alt="">
-                                </div>
-                                <div class="bi-text">
-                                    <a href="./blog-details.html">
-                                        <h4>Writing has always been kind of therapeutic for me</h4>
-                                    </a>
-                                    <p>Fashion <span>- May 19, 2019</span></p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-12">
-                            <div class="loading-more">
-                                <i class="icon_loading"></i>
-                                <a href="#">
-                                    Loading More
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
+                <div class="col-lg-9 order-1 order-lg-2">
+                       <div class="table">
+                       	<table>
+                       		<tr>
+                       			<th>ddd</th>
+                       			<th>ddd</th>
+                       			<th>ddd</th>
+                       		</tr>
+                       		
+                       	</table>
+                       </div>
             </div>
         </div>
     </section>
@@ -270,3 +192,6 @@
 </body>
 
 </html>
+                       			
+                       			
+                       			
