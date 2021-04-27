@@ -1,8 +1,13 @@
 package com.sist.controller;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -16,6 +21,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.sist.dao.Chat_foodDAO;
 import com.sist.dao.Chat_planDAO;
@@ -97,5 +104,34 @@ public class ChatRestController {
 		dList=dList.substring(0,dList.length());
 		
 		return dList;
+	}
+	@PostMapping("chat/image_upload.do") /*긁어서 뭔소리인지모름*/
+	public String chat_imageUpload(MultipartHttpServletRequest multipartRequest) { //Multipart로 받는다.
+       Iterator<String> itr =  multipartRequest.getFileNames();
+       String filePath = "C:/upload"; //설정파일로 뺀다.
+       while (itr.hasNext()) { //받은 파일들을 모두 돌린다.
+                  
+           MultipartFile mpf = multipartRequest.getFile(itr.next());
+    
+           String originalFilename = mpf.getOriginalFilename(); //파일명 아이디or 날짜 추가해서 파일명 변경해야됨 ============================
+    
+           String fileFullPath = filePath+"/"+originalFilename; //파일 전체 경로
+    
+           try {
+               //파일 저장
+               mpf.transferTo(new File(fileFullPath)); //파일저장 실제로는 service에서 처리
+               
+               System.out.println("originalFilename => "+originalFilename);
+               System.out.println("fileFullPath => "+fileFullPath);
+    
+           } catch (Exception e) {
+               System.out.println("postTempFile_ERROR======>"+fileFullPath);
+               e.printStackTrace();
+           }
+                        
+      }
+        
+       return "success";
+   
 	}
 }

@@ -155,6 +155,9 @@ td[id^=date]{
 let today=new Date().toLocaleDateString();
 thismonth=0;
 thisday=0;
+var fileurl="";
+let filename="";
+let file="";
 let id="admin"; /* 임시데이터 ===========================*/
 /* 왼쪽제어 */
 $(function () {
@@ -278,10 +281,11 @@ $(function () {
 });
 /* 오른쪽 제어 */
 $(function(){
-	var fileurl="";
+
 	let year=2021;
 	let month=5;
 	thismonth=month;
+	
     //드래그앤드랍
     $("#img_span").on("dragenter", function(e){
         e.preventDefault();
@@ -296,11 +300,11 @@ $(function(){
         $(this).css("background-color", "#FFF");
     }).on("drop", function(e){
         e.preventDefault();
-    let file = e.originalEvent.dataTransfer.files;
-    console.log(file);
-    if(file!=null&&file!=undefined){	
-   		let name=file[0].name;
-   		console.log(name);
+     file = e.originalEvent.dataTransfer.files;
+    if(file!=null&&file!=undefined){
+   		filename=file[0].name;
+   		
+   		
    		fileurl=window.URL.createObjectURL(file[0]);
    		if(file[0].type.includes("image/")){
    			$('#img_span').css("background-image","url("+fileurl+")");
@@ -308,7 +312,7 @@ $(function(){
    		}else{
    			alert("이미지가 아닙니다");
    			return;
-   			/* 나중에처리 */
+   			/*이미지가 아닐때 나중에처리 */
    		}
    	
     }
@@ -325,7 +329,7 @@ $(function(){
 		$('#img_span').css("background-color", "#fff");
 	});
 	let imgIndex=1;
-	$('#img_IBtn').click(function() {
+	$('#img_IBtn').click(function() {/* 이미지전송버튼 */
 		$('.phone > ul').append(
 				"<li class='right'>"+
 				"<div class='box' id=user_img"+imgIndex+">"+
@@ -337,6 +341,25 @@ $(function(){
 		$('#user_img'+imgIndex).css("width","10em").css("height", "10em"); 
 		imgIndex++;
 		$('.phone').scrollTop($('.phone')[0].scrollHeight);
+			let fd=new FormData();
+			fd.append('file', file[0]);
+      $.ajax({
+			type:'post',
+			url:'../chat/image_upload.do',
+			data:fd,
+			processData: false,
+	        contentType: false,
+	        cache: false,
+	        enctype:'multipart/form-data',
+			success:function(result){
+				alert("전송완료")
+			},error:function(error){
+				alert("파일전송에러")
+			} 
+			
+			
+			
+		}); 
 	});
 	$('th[class^=page]').click(function() {
 		let classno=$(this).attr("class");
@@ -383,7 +406,7 @@ $(function(){
 			 $('#date'+parseInt(i+day)).text(i);
 			 for(j=0;j<arr.length;j++){
 				 if(arr[j]==i){
-					 $('#date'+parseInt(i+day)).append(
+					 $('#date'+parseInt(i+day)).append( /* 달력에 아이콘추가 */
 							  "&nbsp;&nbsp;<i class='ti-align-left'></i>"	  
 					  );
 				 }
@@ -625,6 +648,7 @@ $(function(){
 			  			</td>
 			  		</tr>
 			  	</table>
+			  	<form id="fileForm" name="fileForm" enctype="multipart/form-data" method="post">
 			    <table class="table1">
 			    	<tr>
 			    		<td width="40%">
@@ -633,12 +657,14 @@ $(function(){
 				  		<td>
 				  			<input type="button" value="삭제" id="img_dBtn">
 				  			<input type="button" value="사진보여주기" id="img_IBtn">
+				  			<input type="file"  id="img_fBtn" style="display: none;">
 				  		</td>
 			  	    </tr>
 				</table>
-				<table class="table1">
+				</form>
+				<table class="table1" style="height: 400px;background-color:#ffd47b;" >
 					<tr>
-						<td>음식출력</td>
+						<td>VueJS로 음식출력</td>
 					</tr>
 					<tr>
 						<td>음식출력</td>
