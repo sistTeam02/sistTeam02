@@ -84,8 +84,8 @@
                             <ul>
                                 <li><a href="like_list.jsp">관심목록 </a></li> 
                                 <li><a href="buy_list.jsp">구매정보</a></li>
-                                <li><a href="schedule.jsp">채팅</a></li>
-                                <li><a href="update.jsp">회원정보수정</a></li>
+                                <li><a href="schedule.jsp">나만의 계획</a></li>
+                                <li><a href="mypage_update.jsp">회원정보수정</a></li>
                             </ul>
                         </div>
                         <div class="recent-post">
@@ -146,7 +146,6 @@
                 <div class="col-lg-9 order-1 order-lg-2">
                 <div class="col-lg-12">
                 <div class="bi-text">
-               		<%-- <jsp:include page="${mypage_jsp }"></jsp:include> --%>
             	 <h1>관심 목록</h1>
                		<div style="height:50px"></div>
                        <div class="container">
