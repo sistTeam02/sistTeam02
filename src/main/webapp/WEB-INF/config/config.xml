@@ -6,17 +6,23 @@
   <typeAliases>
     <typeAlias type="com.sist.vo.MemberVO" alias="MemberVO"/>
     <typeAlias type="com.sist.vo.GoodsVO" alias="GoodsVO"/>
+    <typeAlias type="com.sist.vo.GoodsDetailVO" alias="GoodsDetailVO"/>
+    <typeAlias type="com.sist.vo.DietFoodVO" alias="DietFoodVO"/>
+    <typeAlias type="com.sist.vo.DietFoodDetailVO" alias="DietFoodDetailVO"/>
     <typeAlias type="com.sist.vo.HometVO" alias="HometVO"/>
     <typeAlias type="com.sist.vo.Chat_foodVO" alias="Chat_foodVO"/>
-     <typeAlias type="com.sist.vo.KcalVO" alias="KcalVO"/>
-     <typeAlias type="com.sist.vo.Chat_planVO" alias="Chat_planVO"/>
-     <typeAlias type="com.sist.vo.Chat_recipeVO" alias="Chat_recipeVO"/>
+    <typeAlias type="com.sist.vo.KcalVO" alias="KcalVO"/>
+    <typeAlias type="com.sist.vo.Chat_planVO" alias="Chat_planVO"/>
+    <typeAlias type="com.sist.vo.Chat_recipeVO" alias="Chat_recipeVO"/>
+    <typeAlias type="com.sist.vo.WalkVO" alias="WalkVO"/>
   </typeAliases>
   <mappers>
     <mapper resource="com/sist/mapper/member-mapper.xml"/>
     <mapper resource="com/sist/mapper/goods-mapper.xml"/>
+    <mapper resource="com/sist/mapper/dietfood-mapper.xml"/>
     <mapper resource="com/sist/mapper/homet-mapper.xml"/>
     <mapper resource="com/sist/mapper/chat-mapper.xml"/>
     <mapper resource="com/sist/mapper/kcal-mapper.xml"/>
+    <mapper resource="com/sist/mapper/walk-mapper.xml"/>
   </mappers>
 </configuration>

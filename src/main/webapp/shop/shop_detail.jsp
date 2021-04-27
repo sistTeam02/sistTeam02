@@ -1,22 +1,31 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <!-- coloshop-master의 single 페이지 활용 -->
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" type="text/css" href="styles/bootstrap4/bootstrap.min.css">
-<link href="plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-<link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/owl.carousel.css">
-<link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/owl.theme.default.css">
-<link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/animate.css">
-<link rel="stylesheet" href="plugins/themify-icons/themify-icons.css">
-<link rel="stylesheet" type="text/css" href="plugins/jquery-ui-1.12.1.custom/jquery-ui.css">
-<link rel="stylesheet" type="text/css" href="styles/single_styles.css">
-<link rel="stylesheet" type="text/css" href="styles/single_responsive.css">
 <title>Insert title here</title>
 </head>
 <body>
+	<!-- Breadcrumb Section Begin -->
+    <div class="breacrumb-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb-text">
+                        <a href="../main/main.do"><i class="fa fa-home"></i> Home</a>
+                        <a href="../shop/shop_list.do"><i class="fa fa-home"></i> Shop</a>
+                        <span>Goods</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Breadcrumb Section Begin -->
+    
 		<div class="row">
 			<div class="col-lg-7">
 				<div class="single_product_pics">
@@ -41,14 +50,16 @@
 			<div class="col-lg-5">
 				<div class="product_details">
 					<div class="product_details_title">
-						<h2>Pocket cotton sweatshirt</h2>
+						<h2>${vo.title }</h2>
 						<p>Nam tempus turpis at metus scelerisque placerat nulla deumantos solicitud felis. Pellentesque diam dolor, elementum etos lobortis des mollis ut...</p>
 					</div>
 					<div class="free_delivery d-flex flex-row align-items-center justify-content-center">
 						<span class="ti-truck"></span><span>free delivery</span>
 					</div>
-					<div class="original_price">$629.99</div>
-					<div class="product_price">$495.00</div>
+					<!-- <div class="original_price">$629.99</div> -->
+					<div class="product_price">
+						<fmt:formatNumber value="${vo.price }"/>원
+					</div>
 					<ul class="star_rating">
 						<li><i class="fa fa-star" aria-hidden="true"></i></li>
 						<li><i class="fa fa-star" aria-hidden="true"></i></li>
@@ -108,7 +119,7 @@
 									<h4>Description</h4>
 								</div>
 								<div class="tab_text_block">
-									<h2>Pocket cotton sweatshirt</h2>
+									<h2>${vo.title }</h2>
 									<p>Nam tempus turpis at metus scelerisque placerat nulla deumantos solicitud felis. Pellentesque diam dolor, elementum etos lobortis des mollis ut...</p>
 								</div>
 								<div class="tab_image">

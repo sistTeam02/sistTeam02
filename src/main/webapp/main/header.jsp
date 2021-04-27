@@ -108,7 +108,7 @@
                         <i class="ti-menu"></i>
                         <span>쇼핑몰</span>
                         <ul class="depart-hover">
-                            <li class="active"><a href="#">운동 기구 & 용품</a></li>
+                            <li class="active"><a href="../shop/shop_list.do">운동 기구 & 용품</a></li>
                             <li><a href="#">다이어트 & 건강 식품</a></li>
                         </ul>
                     </div>
@@ -122,7 +122,6 @@
                                 <li><a href="#">수강후기 게시판</a></li>
                             </ul>
                         </li>
-                        <li><a href="../shop/shop_list.do">Shop</a></li>
                         <li><a href="#">커뮤니티</a>
                             <ul class="dropdown">
                                 <li><a href="#">자유게시판(운동팁 공유)</a></li>

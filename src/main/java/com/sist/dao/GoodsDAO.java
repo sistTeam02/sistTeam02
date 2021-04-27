@@ -11,7 +11,7 @@ import com.sist.vo.*;
 @Repository
 public class GoodsDAO extends SqlSessionDaoSupport {
 
-	@Resource(name="ssf")
+	@Resource
 	public void setSqlSessionFactory(SqlSessionFactory sqlSessionFactory) {
 		// TODO Auto-generated method stub
 		super.setSqlSessionFactory(sqlSessionFactory);
@@ -27,9 +27,9 @@ public class GoodsDAO extends SqlSessionDaoSupport {
 		return getSqlSession().selectOne("goodsTotalPage");
 	}
 	
-//	public GoodsDetailVO goodsDetailData(int no)
-//	{
-//		return getSqlSession().selectOne("goodsDetailData", no);
-//	}
+	public GoodsDetailVO goodsDetailData(int no)
+	{
+		return getSqlSession().selectOne("goodsDetailData", no);
+	}
 	
 }

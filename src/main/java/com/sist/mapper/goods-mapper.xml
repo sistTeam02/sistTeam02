@@ -22,8 +22,8 @@
     SELECT CEIL(COUNT(*)/9.0) FROM goods_list
   </select>
   <!-- goods 상세데이터 -->
-<!--   <select id="goodsDetailData" resultType="GoodsDetailVO" parameterType="int">
+  <select id="goodsDetailData" resultType="GoodsDetailVO" parameterType="int">
     SELECT * FROM goods_detail
     WHERE no=#{no}
-  </select> -->
+  </select>
 </mapper>

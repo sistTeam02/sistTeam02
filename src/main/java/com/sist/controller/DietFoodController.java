@@ -10,12 +10,12 @@ import java.util.*;
 import com.sist.vo.*;
 import com.sist.dao.*;
 @Controller
-public class GoodsController {
-	// GoodsDAO 저장
+public class DietFoodController {
+	// DietFoodDAO 저장
 	@Autowired
-	private GoodsDAO gDao;
+	private DietFoodDAO dDao;
 	
-	@GetMapping("shop/shop_list.do")
+	@GetMapping("shop/dietfood_list.do")
 	public String shop_list(String page,Model model)
 	{
 		if(page==null)
@@ -28,9 +28,9 @@ public class GoodsController {
 		map.put("start", start);
 		map.put("end", end);
 		
-		List<GoodsVO> list=gDao.goodsListData(map);
+		List<DietFoodVO> list=dDao.dfoodListData(map);
 		// 총 페이지
-		int totalpage=gDao.goodsTotalPage();
+		int totalpage=dDao.dfoodTotalPage();
 		
 		final int BLOCK=9;
 		int startPage=((curpage-1)/BLOCK*BLOCK)+1;
@@ -46,16 +46,15 @@ public class GoodsController {
 		model.addAttribute("endPage", endPage);
 		model.addAttribute("curpage", curpage);
 		model.addAttribute("allPage", allPage);
-		model.addAttribute("main_jsp", "../shop/shop_list.jsp");
+		model.addAttribute("main_jsp", "../shop/dietfood_list.jsp");
 		return "main/main";
 	}
 	
-	@RequestMapping("shop/shop_detail.do")
-	public String shop_detail(int no,Model model)
+	@RequestMapping("shop/dietfood_detail.do")
+	public String dfood_detail(int no,Model model)
 	{
-		GoodsDetailVO vo=gDao.goodsDetailData(no);
+		DietFoodDetailVO vo=dDao.dfoodDetailData(no);
 		model.addAttribute("vo", vo);
-		return "shop/shop_detail";
+		return "shop/dietfood_detail";
 	}
 }
-
