@@ -158,7 +158,29 @@ td[id^=date]{
     color: #e2d534;
     cursor: pointer;
 }
+td[id^=table3_td] img{
+    width: 150px;
+    height: 150px;
+    border-radius: 65px;
+}
+.recipe_page{
 
+    height: 4em;
+	padding: 0px 39px;
+}
+.pageBtn{
+    background-color: white;
+    border-radius: 5px;
+    width: 40px;
+    height: 40px;
+    margin: 6px 7px;
+}
+.pageBtn:hover{
+	background-color: #648cff;
+}
+.pageBtn:active{
+	border: 2px solid #d2bfec;
+}
 </style>
 <script type="text/javascript" src="https://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
@@ -169,6 +191,8 @@ let fileurl="";
 let filename="";
 let file="";
 let id="admin"; /* 임시데이터 ===========================*/
+let page=1;
+totalpage=0;
 /* 왼쪽제어 */
 $(function () {
 	/* 나 머먹었어 */
@@ -303,32 +327,25 @@ $(function () {
 				"</li>"	
 		);
 		rBtnIndex++;
+		$('button[id^=recipe_Rbtn]').click(function() {
 		recipe_list(page);
+		});
 	});
-	let page=1;
-	totalpage=0;
 	
-	/* 레시피 리스트 호출함수 */
-	function recipe_list(page){
-	$('button[id^=recipe_Rbtn]').click(function() {
-		$.ajax({
-			type:'post',
-			data:{'page':page},
-			url:'../chat/chat_recipeList.do',
-			success:function(result){
-				alert(result);
-				let json=JSON.parse(result);
-				for(i=0;i<json.length;i++){
-					console.log(json[i])
-				}
-			},error:function(error){
-				alert("레시피 호출에러");
-			}
-			
-			
-		})
-	})
-	}
+
+
+});
+$(document).on('click', 'button[id^=pageBtn]' , function(){
+	let cPage=$(this).text();
+	recipe_list(cPage);
+});
+$(document).on('click', '.pageBtn > .ti-angle-left' , function(){
+	let cPage=$(this).parent().next().text();
+	recipe_list(Number(cPage)-10);
+});
+$(document).on('click', '.pageBtn > .ti-angle-right' , function(){
+	let cPage=$(this).parent().prev().text();
+	recipe_list(Number(cPage)+1);
 });
 /* 오른쪽 제어 */
 $(function(){
@@ -425,11 +442,14 @@ $(function(){
 			
 		}); 
 	});
+	/* 오른쪽테이블 화면제어 */
 	$('th[class^=page]').click(function() {
 		let classno=$(this).attr("class");
 		classno=classno.substr(4, 1);
 		$('table[class^=table]').hide();
 		$('.table'+classno).show();
+		$('.table3').hide();
+		$('#page_div > button').remove();
 	});
 	/* 월 감소 */
 	  $('.ti-angle-left').click(function() {
@@ -624,6 +644,59 @@ $(function(){
 	  });
 	  }//아이콘 함수
 });
+/* 레시피리스트 호출함수 */
+	
+function recipe_list(page){
+		$('#page_div > button').remove();
+		$.ajax({
+			type:'post',
+			data:{'page':page},
+			async:true,
+			url:'../chat/chat_recipeList.do',
+			success:function(result){
+				let json=JSON.parse(result);
+				for(i=0;i<json.length;i++){
+					if(json[i].title.length>18){
+						json[i].title=json[i].title.substring(0, 18)+"..."
+					}
+					$('#table3_td'+i).text(json[i].title);
+					$('#table3_td'+i).append(
+						"<img src="+json[i].poster+">"
+					);
+				totalpage=json[i].totalpage;
+				page=json[i].page;
+				}
+				for(let k=0;k<10;k++){
+					recipe_for(k,page);
+				}
+				if(page>10){
+				$('#page_div').prepend("<button class=pageBtn><i class='ti-angle-left'></i></button>")	
+				}
+				if(page<(totalpage-totalpage%10)){
+				$('#page_div').append("<button class=pageBtn><i class='ti-angle-right'></i></button>")
+				}
+				$('table[class^=table]').hide();
+				$('.table3').show();
+			
+			},error:function(error){
+				alert("레시피 호출에러");
+			}
+							
+		})
+		
+		
+		
+	}
+		
+/* 레시피 페이지 호출함수 */
+function recipe_for(k,page){
+	let block=10;
+
+	let startPage=Math.floor((page-1)/block)*block+1;
+	let endPage=Math.floor((page-1)/block)*block+block;
+	endPage>totalpage?endPage=totalpage:endPage=endPage;
+	$('#page_div').append("<button class=pageBtn id=pageBtn"+(startPage+k)+">"+(Number(startPage)+Number(k))+"</button>")
+}
 </script>
 </head>
 <body>
@@ -781,10 +854,27 @@ $(function(){
 					</tr>
 				</table>
 				<table class="table3">
-				 	
+				 		<tr>
+					 	<c:forEach begin="0" end="2" varStatus="s" step="1">
+					 		<td id="table3_td${s.index }"><img src=""></td>
+					 	</c:forEach>
+				 		</tr>
+				 		<tr>
+					 	<c:forEach begin="3" end="5" varStatus="s" step="1">
+					 		<td id="table3_td${s.index }"><img src=""></td>
+					 	</c:forEach>
+				 		</tr>
+				 		<tr>
+					 	<c:forEach begin="6" end="8" varStatus="s" step="1">
+					 		<td id="table3_td${s.index }"><img src=""></td>
+					 	</c:forEach>
+				 		</tr>
 				 	
 				</table>
 			    </div>
+			  </div>
+			  <div class="recipe_page" id="page_div">
+			  		
 			  </div>
 			</div>
 		</div>

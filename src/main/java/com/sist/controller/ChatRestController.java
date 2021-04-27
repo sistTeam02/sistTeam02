@@ -141,14 +141,12 @@ public class ChatRestController {
 
 			int rowSize=9;
 			int start=1+(page-1)*rowSize;
-			System.out.println(start);
 			int end=(page*rowSize);
 			Map map=new HashMap();
 			map.put("start", start);
 			map.put("end", end);
 			List<Chat_recipeVO> list=fdao.chat_recipeList(map);
 			int totalpage=fdao.chat_recipeTotalPage();
-				
 			JSONArray arr=new JSONArray();
 			for(Chat_recipeVO vo:list){
 				JSONObject obj=new JSONObject();
