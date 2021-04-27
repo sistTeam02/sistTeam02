@@ -28,7 +28,7 @@
                     <div class="col-lg-2 col-md-2">
                         <div class="logo">
                             <a href="../main/main.do">
-                                <img src="../img/logo.png" alt="">
+                                <img src="../img/logo.png">
                             </a>
                         </div>
                     </div>
@@ -116,18 +116,21 @@
                 <nav class="nav-menu mobile-menu">
                     <ul>
 						<li class="active"><a href="../main/main.do">Home</a></li>
-                        <li><a href="./shop.html">Shop</a></li>
-						<li class="active"><a href="./index.html">Home</a></li>
-                        <li><a href="../shop/shop_list.do">Shop</a></li>
-                        <li><a href="#">Collection</a>
+						<li><a href="#">홈트레이닝</a>
                             <ul class="dropdown">
-                                <li><a href="#">Men's</a></li>
-                                <li><a href="#">Women's</a></li>
-                                <li><a href="#">Kid's</a></li>
+                                <li><a href="#">홈트레이닝 목록</a></li>
+                                <li><a href="#">수강후기 게시판</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="../shop/shop_list.do">Shop</a></li>
+                        <li><a href="#">커뮤니티</a>
+                            <ul class="dropdown">
+                                <li><a href="#">자유게시판(운동팁 공유)</a></li>
+                                <li><a href="#">고객문의 게시판</a></li>
+                                <li><a href="#">공지사항</a></li>
                             </ul>
                         </li>
 					<li><a href="../chat/chat_main.do">채팅</a></li>
-                        <li><a href="./contact.html">Contact</a></li>
                         <li><a href="#">마이페이지</a>
                             <ul class="dropdown">
                                 <li><a href="./blog-details.html">운동&쇼핑몰 찜리스트</a></li>
