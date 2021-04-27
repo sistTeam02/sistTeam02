@@ -781,21 +781,7 @@ $(function(){
 					</tr>
 				</table>
 				<table class="table3">
-				 	<tr>
-				 	<c:forEach begin="1" end="3" step="1" varStatus="s">
-				 		<td></td>
-				 	</c:forEach>
-				 	</tr>
-				 	<tr>
-				 	<c:forEach begin="4" end="6" step="1" varStatus="s">
-				 		<td></td>
-				 	</c:forEach>
-				 	</tr>
-				 	<tr>
-				 	<c:forEach begin="7" end="9" step="1" varStatus="s">
-				 		<td></td>
-				 	</c:forEach>
-				 	</tr>
+				 	
 				 	
 				</table>
 			    </div>
