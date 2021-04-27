@@ -82,7 +82,7 @@
                         <div class="blog-catagory">
                             <h4>마이페이지</h4>
                             <ul>
-                                <li><a href="like_list.jsp">관심목록</a></li>
+                                <li><a href="like_list.jsp">관심목록 </a></li> 
                                 <li><a href="buy_list.jsp">구매정보</a></li>
                                 <li><a href="schedule.jsp">채팅</a></li>
                                 <li><a href="update.jsp">회원정보수정</a></li>
