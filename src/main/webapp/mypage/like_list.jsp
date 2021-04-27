@@ -11,6 +11,12 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Fashi | Template</title>
      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+     <style type="text/css">
+     .table-hover{
+     	font-size:large;
+     	width:900px;
+     }
+     </style>
     
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css?family=Muli:300,400,500,600,700,800,900&display=swap" rel="stylesheet">
@@ -76,7 +82,7 @@
                         <div class="blog-catagory">
                             <h4>마이페이지</h4>
                             <ul>
-                                <li><a href="mypage/main.jsp">관심목록</a></li>
+                                <li><a href="like_list.jsp">관심목록</a></li>
                                 <li><a href="buy_list.jsp">구매정보</a></li>
                                 <li><a href="schedule.jsp">채팅</a></li>
                                 <li><a href="update.jsp">회원정보수정</a></li>
@@ -138,54 +144,151 @@
                     </div>
                 </div>
                 <div class="col-lg-9 order-1 order-lg-2">
-                       <div class="table">
-                       	<table>
-                       		<tr>
-                       			<th>ddd</th>
-                       			<th>ddd</th>
-                       			<th>ddd</th>
-                       		</tr>
-                       		
-                       	</table>
-                       </div>
+                <div class="col-lg-12">
+                <div class="bi-text">
+               		<%-- <jsp:include page="${mypage_jsp }"></jsp:include> --%>
+            	 <h1>관심 목록</h1>
+               		<div style="height:50px"></div>
+                       <div class="container">
+                       <h2>찜한 클래스</h2>
+ 						<p>찜한 운동 프로그램 목록을 보여줍니다(youtube)</p>            
+							  <table class="table table-hover">
+							    <thead>
+							      <tr>
+							        <th>운동이름</th>
+							        <th>등록일</th>
+							        <th>코치 이름</th>
+							      </tr>
+							    </thead>
+							    <tbody>
+							      <tr>
+							        <td>전신다이어트 유산소 운동</td>
+							        <td>2017-10-13</td>
+							        <td>Thankyou BUBU</td>
+							      </tr>
+							      <tr>
+							        <td>맨몸운동 홈트레이닝</td>
+							        <td>2019-03-12</td>
+							        <td>바벨라토르 홈트레이닝</td>
+							      </tr>
+							      <tr>
+							        <td>3개월 맨몸운동</td>
+							        <td>2021-01-30</td>
+							        <td>습관의힘제이건</td>
+							      </tr>
+							    </tbody>
+							  </table>
+							</div>
+							
+								<div style="height:50px"></div>
+                       <div class="container">
+                       <h2>찜한 홈트레이닝</h2>
+ 						<p>찜한 홈트레이닝 목록을 보여줍니다(hometraining_detail)</p>            
+							  <table class="table table-hover">
+							    <thead>
+							      <tr>
+							        <th>운동 부위</th>
+							        <th>운동 제목</th>
+							        <th>운동 난이도</th>
+							        <th>운동 시간</th>
+							      </tr>
+							    </thead>
+							    <tbody>
+							      <tr>
+							        <td>전신</td>
+							        <td>예쁜뒷태 등운동</td>
+							        <td>상</td>
+							        <td>4분37초</td>
+							      </tr>
+							      <tr>
+							        <td>상체</td>
+							        <td>예쁜 상체 만들어주는 [세라밴드 상체 운동법 2탄]</td>
+							        <td>중</td>
+							        <td>0분51초</td>
+							      </tr>
+							      <tr>
+							        <td>하체</td>
+							        <td>틀어진 골반을 위한 [교정 스트레칭 2]</td>
+							        <td>중</td>
+							        <td>0분13초</td>
+							      </tr>
+							    </tbody>
+							  </table>
+							</div>
+							
+					<div style="height:50px"></div>
+                       <div class="container">
+                       <h2>찜한 제품</h2>
+ 						<p>장바구니에 넣은 제품 목록을 보여줍니다(hometraining_detail)</p>            
+							  <table class="table table-hover">
+							    <thead>
+							      <tr>
+							        <th>제품 사진</th>
+							        <th>제품 이름</th>
+							        <th>가격</th>
+							      </tr>
+							    </thead>
+							    <tbody>
+							      <tr>
+							        <td>${vo.poster}</td>
+							        <td>맨몸운동 홈트레이닝 팔굽혀펴기 몸짱 푸쉬업바</td>
+							        <td>8490원</td>
+							      </tr>
+							      <tr>
+							        <td>${vo.poster}</td>
+							        <td>ab슬라이드 4휠 복근 탄력 운동기구 홈트레이닝</td>
+							        <td>16500원</td>
+							      </tr>
+							      <tr>
+							        <td>${vo.poster}</td>
+							        <td>다이어트짐볼 55cm 블루 스트레칭도구 홈트레이닝 볼</td>
+							        <td>16650원</td>
+							      </tr>
+							    </tbody>
+							  </table>
+							</div>
+							
+							<div style="height:50px"></div>
+                       <div class="container">
+                       <h2>찜한 식품</h2>
+ 						<p>장바구니에 넣은 식품 목록을 보여줍니다(dietfood_detail)</p>            
+							  <table class="table table-hover">
+							    <thead>
+							      <tr>
+							        <th>제품 사진</th>
+							        <th>제품 이름</th>
+							        <th>가격</th>
+							      </tr>
+							    </thead>
+							    <tbody>
+							      <tr>
+							        <td>${vo.poster}</td>
+							        <td>2개사면 +2개더/이지퀵다이어트식품/뱃살감량/S라인</td>
+							        <td>41,900원</td>
+							      </tr>
+							      <tr>
+							        <td>${vo.poster}</td>
+							        <td>한성 실곤약 200g 30개 국수면 두부 고구마말랭이</td>
+							        <td>21,450원</td>
+							      </tr>
+							      <tr>
+							        <td>${vo.poster}</td>
+							        <td>깔라만씨 원액100% (1L) 1+1+1</td>
+							        <td>10,900원</td>
+							      </tr>
+							    </tbody>
+							  </table>
+							</div>
+							
+               		 </div> 
+                </div>
             </div>
         </div>
     </section>
     <!-- Blog Section End -->
 
     <!-- Partner Logo Section Begin -->
-    <div class="partner-logo">
-        <div class="container">
-            <div class="logo-carousel owl-carousel">
-                <div class="logo-item">
-                    <div class="tablecell-inner">
-                        <img src="img/logo-carousel/logo-1.png" alt="">
-                    </div>
-                </div>
-                <div class="logo-item">
-                    <div class="tablecell-inner">
-                        <img src="img/logo-carousel/logo-2.png" alt="">
-                    </div>
-                </div>
-                <div class="logo-item">
-                    <div class="tablecell-inner">
-                        <img src="img/logo-carousel/logo-3.png" alt="">
-                    </div>
-                </div>
-                <div class="logo-item">
-                    <div class="tablecell-inner">
-                        <img src="img/logo-carousel/logo-4.png" alt="">
-                    </div>
-                </div>
-                <div class="logo-item">
-                    <div class="tablecell-inner">
-                        <img src="img/logo-carousel/logo-5.png" alt="">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Partner Logo Section End -->
+    
 
 
     
