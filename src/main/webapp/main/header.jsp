@@ -129,6 +129,11 @@
                                 <li><a href="#">공지사항</a></li>
                             </ul>
                         </li>
+                        <li><a href="#">산책로</a>
+                            <ul class="dropdown">
+                                <li><a href="#">산책로 추천맵</a></li>
+                            </ul>
+                        </li>
 					<li><a href="../chat/chat_main.do">채팅</a></li>
                         <li><a href="#">마이페이지</a>
                             <ul class="dropdown">
