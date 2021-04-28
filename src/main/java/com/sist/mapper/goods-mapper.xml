@@ -22,8 +22,15 @@
     SELECT CEIL(COUNT(*)/9.0) FROM goods_list
   </select>
   <!-- goods 상세데이터 -->
+  <!-- 
+	    NO               NUMBER        
+		TITLE            VARCHAR2(300) 
+		POSTER           VARCHAR2(400) 
+		PRICE            NUMBER        
+		DETAIL_POSTER    CLOB          
+   -->
   <select id="goodsDetailData" resultType="GoodsDetailVO" parameterType="int">
-    SELECT * FROM goods_detail
+    SELECT no,title,poster,price,detail_poster FROM goods_detail
     WHERE no=#{no}
   </select>
 </mapper>
