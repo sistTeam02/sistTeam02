@@ -1,4 +1,7 @@
 package com.sist.vo;
+
+import java.util.Date;
+
 /*
  *  NO        NOT NULL NUMBER         
 	ID                 VARCHAR2(34)   
@@ -13,5 +16,83 @@ package com.sist.vo;
 	HIT                NUMBER
  */
 public class NoticeBoardVO {
+	private int no;
+	private String id;
+	private String name;
+	private String subject;
+	private String pwd;
+	private String content;
+	private Date regdate;
+	private String filename;
+	private String filesize;
+	private int filecount;
+	private int hit;
+	public int getNo() {
+		return no;
+	}
+	public void setNo(int no) {
+		this.no = no;
+	}
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getSubject() {
+		return subject;
+	}
+	public void setSubject(String subject) {
+		this.subject = subject;
+	}
+	public String getPwd() {
+		return pwd;
+	}
+	public void setPwd(String pwd) {
+		this.pwd = pwd;
+	}
+	public String getContent() {
+		return content;
+	}
+	public void setContent(String content) {
+		this.content = content;
+	}
+	public Date getRegdate() {
+		return regdate;
+	}
+	public void setRegdate(Date regdate) {
+		this.regdate = regdate;
+	}
+	public String getFilename() {
+		return filename;
+	}
+	public void setFilename(String filename) {
+		this.filename = filename;
+	}
+	public String getFilesize() {
+		return filesize;
+	}
+	public void setFilesize(String filesize) {
+		this.filesize = filesize;
+	}
+	public int getFilecount() {
+		return filecount;
+	}
+	public void setFilecount(int filecount) {
+		this.filecount = filecount;
+	}
+	public int getHit() {
+		return hit;
+	}
+	public void setHit(int hit) {
+		this.hit = hit;
+	}
+	
 
 }
