@@ -26,7 +26,7 @@ h1 {
   <table class="table">
   <tr>
    <td class="text-right">
-    <a href="insert.do" class="btn btn-sm btn-warning">등록</a> 
+    <a href="freeboard_insert.do" class="btn btn-sm btn-warning">글쓰기</a> 
    </td>
   </tr>
   </table>
@@ -42,7 +42,7 @@ h1 {
      <tr>
       <td width=10% class="text-center">${vo.no }</td>
       <td width=45%>
-       <a href="detail.do?no=${vo.no}&page=${curpage}">${vo.subject }</a>
+       <a href="freeboard_detail.do?no=${vo.no}&page=${curpage}">${vo.subject }</a>
        </td>
       <td width=15% class="text-center">${vo.name }</td>
       <td width=20% class="text-center"><fmt:formatDate value="${vo.regdate }" pattern="yyyy-MM-dd"/> </td>
@@ -73,7 +73,7 @@ h1 {
          <ul class="pagination">
              <li><a href="#">&lt;</a></li>
 	         <c:forEach var="i" begin="${startPage }" end="${endPage }">
-	           <li><a href="../board/list.do?page=${i }">${i }</a></li>
+	           <li><a href="../board/freeboard_list.do?page=${i }">${i }</a></li>
 	         </c:forEach>
 	         <li><a href="#">&gt;</a></li>
 	     </ul>

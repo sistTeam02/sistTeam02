@@ -11,4 +11,43 @@
 <select id="freeboardTotalPage" resultType="int">
  SELECT CEIL(COUNT(*)/10.0) FROM freeboard
 </select>
+<!-- 글쓰기 -->
+<insert id="freeboardInsert" parameterType="FreeBoardVO">
+ <selectKey keyProperty="no" resultType="int" order="BEFORE">
+  SELECT NVL(MAX(no)+1,1) as no FROM freeboard
+ </selectKey>
+  INSERT INTO freeboard VALUES(
+     #{no},
+     #{id},
+     #{name},
+     #{subject},
+     #{pwd},
+     #{content},
+     SYSDATE,
+     0
+   )
+</insert>
 </mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

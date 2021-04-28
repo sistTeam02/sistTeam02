@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import com.sist.dao.FreeBoardDAO;
 import com.sist.vo.FreeBoardVO;
@@ -53,5 +54,50 @@ public class FreeBoardController {
 		return "main/main";
 		
 	}
+	// 글쓰기
+	@GetMapping("board/freeboard_insert.do")
+	public String freeboard_insert(Model model)
+	{
+		model.addAttribute("main_jsp","../board/freeboard_insert.jsp");
+		return "board/freeboard_insert";
+	}
+	@PostMapping("board/freeboard_insert_ok.do")
+	public String freeboard_insert_ok(FreeBoardVO vo)
+	{
+		// DAO연결
+		fDao.freeboardInsert(vo);
+		return "redirect:freeboard_insert.do";
+	}
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

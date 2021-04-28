@@ -36,6 +36,11 @@ public class FreeBoardDAO extends SqlSessionDaoSupport{
 	{
 		return getSqlSession().selectOne("freeboardTotalPage");
 	}
+	// 글쓰기
+	public void freeboardInsert(FreeBoardVO vo)
+	{
+		getSqlSession().insert("freeboardInsert", vo);
+	}
 
 }
 
