@@ -92,7 +92,7 @@
                 <div class="col-lg-9 order-1 order-lg-2">
                 <div class="col-lg-12">
                 <div class="bi-text">
-            	 <jsp:include page="${mypage_jsp }"></jsp:include>
+            	 <jsp:include page="${mypage_jsp }"/>
                 </div>
             </div>
         </div>

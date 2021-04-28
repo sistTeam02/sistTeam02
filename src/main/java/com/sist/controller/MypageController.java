@@ -16,7 +16,8 @@ public class MypageController {
 	//메인으로 전송
 	@GetMapping("mypage/mypage.do")
 	public String mypage_mypage(Model model){
-		model.addAttribute("main_jsp","../mypage/like_list.jsp");
+		model.addAttribute("mypage_jsp","../mypage/like_list.jsp");
+		model.addAttribute("main_jsp","../mypage/mypage_main.jsp");
 		return "main/main";
 	}
 	
