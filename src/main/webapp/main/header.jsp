@@ -135,11 +135,12 @@
                             </ul>
                         </li>
 					<li><a href="../chat/chat_main.do">채팅</a></li>
-                        <li><a href="#">마이페이지</a>
+                        <li><a href="../mypage/like_list.jsp">마이페이지</a>
                             <ul class="dropdown">
-                                <li><a href="./blog-details.html">운동&쇼핑몰 찜리스트</a></li>
-                                <li><a href="./shopping-cart.html">프로그램 신청 내역</a></li>
-                                <li><a href="./check-out.html">나만의 계획</a></li>
+                                <li><a href="../mypage/like_list.jsp">운동&쇼핑몰 찜리스트</a></li>
+                                <li><a href="../mypage/buy_list.jsp">프로그램 신청 내역</a></li>
+                                <li><a href="../mypage/schedule.jsp">나만의 계획</a></li>
+                                <li><a href="../mypagemypage_update.jsp">회원정보 수정</a></li>
                             </ul>
                         </li>
                         <li><a href="#">쇼핑</a>
