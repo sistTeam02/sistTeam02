@@ -4,6 +4,10 @@
 	<insert id="chat_planInsert" parameterType="Chat_planVO">
 		insert into chat_plan values(#{id},#{plandate},#{time},#{sport})
 	</insert>
+	<insert id="chat_foodInsert" parameterType="Chat_foodVO">
+		insert into chat_food(id,fooddate,whenfood,foodname,foodkcal,foodgram)
+		 values(#{id},#{fooddate},#{whenfood},#{foodname},#{foodkcal},#{foodgram})
+	</insert>
 	<select id="chat_foodData" resultType="Chat_foodVO" parameterType="Chat_foodVO">
 		SELECT * from chat_food 
 		WHERE fooddate=#{fooddate} and id=#{id}

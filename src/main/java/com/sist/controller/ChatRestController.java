@@ -61,11 +61,34 @@ public class ChatRestController {
 		}
 		return result;
 	}
+	@PostMapping("chat/chat_food.do")
+	public String chat_food_insert(String memo){
+		String result="success!!";
+		try{
+			JSONParser jp=new JSONParser();
+			JSONObject obj=(JSONObject)jp.parse(memo);
+			Chat_foodVO vo=new Chat_foodVO();
+			vo.setId((String) obj.get("id"));
+			vo.setFooddate((String) obj.get("date"));
+			vo.setWhenfood((String) obj.get("time"));
+			vo.setFoodname((String) obj.get("fname"));
+			Double kcal=Double.parseDouble(obj.get("fkcal").toString());
+			Double gram=Double.parseDouble(obj.get("fgram").toString());
+			vo.setFoodkcal(kcal);
+			vo.setFoodgram(gram);
+			fdao.chat_foodInsertData(vo);
+			System.out.println("식단저장완료");
+		}catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return result;
+	}
 	@PostMapping("chat/chat_planData.do")
 	public String chat_plan_data(String date,String id){
 		Chat_planVO vo=new Chat_planVO();
 		vo.setId(id);
 		vo.setPlandate(date);
+		System.out.println(date);
 		String json="";
 		List<Chat_planVO> pList=pdao.chat_planData(vo);
 		JSONArray arr=new JSONArray();
@@ -105,10 +128,11 @@ public class ChatRestController {
 		List<String> list=pdao.chat_dbDay(id);
 		for(int i=0; i<list.size(); i++){
 			String db_day=list.get(i);
+			String[]arr=db_day.split("\\.");
 			int m=Integer.parseInt(month);
-			int db_m=Integer.parseInt(db_day.substring(5,7));
+			int db_m=Integer.parseInt(arr[1]);
 			if(m==db_m){
-				db_day=db_day.substring(db_day.lastIndexOf(".")+1,db_day.length());
+				db_day=arr[2];
 				dList+=db_day+"^";
 			}
 		}

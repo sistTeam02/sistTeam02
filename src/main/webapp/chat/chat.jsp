@@ -219,6 +219,13 @@ input[type="number"] {
 <script type="text/javascript" src="https://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
 let today=new Date().toLocaleDateString();
+today=today.replace(/(\s*)/g, "");
+today=today.substring(0, today.lastIndexOf("."));
+/* let todayArr=[];
+todayArr=today.split(".");
+today=todayArr[0]+"."+("0"+todayArr[1])+"."+todayArr[2];
+console.log(today); */
+/* today format변환 */
 thismonth=0;
 thisday=0;
 let fileurl="";
@@ -284,7 +291,7 @@ $(function () {
 	$('#pBtn10').click(function() {
 		let row=$('#sport_memo_tr').length+$('.sport_memo_tr_clone').length;
 		let sportSum="";
-		let date=$('#sport_memo_date').val();
+		let date=$('#sport_memo_date').text(today);
 		/* if(date==''){ 날짜입력 삭제
 			$('.phone > ul').append(
 					"<li class='left'>"+
@@ -312,7 +319,7 @@ $(function () {
 		}
 		 memo={
 			"id":"admin",/* id작업후수정 ======================*/	
-			"date":$('#sport_memo_date').val(),
+			"date":$('#sport_memo_date').text(),
 			"time":$('#sport_memo_time').val(),
 			"sport":sportSum
 		}
@@ -588,7 +595,7 @@ $(function(){
 		  		  strday=result;
 		  		
 		  	  },error:function(error){
-		  		  alert("에러");
+		  		  alert("달력에러");
 		  	  }
 		  });
 		  let arr=strday.split("^");
@@ -602,7 +609,7 @@ $(function(){
 				 }
 			 }
 		  }
-		  iconclick(thismonth, thisday,id); 
+
 	  });
 	/* 월증가 */
 	  $('.ti-angle-right').click(function() {
@@ -636,7 +643,7 @@ $(function(){
 			  		  strday=result;
 			  		
 			  	  },error:function(error){
-			  		  alert("에러");
+			  		  alert("달력에러");
 			  	  }
 			  });
 			  let arr=strday.split("^");
@@ -650,7 +657,7 @@ $(function(){
 					 }
 				 }
 			  }
-			  iconclick(thismonth, thisday,id);
+		
 		  });
 	let daynum=year*365+(parseInt(year/4)-parseInt(year/100)+parseInt(year/400));
 	
@@ -675,7 +682,7 @@ $(function(){
 	  		  strday=result;
 	  		
 	  	  },error:function(error){
-	  		  alert("에러");
+	  		  alert("달력에러");
 	  	  }
 	  });
 	  let arr=strday.split("^");
@@ -690,90 +697,9 @@ $(function(){
 		 }
 	  }
 	  
-	  iconclick(thismonth, thisday,id);
-	  /* 달력안에 내용클릭함수 */
-	function iconclick(thismonth,thisday,id){
-	  $('.ti-align-left').click(function() {
-		  thisday=$(this).parent().text();
-		  $('.phone >ul >li').remove();
-		  $('#pBtn10').hide();
-		  $('.sport_memo').hide();
-		  let date="2021.04.25";/* 임시데이터 클릭한 날짜*/
-		  if(thismonth<10&& !thismonth.toString().includes("0")){
-			thismonth="0"+thismonth;
-			
-		  }
-		  if(thisday<10&& !thisday.toString().includes("0")){
-			  thisday="0"+thisday;
-		  }
-		  thisday=thisday.trim();
-		  $.ajax({
-			  type:'post',
-				data:{'date':'2021.'+thismonth+'.'+thisday,'id':id},
-				url:'../chat/chat_planData.do',
-				async: false,
-				success: function (result) {
-					$('.phone > ul').append(
-							"<li class='left'>"+
-							"<div class='box' id='bot'>"+
-								"<span class='message' id='bot_msg'>"+thismonth+"월"+thisday+"일의 운동기록입니다</span>"+
-							"</div>"+
-						"</li>"
-					);
-					 let json=JSON.parse(result);
-					
-					 let ptime="";
-					 let psport="";
-					 if(json.length>0){
-						 for(i=0;i<json.length; i++){
-							psport=json[i].sport;
-							ptime=json[i].time;
-							psport=psport.replace(/\^/g, "세트<br>");
-							psport=psport.substring(0,psport.lastIndexOf("<"));
-							bot_msg(ptime);
-							bot_msg(psport);
-						} 
-					 }else{
-						 bot_msg("운동기록이 존재하지 않습니다.")
-					 }
-				},error:function (error) {
-					alert("오류");
-				}	
-		  })
-		  $.ajax({
-			  type:'post',
-				data:{'date':'2021.'+thismonth+'.'+thisday,'id':id},
-				url:'../chat/chat_foodData.do',
-				async: false,
-				success: function (result) {
-					$('.phone > ul').append(
-							"<li class='left'>"+
-							"<div class='box' id='bot'>"+
-								"<span class='message' id='bot_msg'>"+thismonth+"월"+thisday+"일의 음식 기록입니다</span>"+
-							"</div>"+
-						"</li>"
-					);
-					 let json=JSON.parse(result);
-					 if(json.length>0){
-						 for(i=0;i<json.length; i++){
-							let fname=json[i].foodname;
-							let ftime=json[i].whenfood;
-							let fkcal=json[i].foodkcal;
-							let fgram=json[i].foodgram;
+
+	 
 	
-							bot_msg(ftime);
-							bot_msg(fname);
-							bot_msg(fkcal+" kcal   "+fgram+" g");
-						} 
-					}else{
-						bot_msg("기록이 존재하지 않습니다.")
-					}
-				},error:function (error) {
-					alert("오류");
-				}	
-		  })
-	  });
-	  }//아이콘 함수 -plan
 	
 		
 });
@@ -860,7 +786,7 @@ function kcal_search(keyword){
 	$('#search_click_gram').val(gram);
 	$('#search_click_gram').attr('division',division)
 }
- /* 먹은 음식 화면출력함수 *보내기클릭 안에 있어야함 */
+ /* 먹은 음식 화면출력함수+먹은 음식 insert *보내기클릭 안에 있어야함 */
  function send_phone(){
 	 let sysdate=today;
 	 let time="";
@@ -871,7 +797,7 @@ function kcal_search(keyword){
 			 break;
 		 }
 	 }
-	 let name=$('search_click_name').text();
+	 let name=$('#search_click_name').text();
 	 let kcal=$('#search_click_kcal').val();
 	 let gram=$('#search_click_gram').val();
 	 if(time.length==2){
@@ -886,6 +812,26 @@ function kcal_search(keyword){
 	 }else{
 	 user_msg((name+"  "+gram+" 그램"+kcal+"  kcal"));
 	 user_msg("저장해줘");
+
+	 memo={
+				"id":"admin",/* id작업후수정 ======================*/	
+				"date":sysdate,
+				"time":time,
+				"fname":name,
+				"fkcal":kcal,
+				"fgram":gram
+			}
+			
+			$.ajax({
+				type:'post',
+				data:{'memo':JSON.stringify(memo)},
+				url:'../chat/chat_food.do',
+				success: function (result) {
+					bot_msg("식단기록 완료했습니다")
+				},error:function (error) {
+					alert("오류");
+				}	
+			})
 	 }
  }
  /* 사용자 메세지함수 */
@@ -907,6 +853,81 @@ function kcal_search(keyword){
 		"</li>"
 	)
  }
+ /* 달력안에 내용클릭함수 */
+$(document).on('click', '.ti-align-left' , function(){
+		  thisday=$(this).parent().text();
+		  thisday=thisday.trim();
+		  $('.phone >ul >li').remove();
+		  $('#pBtn10').hide();
+		  $('.sport_memo').hide();
+			
+		  $.ajax({
+			  type:'post',
+				data:{'date':'2021.'+thismonth+'.'+thisday,'id':id},
+				url:'../chat/chat_planData.do',
+				async: false,
+				success: function (result) {
+					$('.phone > ul').append(
+							"<li class='left'>"+
+							"<div class='box' id='bot'>"+
+								"<span class='message' id='bot_msg'>"+thismonth+"월"+thisday+"일의 운동기록입니다</span>"+
+							"</div>"+
+						"</li>"
+					);
+					 let json=JSON.parse(result);
+					
+					 let ptime="";
+					 let psport="";
+					 if(json.length>0){
+						 for(i=0;i<json.length; i++){
+							psport=json[i].sport;
+							ptime=json[i].time;
+							psport=psport.replace(/\^/g, "세트<br>");
+							psport=psport.substring(0,psport.lastIndexOf("<"));
+							bot_msg(ptime);
+							bot_msg(psport);
+						} 
+					 }else{
+						 bot_msg("운동기록이 존재하지 않습니다.")
+					 }
+				},error:function (error) {
+					alert("오류");
+				}	
+		  })
+		  $.ajax({
+			  type:'post',
+				data:{'date':'2021.'+thismonth+'.'+thisday,'id':id},
+				url:'../chat/chat_foodData.do',
+				async: false,
+				success: function (result) {
+					$('.phone > ul').append(
+							"<li class='left'>"+
+							"<div class='box' id='bot'>"+
+								"<span class='message' id='bot_msg'>"+thismonth+"월"+thisday+"일의 음식 기록입니다</span>"+
+							"</div>"+
+						"</li>"
+					);
+					 let json=JSON.parse(result);
+					 if(json.length>0){
+						 for(i=0;i<json.length; i++){
+							let fname=json[i].foodname;
+							let ftime=json[i].whenfood;
+							let fkcal=json[i].foodkcal;
+							let fgram=json[i].foodgram;
+	
+							bot_msg(ftime);
+							bot_msg(fname);
+							bot_msg(fkcal+" kcal   "+fgram+" g");
+						} 
+					}else{
+						bot_msg("기록이 존재하지 않습니다.")
+					}
+				},error:function (error) {
+					alert("오류");
+				}	
+		  })
+	  });
+	  //아이콘 함수 -plan
 </script>
 </head>
 <body>
@@ -1039,7 +1060,7 @@ function kcal_search(keyword){
 			    		</td>
 				  		<td>
 				  			<input type="button" value="삭제" id="img_dBtn">
-				  			<input type="button" value="사진보여주기" id="img_IBtn">
+				  			<input type="button" value="식단기록" id="img_IBtn">
 				  			<input type="file"  id="img_fBtn" style="display: none;">
 				  		</td>
 			  	    </tr>

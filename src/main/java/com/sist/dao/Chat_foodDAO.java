@@ -19,7 +19,7 @@ public class Chat_foodDAO extends SqlSessionDaoSupport{
 		super.setSqlSessionFactory(sqlSessionFactory);
 	}
 	public List<Chat_foodVO> chat_foodData(Chat_foodVO vo){
-
+		
 		return getSqlSession().selectList("chat_foodData",vo);
 	}
 	public List<Chat_recipeVO> chat_recipeList(Map map){
@@ -30,5 +30,8 @@ public class Chat_foodDAO extends SqlSessionDaoSupport{
 	}
 	public List<KcalVO> chat_kcalData(String keyword){
 		return getSqlSession().selectList("chat_kcalData", keyword);
+	}
+	public void chat_foodInsertData(Chat_foodVO vo){
+		getSqlSession().insert("chat_foodInsert", vo);
 	}
 }
