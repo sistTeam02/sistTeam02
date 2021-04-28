@@ -16,6 +16,13 @@
      	font-size:large;
      	width:900px;
      }
+     .table{
+     	font-size:large;
+     	width:900px;
+     }
+     #call{
+     	color: red; 
+     }
      </style>
     
     <!-- Google Font -->
@@ -82,8 +89,8 @@
                         <div class="blog-catagory">
                             <h4>마이페이지</h4>
                             <ul>
-                                <li><a href="like_list.jsp">관심목록 </a></li> 
-                                <li><a href="buy_list.jsp">구매정보</a></li>
+                                <li><a href="like_list.jsp">운동&쇼핑몰 찜리스트 </a></li> 
+                                <li><a href="buy_list.jsp">프로그램 신청 내역</a></li>
                                 <li><a href="schedule.jsp">나만의 계획</a></li>
                                 <li><a href="mypage_update.jsp">회원정보수정</a></li>
                             </ul>
@@ -118,114 +125,83 @@
                     </div>
                 </div>
                 <div class="col-lg-9 order-1 order-lg-2">
-                 <h2>장바구니</h2>
+                 <h2>프로그램 신청내역</h2>
                 <div class="col-lg-12">
-                 <!-- Shopping Cart Section Begin -->
-    <section class="shopping-cart spad">
-        <div class="container">
-            <div class="row">
-            <p>찜한 제품을 구매합니다</p>
-                <div class="col-lg-12">
-                    <div class="cart-table">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>제품 사진</th>
-                                    <th class="p-name">제품명</th>
-                                    <th>제품 가격</th>
-                                    <th>수량</th>
-                                    <th>합계</th>
-                                    <th><i class="ti-close"></i></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="cart-pic first-row"><img src="img/cart-page/product-1.jpg" alt=""></td>
-                                    <td class="cart-title first-row">
-                                        <h5>Pure Pineapple</h5>
-                                    </td>
-                                    <td class="p-price first-row">$60.00</td>
-                                    <td class="qua-col first-row">
-                                        <div class="quantity">
-                                            <div class="pro-qty">
-                                                <input type="text" value="1">
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="total-price first-row">$60.00</td>
-                                    <td class="close-td first-row"><i class="ti-close"></i></td>
-                                </tr>
-                                <tr>
-                                    <td class="cart-pic"><img src="img/cart-page/product-2.jpg" alt=""></td>
-                                    <td class="cart-title">
-                                        <h5>American lobster</h5>
-                                    </td>
-                                    <td class="p-price">$60.00</td>
-                                    <td class="qua-col">
-                                        <div class="quantity">
-                                            <div class="pro-qty">
-                                                <input type="text" value="1">
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="total-price">$60.00</td>
-                                    <td class="close-td"><i class="ti-close"></i></td>
-                                </tr>
-                                <tr>
-                                    <td class="cart-pic"><img src="img/cart-page/product-3.jpg" alt=""></td>
-                                    <td class="cart-title">
-                                        <h5>Guangzhou sweater</h5>
-                                    </td>
-                                    <td class="p-price">$60.00</td>
-                                    <td class="qua-col">
-                                        <div class="quantity">
-                                            <div class="pro-qty">
-                                                <input type="text" value="1">
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="total-price">$60.00</td>
-                                    <td class="close-td"><i class="ti-close"></i></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-4">
-                            <div class="cart-buttons">
-                                <a href="#" class="primary-btn continue-shop">Continue shopping</a>
-                                <a href="#" class="primary-btn up-cart">쇼핑 계속하기</a>
-                            </div>
-                            <div class="discount-coupon">
-                                <h6>할인쿠폰</h6>
-                                <form action="#" class="coupon-form">
-                                    <input type="text" placeholder="코드를 입력하세요">
-                                    <button type="submit" class="site-btn coupon-btn">적용</button>
-                                </form>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 offset-lg-4">
-                            <div class="proceed-checkout">
-                                <ul>
-                                    <li class="subtotal">Subtotal <span>$240.00</span></li>
-                                    <li class="cart-total">총합 <span>$240.00</span></li>
-                                </ul>
-                                <a href="#" class="proceed-btn">구매하기</a>
-                            </div>
-                        </div>
-                    </div>
+               		<div style="height:50px"></div>
+                       <div class="container">
+                       <h2>내 구매 정보</h2>
+ 						<p>콕방 운동과 함께 즐거운 운동해요!</p>            
+							  <table class="table table-hover">
+							    <thead>
+							      <tr>
+							        <th>결제일</th>
+							        <th>구매상품</th>
+							        <th>신청일수</th>
+							        <th>결제금액</th>
+							        <th>개강일</th>
+							        <th>상태</th>
+							      </tr>
+							    </thead>
+							    <tbody>
+							      <tr>
+							        <td>2018.01.28</td>
+							        <td>토탈케어프로그램</td>
+							        <td>1개월</td>
+							        <td>30,000원</td>
+							        <td>2021.08.21</td>
+							        <td>결제완료</td>
+							      </tr>
+							       <tr>
+							        <td>2018.01.28</td>
+							        <td>토탈케어프로그램</td>
+							        <td>2개월</td>
+							        <td>30,000원</td>
+							        <td>2021.08.21</td>
+							        <td>승인대기중</td>
+							      </tr>
+							      <tr>
+							        <td>2018.01.28</td>
+							        <td>토탈케어프로그램</td>
+							        <td>3개월</td>
+							        <td>30,000원</td>
+							        <td>2021.08.21</td>
+							        <td>결제완료</td>
+							      </tr>
+							    </tbody>
+							  </table>
+							</div>
+							<div class="container" align="right">
+							  <button type="button" class="btn btn-lg btn-default" onclick="location.href='#'">다른 프로그램 신청하러 가기</button>
+							</div>
+							
+							<div style="height:50px"></div>
+                       <div class="container">
+                       <h2>클래스/코치 변경</h2>
+ 						<p>유의사항을 잘 확인하시고 변경해 주세요!</p>            
+							<table class="table">
+								<tr>
+									<th>유의사항</th>
+								</tr>
+								<tr>
+									<td>
+										1. 수강권을 새로 결제하셨다면, 반드시 '개강 전'까지 앱에서 클래스 정보를 등록해 주세요<br>
+										2. 결제 후, 앱에서 클래스 정보를 등록해야만 변경 가능한 창이 보이게 되어요<br>
+										3. 연속 수강권을 이용 중 이시라면, 클래스 4주차에 앱 내에서 다음 달 등록이 가능해요<br>
+										4. 개강 이후에는 클래스 정보(운동종류/난이도/코치님)변경이 불가할 수 있어요<br>
+									</td>
+								</tr>
+								<tr>
+									<td id="call">*클래스 연기자의 경우, 고객센터를 통해 문의해 주시기 바랍니다</td>
+								</tr>
+							</table>
+							</div>
+							
+						
                 </div>
             </div>
         </div>
     </section>
-    <!-- Shopping Cart Section End -->
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Blog Section End -->
 
-    <!-- Partner Logo Section Begin -->
     
 
 

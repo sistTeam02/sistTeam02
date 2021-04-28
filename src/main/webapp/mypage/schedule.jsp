@@ -189,8 +189,8 @@
                         <div class="blog-catagory">
                             <h4>마이페이지</h4>
                             <ul>
-                                <li><a href="like_list.jsp">관심목록 </a></li> 
-                                <li><a href="buy_list.jsp">구매정보</a></li>
+                                 <li><a href="like_list.jsp">운동&쇼핑몰 찜리스트 </a></li> 
+                                <li><a href="buy_list.jsp">프로그램 신청 내역</a></li>
                                 <li><a href="schedule.jsp">나만의 계획</a></li>
                                 <li><a href="mypage_update.jsp">회원정보수정</a></li>
                             </ul>

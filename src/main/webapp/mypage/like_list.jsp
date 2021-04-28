@@ -85,8 +85,8 @@
                         <div class="blog-catagory">
                             <h4>마이페이지</h4>
                             <ul>
-                                <li><a href="like_list.jsp">관심목록 </a></li> 
-                                <li><a href="buy_list.jsp">구매정보</a></li>
+                                 <li><a href="like_list.jsp">운동&쇼핑몰 찜리스트 </a></li> 
+                                <li><a href="buy_list.jsp">프로그램 신청 내역</a></li>
                                 <li><a href="schedule.jsp">나만의 계획</a></li>
                                 <li><a href="mypage_update.jsp">회원정보수정</a></li>
                             </ul>
@@ -156,7 +156,7 @@
 							  </table>
 							</div>
 							
-								<div style="height:50px"></div>
+					<div style="height:50px"></div>
                        <div class="container">
                        <h2>찜한 홈트레이닝</h2>
  						<p>찜한 홈트레이닝 목록을 보여줍니다(hometraining_detail)</p>            
@@ -224,7 +224,7 @@
 							  </table>
 							</div>
 							<div class="container" align="right">
-							  <button type="button" class="btn btn-lg btn-default" onclick="location.href='buy_list.jsp'">지금 제품 구매하러 가기</button>
+							  <button type="button" class="btn btn-lg btn-default" onclick="location.href='#'">지금 제품 구매하러 가기</button>
 							</div>
 							
 							<div style="height:50px"></div>
@@ -259,7 +259,7 @@
 							  </table>
 							</div>
 							<div class="container" align="right">
-							  <button type="button" class="btn btn-lg btn-default" onclick="location.href='buy_list.jsp'">지금 제품 구매하러 가기</button>
+							  <button type="button" class="btn btn-lg btn-default" onclick="location.href='#'">지금 제품 구매하러 가기</button>
 							</div>
 							
                		 </div> 
