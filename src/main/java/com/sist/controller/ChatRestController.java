@@ -55,7 +55,7 @@ public class ChatRestController {
 			vo.setPlandate((String) obj.get("date"));
 			vo.setTime((String) obj.get("time"));
 			vo.setSport((String) obj.get("sport"));
-			//pdao.chat_planInsertData(vo);
+			pdao.chat_planInsertData(vo);
 		}catch (Exception ex) {
 			ex.printStackTrace();
 		}
