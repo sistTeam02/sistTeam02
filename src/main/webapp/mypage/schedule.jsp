@@ -230,10 +230,14 @@
             	 <h2>나만의 계획 세우기</h2>
                		<div style="height:50px"></div>
                        <div class="container">
-                       
- 						<div id='calendar'></div>
-						
-               		 </div> 
+ 						  <div id='calendar'></div>
+					   </div> 
+					   
+					<div style="height:50px"></div>
+                       <div class="container">
+                       <h2>채팅 기록 확인하기</h2>
+                       <p>채팅에 기록된 내용을 출력합니다</p>
+                    </div>   
                 </div>
             </div>
         </div>

@@ -227,7 +227,7 @@
 							  <button type="button" class="btn btn-lg btn-default" onclick="location.href='#'">지금 제품 구매하러 가기</button>
 							</div>
 							
-							<div style="height:50px"></div>
+					<div style="height:50px"></div>
                        <div class="container">
                        <h2>찜한 식품</h2>
  						<p>장바구니에 넣은 식품 목록을 보여줍니다(dietfood_detail)</p>            
