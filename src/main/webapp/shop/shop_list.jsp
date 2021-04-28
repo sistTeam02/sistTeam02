@@ -7,14 +7,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-<style type="text/css">
-.pi-text(function(){
-	if($(this).text().length >= length){
-		$(this).text($(this).text().substr(0,length)+'...');
-	});
-});
-</style>
 </head>
 <body>
     <!-- Breadcrumb Section Begin -->
@@ -97,18 +89,6 @@
                             </div>
                         </div>
                     </div>
-                    <!-- <div class="filter-widget">
-                        <h4 class="fw-title">Tags</h4>
-                        <div class="fw-tags">
-                            <a href="#">Towel</a>
-                            <a href="#">Shoes</a>
-                            <a href="#">Coat</a>
-                            <a href="#">Dresses</a>
-                            <a href="#">Trousers</a>
-                            <a href="#">Men's hats</a>
-                            <a href="#">Backpack</a>
-                        </div>
-                    </div> -->
                 </div>
                 <div class="col-lg-9 order-1 order-lg-2">
                     <div class="product-show-option">
@@ -135,25 +115,24 @@
                                   <a href="shop_detail.do?no=${vo.no }">
                                      <img src="${vo.poster }">
                                         <div class="pi-text text-center">
-                                          <p>${vo.title }</p>
-                                        </div>
-                                  </a>
-                                  <div class="product-price text-center" style="color:#648cff;font-weight:bold;height:30px">
-                                      <fmt:formatNumber value="${vo.price }"/>원
-                                  </div>
+	                                       <p>${vo.title }</p>
+	                                    </div>
+	                              </a>
+	                              <div class="product-price text-center" style="font-size:13pt;font-weight:bold;color:#648cff;height:55px">
+	                                  <span><fmt:formatNumber value="${vo.price }"/>&nbsp;원</span>
+	                              </div>
                                </div>
-                            </c:forEach>
+                            </c:forEach>    
                          </div>
                      </div>
-                </div>
+             </div>
+         </div>
+         <div class="loading-more" style="height:30px">
+             <i class="icon_loading"></i>
+                  <a href="#">
+                       Loading More
+                  </a>
           </div>
-          <div class="row">
-            <div class="text-center"> 
-				<a href="list.do?page=${curpage>1?curpage-1:curpage }" class="btn btn-sm btn-primary">이전</a>
-				   ${curpage } page / ${totalpage } pages
-				<a href="list.do?page=${curpage<totalpage?curpage+1:curpage }" class="btn btn-sm btn-primary">다음</a>
-			</div>
-           </div>
       </div>
     </section>
     <!-- Product Shop Section End -->
