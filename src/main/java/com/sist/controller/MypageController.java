@@ -13,39 +13,44 @@ public class MypageController {
 	
 	
 	
-	//메인으로 전송
-	@GetMapping("mypage/mypage.do")
+	//메인으로 전송 //관심목록(찜&장바구니)
+	@GetMapping("mypage/like_list.do")
 	public String mypage_mypage(Model model){
 		model.addAttribute("mypage_jsp","../mypage/like_list.jsp");
 		model.addAttribute("main_jsp","../mypage/mypage_main.jsp");
 		return "main/main";
 	}
 	
-	//관심목록(찜&장바구니)
+	
 	@GetMapping("mypage/like_list.do")
 		public String mypage_like_list(Model model){
 		
-		return "mypage/main";
+		model.addAttribute("mypage_jsp","../mypage/like_list.jsp");
+		model.addAttribute("main_jsp","../mypage/mypage_main.jsp");
+		return "main/main";
 	}
 	//구매정보
 	@GetMapping("mypage/buy_list.do")
 	public String mypage_buy_list(Model model){
-		
-		return "mypage/buy_list";
+		model.addAttribute("mypage_jsp","../mypage/like_list.jsp");
+		model.addAttribute("main_jsp","../mypage/mypage_main.jsp");
+		return "main/main";
 	}
 
 	//나만의 계획(채팅정보 불러오기)
 	@GetMapping("mypage/schedule.do")
 	public String mypage_schdule(Model model){
-		
-		return "mypage/schedule";
+		model.addAttribute("mypage_jsp","../mypage/like_list.jsp");
+		model.addAttribute("main_jsp","../mypage/mypage_main.jsp");
+		return "main/main";
 	}
 	//회원정보수정
 	@GetMapping("mypage/mypage_update.do")
 	public String mypage_update(Model model){
 		
-	
-		return "mypage/mypage_update";
+		model.addAttribute("mypage_jsp","../mypage/like_list.jsp");
+		model.addAttribute("main_jsp","../mypage/mypage_main.jsp");
+		return "main/main";
 	}
 	
 }

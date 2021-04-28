@@ -135,7 +135,7 @@
                             </ul>
                         </li>
 					<li><a href="../chat/chat_main.do">채팅</a></li>
-                        <li><a href="../mypage/mypage.do">마이페이지</a>
+                        <li><a href="../mypage/like_list.do">마이페이지</a>
                             <ul class="dropdown">
                                 <li><a href="../mypage/like_list.do">운동&쇼핑몰 찜리스트</a></li>
                                 <li><a href="../mypage/buy_list.do">프로그램 신청 내역</a></li>
