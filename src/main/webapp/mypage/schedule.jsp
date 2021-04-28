@@ -22,11 +22,11 @@
      	width:900px;
      	
      }
-     body {
+    body {
 		margin-top: 40px;
 		text-align: center;
-		font-size: 13px;
-		font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
+		font-size: 14px;
+		
 		}
 
 	#calendar {
@@ -62,25 +62,41 @@
     <script src="../js/main.js"></script>
     
     <!-- Calendar -->
-    <link rel='stylesheet' type='text/css' href='../css/theme.css' />
-	<link rel='stylesheet' type='text/css' href='../css/fullcalendar.css' />
-	<script type='text/javascript' src='../js/jquery_calendar.js'></script>
-	<script type='text/javascript' src='../js/jquery-ui-custom.js'></script>
-	<script type='text/javascript' src='../js/fullcalendar.min.js'></script>
+    <link rel='stylesheet' type='text/css' href='../css/fullcalendar.css' />
+<script type='text/javascript' src='../js/jquery_selecttable.js'></script>
+<script type='text/javascript' src='../js/jquery-ui-custom.js'></script>
+<script type='text/javascript' src='../js/fullcalendar.min.js'></script>
 	<script type='text/javascript'>
+
 	$(document).ready(function() {
-		
+	
 		var date = new Date();
 		var d = date.getDate();
 		var m = date.getMonth();
 		var y = date.getFullYear();
 		
-		$('#calendar').fullCalendar({
-			theme: true,
+		var calendar = $('#calendar').fullCalendar({
 			header: {
 				left: 'prev,next today',
 				center: 'title',
 				right: 'month,agendaWeek,agendaDay'
+			},
+			selectable: true,
+			selectHelper: true,
+			select: function(start, end, allDay) {
+				var title = prompt('Event Title:');
+				if (title) {
+					calendar.fullCalendar('renderEvent',
+						{
+							title: title,
+							start: start,
+							end: end,
+							allDay: allDay
+						},
+						true // make the event "stick"
+					);
+				}
+				calendar.fullCalendar('unselect');
 			},
 			editable: true,
 			events: [
@@ -215,7 +231,7 @@
                		<div style="height:50px"></div>
                        <div class="container">
                        
- 						<div id='calendar'></div>            
+ 						<div id='calendar'></div>
 						
                		 </div> 
                 </div>
