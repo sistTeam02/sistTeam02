@@ -91,6 +91,7 @@
 }
 th[class^=page]{
 	cursor: pointer;
+	 font-size: 16pt;
 }
 table[class^=table]{
 	
@@ -181,6 +182,39 @@ td[id^=table3_td] img{
 .pageBtn:active{
 	border: 2px solid #d2bfec;
 }
+.ui-widget-header{
+    background-color: #648cff;
+}
+#search_div{
+ 	width:20em;
+ 	overflow-y: auto;
+ 	height: 23em;
+	overflow-x: hidden;
+	 position: relative;
+    top: 17px;
+}
+#search_result_table tr td{
+	padding-left: 25px;
+    font-size: 15pt;
+}
+#search_result_table tr td:hover{
+	background-color: #ffc301;
+    color: white;
+}
+#search_click_div{
+    border: 2px solid black;
+    width: 21em;
+    height: 24em;
+    position: relative;
+    left: 23em;
+    bottom: 22em;
+}
+input[type="number"] {
+ width: 6em;
+}
+ .category_user tr th:hover{
+ color: #444963bf;
+ }
 </style>
 <script type="text/javascript" src="https://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
@@ -251,7 +285,7 @@ $(function () {
 		let row=$('#sport_memo_tr').length+$('.sport_memo_tr_clone').length;
 		let sportSum="";
 		let date=$('#sport_memo_date').val();
-		if(date==''){
+		/* if(date==''){ 날짜입력 삭제
 			$('.phone > ul').append(
 					"<li class='left'>"+
 					"<div class='box' id='bot'>"+
@@ -260,7 +294,7 @@ $(function () {
 				"</li>"
 			);
 			return;
-		}
+		} */
 		for(i=0;i<row; i++){
 			let temp1=$('#sport_memo_name'+i).val();
 			let temp2=$('#sport_memo_number'+i).val();
@@ -288,7 +322,7 @@ $(function () {
 			data:{'memo':JSON.stringify(memo)},
 			url:'../chat/sport_plan.do',
 			success: function (result) {
-				alert(result);
+				bot_msg("운동기록 완료했습니다")
 			},error:function (error) {
 				alert("오류");
 			}	
@@ -327,26 +361,64 @@ $(function () {
 				"</li>"	
 		);
 		rBtnIndex++;
-		$('button[id^=recipe_Rbtn]').click(function() {
-		recipe_list(page);
+		$('button[id^=recipe_Rbtn]').click(function() { /* 추천해줘클릭 */
+			$('#search_div').hide();
+			$('#search_click_div').hide();
+			recipe_list(page);
 		});
 	});
-	
+	/* 테스트용버튼 */
+	$('#pBtn5').click(function() {
+		
+	});
 
 
 });
+/*레시피 페이지클릭 */
 $(document).on('click', 'button[id^=pageBtn]' , function(){
 	let cPage=$(this).text();
 	recipe_list(cPage);
 });
-$(document).on('click', '.pageBtn > .ti-angle-left' , function(){
-	let cPage=$(this).parent().next().text();
+/* 레시피 '<' 아이콘클릭 */
+$(document).on('click', '#leftBtn' , function(){
+	let cPage=$(this).next().text();
 	recipe_list(Number(cPage)-10);
 });
-$(document).on('click', '.pageBtn > .ti-angle-right' , function(){
-	let cPage=$(this).parent().prev().text();
+/* 레시피 '>' 아이콘클릭 */
+$(document).on('click', '#rightBtn' , function(){
+	let cPage=$(this).prev().text();
 	recipe_list(Number(cPage)+1);
 });
+/* 레시피상세다이얼로그 */
+$(document).on('click', 'td[id^=table3_td] > img' , function(){
+	$('.recipe_detail').dialog({
+		autoOpen:true,
+		width:1000,
+		height:1200,
+		modal:true
+		
+	})
+	$('.ui-button-icon-only').append("<i class='ti-close'></i>");
+});
+/* 칼로리 검색결과 클릭 */
+$(document).on('click', '#search_result_table > tbody > tr' , function(){
+	let kcal=$(this).children().attr('kcal');
+	let gram=$(this).children().attr('gram');
+	let name=$(this).children().text();
+	let division=$(this).children().attr('division');
+	click_result(name,kcal,gram,division);
+	
+});
+/* 먹은 용량변경 */
+$(document).on('change','#search_click_gram',function(){
+	let gram=$('#search_click_gram').val();
+	let name=$('#search_click_name').text();
+	let division=$('#search_click_gram').attr('division');
+	let kcal=Math.ceil(gram*division);
+	
+	click_result(name, kcal, gram, division);
+});
+
 /* 오른쪽 제어 */
 $(function(){
 
@@ -388,16 +460,19 @@ $(function(){
     }
     
     });
+    /* 시간버튼 클릭 */
     $('.timeBtn').click(function() {
-    	
+    	$('.timeBtn').attr('value','0');
     	$('.timeBtn').css('background-color','rgb(84 91 99 / 14%)'); 
     	$(this).css("background-color", "#fdf3f4");
-    	var time=$(this).attr('value');
+    	$(this).attr('value','1');
     });
+    /* 이미지삭제버튼 */
 	$('#img_dBtn').click(function() {
 		hoverSwitch=0;
 		$('#img_span').css("background-image","none");
 		$('#img_span').css("background-color", "#fff");
+		fileurl="";
 	});
 	
 		$('#img_span').hover(function(){ /* 이미지칸 마우스호버 */
@@ -411,12 +486,14 @@ $(function(){
 		});
 	let imgIndex=1;
 	$('#img_IBtn').click(function() {/* 이미지전송버튼 */
-		$('.phone > ul').append(
-				"<li class='right'>"+
-				"<div class='box' id=user_img"+imgIndex+">"+
-				"</div>"+
-			"</li>"
-		);
+		if(fileurl!=""){
+			$('.phone > ul').append(
+					"<li class='right'>"+
+					"<div class='box' id=user_img"+imgIndex+">"+
+					"</div>"+
+				"</li>"
+			);
+		}
 		 $('#user_img'+imgIndex).css("background-image","url("+fileurl+")");
 		$('#user_img'+imgIndex).css("background-size","100% 100%");
 		$('#user_img'+imgIndex).css("width","10em").css("height", "10em"); 
@@ -433,9 +510,9 @@ $(function(){
 	        cache: false,
 	        enctype:'multipart/form-data',
 			success:function(result){
-				alert("전송완료")
+				send_phone();
 			},error:function(error){
-				alert("파일전송에러")
+				bot_msg("사진전송이 안되었어요 다시올려주세요")
 			} 
 			
 			
@@ -450,6 +527,35 @@ $(function(){
 		$('.table'+classno).show();
 		$('.table3').hide();
 		$('#page_div > button').remove();
+		$('#search_div').hide();
+		$('#search_click_div').hide();
+		if(classno==1){
+			$('#search_div').show();
+			$('#search_click_div').show();
+		}
+	});
+	/* 검색버튼클릭 */
+	$('#searchBtn').click(function(){
+		$('#search_result_table tr').remove();
+		keyword=$('#input_search').val();
+		if(keyword.length<1){
+			$('#input_search').focus();
+			return;
+		}
+		kcal_search(keyword);
+	});
+	/* 검색창엔터 */
+	$('#input_search').keypress(function(key) {
+		if(key.keyCode==13){
+			$('#search_result_table tr').remove();
+			keyword=$('#input_search').val();
+			if(keyword.length<1){
+				$('#input_search').focus();
+				return;
+			}
+			kcal_search(keyword);
+		}
+		
 	});
 	/* 월 감소 */
 	  $('.ti-angle-left').click(function() {
@@ -586,9 +692,8 @@ $(function(){
 	  
 	  iconclick(thismonth, thisday,id);
 	  /* 달력안에 내용클릭함수 */
-	  function iconclick(thismonth,thisday,id){
+	function iconclick(thismonth,thisday,id){
 	  $('.ti-align-left').click(function() {
-		  alert(1);
 		  thisday=$(this).parent().text();
 		  $('.phone >ul >li').remove();
 		  $('#pBtn10').hide();
@@ -605,44 +710,72 @@ $(function(){
 		  $.ajax({
 			  type:'post',
 				data:{'date':'2021.'+thismonth+'.'+thisday,'id':id},
-				url:'../chat/chat_total.do',
+				url:'../chat/chat_planData.do',
+				async: false,
 				success: function (result) {
 					$('.phone > ul').append(
 							"<li class='left'>"+
 							"<div class='box' id='bot'>"+
-								"<span class='message' id='bot_msg'>"+thismonth+"월"+thisday+"일의 기록입니다</span>"+
+								"<span class='message' id='bot_msg'>"+thismonth+"월"+thisday+"일의 운동기록입니다</span>"+
 							"</div>"+
 						"</li>"
 					);
-					alert(result);
 					 let json=JSON.parse(result);
 					
 					 let ptime="";
-					let psport="";
-					 for(i=0;i<json.length; i++){
-						psport=json[i].sport;
-						ptime=json[i].time;
-						psport=psport.replace(/\^/g, "세트<br>");
-						psport=psport.substring(0,psport.lastIndexOf("<"));
-						$('.phone > ul').append(
-								"<li class='left'>"+
-								"<div class='box' id='bot'>"+
-									"<span class='message' id='bot_msg'>"+ptime+"</span>"+
-								"</div>"+
-								"</li>"+
-								"<li class='left'>"+
-								"<div class='box' id='bot'>"+
-									"<span class='message' id='bot_msg'>"+psport+"</span>"+
-								"</div>"+
-								"</li>"  
-						);
-					} 
+					 let psport="";
+					 if(json.length>0){
+						 for(i=0;i<json.length; i++){
+							psport=json[i].sport;
+							ptime=json[i].time;
+							psport=psport.replace(/\^/g, "세트<br>");
+							psport=psport.substring(0,psport.lastIndexOf("<"));
+							bot_msg(ptime);
+							bot_msg(psport);
+						} 
+					 }else{
+						 bot_msg("운동기록이 존재하지 않습니다.")
+					 }
+				},error:function (error) {
+					alert("오류");
+				}	
+		  })
+		  $.ajax({
+			  type:'post',
+				data:{'date':'2021.'+thismonth+'.'+thisday,'id':id},
+				url:'../chat/chat_foodData.do',
+				async: false,
+				success: function (result) {
+					$('.phone > ul').append(
+							"<li class='left'>"+
+							"<div class='box' id='bot'>"+
+								"<span class='message' id='bot_msg'>"+thismonth+"월"+thisday+"일의 음식 기록입니다</span>"+
+							"</div>"+
+						"</li>"
+					);
+					 let json=JSON.parse(result);
+					 if(json.length>0){
+						 for(i=0;i<json.length; i++){
+							let fname=json[i].foodname;
+							let ftime=json[i].whenfood;
+							let fkcal=json[i].foodkcal;
+							let fgram=json[i].foodgram;
+	
+							bot_msg(ftime);
+							bot_msg(fname);
+							bot_msg(fkcal+" kcal   "+fgram+" g");
+						} 
+					}else{
+						bot_msg("기록이 존재하지 않습니다.")
+					}
 				},error:function (error) {
 					alert("오류");
 				}	
 		  })
 	  });
-	  }//아이콘 함수
+	  }//아이콘 함수 -plan
+	
+		
 });
 /* 레시피리스트 호출함수 */
 	
@@ -670,10 +803,10 @@ function recipe_list(page){
 					recipe_for(k,page);
 				}
 				if(page>10){
-				$('#page_div').prepend("<button class=pageBtn><i class='ti-angle-left'></i></button>")	
+				$('#page_div').prepend("<button class=pageBtn id='leftBtn'><i class='ti-angle-left'></i></button>")	
 				}
 				if(page<(totalpage-totalpage%10)){
-				$('#page_div').append("<button class=pageBtn><i class='ti-angle-right'></i></button>")
+				$('#page_div').append("<button class=pageBtn id='rightBtn'><i class='ti-angle-right'></i></button>")
 				}
 				$('table[class^=table]').hide();
 				$('.table3').show();
@@ -697,6 +830,83 @@ function recipe_for(k,page){
 	endPage>totalpage?endPage=totalpage:endPage=endPage;
 	$('#page_div').append("<button class=pageBtn id=pageBtn"+(startPage+k)+">"+(Number(startPage)+Number(k))+"</button>")
 }
+/* 칼로리 검색함수 */
+function kcal_search(keyword){
+	$.ajax({
+		type:'post',
+		data:{'keyword':keyword},
+		url:'../chat/chat_kcal.do',
+		success:function(result){
+			let json=JSON.parse(result);
+			for(i=0;i<json.length;i++){
+				kcal_maketr(json[i].name,json[i].kcal,json[i].gram);
+			}
+		},error:function(error){
+			alert("칼로리 검색에러");
+		}
+	});
+}
+ /* 칼로리 tr생성함수 */
+ function kcal_maketr(name,kcal,gram) {
+	$('#search_result_table').append(
+		"<tr><td kcal="+kcal+" gram="+gram+" division="+(kcal/gram)+">"+name+"</td></tr>"		
+	)
+	
+}
+ /* 검색결과 클릭 함수 */
+ function click_result(name,kcal,gram,division) {
+	$('#search_click_name').text(name);
+	$('#search_click_kcal').val(kcal);
+	$('#search_click_gram').val(gram);
+	$('#search_click_gram').attr('division',division)
+}
+ /* 먹은 음식 화면출력함수 *보내기클릭 안에 있어야함 */
+ function send_phone(){
+	 let sysdate=today;
+	 let time="";
+	 for(i=0; i<4;i++){
+	  time=$('#timeBtn'+i).attr('value');
+		 if(time=="1"){
+			 time=$('#timeBtn'+i).text();
+			 break;
+		 }
+	 }
+	 let name=$('search_click_name').text();
+	 let kcal=$('#search_click_kcal').val();
+	 let gram=$('#search_click_gram').val();
+	 if(time.length==2){
+
+		 user_msg(sysdate+"  "+time);
+	 }else{
+		 bot_msg("먹은 시간을 알려주세요");
+		 return;
+	 }
+	 if(kcal==""){
+		 bot_msg("먹은 음식을 알려주세요");
+	 }else{
+	 user_msg((name+"  "+gram+" 그램"+kcal+"  kcal"));
+	 user_msg("저장해줘");
+	 }
+ }
+ /* 사용자 메세지함수 */
+ function user_msg(msg) {
+	 $('.phone > ul').append(
+				"<li class='right'>"+
+				"<div class='box' id='user'>"+			
+				"<span class='message' id='user_msg'>"+msg+"</span>"+
+				"</div>"+
+			"</li>"
+			)
+}
+ function bot_msg(msg) {
+ $('.phone > ul').append(
+			"<li class='left'>"+
+			"<div class='box' id='bot'>"+
+				"<span class='message' id='bot_msg'>"+msg+"</span>"+
+			"</div>"+
+		"</li>"
+	)
+ }
 </script>
 </head>
 <body>
@@ -761,7 +971,7 @@ function recipe_for(k,page){
 						<li><button type="button" class="pBtn" id="pBtn3">안녕</button>
 							<button type="button" class="pBtn" id="pBtn4">뭐 먹지</button>
 						</li>
-						<li><button type="button" class="pBtn" id="pBtn5">몸무게 변경할래</button>
+						<li><button type="button" class="pBtn" id="pBtn5">테스트용 </button>
 						</li>
 					</ul>
 				</div>
@@ -775,25 +985,55 @@ function recipe_for(k,page){
 			  		<th class="page3">뭐먹지</th>
 			  	</tr>
 			  </table>
-			  <div class="page_div">
+			  <div class="page_div" style="height: 40em">
 			  	<table class="table1">
 			  		<tr>
 			  			<td>
-			  				<button class="timeBtn" value="1">아침</button>
-			  				<button class="timeBtn" value="2">점심</button>
-			  				<button class="timeBtn" value="3">저녁</button>
-			  				<button class="timeBtn" value="4">간식</button>
+			  				<button class="timeBtn" value="0" id="timeBtn0">아침</button>
+			  				<button class="timeBtn" value="0" id="timeBtn1">점심</button>
+			  				<button class="timeBtn" value="0" id="timeBtn2">저녁</button>
+			  				<button class="timeBtn" value="0" id="timeBtn3">간식</button>
 			  			</td>
 			  		</tr>
 			  		<tr>
 			  			<td>
-			  			<input type="text" size=20>
+			  			<input type="text" size=20 id="input_search">
+			  			<button type="button" id="searchBtn">검색</button>
 			  			</td>
 			  		</tr>
 			  	</table>
 			  	<form id="fileForm" name="fileForm" enctype="multipart/form-data" method="post">
 			    <table class="table1">
-			    	<tr>
+			    	
+				</table>
+				</form>
+				<div id="search_div">
+					<table class="table1" style="height: 360px;background-color:#fffcf5; overflow-y:auto;" id="search_result_table" >
+						<!-- 칼로리별음식출력 -->
+					</table>
+				</div>
+				<div id="search_click_div">
+					<table class="table1" style="width: 336px;">
+						<tr style="height: 70px;font-size: 19px;border-bottom: 2px dotted black;">
+							<th colspan="2" style="text-align: center;" id="search_click_name"></th>
+						</tr>
+						<tr>
+							<td>
+								용량(g)
+							</td>
+							<td>
+								칼로리(kcal)
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<input type="number"  id="search_click_gram">
+							</td>
+							<td>
+								<input type="number"  id="search_click_kcal" disabled="disabled">
+							</td>
+						</tr>
+						<tr>
 			    		<td width="40%">
 			    			<div id="img_span" name="image" style="border-radius: 7px;"></div>
 			    		</td>
@@ -803,16 +1043,8 @@ function recipe_for(k,page){
 				  			<input type="file"  id="img_fBtn" style="display: none;">
 				  		</td>
 			  	    </tr>
-				</table>
-				</form>
-				<table class="table1" style="height: 400px;background-color:#ffd47b;" >
-					<tr>
-						<td>VueJS로 음식출력</td>
-					</tr>
-					<tr>
-						<td>음식출력</td>
-					</tr>
-				</table>
+					</table>
+				</div>
 				<!-- 달력 -->
 				<table class="table2" style="height: 1em;">
 					<tr id="calender_tr">
@@ -875,6 +1107,9 @@ function recipe_for(k,page){
 			  </div>
 			  <div class="recipe_page" id="page_div">
 			  		
+			  </div>
+			  <div class="recipe_detail">
+			  	<!-- dialog -->
 			  </div>
 			</div>
 		</div>

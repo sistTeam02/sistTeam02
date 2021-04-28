@@ -15,7 +15,14 @@ public class Chat_foodVO {
 	private String id,filename,foodname;
 	private String whenfood;
 	private String fooddate;
-	private double foodkcal;
+	private double foodkcal,foodgram;
+	
+	public double getFoodgram() {
+		return foodgram;
+	}
+	public void setFoodgram(double foodgram) {
+		this.foodgram = foodgram;
+	}
 	public String getId() {
 		return id;
 	}

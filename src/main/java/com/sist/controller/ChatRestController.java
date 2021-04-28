@@ -61,17 +61,13 @@ public class ChatRestController {
 		}
 		return result;
 	}
-	@PostMapping("chat/chat_total.do")
-	public String chat_total_data(String date,String id){
+	@PostMapping("chat/chat_planData.do")
+	public String chat_plan_data(String date,String id){
 		Chat_planVO vo=new Chat_planVO();
-		Chat_foodVO fvo=new Chat_foodVO();
 		vo.setId(id);
 		vo.setPlandate(date);
 		String json="";
 		List<Chat_planVO> pList=pdao.chat_planData(vo);
-		fvo.setFooddate(date);
-		fvo.setId(id);
-		List<Chat_foodVO> fList=fdao.chat_foodData(fvo);
 		JSONArray arr=new JSONArray();
 		for(Chat_planVO pvo:pList){
 			JSONObject obj=new JSONObject();
@@ -80,14 +76,26 @@ public class ChatRestController {
 			obj.put("sport",pvo.getSport() );
 			arr.add(obj);
 		}
-		/*for(Chat_foodVO fovo:fList){ 사진 처리한후에 하자
+		json=arr.toJSONString();
+		return json;
+	}
+	@PostMapping("chat/chat_foodData.do")
+	public String chat_food_data(String date,String id){
+		Chat_foodVO fvo=new Chat_foodVO();
+		String json="";
+		fvo.setFooddate(date);
+		fvo.setId(id);
+		List<Chat_foodVO> fList=fdao.chat_foodData(fvo);
+		JSONArray arr=new JSONArray();
+		for(Chat_foodVO vo:fList){ 
 			JSONObject obj=new JSONObject();
-			obj.put("fooddate",fovo.getFooddate() );
-			obj.put("whenfood",fovo.getWhenfood() );
-			obj.put("foodname",fovo.getFoodname() );
-			obj.put("foodkcal",fovo.getFoodkcal() );
+			obj.put("fooddate",vo.getFooddate() );
+			obj.put("whenfood",vo.getWhenfood() );
+			obj.put("foodname",vo.getFoodname() );
+			obj.put("foodkcal",vo.getFoodkcal() );
+			obj.put("foodgram", vo.getFoodgram());
 			arr.add(obj);
-		}*/
+		}
 		json=arr.toJSONString();
 		return json;
 	}
@@ -166,4 +174,28 @@ public class ChatRestController {
 		
 		return json;
 	}
+	@PostMapping("chat/chat_kcal.do")
+	public String chat_kcaldata(String keyword){
+		String json="";
+		try {
+			List<KcalVO> list=fdao.chat_kcalData(keyword);
+			JSONArray arr=new JSONArray();
+			for(KcalVO vo:list){
+				JSONObject obj=new JSONObject();
+				obj.put("no", vo.getNo());
+				obj.put("name", vo.getName());
+				obj.put("gram", vo.getGram());
+				obj.put("kcal", vo.getKcal());
+				arr.add(obj);
+				
+			}
+		json=arr.toJSONString();
+			
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		
+		return json;
+	}
+	
 }

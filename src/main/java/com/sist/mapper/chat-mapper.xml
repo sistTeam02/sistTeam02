@@ -21,10 +21,15 @@
 	<select id="chat_recipeList" resultType="Chat_recipeVO" parameterType="hashmap">
 		SELECT no,title,poster,num
 		FROM (SELECT no,title,poster,rownum as num
-		FROM (SELECT /*+INDEX_ASC(chat_recipe_list INDEX1) */no,title,poster from chat_recipe_list))
+		FROM (SELECT /*+INDEX_ASC(chat_recipe_list kcal_INDEX1) */no,title,poster from chat_recipe_list))
 		WHERE num Between #{start} and #{end}
 	</select>
 	<select id="chat_recipeTotalPage" resultType="int">
 		SELECT CEIL(count(*)/9.0) from chat_recipe_list
+	</select>
+	<select id="chat_kcalData" resultType="KcalVO" parameterType="String">
+		SELECT /*+INDEX_ASC(chat_kcal INDEX1) */no,name,gram,kcal from 
+		chat_kcal
+		where name like '%'||#{keyword}||'%'
 	</select>
 </mapper>

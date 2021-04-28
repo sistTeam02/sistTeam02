@@ -28,4 +28,7 @@ public class Chat_foodDAO extends SqlSessionDaoSupport{
 	public int chat_recipeTotalPage(){
 		return getSqlSession().selectOne("chat_recipeTotalPage");
 	}
+	public List<KcalVO> chat_kcalData(String keyword){
+		return getSqlSession().selectList("chat_kcalData", keyword);
+	}
 }
