@@ -5,6 +5,11 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+	<link rel="stylesheet" href="assets/styles/index.css">
+ 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+ 	<meta name="viewport" content="width=device-width, initial-scale=1">
+  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css?family=Muli:300,400,500,600,700,800,900&display=swap" rel="stylesheet">
 
@@ -32,6 +37,65 @@
     <script src="../js/main.js"></script>
 </head>
 <body>
-	
+<jsp:include page="mypage_breadcurmb.jsp"></jsp:include>
+	<!-- Blog Section Begin -->
+    <section class="blog-section spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6 col-sm-8 order-2 order-lg-1">
+                    <div class="blog-sidebar">
+                        <!-- <div class="search-form">
+                            <h4>Search</h4>
+                            <form action="#">
+                                <input type="text" placeholder="Search . . .  ">
+                                <button type="submit"><i class="fa fa-search"></i></button>
+                            </form>
+                        </div> -->
+                        <div class="blog-catagory">
+                            <h4>마이페이지</h4>
+                            <ul>
+                                 <li><a href="like_list.jsp">운동&쇼핑몰 찜리스트 </a></li> 
+                                <li><a href="buy_list.jsp">프로그램 신청 내역</a></li>
+                                <li><a href="schedule.jsp">나만의 계획</a></li>
+                                <li><a href="mypage_update.jsp">회원정보수정</a></li>
+                            </ul>
+                        </div>
+                        <div class="recent-post">
+                            <h4>쿠키 들어갈 자리?</h4>
+                            <div class="recent-blog">
+                                <a href="#" class="rb-item">
+                                    <div class="rb-pic">
+                                        <img src="img/blog/recent-1.jpg" alt="">
+                                    </div>
+                                    <div class="rb-text">
+                                        <h6>The Personality Trait That Makes...</h6>
+                                        <p>Fashion <span>- May 19, 2019</span></p>
+                                    </div>
+                                </a>
+                               
+                            </div>
+                        </div>
+                        <div class="blog-tags">
+                            <h4>실시간 구매 상품</h4>
+                            <div class="tag-item">
+                                <a href="#">Towel</a>
+                                <a href="#">Shoes</a>
+                                <a href="#">Coat</a>
+                                <a href="#">Dresses</a>
+                                <a href="#">Trousers</a>
+                                <a href="#">Men's hats</a>
+                                <a href="#">Backpack</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-9 order-1 order-lg-2">
+                <div class="col-lg-12">
+                <div class="bi-text">
+            	 <jsp:include page="${mypage_jsp }"></jsp:include>
+                </div>
+            </div>
+        </div>
+    </section>
 </body>
 </html>
