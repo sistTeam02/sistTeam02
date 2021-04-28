@@ -28,6 +28,6 @@
     <mapper resource="com/sist/mapper/chat-mapper.xml"/>
     <mapper resource="com/sist/mapper/kcal-mapper.xml"/>
     <mapper resource="com/sist/mapper/walk-mapper.xml"/>
-    <mapper resource="com/sist/mapper.board-mapper.xml"/>
+    <mapper resource="com/sist/mapper/board-mapper.xml"/>
   </mappers>
 </configuration>
