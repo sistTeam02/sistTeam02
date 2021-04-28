@@ -139,7 +139,7 @@
                             <ul class="dropdown">
                                 <li><a href="../mypage/like_list.do">운동&쇼핑몰 찜리스트</a></li>
                                 <li><a href="../mypage/buy_list.do">프로그램 신청 내역</a></li>
-                                <li><a href="../mypage/schedule.do">나만의 계획</a></li>
+                                <li><a href="../mypage/mypage_schedule.do">나만의 계획</a></li>
                                 <li><a href="../mypage/mypage_update.do">회원정보 수정</a></li>
                             </ul>
                         </li>

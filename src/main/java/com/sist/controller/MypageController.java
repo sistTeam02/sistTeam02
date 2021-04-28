@@ -16,7 +16,7 @@ public class MypageController {
 	//메인으로 전송
 	//관심목록(찜&장바구니)
 	@GetMapping("mypage/like_list.do")
-	public String mypage_mypage(Model model){
+	public String mypage_like_list(Model model){
 		model.addAttribute("mypage_jsp","../mypage/like_list.jsp");
 		model.addAttribute("main_jsp","../mypage/mypage_main.jsp");
 		return "main/main";
@@ -31,9 +31,9 @@ public class MypageController {
 	}
 
 	//나만의 계획(채팅정보 불러오기)
-	@GetMapping("mypage/schedule.do")
+	@GetMapping("mypage/mypage_schedule.do")
 	public String mypage_schdule(Model model){
-		model.addAttribute("mypage_jsp","../mypage/schedule.jsp");
+		model.addAttribute("mypage_jsp","../mypage/mypage_schedule.jsp");
 		model.addAttribute("main_jsp","../mypage/mypage_main.jsp");
 		return "main/main";
 	}
