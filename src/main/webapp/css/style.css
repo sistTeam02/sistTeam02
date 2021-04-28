@@ -30,7 +30,12 @@
 /*----------------------------------------*/
 /* Template default CSS
 /*----------------------------------------*/
-
+@font-face {
+    font-family: '양진체';
+    src: url('https://cdn.jsdelivr.net/gh/supernovice-lab/font@0.9/yangjin.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
 html,
 body {
 	height: 100%;
@@ -827,8 +832,8 @@ ol {
 -----------------------*/
 
 .hero-items .single-hero-items {
-	height: 725px;
-	padding-top: 210px;
+	height: 400px;
+	padding-top: 100px;
 }
 
 .hero-items .single-hero-items span {
@@ -853,6 +858,19 @@ ol {
 	top: 50px;
 	opacity: 0;
 }
+
+.hero-items .single-hero-items .boo {
+	color: #252525;
+	font-size: 65px;
+	font-weight: 700;
+	margin-bottom: 6px;
+	position: relative;
+	top: 50px;
+	opacity: 0;
+}
+
+
+
 
 .hero-items .single-hero-items p {
 	margin-bottom: 42px;
@@ -1030,10 +1048,11 @@ ol {
 }
 
 .single-banner .inner-text h4 {
-	color: #252525;
-	font-weight: 700;
-	padding: 11px 28px;
-	background: #ffffff;
+	font-family: '양진체';
+	color: rgb(51 51 51);
+	/*font-weight: 700;*/
+	padding: 20px 40px;
+	background: rgba(255,255,255,0.7);
 	border-radius: 2px;
 }
 

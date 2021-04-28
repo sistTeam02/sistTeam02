@@ -12,20 +12,20 @@
     <!-- Hero Section Begin -->
     <section class="hero-section">
         <div class="hero-items owl-carousel">
-            <div class="single-hero-items set-bg" data-setbg="../img/hero-1.jpg">
+            <div class="single-hero-items set-bg" data-setbg="../img/hero-4.png">
                 <div class="container">
                     <div class="row">
-                        <div class="col-lg-5">
-                            <span>Bag,kids</span>
-                            <h1>Black friday</h1>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                incididunt ut labore et dolore</p>
+                        <div class="col-lg-7">
+                            <h1 style="font-weight: 100">
+                            	<span class="boo">내방</span>에서 <span class="boo">스마트</span>하게 <span class="boo">홈트레이닝</span>하자!
+                            </h1>
+                            &nbsp;
                             <a href="#" class="primary-btn">Shop Now</a>
                         </div>
                     </div>
-                    <div class="off-card">
+                   <!--  <div class="off-card">
                         <h2>Sale <span>50%</span></h2>
-                    </div>
+                    </div> -->
                 </div>
             </div>
             <div class="single-hero-items set-bg" data-setbg="../img/hero-2.jpg">
@@ -54,25 +54,25 @@
             <div class="row">
                 <div class="col-lg-4">
                     <div class="single-banner">
-                        <img src="../img/banner-1.jpg" alt="">
+                        <img src="../img/bvb.png" style="width: 570px; height: 320px" alt="">
                         <div class="inner-text">
-                            <h4>Men’s</h4>
+                            <h4>운동 기구&용품</h4>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-4">
                     <div class="single-banner">
-                        <img src="../img/banner-2.jpg" alt="">
+                        <img src="../img/training.PNG" style="width: 570px; height: 320px" alt="">
                         <div class="inner-text">
-                            <h4>Women’s</h4>
+                            <h4>홈트 영상</h4>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-4">
                     <div class="single-banner">
-                        <img src="../img/banner-3.jpg" alt="">
+                        <img src="../img/dietff.PNG" style="width: 570px; height: 320px" alt="">
                         <div class="inner-text">
-                            <h4>Kid’s</h4>
+                            <h4>다이어트&건강 식품</h4>
                         </div>
                     </div>
                 </div>
