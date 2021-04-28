@@ -45,14 +45,8 @@
 #pagination a {display:inline-block;margin-right:10px;}
 #pagination .on {font-weight: bold; cursor: default;color:#777;}
 .row {
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-wrap: wrap;
-    flex-wrap: nowrap;
-    margin-right: -15px;
-    margin-left: -15px;
-    flex-direction: row;
-    align-content: center;
+
+    
     justify-content: space-around;
 }
 </style>
@@ -79,9 +73,14 @@ $(function(){
 					modal:true
 				})
 				$('#dialog').show()
+				map.relayout()
 			}
 		});
 		
+	});
+	
+	$('.modal').on('hidden.bs.modal', function (e) {
+	    $(this).find('form')[0].reset()
 	});
 	
 	$('.loc').click(function(){
@@ -89,6 +88,7 @@ $(function(){
 		$('#keyword').val(loc);
 		$('#subutton').trigger("click");
 	});
+	
 });
 </script>
 </head>
@@ -100,7 +100,7 @@ $(function(){
                 <div class="col-lg-12">
                     <div class="breadcrumb-text">
                         <a href="../main/main.do"><i class="fa fa-home"></i> 홈</a>
-                        <span>주변 산책로</span>
+                        <span>산책로 추천맵</span>
                     </div>
                 </div>
             </div>
@@ -112,30 +112,26 @@ $(function(){
     <div class="container">
     	<div class="row">
     		         <div class="product-slider owl-carousel">
+    		         <c:forEach var="vo" items="${list }">
                         <div class="product-item">
                             <div class="pi-pic">
-                                <img src="../img/products/women-1.jpg" alt="Lights" style="width:100%" class="walk_img" value="1">
-                                <div class="sale">Sale</div>
+                                <img src="${vo.poster }" alt="Lights" style="width:100%" class="walk_img" value="${vo.no }">
+                                <!-- <div class="sale">Sale</div>
                                 <div class="icon">
                                     <i class="icon_heart_alt"></i>
-                                </div>
-                                <ul>
-                                    <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
-                                    <li class="quick-view"><a href="#">+ Quick View</a></li>
-                                    <li class="w-icon"><a href="#"><i class="fa fa-random"></i></a></li>
-                                </ul>
+                                </div> -->
                             </div>
                             <div class="pi-text">
-                                <div class="catagory-name">Coat</div>
-                                <a href="#">
-                                    <h5>Pure Pineapple</h5>
-                                </a>
-                                <div class="product-price">
-                                    $14.00
-                                    <span>$35.00</span>
-                                </div>
+                                
+                              
+                                    <h5>${vo.title }</h5>
+                               
+                                <!-- <div class="product-price">
+                                    ${vo.addr }
+                                </div> -->
                             </div>
                         </div>
+                        </c:forEach>
                         <!--  <div class="product-item">
                             <div class="pi-pic">
                                 <img src="../img/products/women-2.jpg" alt="">
