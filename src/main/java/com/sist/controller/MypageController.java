@@ -14,8 +14,15 @@ public class MypageController {
 	@Autowired
 	private MemberDAO dao;
 	
-	//관심목록(찜&장바구니)
+	//메인으로 전송
 	@GetMapping("mypage/mypage.do")
+	public String mypage_mypage(Model model){
+		model.addAttribute("main_jsp","../mypage/like_list.jsp");
+		return "main/main";
+	}
+	
+	//관심목록(찜&장바구니)
+	@GetMapping("mypage/like_list.do")
 		public String mypage_mypage(int id,MemberVO vo,Model model){
 		
 		model.addAttribute("id",id);
@@ -29,7 +36,7 @@ public class MypageController {
 		return "mypage/buy_list";
 	}
 
-	//나만의 계획(채팅)
+	//나만의 계획(채팅정보 불러오기)
 	@GetMapping("mypage/schedule.do")
 	public String mypage_schdule(int id,Model model){
 		
@@ -37,12 +44,12 @@ public class MypageController {
 		return "mypage/schedule";
 	}
 	//회원정보수정
-	@GetMapping("mypage/update.do")
+	@GetMapping("mypage/mypage_update.do")
 	public String mypage_update(int id,Model model){
 		
 		//MemberVO vo=
 		//model.addAttribute("vo",vo);
-		return "mypage/update";
+		return "mypage/mypage_update";
 	}
 	
 }
