@@ -149,7 +149,7 @@
                 <div class="col-lg-12">
                     <div class="breadcrumb-text">
                         <a href="#"><i class="fa fa-home"></i>마이페이지</a>
-                        <span>관심목록</span>
+                        <span>나만의 계획</span>
                     </div>
                 </div>
             </div>
