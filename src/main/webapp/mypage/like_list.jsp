@@ -13,6 +13,8 @@
      </style>
 </head>
 <body>
+  			<div class="col-lg-12">
+                <div class="bi-text">
  				<h1>관심 목록</h1>
                		<div style="height:50px"></div>
                        <div class="container">
@@ -151,6 +153,9 @@
 							<div class="container" align="right">
 							  <button type="button" class="btn btn-lg btn-default" onclick="location.href='#'">지금 제품 구매하러 가기</button>
 							</div>
+						</div>
+					</div>
+					
 
 </body>
 

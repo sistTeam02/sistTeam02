@@ -1,148 +1,108 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta charset="UTF-8">
-    <meta name="description" content="Fashi Template">
-    <meta name="keywords" content="Fashi, unica, creative, html">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Fashi | Template</title>
-    <link rel="stylesheet" href="assets/styles/index.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-     <style type="text/css">
+<title>Fashi | Template</title>
+<style type="text/css">
      .table-hover{
      	font-size:large;
      	width:900px;
-     	
      }
-    body {
-		margin-top: 40px;
-		text-align: center;
-		font-size: 14px;
-		
-		}
-
-	#calendar {
-		width: 900px;
+     #calendar {
+		max-width: 900px;
 		margin: 0 auto;
-		}
-     </style>
-    
-    <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css?family=Muli:300,400,500,600,700,800,900&display=swap" rel="stylesheet">
-
-    <!-- Css Styles -->
-    <link rel="stylesheet" href="../css/bootstrap.min.css" type="text/css">
-    <link rel="stylesheet" href="../css/font-awesome.min.css" type="text/css">
-    <link rel="stylesheet" href="../css/themify-icons.css" type="text/css">
-    <link rel="stylesheet" href="../css/elegant-icons.css" type="text/css">
-    <link rel="stylesheet" href="../css/owl.carousel.min.css" type="text/css">
-    <link rel="stylesheet" href="../css/nice-select.css" type="text/css">
-    <link rel="stylesheet" href="../css/jquery-ui.min.css" type="text/css">
-    <link rel="stylesheet" href="../css/slicknav.min.css" type="text/css">
-    <link rel="stylesheet" href="../css/style.css" type="text/css">
-    
-    <!-- Js Plugins -->
-    <script src="../js/jquery-3.3.1.min.js"></script>
-    <script src="../js/bootstrap.min.js"></script>
-    <script src="../js/jquery-ui.min.js"></script>
-    <script src="../js/jquery.countdown.min.js"></script>
-    <script src="../js/jquery.nice-select.min.js"></script>
-    <script src="../js/jquery.zoom.min.js"></script>
-    <script src="../js/jquery.dd.min.js"></script>
-    <script src="../js/jquery.slicknav.js"></script>
-    <script src="../js/owl.carousel.min.js"></script>
-    <script src="../js/main.js"></script>
-    
-    <!-- Calendar -->
-    <link rel='stylesheet' type='text/css' href='../css/fullcalendar.css' />
-<script type='text/javascript' src='../js/jquery_selecttable.js'></script>
-<script type='text/javascript' src='../js/jquery-ui-custom.js'></script>
-<script type='text/javascript' src='../js/fullcalendar.min.js'></script>
-	<script type='text/javascript'>
+	}
+     
+</style>
+<link href='../css/fullcalendar.css' rel='stylesheet' />
+<link href='../css/fullcalendar.print.css' rel='stylesheet' media='print' />
+<script src='../js/lib/moment.min.js'></script>
+<script src='../js/lib/jquery.min.js'></script>
+<script src='../js/fullcalendar.min.js'></script>
+<script>
 
 	$(document).ready(function() {
-	
-		var date = new Date();
-		var d = date.getDate();
-		var m = date.getMonth();
-		var y = date.getFullYear();
 		
-		var calendar = $('#calendar').fullCalendar({
+		$('#calendar').fullCalendar({
 			header: {
 				left: 'prev,next today',
 				center: 'title',
 				right: 'month,agendaWeek,agendaDay'
 			},
+			defaultDate: '2015-02-12',
 			selectable: true,
 			selectHelper: true,
-			select: function(start, end, allDay) {
+			select: function(start, end) {
 				var title = prompt('Event Title:');
+				var eventData;
 				if (title) {
-					calendar.fullCalendar('renderEvent',
-						{
-							title: title,
-							start: start,
-							end: end,
-							allDay: allDay
-						},
-						true // make the event "stick"
-					);
+					eventData = {
+						title: title,
+						start: start,
+						end: end
+					};
+					$('#calendar').fullCalendar('renderEvent', eventData, true); // stick? = true
 				}
-				calendar.fullCalendar('unselect');
+				$('#calendar').fullCalendar('unselect');
 			},
 			editable: true,
+			eventLimit: true, // allow "more" link when too many events
 			events: [
 				{
 					title: 'All Day Event',
-					start: new Date(y, m, 1)
+					start: '2015-02-01'
 				},
 				{
 					title: 'Long Event',
-					start: new Date(y, m, d-5),
-					end: new Date(y, m, d-2)
+					start: '2015-02-07',
+					end: '2015-02-10'
 				},
 				{
 					id: 999,
 					title: 'Repeating Event',
-					start: new Date(y, m, d-3, 16, 0),
-					allDay: false
+					start: '2015-02-09T16:00:00'
 				},
 				{
 					id: 999,
 					title: 'Repeating Event',
-					start: new Date(y, m, d+4, 16, 0),
-					allDay: false
+					start: '2015-02-16T16:00:00'
+				},
+				{
+					title: 'Conference',
+					start: '2015-02-11',
+					end: '2015-02-13'
 				},
 				{
 					title: 'Meeting',
-					start: new Date(y, m, d, 10, 30),
-					allDay: false
+					start: '2015-02-12T10:30:00',
+					end: '2015-02-12T12:30:00'
 				},
 				{
 					title: 'Lunch',
-					start: new Date(y, m, d, 12, 0),
-					end: new Date(y, m, d, 14, 0),
-					allDay: false
+					start: '2015-02-12T12:00:00'
+				},
+				{
+					title: 'Meeting',
+					start: '2015-02-12T14:30:00'
+				},
+				{
+					title: 'Happy Hour',
+					start: '2015-02-12T17:30:00'
+				},
+				{
+					title: 'Dinner',
+					start: '2015-02-12T20:00:00'
 				},
 				{
 					title: 'Birthday Party',
-					start: new Date(y, m, d+1, 19, 0),
-					end: new Date(y, m, d+1, 22, 30),
-					allDay: false
+					start: '2015-02-13T07:00:00'
 				},
 				{
 					title: 'Click for Google',
-					start: new Date(y, m, 28),
-					end: new Date(y, m, 29),
-					url: 'http://google.com/'
+					url: 'http://google.com/',
+					start: '2015-02-28'
 				}
 			]
 		});
@@ -150,102 +110,27 @@
 	});
 
 </script>
+
 </head>
-
 <body>
-    <!-- Page Preloder -->
-    <div id="preloder">
-        <div class="loader"></div>
-    </div>
-
-    <!-- Breadcrumb Section Begin -->
-    <div class="breacrumb-section">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="breadcrumb-text">
-                        <a href="#"><i class="fa fa-home"></i>마이페이지</a>
-                        <span>나만의 계획</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Breadcrumb Section Begin -->
-
-    <!-- Blog Section Begin -->
-    <section class="blog-section spad">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-3 col-md-6 col-sm-8 order-2 order-lg-1">
-                    <div class="blog-sidebar">
-                        <!-- <div class="search-form">
-                            <h4>Search</h4>
-                            <form action="#">
-                                <input type="text" placeholder="Search . . .  ">
-                                <button type="submit"><i class="fa fa-search"></i></button>
-                            </form>
-                        </div> -->
-                        <div class="blog-catagory">
-                            <h4>마이페이지</h4>
-                            <ul>
-                                 <li><a href="like_list.do">운동&쇼핑몰 찜리스트 </a></li> 
-                                <li><a href="buy_list.do">프로그램 신청 내역</a></li>
-                                <li><a href="schedule.do">나만의 계획</a></li>
-                                <li><a href="mypage_update.do">회원정보수정</a></li>
-                            </ul>
-                        </div>
-                        <div class="recent-post">
-                            <h4>쿠키 들어갈 자리?</h4>
-                            <div class="recent-blog">
-                                <a href="#" class="rb-item">
-                                    <div class="rb-pic">
-                                        <img src="img/blog/recent-1.jpg" alt="">
-                                    </div>
-                                    <div class="rb-text">
-                                        <h6>The Personality Trait That Makes...</h6>
-                                        <p>Fashion <span>- May 19, 2019</span></p>
-                                    </div>
-                                </a>
-                               
-                            </div>
-                        </div>
-                        <div class="blog-tags">
-                            <h4>실시간 구매 상품</h4>
-                            <div class="tag-item">
-                                <a href="#">Towel</a>
-                                <a href="#">Shoes</a>
-                                <a href="#">Coat</a>
-                                <a href="#">Dresses</a>
-                                <a href="#">Trousers</a>
-                                <a href="#">Men's hats</a>
-                                <a href="#">Backpack</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-9 order-1 order-lg-2">
-                <div class="col-lg-12">
+  			<div class="col-lg-12">
                 <div class="bi-text">
-            	 <h2>나만의 계획 세우기</h2>
+ 				<h1>관심 목록</h1>
                		<div style="height:50px"></div>
                        <div class="container">
- 						  <div id='calendar'></div>
-					   </div> 
+                      	<h2>나만의 계획 세우기</h2>
+               		<div style="height:50px"></div>
+                        <div id='calendar'></div>
 					   
 					<div style="height:50px"></div>
                        <div class="container">
                        <h2>채팅 기록 확인하기</h2>
-                       <p>채팅에 기록된 내용을 출력합니다</p>
-                    </div>   
-                </div>
-            </div>
-        </div>
-    </section>
-    
+                       <p>채팅에 기록된 내용을 출력합니다</p> 
+						</div>
+					</div>
+				</div>
+			</div>
 
-
-    
 </body>
 
 </html>

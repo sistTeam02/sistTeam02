@@ -59,10 +59,10 @@
                         <div class="blog-catagory">
                             <h4>마이페이지</h4>
                             <ul>
-                                 <li><a href="like_list.jsp">운동&쇼핑몰 찜리스트 </a></li> 
-                                <li><a href="buy_list.jsp">프로그램 신청 내역</a></li>
-                                <li><a href="schedule.jsp">나만의 계획</a></li>
-                                <li><a href="mypage_update.jsp">회원정보수정</a></li>
+                                 <li><a href="like_list.do">운동&쇼핑몰 찜리스트 </a></li> 
+                                <li><a href="buy_list.do">프로그램 신청 내역</a></li>
+                                <li><a href="mypage_schedule.do">나만의 계획</a></li>
+                                <li><a href="mypage_update.do">회원정보수정</a></li>
                             </ul>
                         </div>
                         <div class="recent-post">
@@ -95,9 +95,9 @@
                     </div>
                 </div>
                 <div class="col-lg-9 order-1 order-lg-2">
-                <div class="col-lg-12">
-                <div class="bi-text">
+                <!-- 마이페이지 내용 출력 -->
             	 <jsp:include page="${mypage_jsp }"/>
+            	 
                 </div>
             </div>
         </div>
