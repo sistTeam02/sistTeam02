@@ -15,6 +15,10 @@
     <typeAlias type="com.sist.vo.Chat_planVO" alias="Chat_planVO"/>
     <typeAlias type="com.sist.vo.Chat_recipeVO" alias="Chat_recipeVO"/>
     <typeAlias type="com.sist.vo.WalkVO" alias="WalkVO"/>
+    <typeAlias type="com.sist.vo.NoticeBoardVO" alias="NoticeBoardVO"/>
+    <typeAlias type="com.sist.vo.FreeBoardVO" alias="FreeBoardVO"/>
+    <typeAlias type="com.sist.vo.ReplyBoardVO" alias="ReplyBoardVO"/>
+    <typeAlias type="com.sist.vo.ReplyVO" alias="ReplyVO"/>
   </typeAliases>
   <mappers>
     <mapper resource="com/sist/mapper/member-mapper.xml"/>
@@ -24,5 +28,6 @@
     <mapper resource="com/sist/mapper/chat-mapper.xml"/>
     <mapper resource="com/sist/mapper/kcal-mapper.xml"/>
     <mapper resource="com/sist/mapper/walk-mapper.xml"/>
+    <mapper resource="com/sist/mapper.board-mapper.xml"/>
   </mappers>
 </configuration>
