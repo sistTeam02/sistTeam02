@@ -7,14 +7,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-<style type="text/css">
-.pi-text(function(){
-	if($(this).text().length >= length){
-		$(this).text($(this).text().substr(0,length)+'...');
-	});
-});
-</style>
 </head>
 <body>
     <!-- Breadcrumb Section Begin -->
@@ -130,31 +122,50 @@
                     </div>
                     <div class="product-list">
                         <div class="row">
-                           <c:forEach var="vo" items="${list }">
-                               <div class="col-lg-4">
-                                  <a href="shop_detail.do?no=${vo.no }">
-                                     <img src="${vo.poster }">
-                                        <div class="pi-text text-center">
-                                          <p>${vo.title }</p>
+                            <div class="col-lg-4">
+                              <div class="product-item">
+                                 <c:forEach var="vo" items="${list }">
+                                     <div class="pi-pic">
+                                        <img src="${vo.poster }">
+                                        <!-- <div class="sale pp-sale">Sale</div> -->
+                                        <div class="icon">
+                                          <!-- 찜으로 이동 -->
+                                          <a href="#">
+                                            <i class="icon_heart_alt"></i>
+                                          </a>
                                         </div>
-                                  </a>
-                                  <div class="product-price text-center" style="color:#648cff;font-weight:bold;height:30px">
-                                      <fmt:formatNumber value="${vo.price }"/>원
-                                  </div>
+                                        <ul class="text-left">
+                                          <!-- 장바구니로 이동 -->
+                                            <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
+                                            <!-- <li class="quick-view"><a href="#">+ Quick View</a></li> -->
+                                            <!-- <li class="w-icon"><a href="#"><i class="fa fa-random"></i></a></li> -->
+                                        </ul>
+                                     </div>
+                                     <div class="pi-text">
+                                        <!-- <div class="catagory-name">Towel</div> -->
+                                        <a href="../shop/shop_detail.do">
+                                            <h5>${vo.title }</h5>
+                                        </a>
+                                        <div class="product-price">
+                                            <fmt:formatNumber value="${vo.price }"/>원
+                                            <!-- <span>$35.00</span> -->
+                                        </div>
+                                        <div class="height:10px"></div>
+                                     </div>
+                                  </c:forEach>
                                </div>
-                            </c:forEach>
-                         </div>
-                     </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="loading-more">
+                        <i class="icon_loading"></i>
+                        <a href="#">
+                            Loading More
+                        </a>
+                    </div>
                 </div>
-          </div>
-          <div class="row">
-            <div class="text-center"> 
-				<a href="list.do?page=${curpage>1?curpage-1:curpage }" class="btn btn-sm btn-primary">이전</a>
-				   ${curpage } page / ${totalpage } pages
-				<a href="list.do?page=${curpage<totalpage?curpage+1:curpage }" class="btn btn-sm btn-primary">다음</a>
-			</div>
-           </div>
-      </div>
+            </div>
+        </div>
     </section>
     <!-- Product Shop Section End -->
 </body>
