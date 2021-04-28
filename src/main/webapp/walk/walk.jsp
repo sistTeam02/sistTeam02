@@ -6,7 +6,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <style>
 .map_wrap, .map_wrap * {margin:0;padding:0;font-family:'Malgun Gothic',dotum,'돋움',sans-serif;font-size:12px;}
 .map_wrap a, .map_wrap a:hover, .map_wrap a:active{color:#000;text-decoration: none;}
@@ -45,8 +44,6 @@
 #pagination a {display:inline-block;margin-right:10px;}
 #pagination .on {font-weight: bold; cursor: default;color:#777;}
 .row {
-
-    
     justify-content: space-around;
 }
 </style>
@@ -82,7 +79,7 @@ $(function(){
 	$('.modal').on('hidden.bs.modal', function (e) {
 	    $(this).find('form')[0].reset()
 	});
-	
+	$('.loc').css("cursor","pointer");
 	$('.loc').click(function(){
 		let loc=$(this).attr("value");
 		$('#keyword').val(loc);
@@ -218,15 +215,15 @@ $(function(){
 	
 	<div class="container">
 		<div class="row" style="text-align: center;">
-			<span class="btn btn-md btn-default loc" value="서울 공원">서울</span>
-			<span class="btn btn-md btn-default loc" value="인천 공원">인천</span>
-			<span class="btn btn-md btn-default loc" value="대전 공원">대전</span>
-			<span class="btn btn-md btn-default loc" value="세종 공원">세종</span>
-			<span class="btn btn-md btn-default loc" value="대구 공원">대구</span>
-			<span class="btn btn-md btn-default loc" value="울산 공원">울산</span>
-			<span class="btn btn-md btn-default loc" value="부산 공원">부산</span>
-			<span class="btn btn-md btn-default loc" value="광주 공원">광주</span>
-			<span class="btn btn-md btn-default loc" value="제주 공원">제주</span>
+			<span class="button loc" value="서울 공원">서울</span>
+			<span class="button loc" value="인천 공원">인천</span>
+			<span class="button loc" value="대전 공원">대전</span>
+			<span class="button loc" value="세종 공원">세종</span>
+			<span class="button loc" value="대구 공원">대구</span>
+			<span class="button loc" value="울산 공원">울산</span>
+			<span class="button loc" value="부산 공원">부산</span>
+			<span class="button loc" value="광주 공원">광주</span>
+			<span class="button loc" value="제주 공원">제주</span>
 
 		</div>
 	</div>
