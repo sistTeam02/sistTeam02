@@ -7,12 +7,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.*;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+
 import com.sist.vo.*;
 import com.sist.dao.*;
 @Controller
 public class GoodsController {
 	// GoodsDAO 저장
-	@Autowired
+	@Resource(name="goodsDAO")
 	private GoodsDAO gDao;
 	
 	@GetMapping("shop/shop_list.do")

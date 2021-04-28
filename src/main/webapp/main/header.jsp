@@ -129,17 +129,18 @@
                                 <li><a href="#">공지사항</a></li>
                             </ul>
                         </li>
-                        <li><a href="#">산책로</a>
+                        <li><a href="../walk/walk.do">산책로</a>
                             <ul class="dropdown">
-                                <li><a href="#">산책로 추천맵</a></li>
+                                <li><a href="../walk/walk.do">산책로 추천맵</a></li>
                             </ul>
                         </li>
 					<li><a href="../chat/chat_main.do">채팅</a></li>
                         <li><a href="#">마이페이지</a>
                             <ul class="dropdown">
-                                <li><a href="./blog-details.html">운동&쇼핑몰 찜리스트</a></li>
-                                <li><a href="./shopping-cart.html">프로그램 신청 내역</a></li>
-                                <li><a href="./check-out.html">나만의 계획</a></li>
+                                <li><a href="#">운동&쇼핑몰 찜리스트</a></li>
+                                <li><a href="#">프로그램 신청 내역</a></li>
+                                <li><a href="#">나만의 계획</a></li>
+                                <li><a href="#">회원정보 수정</a></li>
                             </ul>
                         </li>
                         <li><a href="#">쇼핑</a>

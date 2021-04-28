@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	
+	회원가입 양식 복붙
 </body>
 </html>

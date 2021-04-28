@@ -11,7 +11,7 @@ import com.sist.vo.*;
 @Repository
 public class GoodsDAO extends SqlSessionDaoSupport {
 
-	@Resource
+	@Resource(name="ssf")
 	public void setSqlSessionFactory(SqlSessionFactory sqlSessionFactory) {
 		// TODO Auto-generated method stub
 		super.setSqlSessionFactory(sqlSessionFactory);

@@ -189,8 +189,8 @@
                         <div class="blog-catagory">
                             <h4>마이페이지</h4>
                             <ul>
-                                <li><a href="like_list.jsp">관심목록 </a></li> 
-                                <li><a href="buy_list.jsp">구매정보</a></li>
+                                 <li><a href="like_list.jsp">운동&쇼핑몰 찜리스트 </a></li> 
+                                <li><a href="buy_list.jsp">프로그램 신청 내역</a></li>
                                 <li><a href="schedule.jsp">나만의 계획</a></li>
                                 <li><a href="mypage_update.jsp">회원정보수정</a></li>
                             </ul>
@@ -230,10 +230,14 @@
             	 <h2>나만의 계획 세우기</h2>
                		<div style="height:50px"></div>
                        <div class="container">
-                       
- 						<div id='calendar'></div>
-						
-               		 </div> 
+ 						  <div id='calendar'></div>
+					   </div> 
+					   
+					<div style="height:50px"></div>
+                       <div class="container">
+                       <h2>채팅 기록 확인하기</h2>
+                       <p>채팅에 기록된 내용을 출력합니다</p>
+                    </div>   
                 </div>
             </div>
         </div>

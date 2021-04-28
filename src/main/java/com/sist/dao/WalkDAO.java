@@ -16,4 +16,13 @@ public class WalkDAO extends SqlSessionDaoSupport{
 		// TODO Auto-generated method stub
 		super.setSqlSessionFactory(sqlSessionFactory);
 	}
+	
+	//목록
+	public List<WalkVO> walkAllData(){
+		return getSqlSession().selectList("walkAllData");
+	}
+	//상세
+	public WalkVO walkDetailData(int no){
+		return getSqlSession().selectOne("walkDetailData", no);
+	}
 }
