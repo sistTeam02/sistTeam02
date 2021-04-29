@@ -5,7 +5,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <style type="text/css">
 .row{
   margin: 0px auto;
@@ -58,7 +57,7 @@ h1 {
 		var title_='${vo.title}';
 		console.log(title_);
 		// 지도를 생성합니다    
-		var map = new kakao.maps.Map(mapContainer, mapOption); 
+		var map2 = new kakao.maps.Map(mapContainer, mapOption); 
 		
 		// 주소-좌표 변환 객체를 생성합니다
 		var geocoder = new kakao.maps.services.Geocoder();
@@ -74,7 +73,7 @@ h1 {
 		
 		        // 결과값으로 받은 위치를 마커로 표시합니다
 		        var marker = new kakao.maps.Marker({
-		            map: map,
+		            map: map2,
 		            position: coords
 		        });
 		        
@@ -82,13 +81,13 @@ h1 {
 		        var infowindow = new kakao.maps.InfoWindow({
 		            content: '<div style="width:150px;text-align:center;padding:6px 0;">'+title_+'</div>'
 		        });
-		        infowindow.open(map, marker);
+		        infowindow.open(map2, marker);
 		
 		        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
-		        map.setCenter(coords);
+		        map2.setCenter(coords);
 		    } 
 		});    
-		map.relayout();
+		map2.relayout();
 		</script>
    </div>
 </body>

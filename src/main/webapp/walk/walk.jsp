@@ -43,8 +43,37 @@
 #pagination {margin:10px auto;text-align: center;}
 #pagination a {display:inline-block;margin-right:10px;}
 #pagination .on {font-weight: bold; cursor: default;color:#777;}
-.row {
-    justify-content: space-around;
+.btn {
+  -webkit-border-radius: 15;
+  -moz-border-radius: 15;
+  border-radius: 15px;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 15px;
+  background: #648bff;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
+}
+
+.btn:hover {
+  background: #3cb0fd;
+  text-decoration: none;
+  color: #ffffff;
+}
+select {
+	width: 130px;
+	padding: .4em .4em;
+	border: 1px solid #999;
+	font-family: inherit;
+	background: url('arrow.jpg') no-repeat 95% 50%;
+	border-radius: 0px;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+}
+.walk_img{
+	width: 500px;
+	height:250px;
 }
 </style>
 <script src="https://code.jquery.com/jquery.js"></script>
@@ -70,7 +99,8 @@ $(function(){
 					modal:true
 				})
 				$('#dialog').show()
-				map.relayout()
+				map.relayout();
+				map2.relayout();
 			}
 		});
 		
@@ -82,11 +112,99 @@ $(function(){
 	$('.loc').css("cursor","pointer");
 	$('.loc').click(function(){
 		let loc=$(this).attr("value");
-		$('#keyword').val(loc);
+		let loc2=$("#addressSiGunGu1 option:selected").val();
+		let loc3=$("#addressDo1 option:selected").val();
+		$('#keyword').val(loc3+' '+loc2+' '+loc);
+		console.log(loc3+' '+loc2+' '+loc);
 		$('#subutton').trigger("click");
 	});
 	
+	areaSelectMaker("select[name=addressRegion]");
 });
+
+var areaSelectMaker = function(target){
+    if(target == null || $(target).length == 0){
+        console.warn("Unkwon Area Tag");
+        return;
+    }
+
+    var area = {
+        "수도권" :{
+            "서울특별시" : [ "강남구", "강동구", "강북구", "강서구", "관악구", "광진구", "구로구", "금천구", "노원구", "도봉구", "동대문구", "동작구", "마포구", "서대문구", "서초구", "성동구", "성북구", "송파구", "양천구", "영등포구", "용산구", "은평구", "종로구", "중구", "중랑구" ],
+            "경기도" : [ "수원시", "성남시", "의정부시", "안양시", "부천시", "광명시", "평택시", "동두천시", "안산시", "고양시",
+                 "과천시", "구리시", "남양주시", "오산시", "시흥시", "군포시", "의왕시", "하남시", "용인시", "파주시", "이천시", "안성시", "김포시", "화성시", "광주시", "양주시", "포천시", "여주시", "연천군", "가평군",
+                "양평군" ],
+            "인천광역시" : [ "계양구", "미추홀구", "남동구", "동구", "부평구", "서구", "연수구", "중구", "강화군", "옹진군" ]			
+        },
+        "강원권" :{
+            "강원도" : [ "춘천시", "원주시", "강릉시", "동해시", "태백시", "속초시", "삼척시", "홍천군", "횡성군", "영월군", "평창군", "정선군", "철원군", "화천군", "양구군", "인제군", "고성군", "양양군" ]			
+        },
+        "충청권" :{
+            "충청북도" : [ "청주시", "충주시", "제천시", "보은군", "옥천군", "영동군", "증평군", "진천군", "괴산군", "음성군", "단양군" ],
+            "충청남도" : [ "천안시", "공주시", "보령시", "아산시", "서산시", "논산시", "계룡시", "당진시", "금산군", "부여군", "서천군", "청양군", "홍성군", "예산군", "태안군" ],
+            "대전광역시" : [ "대덕구", "동구", "서구", "유성구", "중구" ],
+            "세종특별자치시" : [ "세종특별자치시" ]			
+        },
+        "전라권" :{
+            "전라북도" : [ "전주시", "군산시", "익산시", "정읍시", "남원시", "김제시", "완주군", "진안군", "무주군", "장수군", "임실군", "순창군", "고창군", "부안군" ],
+            "전라남도" : [ "목포시", "여수시", "순천시", "나주시", "광양시", "담양군", "곡성군", "구례군", "고흥군", "보성군", "화순군", "장흥군", "강진군", "해남군", "영암군", "무안군", "함평군", "영광군", "장성군", "완도군", "진도군", "신안군" ],
+            "광주광역시" : [ "광산구", "남구", "동구", "북구", "서구" ]			
+        },
+        "경상권" : {
+            "경상북도" : [ "포항시", "경주시", "김천시", "안동시", "구미시", "영주시", "영천시", "상주시", "문경시", "경산시", "군위군", "의성군", "청송군", "영양군", "영덕군", "청도군", "고령군", "성주군", "칠곡군", "예천군", "봉화군", "울진군", "울릉군" ],
+            "경상남도" : [ "창원시", "진주시", "통영시", "사천시", "김해시", "밀양시", "거제시", "양산시", "의령군", "함안군", "창녕군", "고성군", "남해군", "하동군", "산청군", "함양군", "거창군", "합천군" ],
+            "부산광역시" : [ "강서구", "금정구", "남구", "동구", "동래구", "부산진구", "북구", "사상구", "사하구", "서구", "수영구", "연제구", "영도구", "중구", "해운대구", "기장군" ],
+            "대구광역시" : [ "남구", "달서구", "동구", "북구", "서구", "수성구", "중구", "달성군" ],
+            "울산광역시" : [ "남구", "동구", "북구", "중구", "울주군" ]			
+        },
+        "제주권" : {
+            "제주특별자치도" : [ "서귀포시", "제주시" ]			
+        }
+    };
+
+    for(i=0; i<$(target).length; i++){
+        (function(z){
+            var a1 = $(target).eq(z);
+            var a2 = a1.next();
+            var a3 = a2.next();
+
+            //초기화
+            init(a1, true);
+
+            //권역 기본 생성
+            var areaKeys1 = Object.keys(area);
+            areaKeys1.forEach(function(Region){
+                a1.append("<option value="+Region+">"+Region+"</option>");
+            });
+
+            //변경 이벤트
+            $(a1).on("change", function(){
+                init($(this), false);
+                var Region = $(this).val();
+                var keys = Object.keys(area[Region]);
+                keys.forEach(function(Do){
+                    a2.append("<option value="+Do+">"+Do+"</option>");    
+                });
+            });
+
+            $(a2).on("change", function(){
+                a3.empty().append("<option value=''>선택</option>");
+                var Region = a1.val();
+                var Do = $(this).val();
+                var keys = Object.keys(area[Region][Do]);
+                keys.forEach(function(SiGunGu){
+                    a3.append("<option value="+area[Region][Do][SiGunGu]+">"+area[Region][Do][SiGunGu]+"</option>");    
+                });
+            });
+        })(i);        
+
+        function init(t, first){
+            first ? t.empty().append("<option value=''>선택</option>") : "";
+            t.next().empty().append("<option value=''>선택</option>");
+            t.next().next().empty().append("<option value=''>선택</option>");
+        }
+    }
+}
 </script>
 </head>
 <body>
@@ -113,88 +231,13 @@ $(function(){
                         <div class="product-item">
                             <div class="pi-pic">
                                 <img src="${vo.poster }" alt="Lights" style="width:100%" class="walk_img" value="${vo.no }">
-                                <!-- <div class="sale">Sale</div>
-                                <div class="icon">
-                                    <i class="icon_heart_alt"></i>
-                                </div> -->
                             </div>
                             <div class="pi-text">
-                                
-                              
                                     <h5>${vo.title }</h5>
-                               
-                                <!-- <div class="product-price">
-                                    ${vo.addr }
-                                </div> -->
                             </div>
                         </div>
                         </c:forEach>
-                        <!--  <div class="product-item">
-                            <div class="pi-pic">
-                                <img src="../img/products/women-2.jpg" alt="">
-                                <div class="icon">
-                                    <i class="icon_heart_alt"></i>
-                                </div>
-                                <ul>
-                                    <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
-                                    <li class="quick-view"><a href="#">+ Quick View</a></li>
-                                    <li class="w-icon"><a href="#"><i class="fa fa-random"></i></a></li>
-                                </ul>
-                            </div>
-                            <div class="pi-text">
-                                <div class="catagory-name">Shoes</div>
-                                <a href="#">
-                                    <h5>Guangzhou sweater</h5>
-                                </a>
-                                <div class="product-price">
-                                    $13.00
-                                </div>
-                            </div>
-                        </div>-->
-                        <!-- <div class="product-item">
-                            <div class="pi-pic">
-                                <img src="../img/products/women-3.jpg" alt="">
-                                <div class="icon">
-                                    <i class="icon_heart_alt"></i>
-                                </div>
-                                <ul>
-                                    <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
-                                    <li class="quick-view"><a href="#">+ Quick View</a></li>
-                                    <li class="w-icon"><a href="#"><i class="fa fa-random"></i></a></li>
-                                </ul>
-                            </div>
-                            <div class="pi-text">
-                                <div class="catagory-name">Towel</div>
-                                <a href="#">
-                                    <h5>Pure Pineapple</h5>
-                                </a>
-                                <div class="product-price">
-                                    $34.00
-                                </div>
-                            </div>
-                        </div> -->
-                        <!-- <div class="product-item">
-                            <div class="pi-pic">
-                                <img src="../img/products/women-4.jpg" alt="">
-                                <div class="icon">
-                                    <i class="icon_heart_alt"></i>
-                                </div>
-                                <ul>
-                                    <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
-                                    <li class="quick-view"><a href="#">+ Quick View</a></li>
-                                    <li class="w-icon"><a href="#"><i class="fa fa-random"></i></a></li>
-                                </ul>
-                            </div>
-                            <div class="pi-text">
-                                <div class="catagory-name">Towel</div>
-                                <a href="#">
-                                    <h5>Converse Shoes</h5>
-                                </a>
-                                <div class="product-price">
-                                    $34.00
-                                </div>
-                            </div>
-                        </div> -->
+                        
                     </div>
     	</div>
     	
@@ -206,15 +249,16 @@ $(function(){
 	<div style="height:30px"></div>
 	
     <div class="container">
-    	<div class="row" style="text-align: center;">
-    		<h3>더 많은 곳을 둘러보세요! </h3>
+    	<div class="row" style="text-align: center;justify-content: center;">
+    		<h4>더 많은 곳을 둘러보세요! </h4>
     	</div>
     </div>
     
     <div style="height:30px"></div>
 	
 	<div class="container">
-		<div class="row" style="text-align: center;">
+		<div class="row" style="text-align: center;justify-content: center;">
+			<!-- 
 			<span class="button loc" value="서울 공원">서울</span>
 			<span class="button loc" value="인천 공원">인천</span>
 			<span class="button loc" value="대전 공원">대전</span>
@@ -224,26 +268,28 @@ $(function(){
 			<span class="button loc" value="부산 공원">부산</span>
 			<span class="button loc" value="광주 공원">광주</span>
 			<span class="button loc" value="제주 공원">제주</span>
-
+			 -->
+			 
+			<select name="addressRegion" id="addressRegion1"></select>&nbsp;&nbsp;
+		    <select name="addressDo" id="addressDo1"></select>&nbsp;&nbsp;
+		    <select name="addressSiGunGu" id="addressSiGunGu1"></select>
+	
+		</div>
+		<div style="height:20px"></div>
+		
+		<div class="row" style="text-align: center;justify-content: center;">
+			<button class="btn loc" value=구장>경기장</button>&nbsp;&nbsp;
+			<button class="btn loc" value=공원>공원</button>&nbsp;&nbsp;
+			<button class="btn loc" value=체육>체육관</button>&nbsp;&nbsp;
+			<button class="btn loc" value=자전거길>자전거길</button>&nbsp;&nbsp;
+			<button class="btn loc" value=산>등산로</button>
 		</div>
 	</div>
 	
+	
 	 <div style="height:30px"></div>
 
-    <!-- 카카오 API 맵 첨부 예정 -->
-    <!-- <div class="map spad">
-        <div class="container">
-            <div class="map-inner">
-                <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d48158.305462977965!2d-74.13283844036356!3d41.02757295168286!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c2e440473470d7%3A0xcaf503ca2ee57958!2sSaddle%20River%2C%20NJ%2007458%2C%20USA!5e0!3m2!1sen!2sbd!4v1575917275626!5m2!1sen!2sbd"
-                    height="610" style="border:0" allowfullscreen="">
-                </iframe>
-                <div class="icon">
-                    <i class="fa fa-map-marker"></i>
-                </div>
-            </div>
-        </div>
-    </div>-->
+    <!-- 카카오 API 맵-->
     
     <div class="map_wrap" align="center" style="margin:0px auto;justify-content: space-around; align-content: center;">
 	    <div id="map" style="width:70%;height:100%;position:relative;overflow:hidden;"></div>
@@ -485,79 +531,9 @@ $(function(){
 	    }
 	}
 	</script>
-    
-    <!-- Map Section Begin -->
+ 
 	<div style="height:50px"></div>
-    <!-- Contact Section Begin -->
-    <!-- 
-    <section class="contact-section spad">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-5">
-                    <div class="contact-title">
-                        <h4>Contacts Us</h4>
-                        <p>Contrary to popular belief, Lorem Ipsum is simply random text. It has roots in a piece of
-                            classical Latin literature from 45 BC, maki years old.</p>
-                    </div>
-                    <div class="contact-widget">
-                        <div class="cw-item">
-                            <div class="ci-icon">
-                                <i class="ti-location-pin"></i>
-                            </div>
-                            <div class="ci-text">
-                                <span>Address:</span>
-                                <p>60-49 Road 11378 New York</p>
-                            </div>
-                        </div>
-                        <div class="cw-item">
-                            <div class="ci-icon">
-                                <i class="ti-mobile"></i>
-                            </div>
-                            <div class="ci-text">
-                                <span>Phone:</span>
-                                <p>+65 11.188.888</p>
-                            </div>
-                        </div>
-                        <div class="cw-item">
-                            <div class="ci-icon">
-                                <i class="ti-email"></i>
-                            </div>
-                            <div class="ci-text">
-                                <span>Email:</span>
-                                <p>hellocolorlib@gmail.com</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 offset-lg-1">
-                    <div class="contact-form">
-                        <div class="leave-comment">
-                            <h4>Leave A Comment</h4>
-                            <p>Our staff will call back later and answer your questions.</p>
-                            <form action="#" class="comment-form">
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <input type="text" placeholder="Your name">
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <input type="text" placeholder="Your email">
-                                    </div>
-                                    <div class="col-lg-12">
-                                        <textarea placeholder="Your message"></textarea>
-                                        <button type="submit" class="site-btn">Send message</button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-     -->
-    <!-- Contact Section End -->
-    
-    
-    
+
 </body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </html>
