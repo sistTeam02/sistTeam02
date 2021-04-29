@@ -1,6 +1,6 @@
 package com.sist.vo;
 
-public class User_basketVO {
+public class User_order_basketVO {
 	private String id;
 	private int no;//상품번호
 	private int pno;//상품종류
