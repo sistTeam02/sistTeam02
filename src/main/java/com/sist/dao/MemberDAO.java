@@ -5,13 +5,46 @@ package com.sist.dao;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
+
+import com.sist.vo.MemberVO;
+
+import java.util.*;
 
 @Repository
 public class MemberDAO extends SqlSessionDaoSupport{
 	@Autowired
+	@Qualifier("ssf")
 	public void setSqlSessionFactory(SqlSessionFactory sqlSessionFactory) {
 		// TODO Auto-generated method stub
 		super.setSqlSessionFactory(sqlSessionFactory);
+	}
+	
+	public String isLogin(String id, String pwd)
+	{
+		String result="";
+		int count=getSqlSession().selectOne("memberIdCount",id);
+		if(count==0)
+		{
+			result="NOID"; //id 없음
+		}
+		else//id 오케이
+		{
+			MemberVO vo=getSqlSession().selectOne("memberPasswordCheck",id);
+			String db_pwd=vo.getPwd();
+			String name=vo.getName();
+			
+			if(db_pwd.equals(pwd))
+			{
+				result=name; //비밀번호ok 로그인
+			}
+			else
+			{
+				result="NOPWD"; 
+			}
+		}
+		return result;
+				
 	}
 }
