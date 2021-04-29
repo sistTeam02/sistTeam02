@@ -36,7 +36,7 @@
                             </div>
                             <div class="group-input">
                                 <label for="pass">PASSWORD *</label>
-                                <input type="text" id="pwd" name="pwd">
+                                <input type="password" id="pwd" name="pwd">
                             </div>
                             <div class="group-input gi-check">
                                 <div class="gi-more">
