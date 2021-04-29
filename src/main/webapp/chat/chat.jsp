@@ -573,7 +573,7 @@ $(function(){
 		}else{
 	  		month--;
 		}
-		let daynum=year*365+(parseInt(year/4)-parseInt(year/100)+parseInt(year/400));
+		let daynum=year*365+(Math.floor(year/4)-Math.floor(year/100)+Math.floor(year/400));
 		  let monthArr=new Array(31,28,31,30,31,30,31,31,30,31,30,31);
 		  if(year%4==0 && year%100!=0 ||year%400==0){
 				monthArr[1]=29;
@@ -620,7 +620,7 @@ $(function(){
 		 	}else{
 		  		month++;		 		
 		 	}
-		 	let daynum=year*365+(parseInt(year/4)-parseInt(year/100)+parseInt(year/400));
+		 	let daynum=year*365+(Math.floor(year/4)-Math.floor(year/100)+Math.floor(year/400));
 			
 			  let monthArr=new Array(31,28,31,30,31,30,31,31,30,31,30,31);
 			  if(year%4==0 && year%100!=0 ||year%400==0){
@@ -659,7 +659,7 @@ $(function(){
 			  }
 		
 		  });
-	let daynum=year*365+(parseInt(year/4)-parseInt(year/100)+parseInt(year/400));
+	let daynum=year*365+(Math.floor(year/4)-Math.floor(year/100)+Math.floor(year/400));
 	
 	  let monthArr=new Array(31,28,31,30,31,30,31,31,30,31,30,31);
 	  if(year%4==0 && year%100!=0 ||year%400==0){
