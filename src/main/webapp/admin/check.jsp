@@ -17,7 +17,7 @@
     padding: 0px 36em;
     text-align: center;
 }
-.pageBtn{
+.pageBtn,.moveBtn{
     background-color: white;
     border-radius: 5px;
     width: 40px;
@@ -57,11 +57,12 @@
     cursor: pointer;
     
 }
+
 .sBtn:hover{
 	background: #648cff;
     transition-delay: 0.1s;
 }
-.pageBtn:hover{
+.pageBtn:hover,moveBtn:hover{
     background-color: #648cff;
 }
 </style>
@@ -73,24 +74,39 @@ $(document).ready(function(){
 	list_data(page);
 	
 });
+/* 페이지이동 이벤트 */
 $(document).on('click','button[class^=pageBtn]',function(){
 	$('#basket_tbody > tr').remove();
 	let page=$(this).text();
 	list_data(page);
 });
+/* 승인버튼 이벤트*/
 $(document).on('click','button[class^=okBtn]',function(){
 	$(this).attr('class','cokBtn');
 	$(this).text('승인완료');
 	$(this).attr('value',"1");
 });
+/* 승인취소버튼 이벤트*/
 $(document).on('click','button[class^=cokBtn]',function(){
 	$(this).attr('class','okBtn');
 	$(this).text('승인대기');
 	$(this).attr('value',"0");
 });
+/* 저장버튼 이벤트*/
 $(document).on('click','.sBtn',function(){
 	saveBtn();
 });
+/* 페이지10개이동 */
+$(document).on('click','#moveBtn_r',function(){
+	let a=$(this).prev().text();
+	list_data(a+1);
+});
+/* 페이지10개이동 */
+$(document).on('click','#moveBtn_l',function(){
+	let a=$(this).next().text();
+	list_data(a-10);
+});
+/* 리스트가져오기 10개씩 */
 function list_data(page) {
 	$.ajax({
 		type:'get',
@@ -98,6 +114,7 @@ function list_data(page) {
 		url:'../admin/user_purchaseList.do',
 		success:function(result){
 			$('.pageBtn').remove();
+			$('.moveBtn').remove();
 			let json=JSON.parse(result);
 			let endpage=totalpage;
 			let startpage=Math.floor((page-1)/10)*10+1;
@@ -110,11 +127,13 @@ function list_data(page) {
 				}
 				make_pageBtn(i);
 			}
+			pageBtn_makeicon(page);
 		},error:function(error){
 			alert("구매내역출력오류")
 		}	
 	})
 }
+/* 가져온데이터로 테이블 row만들기 */
 function make_tr(json) {
 	for(i=0;i<json.length;i++){
 		$('#basket_tbody').append(
@@ -137,11 +156,13 @@ function make_tr(json) {
 		);
 	}
 }
+/* 페이지 버튼생성 */
 function make_pageBtn(page) {
 	$('.row_button').append(
 			"<button class=pageBtn id=pageBtn"+page+">"+page+"</button>"
 		);
 	}
+	/* 총페이지가져오기 */
 function db_totalpage() {
 	let db_total="";
 	$.ajax({
@@ -156,6 +177,7 @@ function db_totalpage() {
 		});
 	return db_total;
 }
+	/* 승인버튼 대기완료 구분생성 */
 function okbtn_text() {
 	for(i=0;i<10;i++){
 		let state=$('#okBtn'+i).attr('value');
@@ -169,6 +191,7 @@ function okbtn_text() {
 		
 	}
 }
+	/* 같은 아이디 맨윗줄제외 지우기 */
 function same_id_del(){
 	for(i=0;i<9;i++){
 		for(j=i+1;j<10;j++){
@@ -185,6 +208,7 @@ function same_id_del(){
 		 
 	}
 }
+/* 저장버튼 함수 */
 function saveBtn() {
 		let box=[];
 		for(i=0;i<10;i++){
@@ -204,7 +228,19 @@ function saveBtn() {
 		
 		});
 }
-
+/* 페이지 화살표 아이콘생성 */
+function pageBtn_makeicon(page) {
+	if(totalpage>10){
+	$('.row_button').prepend(
+			"<button class=moveBtn id=moveBtn_l><i class=ti-angle-left></i></button>"
+		);
+	}
+	if(page>10){
+	$('.row_button').append(
+			"<button class=moveBtn id=moveBtn_r><i class=ti-angle-right></i></button>"
+		);
+	}
+}
 </script>
 <body>
 	
