@@ -10,15 +10,21 @@
 .table-hover{
     font-size:large;
     width:900px;
+    border-bottom : 1px solid #648CFF;
 }
 .table2 {
     margin:auto; 
-}
-
-.table2{
     border-collapse : collapse;
     border-bottom : 1px solid #648CFF;
-};
+}
+ h2{
+     text-decoration: overline #648CFF;
+     }
+.title_txt{
+	text-decoration:overline #648CFF;
+	text-align:center;
+	font-weight: bold;
+}
 </style>
 <script type="text/javascript" src="https://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
@@ -76,7 +82,7 @@ function make_cal(year,month){
 <body>
   			<div class="col-lg-12">
                 <div class="bi-text">
- 				<h2>나만의 계획 세우기</h2>
+ 				<h2 class="title_txt">나만의 계획 세우기</h2>
                		<div style="height:50px"></div>
                        <div class="container">
                       	<h2>채팅 기록 모아보기</h2>

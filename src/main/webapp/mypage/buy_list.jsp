@@ -10,6 +10,7 @@
      .table-hover{
      	font-size:large;
      	width:900px;
+     	border-bottom : 1px solid #648CFF;
      }
      .table{
      	font-size:large;
@@ -18,10 +19,18 @@
      #call{
      	color: red; 
      }
+      h2{
+     text-decoration: overline #648CFF;
+     }
+     .title_txt{
+	text-decoration:overline #648CFF;
+	text-align:center;
+	font-weight: bold;
+}
      </style>
 <body>
                 <div class="col-lg-9 order-1 order-lg-2">
-                 <h2>프로그램 신청내역</h2>
+                 <h2 class="title_txt">프로그램 신청내역</h2>
                 <div class="col-lg-12">
                		<div style="height:50px"></div>
                        <div class="container">

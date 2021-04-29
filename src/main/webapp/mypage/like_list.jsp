@@ -9,13 +9,22 @@
      .table-hover{
      	font-size:large;
      	width:900px;
+     	border-bottom : 1px solid #648CFF;
      }
+     h2{
+     text-decoration: overline #648CFF;
+     }
+     .title_txt{
+	text-decoration:overline #648CFF;
+	text-align:center;
+	font-weight: bold;
+}
      </style>
 </head>
 <body>
   			<div class="col-lg-12">
                 <div class="bi-text">
- 				<h2>관심 목록</h2>
+ 				<h2 class="title_txt">관심 목록</h2>
                		<div style="height:50px"></div>
                        <div class="container">
                        <h2>찜한 클래스</h2>
