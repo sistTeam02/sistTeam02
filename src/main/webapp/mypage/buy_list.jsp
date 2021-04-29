@@ -70,7 +70,7 @@
 							  <button type="button" class="btn btn-lg btn-default" onclick="location.href='#'">다른 프로그램 신청하러 가기</button>
 							</div>
 							
-							<div style="height:50px"></div>
+					<div style="height:50px"></div>
                        <div class="container">
                        <h2>클래스/코치 변경</h2>
  						<p>유의사항을 잘 확인하시고 변경해 주세요!</p>            

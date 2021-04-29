@@ -15,7 +15,7 @@
 <body>
   			<div class="col-lg-12">
                 <div class="bi-text">
- 				<h1>관심 목록</h1>
+ 				<h2>관심 목록</h2>
                		<div style="height:50px"></div>
                        <div class="container">
                        <h2>찜한 클래스</h2>
@@ -46,6 +46,9 @@
 							      </tr>
 							    </tbody>
 							  </table>
+							</div>
+							<div class="container" align="right">
+							  <button type="button" class="btn btn-lg btn-default" onclick="location.href='#'">다른 운동 보러 가기</button>
 							</div>
 							
 					<div style="height:50px"></div>
@@ -82,6 +85,9 @@
 							      </tr>
 							    </tbody>
 							  </table>
+							</div>
+							<div class="container" align="right">
+							  <button type="button" class="btn btn-lg btn-default" onclick="location.href='#'">다른 운동 하러 가기</button>
 							</div>
 							
 					<div style="height:50px"></div>
