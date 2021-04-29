@@ -147,6 +147,7 @@
                             <ul class="dropdown">
                                 <li><a href="./blog-details.html">장바구니</a></li>
                                 <li><a href="./shopping-cart.html">주문확인</a></li>
+                                <li><a href="../main/admin.do">관리자 임시페이지</a></li>
                             </ul>
                         </li>
                     </ul>
