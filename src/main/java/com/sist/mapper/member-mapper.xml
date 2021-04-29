@@ -42,8 +42,14 @@
 	</select>
 	
 	<!-- 로그인 처리 -->
-	<select id="memberLogin" parameterType="MemberVO">
-
+	<!-- ID 존재여부 -->
+	<select id="memberIdCount" resultType="int" parameterType="MemberVO">
+	  SELECT COUNT(*) FROM member
+      WHERE id=#{id}
+	</select>
+	<select id="memberPasswordCheck" resultType="MemberVO" parameterType="string">
+	  SELECT pwd,name FROM member
+	  WHERE id=#{id}
 	</select>
 	
 	<!-- 회원정보 수정 -->
