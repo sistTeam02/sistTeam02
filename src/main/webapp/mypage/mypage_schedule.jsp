@@ -166,7 +166,7 @@ function make_cal(year,month){
 							  </table>
 							</div>
 							<div class="container" align="right">
-							  <button type="button" class="btn btn-lg btn-default" onclick="location.href='../chat/chat_main.do'">나만의 계획 새우러 가기</button>
+							  <button type="button" class="btn btn-lg btn-default" onclick="location.href='../chat/chat_main.do'">나만의 계획 세우러 가기</button>
 							</div>
 						</div>
 					</div>
