@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -10,10 +11,44 @@
     font-size:large;
     width:900px;
 }
+.table2 {
+    margin:auto; 
+}
+
+.table2{
+    border-collapse : collapse;
+    border-bottom : 1px solid #648CFF;
+};
 </style>
 <script type="text/javascript" src="https://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
+$(function(){ //제이쿼리 메인
+	let year=2021;
+	let month=5;
+	make_cal(year,month);//밑에 만든 함수 실행
 
+	$('.ti-angle-right').click(function() {//화살표 클릭
+		  $('td[id^=date]').text('');// 달력에 모든 숫자 삭제
+	if(month==1){
+			year--;
+			month=12;
+		}else{
+			month--;
+		}
+	make_cal(year,month);
+	});
+	$('.ti-angle-left').click(function() {//화살표 클릭
+		  $('td[id^=date]').text('');
+	if(month==12){
+		 		year++;
+		 		month=1;
+		 	}else{
+		  		month++;		 		
+		 	}
+	make_cal(year,month);
+	});
+	
+});
 
 function make_cal(year,month){
 	let daynum=year*365+(Math.floor(year/4)-Math.floor(year/100)+Math.floor(year/400));
@@ -29,29 +64,12 @@ function make_cal(year,month){
 		  day=(daynum+day)%7; /* 월요일부터  첫째날 */
 		  $('#calender').text(year+'.'+month);
 		  thismonth=month;
-		  let arr=strday.split("^");
 		  for(i=1;i<=monthArr[month-1];i++){
 			 $('#date'+parseInt(i+day)).text(i);
 		}
+		  $('#calender').text(year+"."+month);
 	}
-$('.ti-angle-right').click(function() {
-	  $('td[id^=date]').text('');
-if(month==1){
-		year--;
-		month=12;
-	}else{
-		month--;
-	}	
-}
-$('.ti-angle-left').click(function() {
-	  $('td[id^=date]').text('');
-if(month==12){
-	 		year++;
-	 		month=1;
-	 	}else{
-	  		month++;		 		
-	 	}	
-}
+
 
 </script>
 </head>
@@ -62,11 +80,16 @@ if(month==12){
                		<div style="height:50px"></div>
                        <div class="container">
                       	<h2>채팅 기록 모아보기</h2>
-               		<div style="height:50px"></div>
                       
                         <!-- 달력 -->
-				채팅 달력 넣기 ㅜㅠ
-				<table class="table2">
+			<table class="table2" style="height: 1em; width: 79em;">
+               <tr id="calender_tr">
+                  <td style="height: 3em;text-align: right;"><i class="ti-angle-left"></i></td>
+                  <td style="height: 3em;text-align: center;width: 6em;"id="calender"></td>
+                  <td style="height: 3em;text-align: left;"><i class="ti-angle-right"></i></td>
+               </tr>
+            </table>
+				<table class="table2" style="width: 79em;height: 36em;">
 					<tr>
 					<c:forEach begin="1" end="7" step="1" varStatus="s">
 						<td id="date${s.index }"></td>
