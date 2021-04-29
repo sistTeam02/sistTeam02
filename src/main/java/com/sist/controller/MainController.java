@@ -12,4 +12,9 @@ public class MainController {
 		model.addAttribute("main_jsp","../main/home.jsp");
 		return "main/main";
 	}
+	@GetMapping("main/admin.do")
+	public String main_admin(Model model){
+		model.addAttribute("main_jsp", "../admin/check.jsp");
+		return "main/main";
+	}
 }
