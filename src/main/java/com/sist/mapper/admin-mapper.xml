@@ -1,7 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sist.mapper.admin-mapper">
-	<select id="userBasketList" resultType="User_order_basketVO">
-		SELECT * from user_basket
+	<select id="userBasketList" resultType="User_order_basketVO" parameterType="hashmap">
+		SELECT id,no,pno,cno,title,price,ordercount,state,num 
+		from( SELECT id,no,pno,cno,title,price,ordercount,state,rownum as num 
+		from (SELECT id,no,pno,cno,title,price,ordercount,state from user_order_basket order by id Asc))
+		WHERE num between #{start} and #{end}
 	</select>
+	<select id="userBasketTotalpage" resultType="int">
+		SELECT CEIL(count(*)/10.0) from user_order_basket
+	</select>
+	<update id="order_basketUpdate" parameterType="hashmap">
+		update User_order_basket set
+		state=#{state}
+		where no=#{no}
+	</update>
 </mapper>
