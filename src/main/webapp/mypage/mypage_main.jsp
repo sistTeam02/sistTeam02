@@ -42,7 +42,7 @@
     <script src="../js/main.js"></script>
 </head>
 <body>
-<jsp:include page="mypage_breadcurmb.jsp"></jsp:include>
+<jsp:include page="mypage_breadcurmb.jsp"/>
 	<!-- Blog Section Begin -->
     <section class="blog-section spad">
         <div class="container">
@@ -62,7 +62,7 @@
                                  <li><a href="like_list.do">운동&쇼핑몰 찜리스트 </a></li> 
                                 <li><a href="buy_list.do">프로그램 신청 내역</a></li>
                                 <li><a href="mypage_schedule.do">나만의 계획</a></li>
-                                <li><a href="mypage_update.do">회원정보수정</a></li>
+                                <li><a href="mypage_update.do">회원정보 수정</a></li>
                             </ul>
                         </div>
                         <div class="recent-post">

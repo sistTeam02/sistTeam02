@@ -14,7 +14,9 @@
                 <div class="col-lg-12">
                     <div class="breadcrumb-text">
                         <a href="#"><i class="fa fa-home"></i>마이페이지</a>
-                        <span>뭐여</span>
+                        <span>
+                        <jsp:include page="${bread_jsp }"/>
+                       </span>
                     </div>
                 </div>
             </div>
