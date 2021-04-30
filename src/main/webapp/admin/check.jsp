@@ -65,6 +65,11 @@
 .pageBtn:hover,moveBtn:hover{
     background-color: #648cff;
 }
+.modal{
+}
+.modal_content{
+
+}
 </style>
 <script type="text/javascript" src="https://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
@@ -221,7 +226,7 @@ function saveBtn() {
 			data:{'box':JSON.stringify(box)},
 			url:'../admin/save_state.do',
 			success:function(result){
-				window.loction.href='../main/admin.do';
+			window.location.href="../main/admin.do";
 			},error:function(error){
 				alert("상태 저장실패");
 			}
