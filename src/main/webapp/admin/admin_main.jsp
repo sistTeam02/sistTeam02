@@ -8,7 +8,7 @@
 <style type="text/css">
 .admin_row{
     width: 90em;
-    height: 40em;
+    height: 70em;
     border: 1px solid black;
     margin: 0px 11em;
 }
@@ -18,23 +18,44 @@
     color: white;
     width: 11em;
 	float: left;
+	height: 100%;
 }
 .admin_tab{
 list-style: none;
 }
 .admin_tab li{
-height: 3em;
+	height: 3em;
     padding-left: 1em;
     padding-top: 9px
 }
 .admin_view_div{
 float: left;
 }
+.admin_button_table{
+	width: 38eml;
+	margin-left: 29em;
+	margin-bottom: 10px;
+	margin-top: 10px;
+}
+.admin_button{
+	margin: 0px 14px;
+    width: 74px;
+    border-radius: 9px;
+    background-color: #f8f9faa8;
+}
 </style>
 </head>
 
 <body>
-	<div class="faq-section spad">
+	<table class="admin_button_table">
+	<tr>
+		<td><button class="admin_button" id="qna_allData">전체보기</button>
+			<button class="admin_button">버튼</button>
+			<button class="admin_button">버튼</button>
+			<button class="admin_button">버튼</button></td>
+	</tr>
+	</table>
+	<div class="faq-section spad" style="padding-top: 5px;">
         <div class="container" style="margin: 0px;">
             <div class="admin_row">
 	            <div class="admin_tab_div">
@@ -45,7 +66,6 @@ float: left;
 	            		<li>통계</li>
 	            	</ul>
 	            </div>
-	            1
 	            <div class="admin_view_div">
 	            
 	               <jsp:include page="${admin_jsp }"></jsp:include>
