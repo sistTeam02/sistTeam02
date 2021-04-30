@@ -134,7 +134,12 @@
                                 <li><a href="../walk/walk.do">산책로 추천맵</a></li>
                             </ul>
                         </li>
-					<li><a href="../chat/chat_main.do">채팅</a></li>
+						<li><a href="../chat/chat_main.do">채팅</a>
+							<ul class="dropdown">
+								<li><a href="../main/admin.do">관리자 결제승인</a></li>
+								<li><a href="../main/admin_main.do">관리자페이지</a></li>
+							</ul>
+						</li>
                         <li><a href="../mypage/like_list.do">마이페이지</a>
                             <ul class="dropdown">
                                 <li><a href="../mypage/like_list.do">운동&쇼핑몰 찜리스트</a></li>
@@ -147,7 +152,6 @@
                             <ul class="dropdown">
                                 <li><a href="./blog-details.html">장바구니</a></li>
                                 <li><a href="./shopping-cart.html">주문확인</a></li>
-                                <li><a href="../main/admin.do">관리자 임시페이지</a></li>
                             </ul>
                         </li>
                     </ul>
