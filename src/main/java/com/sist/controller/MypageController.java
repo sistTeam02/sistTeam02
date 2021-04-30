@@ -41,9 +41,12 @@ public class MypageController {
 	@GetMapping("mypage/mypage_schedule.do")
 	public String mypage_schdule(String id,Model model){
 		
-		
+		//^잘라서 출력하고싶다~~~~~~
+		String sList="";
 		List<Chat_foodVO> fList=fdao.mypage_chat_food(id);
 		List<Chat_planVO> pList=fdao.mypage_chat_plan(id);
+		
+		
 		
 		model.addAttribute("fList",fList);
 		model.addAttribute("pList",pList);
