@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -126,12 +126,12 @@ function make_cal(year,month){
 						<td id="date${s.index }"></td>
 					</c:forEach>
 					</tr>
-				</table>
-					   
+				</table>  
 					<div style="height:50px"></div>
                        <div class="container">
                        <h2>채팅 기록 확인하기</h2>
-                       <p>채팅에 기록된 내용을 출력합니다</p> 
+                       <div style="height:20px"></div>
+                       <p>채팅에 등록한 음식 목록을 출력합니다 </p> 
                        <table class="table table-hover">
 							    <thead>
 							      <tr>
@@ -139,45 +139,47 @@ function make_cal(year,month){
 							        <th>식사 시간</th>
 							        <th>먹은 음식</th>
 							        <th>음식 칼로리/용량(g)</th>
-							        <th>운동 시간</th>
-							        <th>운동 종류</th>
 							      </tr>
 							    </thead>
 							    <tbody>
+							    <c:forEach var="vo" items="${fList }">
 							      <tr>
-							        <td>전신</td>
-							        <td>예쁜뒷태 등운동</td>
-							        <td>상</td>
-							        <td>4분37초</td>
-							        <td>4분37초</td>
-							        <td>4분37초</td>
+							        <td>${vo.fooddate }</td>
+							        <td>${vo.whenfood }</td>
+							        <td>${vo.foodname }</td>
+							        <td>${vo.foodkcal}/${vo.foodgram }(g)</td>
 							      </tr>
-							      <tr>
-							        <td>상체</td>
-							        <td>예쁜 상체 만들어주는 [세라밴드 상체 운동법 2탄]</td>
-							        <td>중</td>
-							        <td>0분51초</td>
-							        <td>4분37초</td>
-							        <td>4분37초</td>
-							      </tr>
-							      <tr>
-							        <td>하체</td>
-							        <td>틀어진 골반을 위한 [교정 스트레칭 2]</td>
-							        <td>중</td>
-							        <td>0분13초</td>
-							        <td>4분37초</td>
-							        <td>4분37초</td>
-							      </tr>
+							      </c:forEach>
 							    </tbody>
 							  </table>
 							</div>
+							<div style="height:20px"></div>
+							 <p>채팅에 기록된 운동을 출력합니다</p> 
+							<table class="table table-hover">
+							    <thead>
+							      <tr>
+							        <th>등록날짜</th>
+							        <th>운동 시간</th>
+							        <th>실천한 운동</th>
+							      </tr>
+							    </thead>
+							     <tbody>
+							     <c:forEach var="vo" items="${pList }">
+							      <tr>
+							        <td>${vo.plandate }</td>
+							        <td>${vo.time }</td>
+							        <td>${vo.sport }</td>
+							      </tr>
+							      </c:forEach>
+							    </tbody>
+							    </table>
 							<div class="container" align="right">
 							  <button type="button" class="btn btn-lg btn-default" onclick="location.href='../chat/chat_main.do'">나만의 계획 세우러 가기</button>
 							</div>
 						</div>
 					</div>
 				</div>
-			</div>
+			
 
 </body>
 

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import com.sist.dao.WalkDAO;
 import com.sist.vo.WalkVO;
@@ -41,4 +42,9 @@ public class WalkController {
 			model.addAttribute("vo",vo);
 		   return "walk/walk_detail";
 	   }
+	
+	@PostMapping("walk/walk_reply.do")
+	public String walk_reply(int bno, Model model, int page){
+		return "walk/walk_reply";
+	}
 }

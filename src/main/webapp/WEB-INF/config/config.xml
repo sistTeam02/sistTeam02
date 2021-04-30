@@ -20,6 +20,7 @@
     <typeAlias type="com.sist.vo.ReplyBoardVO" alias="ReplyBoardVO"/>
     <typeAlias type="com.sist.vo.ReplyVO" alias="ReplyVO"/>
     <typeAlias type="com.sist.vo.User_order_basketVO" alias="User_order_basketVO"/>
+    <typeAlias type="com.sist.vo.WalkReplyVO" alias="WalkReplyVO"/>
   </typeAliases>
   <mappers>
     <mapper resource="com/sist/mapper/member-mapper.xml"/>
@@ -32,5 +33,6 @@
     <mapper resource="com/sist/mapper/board-mapper.xml"/>
     <mapper resource="com/sist/mapper/admin-mapper.xml"/>
     <mapper resource="com/sist/mapper/user_basket-mapper.xml"/>
+    <mapper resource="com/sist/mapper/mypage-mapper.xml"/>
   </mappers>
 </configuration>
