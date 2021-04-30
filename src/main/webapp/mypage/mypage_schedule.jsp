@@ -126,12 +126,12 @@ function make_cal(year,month){
 						<td id="date${s.index }"></td>
 					</c:forEach>
 					</tr>
-				</table>
-					   
+				</table>  
 					<div style="height:50px"></div>
                        <div class="container">
                        <h2>채팅 기록 확인하기</h2>
-                       <p>채팅에 기록된 내용을 출력합니다</p> 
+                       <div style="height:30px"></div>
+                       <p>채팅에 등록한 음식 목록을 출력합니다 </p> 
                        <table class="table table-hover">
 							    <thead>
 							      <tr>
@@ -139,24 +139,40 @@ function make_cal(year,month){
 							        <th>식사 시간</th>
 							        <th>먹은 음식</th>
 							        <th>음식 칼로리/용량(g)</th>
-							        <th>운동 시간</th>
-							        <th>운동 종류</th>
 							      </tr>
 							    </thead>
 							    <tbody>
-							    <c:forEach var="vo" items="${cList }">
+							    <c:forEach var="vo" items="${fList }">
 							      <tr>
 							        <td>${vo.fooddate }</td>
 							        <td>${vo.whenfood }</td>
 							        <td>${vo.foodname }</td>
 							        <td>${vo.foodkcal}/${vo.foodgram }(g)</td>
-							        <td>4분37초</td>
-							        <td>4분37초</td>
 							      </tr>
 							      </c:forEach>
 							    </tbody>
 							  </table>
 							</div>
+							<div style="height:50px"></div>
+							 <p>채팅에 기록된 내용을 출력합니다</p> 
+							<table class="table table-hover">
+							    <thead>
+							      <tr>
+							        <th>등록날짜</th>
+							        <th>운동 시간</th>
+							        <th>실천한 운동</th>
+							      </tr>
+							    </thead>
+							     <tbody>
+							     <c:forEach var="vo" items="${pList }">
+							      <tr>
+							        <td>${vo.plandate }</td>
+							        <td>${vo.time }</td>
+							        <td>${vo.sport }</td>
+							      </tr>
+							      </c:forEach>
+							    </tbody>
+							    </table>
 							<div class="container" align="right">
 							  <button type="button" class="btn btn-lg btn-default" onclick="location.href='../chat/chat_main.do'">나만의 계획 세우러 가기</button>
 							</div>

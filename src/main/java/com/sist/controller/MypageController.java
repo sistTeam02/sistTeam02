@@ -38,10 +38,10 @@ public class MypageController {
 	public String mypage_schdule(String id,Model model){
 		
 		
-		List<Chat_foodVO> cList=fdao.mypage_chat_food(id);
-		
-		model.addAttribute("cList",cList);
-		
+		List<Chat_foodVO> fList=fdao.mypage_chat_food(id);
+		List<Chat_planVO> pList=fdao.mypage_chat_plan(id);
+		model.addAttribute("fList",fList);
+		model.addAttribute("pList",pList);
 		model.addAttribute("mypage_jsp","../mypage/mypage_schedule.jsp");
 		model.addAttribute("main_jsp","../mypage/mypage_main.jsp");
 		return "main/main";

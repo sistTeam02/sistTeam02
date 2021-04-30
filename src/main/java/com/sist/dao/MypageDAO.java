@@ -16,7 +16,7 @@ public class MypageDAO extends SqlSessionDaoSupport{
 		super.setSqlSessionFactory(sqlSessionFactory);
 	}
 	
-	/*
+	/*	채팅 음식 데이터 출력
 	 * <select id="mypage_chat_food" resultType="Chat_foodVO" parameterType="Chat_foodVO">
 	 SELECT id,fooddate,whenfood,foodname,foodkcal,foodgram FROM chat_food
 	 WHERE id=#{id}
@@ -26,4 +26,12 @@ public class MypageDAO extends SqlSessionDaoSupport{
 		return getSqlSession().selectList("mypage_chat_food",id);
 	}
 	
+	/*	채팅 운동 데이터 출력
+	 * <select id="mypage_chat_plan" resultType="Chat_PlanVO" parameterType="Chat_PlanVO">
+		SELECT plandate,time,sport FROM chat_plan
+	</select>
+	 */
+	public List<Chat_planVO> mypage_chat_plan(String id){
+		return getSqlSession().selectList("mypage_chat_plan",id);
+	}
 }
