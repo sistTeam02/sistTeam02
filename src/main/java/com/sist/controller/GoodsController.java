@@ -54,7 +54,7 @@ public class GoodsController {
 		return "main/main";
 	}
 	
-	@RequestMapping("shop/shop_detail.do")
+	@GetMapping("shop/shop_detail.do")
 	public String shop_detail(int no,Model model)
 	{
 		GoodsDetailVO vo=gDao.goodsDetailData(no);

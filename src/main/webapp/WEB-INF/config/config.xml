@@ -31,5 +31,6 @@
     <mapper resource="com/sist/mapper/walk-mapper.xml"/>
     <mapper resource="com/sist/mapper/board-mapper.xml"/>
     <mapper resource="com/sist/mapper/admin-mapper.xml"/>
+    <mapper resource="com/sist/mapper/user_basket-mapper.xml"/>
   </mappers>
 </configuration>

@@ -3,29 +3,41 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<!-- coloshop-master의 single 페이지 활용 -->
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="description" content="Colo Shop Template">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="styles/bootstrap4/bootstrap.min.css">
+	<link href="plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/owl.carousel.css">
+	<link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/owl.theme.default.css">
+	<link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/animate.css">
+	<link rel="stylesheet" href="plugins/themify-icons/themify-icons.css">
+	<link rel="stylesheet" type="text/css" href="plugins/jquery-ui-1.12.1.custom/jquery-ui.css">
+	<link rel="stylesheet" type="text/css" href="styles/single_styles.css">
+	<link rel="stylesheet" type="text/css" href="styles/single_responsive.css">
 </head>
 <body>
-	<!-- Breadcrumb Section Begin -->
-    <div class="breacrumb-section">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="breadcrumb-text">
-                        <a href="../main/main.do"><i class="fa fa-home"></i> Home</a>
-                        <a href="../shop/shop_list.do"><i class="fa fa-home"></i> Shop</a>
-                        <span>Goods</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Breadcrumb Section Begin -->
-    
+	<div class="container single_product_container">
+		<div class="row">
+			<div class="col">
+
+				<!-- Breadcrumbs -->
+
+				<div class="breadcrumbs d-flex flex-row align-items-center">
+					<ul>
+						<li><a href="../main/main.do">Home</a></li>
+						<li><a href="../shop/shop_list.do"><i class="fa fa-angle-right" aria-hidden="true"></i>Goods</a></li>
+						<li class="active"><i class="fa fa-angle-right" aria-hidden="true"></i>Single Product</li>
+					</ul>
+				</div>
+
+			</div>
+		</div>
+
 		<div class="row">
 			<div class="col-lg-7">
 				<div class="single_product_pics">
@@ -33,20 +45,21 @@
 						<div class="col-lg-3 thumbnails_col order-lg-1 order-2">
 							<div class="single_product_thumbnails">
 								<ul>
-									<li><img src="../images/single_1_thumb.jpg" alt="" data-image="../images/single_1.jpg"></li>
-									<li class="active"><img src="../images/single_2_thumb.jpg" alt="" data-image="../images/single_2.jpg"></li>
-									<li><img src="../images/single_3_thumb.jpg" alt="" data-image="../images/single_3.jpg"></li>
+									<li><img src="${vo.poster }" alt="" data-image="${vo.poster }"></li>
+									<li class="active"><img src="../img/single_2_thumb.jpg" alt="" data-image="../img/single_2.jpg"></li>
+									<li><img src="../img/single_3_thumb.jpg" alt="" data-image="../img/single_3.jpg"></li>
 								</ul>
 							</div>
 						</div>
 						<div class="col-lg-9 image_col order-lg-2 order-1">
 							<div class="single_product_image">
-								<div class="single_product_image_background" style="background-image:url(../images/single_2.jpg)"></div>
+								<div class="single_product_image_background" style="background-image:url(../img/single_2.jpg)"></div>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
+		<c:forEach var="vo" items="${list }">
 			<div class="col-lg-5">
 				<div class="product_details">
 					<div class="product_details_title">
@@ -58,7 +71,7 @@
 					</div>
 					<!-- <div class="original_price">$629.99</div> -->
 					<div class="product_price">
-						<fmt:formatNumber value="${vo.price }"/>원
+					  <fmt:formatNumber value="${vo.price }"/>원
 					</div>
 					<ul class="star_rating">
 						<li><i class="fa fa-star" aria-hidden="true"></i></li>
@@ -87,8 +100,9 @@
 					</div>
 				</div>
 			</div>
+		  </c:forEach>
 		</div>
-
+		
 	</div>
 
 	<!-- Tabs -->
@@ -119,11 +133,11 @@
 									<h4>Description</h4>
 								</div>
 								<div class="tab_text_block">
-									<h2>${vo.title }</h2>
+									<h2>Pocket cotton sweatshirt</h2>
 									<p>Nam tempus turpis at metus scelerisque placerat nulla deumantos solicitud felis. Pellentesque diam dolor, elementum etos lobortis des mollis ut...</p>
 								</div>
 								<div class="tab_image">
-									<img src="../images/desc_1.jpg" alt="">
+									<img src="../img/desc_1.jpg" alt="">
 								</div>
 								<div class="tab_text_block">
 									<h2>Pocket cotton sweatshirt</h2>
@@ -132,14 +146,14 @@
 							</div>
 							<div class="col-lg-5 offset-lg-2 desc_col">
 								<div class="tab_image">
-									<img src="../images/desc_2.jpg" alt="">
+									<img src="../img/desc_2.jpg" alt="">
 								</div>
 								<div class="tab_text_block">
 									<h2>Pocket cotton sweatshirt</h2>
 									<p>Nam tempus turpis at metus scelerisque placerat nulla deumantos solicitud felis. Pellentesque diam dolor, elementum etos lobortis des mollis ut...</p>
 								</div>
 								<div class="tab_image desc_last">
-									<img src="../images/desc_3.jpg" alt="">
+									<img src="../img/desc_3.jpg" alt="">
 								</div>
 							</div>
 						</div>
@@ -252,6 +266,16 @@
 				</div>
 			</div>
 		</div>
+
 	</div>
+
+<script src="js/jquery-3.2.1.min.js"></script>
+<script src="styles/bootstrap4/popper.js"></script>
+<script src="styles/bootstrap4/bootstrap.min.js"></script>
+<script src="plugins/Isotope/isotope.pkgd.min.js"></script>
+<script src="plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
+<script src="plugins/easing/easing.js"></script>
+<script src="plugins/jquery-ui-1.12.1.custom/jquery-ui.js"></script>
+<script src="js/single_custom.js"></script>
 </body>
 </html>

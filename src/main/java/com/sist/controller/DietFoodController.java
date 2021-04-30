@@ -15,7 +15,7 @@ public class DietFoodController {
 	@Autowired
 	private DietFoodDAO dDao;
 	
-	@GetMapping("shop/dietfood_list.do")
+	@GetMapping("shop/dfood_list.do")
 	public String shop_list(String page,Model model)
 	{
 		if(page==null)
@@ -46,15 +46,15 @@ public class DietFoodController {
 		model.addAttribute("endPage", endPage);
 		model.addAttribute("curpage", curpage);
 		model.addAttribute("allPage", allPage);
-		model.addAttribute("main_jsp", "../shop/dietfood_list.jsp");
+		model.addAttribute("main_jsp", "../shop/dfood_list.jsp");
 		return "main/main";
 	}
 	
-	@RequestMapping("shop/dietfood_detail.do")
-	public String dfood_detail(int no,Model model)
+	@RequestMapping("shop/dfood_detail.do")
+	public String dfood_detail(int uno,Model model)
 	{
-		DietFoodDetailVO vo=dDao.dfoodDetailData(no);
+		DietFoodDetailVO vo=dDao.dfoodDetailData(uno);
 		model.addAttribute("vo", vo);
-		return "shop/dietfood_detail";
+		return "shop/dfood_detail";
 	}
 }

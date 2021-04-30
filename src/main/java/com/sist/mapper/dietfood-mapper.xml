@@ -26,6 +26,6 @@
   <!-- dietFood 상세데이터 -->
   <select id="dfoodDetailData" resultType="DietFoodDetailVO" parameterType="int">
     SELECT * FROM dietfood_list
-    WHERE no=#{no}
+    WHERE uno=#{uno}
   </select>
 </mapper>

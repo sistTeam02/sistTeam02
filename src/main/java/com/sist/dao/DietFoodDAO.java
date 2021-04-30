@@ -10,7 +10,6 @@ import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.stereotype.Repository;
 
 import com.sist.vo.*;
-import com.sist.vo.*;
 
 @Repository
 public class DietFoodDAO extends SqlSessionDaoSupport {
@@ -31,9 +30,9 @@ public class DietFoodDAO extends SqlSessionDaoSupport {
 		return getSqlSession().selectOne("dfoodTotalPage");
 	}
 	
-	public DietFoodDetailVO dfoodDetailData(int no)
+	public DietFoodDetailVO dfoodDetailData(int uno)
 	{
-		return getSqlSession().selectOne("dfoodDetailData", no);
+		return getSqlSession().selectOne("dfoodDetailData", uno);
 	}
 	
 }

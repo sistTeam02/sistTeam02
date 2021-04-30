@@ -33,22 +33,10 @@
                     <div class="filter-widget">
                         <h4 class="fw-title">Categories</h4>
                         <ul class="filter-catagories">
-                            <li><a href="../shop/shop_detail.do">Sports Products</a></li>
-                            <li><a href="##">Diet Food</a></li>
+                            <li><a href="../shop/shop_list.do">Sports Products</a></li>
+                            <li><a href="../shop/dfood_list.do">Diet Food</a></li>
                         </ul>
                     </div>
-                    <!-- <div class="filter-widget">
-                        <h4 class="fw-title">Brand</h4>
-                        <div class="fw-brand-check">
-                            <div class="bc-item">
-                                <label for="bc-calvin">
-                                    Calvin Klein
-                                    <input type="checkbox" id="bc-calvin">
-                                    <span class="checkmark"></span>
-                                </label>
-                            </div>
-                        </div>
-                    </div> -->
                     <div class="filter-widget">
                         <h4 class="fw-title">Price</h4>
                         <div class="filter-range-wrap">
@@ -67,29 +55,8 @@
                         </div>
                         <a href="#" class="filter-btn">Filter</a>
                     </div>
-                    
-                    <div class="filter-widget">
-                        <h4 class="fw-title">Size</h4>
-                        <div class="fw-size-choose">
-                            <div class="sc-item">
-                                <input type="radio" id="s-size">
-                                <label for="s-size">s</label>
-                            </div>
-                            <div class="sc-item">
-                                <input type="radio" id="m-size">
-                                <label for="m-size">m</label>
-                            </div>
-                            <div class="sc-item">
-                                <input type="radio" id="l-size">
-                                <label for="l-size">l</label>
-                            </div>
-                            <div class="sc-item">
-                                <input type="radio" id="xs-size">
-                                <label for="xs-size">xs</label>
-                            </div>
-                        </div>
-                    </div>
                 </div>
+                
                 <div class="col-lg-9 order-1 order-lg-2">
                     <div class="product-show-option">
                         <div class="row">
@@ -119,7 +86,7 @@
 	                                    </div>
 	                              </a>
 	                              <div class="product-price text-center" style="font-size:13pt;font-weight:bold;color:#648cff;height:55px">
-	                                 <span><fmt:formatNumber value="${vo.price }"/>&nbsp;원</span>
+	                                  <span>${vo.price }&nbsp;원</span>
 	                              </div>
                                </div>
                             </c:forEach>    
