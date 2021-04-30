@@ -20,6 +20,7 @@
     <typeAlias type="com.sist.vo.ReplyBoardVO" alias="ReplyBoardVO"/>
     <typeAlias type="com.sist.vo.ReplyVO" alias="ReplyVO"/>
     <typeAlias type="com.sist.vo.User_order_basketVO" alias="User_order_basketVO"/>
+    <typeAlias type="com.sist.vo.WalkReplyVO" alias="WalkReplyVO"/>
   </typeAliases>
   <mappers>
     <mapper resource="com/sist/mapper/member-mapper.xml"/>

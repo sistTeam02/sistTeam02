@@ -13,6 +13,7 @@ h1 {
   text-align: center;
 }
 </style>
+
 </head>
 <body>
    <div style="height:50px"></div>
@@ -89,6 +90,11 @@ h1 {
 		});    
 		map2.relayout();
 		</script>
+		
+		<div style="height:30px"></div>
+		 <div class="row" id="reply_data">
+      
+    	</div>
    </div>
 </body>
 </html>
