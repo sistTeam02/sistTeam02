@@ -17,4 +17,5 @@ public class MainController {
 		model.addAttribute("main_jsp", "../admin/check.jsp");
 		return "main/main";
 	}
+
 }
