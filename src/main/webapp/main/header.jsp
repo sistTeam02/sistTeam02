@@ -116,9 +116,9 @@
                 <nav class="nav-menu mobile-menu">
                     <ul>
 						<li class="active"><a href="../main/main.do">Home</a></li>
-						<li><a href="#">홈트레이닝</a>
+						<li><a href="../home_training/ht_main.do">홈트레이닝</a>
                             <ul class="dropdown">
-                                <li><a href="#">홈트레이닝 목록</a></li>
+                                <li><a href="../home_training/ht_main.do">홈트레이닝 목록</a></li>
                                 <li><a href="#">수강후기 게시판</a></li>
                             </ul>
                         </li>
