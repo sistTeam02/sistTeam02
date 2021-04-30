@@ -27,6 +27,70 @@
      0
    )
 </insert>
+<!-- 상세보기 조회수 증가 -->
+<update id="freeboardHitIncrement" parameterType="int">
+  UPDATE freeboard SET
+  hit=hit+1
+  WHERE no=#{no}
+</update>
+<!-- 상세보기 -->
+<select id="freeboardDetailData" resultType="FreeBoardVO" parameterType="int">
+  SELECT no,name,subject,content,regdate,hit
+  FROM freeboard
+  WHERE no=#{no}
+</select>
+<!-- 찾기 -->
+<sql id="dsql">
+ <trim prefix="(" suffix=")" prefixOverrides="OR">
+  <foreach collection="fsArr" item="fs">
+   <trim prefix="OR">
+    <choose>
+     <when test="fs=='N'.toString()">
+       name LIKE '%'||#{ss}||'%'
+     </when>
+     <when test="fs=='S'.toString()">
+       name LIKE '%'||#{ss}||'%'
+     </when>
+     <when test="fs=='C'.toString()">
+       name LIKE '%'||#{ss}||'%'
+     </when>
+    </choose>
+   </trim>
+  </foreach>
+ </trim>
+</sql>
+<select id="freeboardFindData" resultType="FreeBoardVO" parameterType="hashmap">
+ <bind name="pattern" value="'%'+ss+'%'"/>
+   SELECT no,subject,name,regdate,hit
+   FROM freeboard
+   WHERE 
+   <include refid="dsql"/>
+</select>
+<select id="freeboardFindDataCount" resultType="int" parameterType="hashmap">
+  SELECT COUNT(*)
+  FROM freeboard
+  WHERE
+  <include refid="dsql"/>
+</select>
+<!-- 수정 -->
+<select id="freeboardGetPassword" resultType="string" parameterType="int">
+ SELECT pwd FROM freeboard
+ WHERE no=#{no}
+</select>
+<update id="freeboardUpdate" parameterType="FreeBoardVO">
+ UPDATE freeboard SET
+ name=#{name}, subject=#{subject}, content=#{content}
+ WHERE no=#{no}
+</update>
+<!-- 삭제 -->
+<delete id="freeboardDelete" parameterType="int">
+  DELETE FROM freeboard
+  WHERE no=#{no}
+</delete>
+<delete id="freeboardReplyDelete" parameterType="int">
+  DELETE FROM freeboard
+  WHERE bno=#{bno}
+</delete>
 </mapper>
 
 
