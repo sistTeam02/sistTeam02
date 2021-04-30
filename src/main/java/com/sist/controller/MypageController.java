@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class MypageController {
 	
+	@Autowired
+	private MypageDAO fdao;
 	
 	
 	//메인으로 전송
@@ -33,7 +35,13 @@ public class MypageController {
 
 	//나만의 계획(채팅정보 불러오기)
 	@GetMapping("mypage/mypage_schedule.do")
-	public String mypage_schdule(Model model){
+	public String mypage_schdule(String id,Model model){
+		
+		
+		List<Chat_foodVO> cList=fdao.mypage_chat_food(id);
+		
+		model.addAttribute("cList",cList);
+		
 		model.addAttribute("mypage_jsp","../mypage/mypage_schedule.jsp");
 		model.addAttribute("main_jsp","../mypage/mypage_main.jsp");
 		return "main/main";

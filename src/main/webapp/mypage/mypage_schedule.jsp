@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -144,30 +144,16 @@ function make_cal(year,month){
 							      </tr>
 							    </thead>
 							    <tbody>
+							    <c:forEach var="vo" items="${cList }">
 							      <tr>
-							        <td>전신</td>
-							        <td>예쁜뒷태 등운동</td>
-							        <td>상</td>
-							        <td>4분37초</td>
+							        <td>${vo.fooddate }</td>
+							        <td>${vo.whenfood }</td>
+							        <td>${vo.foodname }</td>
+							        <td>${vo.foodkcal}/${vo.foodgram }(g)</td>
 							        <td>4분37초</td>
 							        <td>4분37초</td>
 							      </tr>
-							      <tr>
-							        <td>상체</td>
-							        <td>예쁜 상체 만들어주는 [세라밴드 상체 운동법 2탄]</td>
-							        <td>중</td>
-							        <td>0분51초</td>
-							        <td>4분37초</td>
-							        <td>4분37초</td>
-							      </tr>
-							      <tr>
-							        <td>하체</td>
-							        <td>틀어진 골반을 위한 [교정 스트레칭 2]</td>
-							        <td>중</td>
-							        <td>0분13초</td>
-							        <td>4분37초</td>
-							        <td>4분37초</td>
-							      </tr>
+							      </c:forEach>
 							    </tbody>
 							  </table>
 							</div>
@@ -177,7 +163,7 @@ function make_cal(year,month){
 						</div>
 					</div>
 				</div>
-			</div>
+			
 
 </body>
 
