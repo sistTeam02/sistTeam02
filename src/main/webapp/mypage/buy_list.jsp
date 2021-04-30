@@ -9,7 +9,7 @@
      <style type="text/css">
      .table-hover{
      	font-size:large;
-     	width:900px;
+     	width:1000px;
      	border-bottom : 1px solid #648CFF;
      }
      .table{

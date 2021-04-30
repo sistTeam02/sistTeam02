@@ -40,6 +40,7 @@ public class MypageController {
 		
 		List<Chat_foodVO> fList=fdao.mypage_chat_food(id);
 		List<Chat_planVO> pList=fdao.mypage_chat_plan(id);
+		
 		model.addAttribute("fList",fList);
 		model.addAttribute("pList",pList);
 		model.addAttribute("mypage_jsp","../mypage/mypage_schedule.jsp");

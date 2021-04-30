@@ -130,7 +130,7 @@ function make_cal(year,month){
 					<div style="height:50px"></div>
                        <div class="container">
                        <h2>채팅 기록 확인하기</h2>
-                       <div style="height:30px"></div>
+                       <div style="height:20px"></div>
                        <p>채팅에 등록한 음식 목록을 출력합니다 </p> 
                        <table class="table table-hover">
 							    <thead>
@@ -153,8 +153,8 @@ function make_cal(year,month){
 							    </tbody>
 							  </table>
 							</div>
-							<div style="height:50px"></div>
-							 <p>채팅에 기록된 내용을 출력합니다</p> 
+							<div style="height:20px"></div>
+							 <p>채팅에 기록된 운동을 출력합니다</p> 
 							<table class="table table-hover">
 							    <thead>
 							      <tr>

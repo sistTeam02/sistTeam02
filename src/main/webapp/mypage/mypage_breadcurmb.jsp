@@ -14,7 +14,7 @@
                 <div class="col-lg-12">
                     <div class="breadcrumb-text">
                         <a href="#"><i class="fa fa-home"></i>마이페이지</a>
-                        <span>#</span>
+                        <span>뭐여</span>
                     </div>
                 </div>
             </div>
