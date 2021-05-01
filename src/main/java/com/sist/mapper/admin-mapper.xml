@@ -19,12 +19,59 @@
 	<select id="userQnAListData" resultType="QnABoardVO" parameterType="hashmap">
 		SELECT no,id,subject,regdate,answer,content,num
 		from (SELECT no,id,subject,regdate,answer,content,rownum as num 
-		from (SELECT no,id,subject,regdate,answer,content from qnaboard order by regdate DESC))
+		from (SELECT no,id,subject,regdate,answer,content from qnaboard where answer='N' order by regdate DESC))
 		WHERE num between #{start} and #{end}
 	</select>
 	<!-- QnA게시판 totalpage-->
 	<select id="userQnATotalpage" resultType="int">
-		SELECT CEIL(count(*)/10.0) from qnaboard
+		SELECT CEIL(count(*)/10.0) from qnaboard where answer='N'
+	</select>
+	<resultMap type="QnABoardVO" id="QnABoardJoinVO">
+		<id property="no" column="no"/>
+		<id property="id" column="id"/>
+		<id property="subject" column="subject"/>
+		<id property="regdate" column="regdate"/>
+		<id property="answer" column="answer"/>
+		<id property="content" column="content"/>
+		<collection property="qnABoard_ReplyVO" resultMap="QnABoard_ReplyVO"/>
+	</resultMap>
+	<resultMap type="QnABoard_ReplyVO" id="QnABoard_ReplyVO">
+		<id property="mno" column="mno"/>
+		<id property="msg" column="msg"/>
+	</resultMap>
+		<!-- QnA게시판 수정리스트 -->
+	<select id="adminQnAUpdateListData" parameterType="hashmap" resultMap="QnABoardJoinVO">
+		SELECT no,id,subject,regdate,answer,content,msg,num
+		from (SELECT no,id,subject,regdate,answer,content,msg,rownum as num 
+		from (SELECT a.no,a.id,a.subject,a.regdate,a.answer,a.content,b.msg from qnaboard  a,qnaboard_reply b 
+		where answer='Y' AND a.no=b.mno order by regdate DESC))
+		WHERE num between #{start} and #{end}
+	</select>
+	<!-- QnA게시판 수정totalpage-->
+	<select id="QnAUpdateTotalpage" resultType="int">
+		SELECT CEIL(count(*)/10.0) from qnaboard where answer='Y'
 	</select>
 	
+	
+	<!-- QnA reply게시판 insert -->
+	<insert id="adminQnaInsert" parameterType="QnABoard_ReplyVO">
+		<selectKey keyProperty="no" resultType="int" order="BEFORE">
+			SELECT NVL(Max(no)+1,1) from qnaboard_reply
+		</selectKey>
+		Insert into QnAboard_reply(no,mno,msg,regdate) values( #{no}, #{mno}, #{msg}, #{regdate})
+	</insert>
+	<!-- QnA게시판  업데이트 -->
+	<sql id="countReply">
+		SELECT count(*) from qnaboard_reply where mno=#{mno}	
+	</sql>
+	<update id="QnAboard_stateUpdate" parameterType="int">
+		Update qnaboard set 
+		answer='Y'
+		where no=#{mno} and (<include refid="countReply"/>) !=0
+	</update>
+	<update id="QnAboard_reply_update" parameterType="QnABoard_ReplyVO">
+		update qnaboard_reply set
+		msg=#{msg},regdate=#{regdate}
+		WHERE mno=#{mno}	
+	</update>
 </mapper>

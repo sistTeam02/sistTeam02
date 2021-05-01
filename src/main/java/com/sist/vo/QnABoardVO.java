@@ -25,7 +25,15 @@ public class QnABoardVO {
 	private int hit;
 	private String answer;
 	private String content;
+	private QnABoard_ReplyVO qnABoard_ReplyVO;
 	
+	
+	public QnABoard_ReplyVO getQnABoard_ReplyVO() {
+		return qnABoard_ReplyVO;
+	}
+	public void setQnABoard_ReplyVO(QnABoard_ReplyVO qnABoard_ReplyVO) {
+		this.qnABoard_ReplyVO = qnABoard_ReplyVO;
+	}
 	public String getContent() {
 		return content;
 	}

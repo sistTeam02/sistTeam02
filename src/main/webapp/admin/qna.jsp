@@ -24,12 +24,15 @@
     padding: 0px 36em;
     text-align: center;
 }
-.qna_tr{
+.qna_tr,.qna_update_tr{
 	background-color: #fbfbfb;
     border: 1px double black;
     height: 48px;
 }
 .qna_tr_content{
+display: none;
+}
+.admin_qna_update_textarea_tr,.qna_update_tr_content{
 display: none;
 }
 .qna_textarea{
@@ -50,14 +53,14 @@ display: none;
     background-color: #f5f4f3;
     margin-bottom: 15px;
 }
-.qna_iBtn,.qna_cBtn{
+.qna_iBtn,.qna_cBtn,.qna_uBtn,.qna_cBtnUpdate{
     background-color: white;
     border-radius: 5px;
     width: 70px;
     height: 40px;
     margin: 6px 7px;	
 }
-.pna_iBtn:hover{
+.qna_iBtn:hover,.qna_uBtn:hover{
 	background-color: #648cff;
 }
 .iBtn_td{
@@ -67,21 +70,35 @@ display: none;
 </style>
 <script type="text/javascript" src="https://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
+let page;
+if(page==null){
+	page=1;
+}
 $(document).ready(function() {
 	mainpage_table();
 });
 /* 전체보기클릭 이벤트 */
 $(document).on("click","#qna_allData",function(){
+	let button=0;
 	$('.admin_table tr').remove();
-	let page=1;
-	qna_allDataList(page);
+	 page=1;
+	qna_allDataList(page,button);
+	
+});
+/* 답변수정버튼클릭 */
+$(document).on("click","#qna_UpdateData",function(){
+	let button=1;
+	$('.admin_table tr').remove();
+	 page=1;
+	qna_allDataList(page,button);
 	
 });
 /* 페이지이동 이벤트 */
 $(document).on('click','button[class^=pageBtn]',function(){
 	$('.admin_table tr').remove();
-	let page=$(this).text();
-	qna_allDataList(page);
+	 page=$(this).text();
+	let button=$(this).attr('buttonnum');
+	qna_allDataList(page,button);
 });
 /* QnA tr클릭 */
 $(document).on("click",".qna_tr",function(){
@@ -92,15 +109,34 @@ $(document).on("click",".qna_tr",function(){
 	let qnaboard_no=$(this).attr('no');
 	answer_inputMake(content_id,qnaboard_no);
 });
+/* 수정 tr클릭 */
+ $(document).on("click",".qna_update_tr",function(){
+	 	$('.qna_update_tr_content').hide();
+		$('.admin_qna_update_textarea_tr').hide();
+		$(this).next().show();
+		$(this).next().next().show();
+	});
+/* 수정버튼클릭 */
+ $(document).on("click","button[class^=qna_uBtn]",function(){
+	 let msg=$(this).parent().parent().children().first().children().val();
+	 let mno=$(this).parent().parent().prev().prev().attr('no');
+	 answer_upodate_data(mno,page,msg);
+ });
 /* 등록버튼클릭 */
 $(document).on("click","button[class^=qna_iBtn]",function(){
 	let qnaboard_no=$(this).parent().parent().attr('no');
-	answer_data(qnaboard_no);
+	answer_data(qnaboard_no,page);
 });
-/* qna취소버튼클릭 */
+/* qna전체보기 취소버튼클릭 */
 $(document).on("click",".qna_cBtn",function(){
 	$('.qna_tr_content').hide();
 	$('.admin_qna_textarea_tr').remove();
+});
+/* qna수정-취소버튼클릭 */
+$(document).on("click",".qna_cBtnUpdate",function(){
+ 	$('.qna_update_tr_content').hide();
+	$('.admin_qna_update_textarea_tr').hide();
+
 });
 /* 페이지10개이동 */
 $(document).on('click','#moveBtn_r',function(){
@@ -119,24 +155,28 @@ function mainpage_table() {
 		)
 }
 /* 전체보기함수 */
-function qna_allDataList(page){
-	let totalpage=db_totalpage();
+function qna_allDataList(page,button){
+	let totalpage=db_totalpage(button);
+	let urlarr=[
+			"../admin/userQnAList.do",
+			"../admin/userQnAUpdata.do"
+	];
 	$.ajax({
 		type:'post',
 		data:{'page':page},
-		url:'../admin/userQnAList.do',
+		url:urlarr[button],
 		success:function(result){
 			$('.pageBtn').remove();
 			$('.moveBtn').remove();
 			let json=JSON.parse(result);
 			let startpage=Math.floor((page-1)/10)*10+1;
-			make_tr(json);
+			make_tr(json,button);
 			endpage=totalpage;
 			for(i=startpage;i<=startpage+9;i++){
 				if(i>endpage){
 					break;
 				}
-				make_pageBtn(i);
+				make_pageBtn(i,button);
 			}
 			pageBtn_makeicon(page,totalpage);
 		},error:function(error){
@@ -146,25 +186,49 @@ function qna_allDataList(page){
 	})
 }
 /* 가져온데이터로 테이블 row만들기 */
-function make_tr(json) {
-	for(i=0;i<json.length;i++){
-		$('.admin_table').append(
-			"<tr class='qna_tr' no="+json[i].no+" id=qna_tr"+i+">"+
-			 "<td>"+json[i].no+"</td>"+
-               "<td id=id"+i+">"+json[i].id+"</td>"+
-                                    "<td>"+json[i].subject+"</td>"+
-                                    "<td>"+json[i].regdate+"</td>"+
-                                    "<td>"+json[i].answer+"</td>"+                          
-                                "</tr>"+
-                          "<tr class='qna_tr_content' id=qna_content_tr"+i+"><td colspan=5><textarea class='qna_textarea'>"+json[i].content+"</textarea></td></tr>"
-		);
+function make_tr(json,button) {
+	if(button==0){
+		for(i=0;i<json.length;i++){
+			$('.admin_table').append(
+				"<tr class='qna_tr' no="+json[i].no+" id=qna_tr"+i+">"+
+				 "<td>"+json[i].no+"</td>"+
+	               "<td id=id"+i+">"+json[i].id+"</td>"+
+	                                    "<td>"+json[i].subject+"</td>"+
+	                                    "<td>"+json[i].regdate+"</td>"+
+	                                    "<td>"+json[i].answer+"</td>"+                          
+	                                "</tr>"+
+	                          "<tr class='qna_tr_content' id=qna_content_tr"+i+"><td colspan=5><textarea class='qna_textarea'>"+json[i].content+"</textarea></td></tr>"
+			);
+		}
+	}else if(button==1){
+		for(i=0;i<json.length;i++){
+			$('.admin_table').append(
+				"<tr class='qna_update_tr' no="+json[i].no+" id=qna_tr"+i+">"+
+				 "<td>"+json[i].no+"</td>"+
+	               "<td id=id"+i+">"+json[i].id+"</td>"+
+	                                    "<td>"+json[i].subject+"</td>"+
+	                                    "<td>"+json[i].regdate+"</td>"+
+	                                    "<td>"+json[i].answer+"</td>"+                          
+	                                "</tr>"+
+	                          "<tr class='qna_update_tr_content' id=qna_content_tr"+i+"><td colspan=5><textarea class='qna_textarea'>"+json[i].content+"</textarea></td></tr>"+
+	                          "<tr class='admin_qna_update_textarea_tr'><td colspan=4><textarea class='answer_textarea'>"+json[i].msg+"</textarea></td>"+
+	              			"<td colspan=1 class='iBtn_td'>"+
+	              			"<button class='qna_uBtn'>수정</button>"+
+	              			"<button class='qna_cBtnUpdate'>취소</button>"+
+	              			"</td>"+
+	              		"</tr>"
+			);
+		}
 	}
 }
-function db_totalpage() {
+function db_totalpage(button) {
+	let urlarr=['../admin/user_qna_totalpage.do',
+			'../admin/user_qna_update_totalpage.do'
+		]
 	let db_total="";
 	$.ajax({
 		type:'get',
-		url:'../admin/user_qna_totalpage.do',
+		url:urlarr[button],
 		async: false,
 		success:function(result){
 			db_total=result;
@@ -175,9 +239,9 @@ function db_totalpage() {
 	return db_total;
 }
 /* 페이지 버튼생성 */
-function make_pageBtn(page) {
+function make_pageBtn(page,button) {
 	$('.row_button').append(
-			"<button class=pageBtn id=pageBtn"+page+">"+page+"</button>"
+			"<button class=pageBtn id=pageBtn"+page+" buttonnum="+button+">"+page+"</button>"
 		);
 	}
 /* 페이지 화살표 아이콘생성 */
@@ -204,8 +268,9 @@ function answer_inputMake(id,no) {
 		"</tr>"		
 	);
 }
+
 /* 데이터전송 */
-function answer_data(no) {
+function answer_data(no,page) {
 	let msg=$('.answer_textarea').val();
 	box={/* qna번호+답변 */
 			"mno":no,
@@ -216,12 +281,36 @@ function answer_data(no) {
 		data:{'box':JSON.stringify(box)}, 
 		url:'../admin/qna_answerInsert.do',
 		success:function(result){
-			alert("답변 insert성공");
+			$('.admin_table tr').remove();
+			let button=0;
+			qna_allDataList(page,button);
 		},error:function(error){
 			alert("답변 insert오류");
 		}
 	})
 }
+/* 수정데이터전송 */
+  function answer_upodate_data(no,page,msg) {
+		box={/* qna번호+답변 */
+				"mno":no,
+				"msg":msg
+		}
+		$.ajax({
+			type:'post',
+			data:{'box':JSON.stringify(box)}, 
+			url:'../admin/qna_answerUpdate.do',
+			success:function(result){
+				$('.qna_update_tr_content').hide();
+				$('.admin_qna_update_textarea_tr').hide();
+				$('.qna_update_tr').remove();
+				let button=1;
+				qna_allDataList(page,button);
+			},error:function(error){
+				alert("답변 update오류");
+			}
+		})
+	}
+ 
 </script>
 
 </head>
