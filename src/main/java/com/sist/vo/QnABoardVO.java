@@ -24,6 +24,22 @@ public class QnABoardVO {
 	private Date regdate;
 	private int hit;
 	private String answer;
+	private String content;
+	private QnABoard_ReplyVO qnABoard_ReplyVO;
+	
+	
+	public QnABoard_ReplyVO getQnABoard_ReplyVO() {
+		return qnABoard_ReplyVO;
+	}
+	public void setQnABoard_ReplyVO(QnABoard_ReplyVO qnABoard_ReplyVO) {
+		this.qnABoard_ReplyVO = qnABoard_ReplyVO;
+	}
+	public String getContent() {
+		return content;
+	}
+	public void setContent(String content) {
+		this.content = content;
+	}
 	public int getNo() {
 		return no;
 	}
