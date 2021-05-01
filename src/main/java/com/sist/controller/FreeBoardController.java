@@ -69,7 +69,7 @@ public class FreeBoardController {
 		return "redirect:freeboard_insert.do";
 	}
 	// 상세보기
-	@GetMapping("freeboard_detail.do")
+	@GetMapping("board/freeboard_detail.do")
 	public String feeboard_detail(int no, int page, Model model)
 	{
 		// 데이터 읽기 => DAO연결
@@ -79,7 +79,7 @@ public class FreeBoardController {
 		return "board/freeboard_detail";
 	}
 	// 수정하기
-	@GetMapping("freeboard_update.do")
+	@GetMapping("board/freeboard_update.do")
 	public String freeboard_update(int no, int page, Model model)
 	{
 		FreeBoardVO vo=fDao.freeboardUpdateData(no);
@@ -97,14 +97,14 @@ public class FreeBoardController {
 		return "board/freeabord_update";
 	}
 	// 삭제하기
-	@GetMapping("freeboard_delete.do")
+	@GetMapping("board/freeboard_delete.do")
 	public String freeboard_delete(int no, int page, Model model)
 	{
 		model.addAttribute("no", no);
 		model.addAttribute("page", page);
 		return "board/freeboard_delete";
 	}
-	@PostMapping("freeboard_delete_ok.do")
+	@PostMapping("board/freeboard_delete_ok.do")
 	public String freeboard_delete(int no, int page, String pwd, Model model)
 	{
 		// 결과값 읽기
