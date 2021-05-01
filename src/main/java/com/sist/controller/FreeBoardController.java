@@ -68,8 +68,6 @@ public class FreeBoardController {
 		fDao.freeboardInsert(vo);
 		return "redirect:freeboard_insert.do";
 	}
-	// 삭제
-	
 
 }
 

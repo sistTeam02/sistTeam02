@@ -2,6 +2,23 @@
 <!DOCTYPE mapper
  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <!-- 
+ 	NO            NUMBER(38)     
+	TITLE         VARCHAR2(4000) 
+	TITLE_LINK    VARCHAR2(4000) 
+	POSTER        VARCHAR2(4000) 
+	PART          VARCHAR2(4000) 
+	GOOD          VARCHAR2(4000) 
+  -->
+ 
+ 
 <mapper namespace="com.sist.mapper.homet-mapper">
-  
+	<select id="hometListData" resultType="HometMainVO" parameterType="hashmap">
+		SELECT no, title, title_link, poster, part, good, num
+		FROM (no, title, title_link, poster, part, good, rownum as num
+		FROM (no, title, title_link, poster, part, good
+		FROM hometraining_main ORDER BY no DESC))
+		WHERE num BETWEEN #{start} AND #{end}
+	
+	</select>
 </mapper>

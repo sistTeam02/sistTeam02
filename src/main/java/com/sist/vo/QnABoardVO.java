@@ -18,10 +18,10 @@ import java.util.Date;
  */
 public class QnABoardVO {
 	private int no;
-	private String id;
+	private String name;
 	private String subject;
 	private String pwd;
-	private String regdate;
+	private Date regdate;
 	private int hit;
 	private String answer;
 	private String content;
@@ -46,11 +46,11 @@ public class QnABoardVO {
 	public void setNo(int no) {
 		this.no = no;
 	}
-	public String getId() {
-		return id;
+	public String getName() {
+		return name;
 	}
-	public void setId(String id) {
-		this.id = id;
+	public void setName(String name) {
+		this.name = name;
 	}
 	public String getSubject() {
 		return subject;
@@ -64,10 +64,10 @@ public class QnABoardVO {
 	public void setPwd(String pwd) {
 		this.pwd = pwd;
 	}
-	public String getRegdate() {
+	public Date getRegdate() {
 		return regdate;
 	}
-	public void setRegdate(String regdate) {
+	public void setRegdate(Date regdate) {
 		this.regdate = regdate;
 	}
 	public int getHit() {

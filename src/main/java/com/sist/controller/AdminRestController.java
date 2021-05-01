@@ -23,6 +23,7 @@ import com.sist.vo.User_order_basketVO;
 public class AdminRestController {
 	@Autowired
 	private AdminDAO dao;
+	
 	@GetMapping("admin/user_purchaseList.do")
 	public String purchaseList(int page){
 		String json="";
@@ -208,5 +209,5 @@ public class AdminRestController {
 		}
 		return result;
 	}
-}
 
+}

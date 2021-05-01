@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+
 import com.sist.vo.QnABoardVO;
 import com.sist.vo.QnABoard_ReplyVO;
 import com.sist.vo.User_order_basketVO;
@@ -56,6 +57,5 @@ public class AdminDAO extends SqlSessionDaoSupport{
 	public void adminQnaUpdate(QnABoard_ReplyVO vo){
 		getSqlSession().update("QnAboard_reply_update", vo);
 	}
-	
 	
 }
