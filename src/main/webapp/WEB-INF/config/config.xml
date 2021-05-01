@@ -22,6 +22,7 @@
     <typeAlias type="com.sist.vo.User_order_basketVO" alias="User_order_basketVO"/>
     <typeAlias type="com.sist.vo.WalkReplyVO" alias="WalkReplyVO"/>
     <typeAlias type="com.sist.vo.HometMainVO" alias="HometMainVO"/>
+    <typeAlias type="com.sist.vo.QnABoard_ReplyVO" alias="QnABoard_ReplyVO"/>    
   </typeAliases>
   <mappers>
     <mapper resource="com/sist/mapper/member-mapper.xml"/>
