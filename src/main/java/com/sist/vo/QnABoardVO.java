@@ -18,7 +18,7 @@ import java.util.Date;
  */
 public class QnABoardVO {
 	private int no;
-	private String name;
+	private String id;
 	private String subject;
 	private String pwd;
 	private Date regdate;
@@ -46,11 +46,12 @@ public class QnABoardVO {
 	public void setNo(int no) {
 		this.no = no;
 	}
-	public String getName() {
-		return name;
+
+	public String getId() {
+		return id;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setId(String id) {
+		this.id = id;
 	}
 	public String getSubject() {
 		return subject;
