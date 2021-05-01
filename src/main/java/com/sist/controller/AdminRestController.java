@@ -13,13 +13,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sist.dao.AdminDAO;
+import com.sist.vo.QnABoardVO;
 import com.sist.vo.User_order_basketVO;
 
 @RestController
 public class AdminRestController {
 	@Autowired
 	private AdminDAO dao;
-	
 	@GetMapping("admin/user_purchaseList.do")
 	public String purchaseList(int page){
 		String json="";
@@ -85,5 +85,56 @@ public class AdminRestController {
 		
 		return result;
 	}
-	
+	@PostMapping("admin/userQnAList.do")
+	public String userQnAList(int page){
+		String json="";
+		try {
+			int rowSize=10;
+			int start=1+(page-1)*rowSize;
+			int end=rowSize*page;
+			Map map=new HashMap();
+			map.put("start", start);
+			map.put("end", end);
+			List<QnABoardVO> list=dao.userQnAListData(map);
+			JSONArray arr=new JSONArray();
+			for(QnABoardVO vo:list){
+				JSONObject obj=new JSONObject();
+				obj.put("id",vo.getId());
+				obj.put("no",vo.getNo());
+				obj.put("subject",vo.getSubject());
+				obj.put("regdate",vo.getRegdate());
+				obj.put("content",vo.getContent());
+				obj.put("answer",vo.getAnswer());
+				arr.add(obj);
+			}
+			json=arr.toJSONString();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return json;
+	}
+	@GetMapping("admin/user_qna_totalpage.do")
+	public String qnatotalpage(){
+		String totalpage="";
+		int total=dao.basketListTotalPage();
+		totalpage=total+"";
+		return totalpage;
+	}
+	/*답변 인서트*/
+	@PostMapping("admin/qna_answerInsert.do")
+	public String qna_answerInsert(String box){
+		String result="";
+		try {
+			JSONParser jp=new JSONParser();
+			JSONObject obj=(JSONObject)jp.parse(box);
+			
+			
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		
+		
+		return result;
+	}
 }
+

@@ -15,4 +15,16 @@
 		state=#{state}
 		where no=#{no}
 	</update>
+	<!-- QnA게시판 리스트 -->
+	<select id="userQnAListData" resultType="QnABoardVO" parameterType="hashmap">
+		SELECT no,id,subject,regdate,answer,content,num
+		from (SELECT no,id,subject,regdate,answer,content,rownum as num 
+		from (SELECT no,id,subject,regdate,answer,content from qnaboard order by regdate DESC))
+		WHERE num between #{start} and #{end}
+	</select>
+	<!-- QnA게시판 totalpage-->
+	<select id="userQnATotalpage" resultType="int">
+		SELECT CEIL(count(*)/10.0) from qnaboard
+	</select>
+	
 </mapper>

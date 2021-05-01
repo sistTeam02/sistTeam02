@@ -8,6 +8,7 @@ import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.sist.vo.QnABoardVO;
 import com.sist.vo.User_order_basketVO;
 
 @Repository
@@ -26,5 +27,12 @@ public class AdminDAO extends SqlSessionDaoSupport{
 	}
 	public void order_basketUpdate(Map map){
 		getSqlSession().update("order_basketUpdate",map);
+	}
+	/*qna리스트*/
+	public List<QnABoardVO> userQnAListData(Map map){
+		return getSqlSession().selectList("userQnAListData",map);
+	}
+	public int userQnATotalpage(){
+		return getSqlSession().selectOne("userQnATotalpage");
 	}
 }
