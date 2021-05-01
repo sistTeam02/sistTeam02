@@ -39,9 +39,19 @@ float: left;
 }
 .admin_button{
 	margin: 0px 14px;
-    width: 74px;
+    width: 76px;
     border-radius: 9px;
     background-color: #f8f9faa8;
+}
+.pageBtn,.moveBtn{
+    background-color: white;
+    border-radius: 5px;
+    width: 40px;
+    height: 40px;
+    margin: 6px 7px;
+}
+.pageBtn:hover,moveBtn:hover{
+    background-color: #648cff;
 }
 </style>
 </head>

@@ -8,7 +8,7 @@
 <style type="text/css">
 .admin_table{
 	border: 2px dotted red;
-    height: 62em;
+    height: 100%;
     width: 68em;
     margin: 0em 5em;
 }
@@ -316,5 +316,8 @@ function answer_data(no,page) {
 	<table class="admin_table">
 	
 	</table>
+	<div class="row_button">
+
+    </div>
 </body>
 </html>
