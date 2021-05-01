@@ -15,6 +15,7 @@
 .main_tr{
     text-align: center;
     font-size: 33pt;
+    height:9em;
     background-color: #80808033;
 }
 .row_button{
@@ -65,6 +66,9 @@ display: none;
 	text-align: center;
 	width: 130px;
 }
+.search_tr{
+	text-align: center;
+}
 </style>
 <script type="text/javascript" src="https://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
@@ -75,6 +79,7 @@ if(page==null){
 $(document).ready(function() {
 	mainpage_table();
 });
+/* 전체보기클릭 이벤트 */
 $(document).on("click","#qna_allData",function(){
 	let button=0;
 	$('.admin_table tr').remove();
@@ -88,7 +93,12 @@ $(document).on("click","#qna_UpdateData",function(){
 	$('.admin_table tr').remove();
 	 page=1;
 	qna_allDataList(page,button);
-	
+});
+/* Qna검색버튼클릭 */
+$(document).on("click","#qna_search",function(){
+	let button=2;
+	$('.admin_table tr').remove();
+	make_searchbar();
 });
 /* 페이지이동 이벤트 */
 $(document).on('click','button[class^=pageBtn]',function(){
@@ -307,12 +317,16 @@ function answer_data(no,page) {
 			}
 		})
 	}
- 
+	/* 검색창생성 */
+ function make_searchbar() {
+	$('.admin_table').append(
+			"<tr class='search_tr'><td><input type='search' id='qna_searchbar'></td></tr>"
+	);
+}
 </script>
 
 </head>
 <body>
-	
 	<table class="admin_table">
 	
 	</table>

@@ -61,7 +61,7 @@ float: left;
 	<tr>
 		<td><button class="admin_button" id="qna_allData">전체보기</button>
 			<button class="admin_button" id="qna_UpdateData">답변수정</button>
-			<button class="admin_button">버튼</button>
+			<button class="admin_button" id="qna_search">QnA검색</button>
 			<button class="admin_button">버튼</button></td>
 	</tr>
 	</table>
