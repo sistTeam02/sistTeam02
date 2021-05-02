@@ -84,21 +84,23 @@
 		<id property="no" column="no"/>
 		<id property="title" column="title"/>
 		<id property="stockNo" column="stockNo"/>
+		<id property="stock" column="stock"/>
 		<collection property="goodsvo" resultMap="GoodsVO"/>
 	</resultMap>
 	<resultMap type="GoodsVO" id="GoodsVO">
 		<id property="no" column="no"/>
 		<id property="title" column="title"/>
 		<id property="stockNo" column="stockNo"/>
+		<id property="stock" column="stock"/>
 	</resultMap>
 	<!-- 상품 전체리스트 출력 -->
 	<select id="manageShopList" resultMap="DietFoodVO" parameterType="hashmap">
-		Select stockNo,title, num
-		from(SELECT stockNo,title,rownum as num
-		from(SELECT to_char(no) stockNo,title 
+		Select stockNo,title,stock, num
+		from(SELECT stockNo,title,stock,rownum as num
+		from(SELECT to_char(no) stockNo,title,stock 
 		from goods_list
 		UNION all
-		SELECT 'd'||to_char(no) stockNo,title
+		SELECT 'd'||to_char(no) stockNo,title,stock
 		from dietfood_list))
 		WHERE num Between #{start} and #{end}
 	</select>

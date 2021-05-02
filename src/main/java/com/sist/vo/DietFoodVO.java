@@ -16,6 +16,7 @@ public class DietFoodVO {
 	private String link;
 	private GoodsVO goodsvo;
 	private String stockNo;
+	private String stock;
 	public int getNo() {
 		return no;
 	}
@@ -63,6 +64,12 @@ public class DietFoodVO {
 	}
 	public void setStockNo(String stockNo) {
 		this.stockNo = stockNo;
+	}
+	public String getStock() {
+		return stock;
+	}
+	public void setStock(String stock) {
+		this.stock = stock;
 	}
 	
 }

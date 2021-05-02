@@ -260,8 +260,14 @@ public class AdminRestController {
 			JSONArray arr=new JSONArray();
 			for(DietFoodVO vo:list){
 				JSONObject obj=new JSONObject();
-				obj.put("stockNO", vo.getStockNo());
+				obj.put("stockNo", vo.getStockNo());
 				obj.put("title", vo.getTitle());
+				if(vo.getStock().equals("Y")){
+					obj.put("stock", "판매중");
+				}else{
+					obj.put("stock", "품절");
+				}
+				
 				arr.add(obj);
 			}
 			json=arr.toJSONString();

@@ -20,6 +20,7 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
 let page=1;
+let button=1;
 $(document).ready(function() {
 	/* 버튼변경 */
 	$('#qna_allData').text('품절관리');
@@ -29,14 +30,20 @@ $(document).ready(function() {
 	mainpage_table();//첫화면 생성
 });
 /* 품절관리버튼 */
-$(document).on('click',function(){
+$(document).on('click','#manage_stock',function(){
 	$('.stock_searchbar').show();
 	$('.manage_table tr').remove();
-	page=50;
-	getStockList(page);
+	page=1;
+	button=1;
+	getStockList(page,button);
 });
 
 
+/* 품절 상태변경 버튼클릭 */
+$(document).on('click','.soldoutBtn',function(){
+	let no=$(this).parent().prevAll('.stock_no').text();
+	alert(no);
+});
 /* 첫화면테이블 */
 function mainpage_table() {
 		$('.manage_table').append(
@@ -44,19 +51,39 @@ function mainpage_table() {
 		)
 }
 /* 상품리스트가져오기 */
-function getStockList(page) {
+function getStockList(page,button) {
 	$.ajax({
 		type:'post',
 		data:{'page':page},
 		url:'../admin/manage_stockList.do',
 		success:function(result){
-			alert(result);
+			let json=JSON.parse(result);
+			 make_tr(json,button);
 		},error:function(error){
 			alert("상품리스트 출력에러")
 		}
 		
 	})
 }
+function make_tr(json,button){
+	if(button==1){
+		for(i=0;i<json.length;i++){
+			$('.manage_table').append(
+				"<tr>"+
+					"<td class='stock_no'>"+json[i].stockNo+"</td>"+
+					"<td>"+json[i].title+"</td>"+
+					"<td class='isStock'>"+json[i].stock+"</td>"+
+					"<td><button class='soldoutBtn'>품절처리</button></td>"+
+				"</tr>"	
+			);
+		}
+	}	
+}
+/* 품절업데이트 버튼클릭후*/
+function updateStock(text,no,cno) {
+		
+}
+
 </script>
 </head>
 <body>
