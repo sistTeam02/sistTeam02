@@ -17,13 +17,10 @@ package com.sist.vo;
 import java.util.Date;
 
 public class WalkReplyVO {
-	private int no;
-	private int bno;
-	private String id;
-	private String name;
-	private String msg;
-	private Date regdate;
-	private int group_id, group_step, group_tab, root, depth;
+	private int no,bno,group_id,group_step,group_tab,root,depth;
+    private String id,name,msg;
+    private Date redate;
+    private String dbday;
 	public int getNo() {
 		return no;
 	}
@@ -35,30 +32,6 @@ public class WalkReplyVO {
 	}
 	public void setBno(int bno) {
 		this.bno = bno;
-	}
-	public String getId() {
-		return id;
-	}
-	public void setId(String id) {
-		this.id = id;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public String getMsg() {
-		return msg;
-	}
-	public void setMsg(String msg) {
-		this.msg = msg;
-	}
-	public Date getRegdate() {
-		return regdate;
-	}
-	public void setRegdate(Date regdate) {
-		this.regdate = regdate;
 	}
 	public int getGroup_id() {
 		return group_id;
@@ -90,5 +63,36 @@ public class WalkReplyVO {
 	public void setDepth(int depth) {
 		this.depth = depth;
 	}
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getMsg() {
+		return msg;
+	}
+	public void setMsg(String msg) {
+		this.msg = msg;
+	}
+	public Date getRedate() {
+		return redate;
+	}
+	public void setRedate(Date redate) {
+		this.redate = redate;
+	}
+	public String getDbday() {
+		return dbday;
+	}
+	public void setDbday(String dbday) {
+		this.dbday = dbday;
+	}
+	
 	
 }

@@ -13,7 +13,22 @@ h1 {
   text-align: center;
 }
 </style>
-
+<script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="https://code.jquery.com/jquery.js"></script>
+<script type="text/javascript">
+$(function(){
+	let bno=${vo.no};
+	$.ajax({
+		type:'GET',
+		url:'walk_reply.do',
+		data:{'bno':bno},
+		success:function(result)
+		{
+			$('#reply_data').html(result);
+		}
+	});
+});
+</script>
 </head>
 <body>
    <div style="height:50px"></div>

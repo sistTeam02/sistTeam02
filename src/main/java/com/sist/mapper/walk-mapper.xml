@@ -10,4 +10,79 @@
 		SELECT * FROM walk_good
 		WHERE no=#{no}
 	</select>
+	<select id="walkReplyListData" resultType="WalkReplyVO" parameterType="int">
+		SELECT no,bno,id,name,msg,TO_CHAR(regdate,'YYYY-MM-DD HH24:MI:SS') as dbday,group_tab
+	    FROM walk_reply 
+	    WHERE bno=#{bno}
+	    ORDER BY group_id DESC,group_step ASC
+	</select>
+	<insert id="walkReplyInsert" parameterType="WalkReplyVO">
+		<selectKey keyProperty="no" resultType="int" order="BEFORE">
+	     SELECT NVL(MAX(no)+1,1) as no FROM walk_reply
+	   </selectKey>
+	    INSERT INTO walk_reply(no,bno,id,name,msg,group_id) VALUES(
+	     #{no},
+	     #{bno},
+	     #{id},
+	     #{name},
+	     #{msg},
+	     (SELECT NVL(MAX(group_id)+1,1) FROM walk_reply)
+	   )
+	</insert>
+	<update id="walkReplyUpdate" parameterType="WalkReplyVO">
+		UPDATE walk_reply SET
+	    msg=#{msg}
+	    WHERE no=#{no}
+	</update>
+	<select id="walkReplyParentInfoData" resultType="WalkReplyVO" parameterType="int">
+		SELECT group_id,group_step,group_tab 
+	   FROM walk_reply
+	   WHERE no=#{no}
+	</select>
+	<update id="walkReplyGroupStepIncrement" parameterType="WalkReplyVO">
+		UPDATE walk_reply SET
+	   group_step=group_step+1
+	   WHERE group_id=#{group_id} AND group_step>#{group_step}
+	</update>
+	<insert id="walkReplyToReplyInsert" parameterType="ReplyVO">
+		<selectKey keyProperty="no" resultType="int" order="BEFORE">
+	      SELECT NVL(MAX(no)+1,1) as no FROM walk_reply
+	    </selectKey>
+	    INSERT INTO walk_reply VALUES(
+	      #{no},
+	      #{bno},
+	      #{id},
+	      #{name},
+	      #{msg},
+	      SYSDATE,
+	      #{group_id},
+	      #{group_step},
+	      #{group_tab},
+	      #{root},
+	      0
+	    )
+	</insert>
+	<update id="walkReplyDepthIncrement" parameterType="int">
+		UPDATE walk_reply SET
+	    depth=depth+1
+	    WHERE no=#{no}
+	</update>
+	<delete id="walkReplyDelete" parameterType="int">
+		DELETE FROM walk_reply
+    	WHERE no=#{no}
+	</delete>
+	  <select id="walkReplyInfoData" resultType="WalkReplyVO" parameterType="int">
+	    SELECT root,depth FROM walk_reply
+	    WHERE no=#{no}
+	  </select>
+	<update id="walkReplyMsgUpdate" parameterType="int">
+	    UPDATE walk_reply SET
+	    msg='관리자가 삭제한 댓글입니다'
+	    WHERE no=#{no}
+	 </update>
+	  <update id="walkDepthDecrement" parameterType="int">
+	    UPDATE walk_reply SET
+	    depth=depth-1
+	    WHERE no=#{no}
+	  </update>
  </mapper>

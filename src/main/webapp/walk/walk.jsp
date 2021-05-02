@@ -76,12 +76,13 @@ select {
 	height:250px;
 }
 </style>
-<script src="https://code.jquery.com/jquery.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery.js"></script>
+
 <script type="text/javascript">
 $(function(){
 	$('.walk_img').css("cursor","pointer");
-	
+	$('.btn').css("cursor","pointer");
 	$('.walk_img').click(function(){
 		let no=$(this).attr("value");
 		
@@ -106,9 +107,10 @@ $(function(){
 		
 	});
 	
-	$('.modal').on('hidden.bs.modal', function (e) {
-	    $(this).find('form')[0].reset()
-	});
+	$('#dialog').on('hidden', function () {
+		  $(this).removeData('modal');
+		});
+	
 	$('.loc').css("cursor","pointer");
 	$('.loc').click(function(){
 		let loc=$(this).attr("value");
