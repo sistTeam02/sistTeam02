@@ -21,7 +21,7 @@
                             	<span class="boo">내방</span>에서 <span class="boo">스마트</span>하게 <span class="boo">홈트레이닝</span>하자!
                             </h1>
                             &nbsp;
-                            <a href="#" class="primary-btn">Shop Now</a>
+                            <a href="#" class="primary-btn">바로가기</a>
                         </div>
                     </div>
                    <!--  <div class="off-card">
@@ -32,17 +32,16 @@
             <div class="single-hero-items set-bg" data-setbg="../img/hero-2.jpg">
                 <div class="container">
                     <div class="row">
-                        <div class="col-lg-5">
-                            <span>Bag,kids</span>
-                            <h1>Black friday</h1>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                incididunt ut labore et dolore</p>
-                            <a href="#" class="primary-btn">Shop Now</a>
+                        <div class="col-lg-7">
+                            <span>아이들과 함께</span>
+                            <h1>산책하기 좋은 날</h1>
+                            <p>전국에 있는 산책로 핫플레이스를 선정하여 추천해드립니다</p>
+                            <a href="../walk/walk.do" class="primary-btn">산책로 맵 바로가기</a>
                         </div>
                     </div>
-                    <div class="off-card">
+                  <!--   <div class="off-card">
                         <h2>Sale <span>50%</span></h2>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
@@ -57,7 +56,7 @@
                     <div class="single-banner">
                         <img src="../img/bvb.png" style="width: 570px; height: 320px" alt="">
                         <div class="inner-text">
-                            <h4>운동 기구&용품</h4>
+                            <a href="../shop/shop_list.do"><h4>운동 기구&용품</h4></a>
                         </div>
                     </div>
                 </div>
@@ -73,7 +72,7 @@
                     <div class="single-banner">
                         <img src="../img/dietff.PNG" style="width: 570px; height: 320px" alt="">
                         <div class="inner-text">
-                            <h4>다이어트&건강 식품</h4>
+                            <a href="../shop/dfood_list.do"><h4>다이어트&건강 식품</h4></a>
                         </div>
                     </div>
                 </div>
@@ -87,9 +86,9 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-3">
-                    <div class="product-large set-bg" data-setbg="../img/products/women-large.jpg">
-                        <h2>산책로 추천</h2>
-                        <a href="#">지역 맞춤 서비스</a>
+                    <div class="product-large set-bg" data-setbg="../img/products/walklike.jpg">
+                        <h2>전국 추천 산책로</h2>
+                        <a href="../walk/walk.do">#산책길 #함께걸어요</a>
                     </div>
                 </div>
                 <div class="col-lg-8 offset-lg-1">
@@ -106,7 +105,9 @@
                       	<c:forEach var="vo" items="${list }">
                         <div class="product-item">
                             <div class="pi-pic">
+                                <a href="../walk/walk.do">
                                 <img src="${vo.poster }" value="${vo.no }">
+                                </a>
                                 <div class="icon">
                                     <i class="icon_heart_alt"></i>
                                 </div>
@@ -118,7 +119,7 @@
                             </div>
                             <div class="pi-text">
                                 <div class="catagory-name">WALK</div>
-                                <a href="#">
+                                <a href="../walk/walk.do">
                                     <h5>${vo.title }</h5>
                                 </a>
                                 <!-- <div class="product-price">
