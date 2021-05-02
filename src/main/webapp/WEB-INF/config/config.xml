@@ -37,5 +37,6 @@
     <mapper resource="com/sist/mapper/user_basket-mapper.xml"/>
     <mapper resource="com/sist/mapper/mypage-mapper.xml"/>
     <mapper resource="com/sist/mapper/homet-mapper.xml"/>
+    <mapper resource="com/sist/mapper/reply-mapper.xml"/>
   </mappers>
 </configuration>
