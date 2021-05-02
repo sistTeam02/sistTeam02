@@ -29,16 +29,21 @@ public class FreeBordRestController {
 		model.addAttribute("count", count);
 		return "board/freeboard_find";
 	}
+	// 수정
 	 @PostMapping("board/freeabord_update_ok.do")
-	   public String board_update_ok(FreeBoardVO vo,int page)
+	   public String board_update_ok(FreeBoardVO vo,int page, Model model)
 	   {
 		   String result="";
 		   // 비밀번호가 O(상세보기 이동) , X(자바스크립트 history.back())
 		   boolean bCheck=fDao.freeboardUpdate(vo);
+		  /*model.addAttribute("bCheck", bCheck);
+		  model.addAttribute("no", vo.getNo());
+		  model.addAttribute("page", page);*/
+		   
 		   // 결과값을 가지고 올때 DAO를 연결 
 		   if(bCheck==true)
 		   {
-			   result="<script>location.href=\"../board/detail.do?no="+vo.getNo()+"&page="+page+"\";</script>";
+			   result="<script>location.href=\"../board/freeabord_detail.do?no="+vo.getNo()+"&page="+page+"\";</script>";
 		   }
 		   else
 		   {
@@ -46,24 +51,24 @@ public class FreeBordRestController {
 		   }
 		   return result;
 	   }
-	 /*
-	  * <c:choose>
- <c:when test="${bCheck==true }">
-  <c:redirect url="list.do?page=${page }"/>
- </c:when>
- <c:otherwise>
- <script>
-  alert("비밀번호가 틀립니다!!");
-  history.back();
- </script>
- </c:otherwise>
-</c:choose>
-	  */
-	 /*@PostMapping("board/freeboard_delete_ok.do")
-	 public String freeboard_delete(int no, int page, String pwd)
+	 // 삭제
+	 @PostMapping("board/freeboard_delete_ok.do")
+	 public String freeboard_delete_ok(int no, int page, String pwd)
 	 {
-		 
-	 }*/
+		 String result="";
+		   // 비밀번호가 O(상세보기 이동) , X(자바스크립트 history.back())
+		   boolean bCheck=fDao.freeboardDelete(no, pwd);
+		   // 결과값을 가지고 올때 DAO를 연결 
+		   if(bCheck==true)
+		   {
+			   result="<script>location.href=\"../board/freeboard_list.do?page=${page }"+"\";</script>";
+		   }
+		   else
+		   {
+			   result="<script>alert(\"비밀번호가 틀립니다!!\");history.back();</script>";
+		   }
+		   return result;
+	 }
 	
 	
 

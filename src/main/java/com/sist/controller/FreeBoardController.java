@@ -87,15 +87,6 @@ public class FreeBoardController {
 		model.addAttribute("page", page);
 		return "board/freeboard_update.do";
 	}
-	@PostMapping("freeboard_update_ok.do")
-	public String freeboard_update_ok(FreeBoardVO vo, int page, Model model)
-	{
-		boolean bCheck=fDao.freeboardUpdate(vo);
-		model.addAttribute("bCheck", bCheck);
-		model.addAttribute("no", vo.getNo());
-		model.addAttribute("page", page);
-		return "board/freeabord_update";
-	}
 	// 삭제하기
 	@GetMapping("board/freeboard_delete.do")
 	public String freeboard_delete(int no, int page, Model model)
@@ -104,17 +95,7 @@ public class FreeBoardController {
 		model.addAttribute("page", page);
 		return "board/freeboard_delete";
 	}
-	@PostMapping("board/freeboard_delete_ok.do")
-	public String freeboard_delete(int no, int page, String pwd, Model model)
-	{
-		// 결과값 읽기
-		System.out.println("pwd="+pwd+",no="+no);
-		boolean bCheck=fDao.freeboardDelete(no, pwd);
-		System.out.println("bCheck="+bCheck);
-		model.addAttribute("bCheck", bCheck);
-		model.addAttribute("page", page);
-		return "board/freeboard_delete_ok";
-	}
+
 
 }
 
