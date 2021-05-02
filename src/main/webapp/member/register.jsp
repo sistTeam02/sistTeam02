@@ -237,7 +237,7 @@ $(function(){
                         <form action="../member/register_ok.do" method="post" id="join_form">
                             <div class="group-input">
                                 <label for="username">Username (ID)*</label>
-                                <input type="text" id="username" style="float:left;">
+                                <input type="text" id="id" name="id" style="float:left; margin-bottom: -15px;" autocomplete="off">
                                 <span>&nbsp;</span>
                                 <input type="button" value="중복체크" class="site-btn" style="float:left" id="checkBtn" >
                             </div>
@@ -252,31 +252,30 @@ $(function(){
                                   <p>email<span>*</span></p>
                                    	<input type="text" size=45 name="email" id="email" class="input-sm" placeholder="user01@google.com" style="width:20em;" autocomplete="off">
                                 <span>&nbsp;</span>
-                                  <p>TEL</p>
-                                        <p>Phone<span>*</span></p>
-                                       	<input type="text" size=5 name="phone1" id="phone1" class="input-sm" readonly value="010" >
-                                       	<input type="text" size=10 name="phone2" id="phone2" class="input-sm" autocomplete="off" placeholder="-포함 입력">
-                               
+                               	 <p>Phone<span>*</span></p>
+                                   	<input type="text" size=5 name="phone1" id="phone1" class="input-sm" readonly value="010" style="width: 9em; float: left;">
+                                   	<input type="text" size=10 name="phone2" id="phone2" class="input-sm" autocomplete="off" placeholder="-포함 입력" style="width: 11em;">
                                <!-- 주소 1우편번호2주소 3상세주소  #######################################-->
-              				<div class="row">
+              				<div style="height: 10px"></div>
+              				
                             <div class="checkout__input">
                           		<span></span>
                                 <p>Address<span>*</span></p>
                                 <input type="text" name="post" id="post" class="checkout__input__add " readonly placeholder="우편번호(000-000)" style="float: left; width: 11em;">
-                             	<input type="button" value="우편번호 검색" class="btn btn-sm" id="postBtn" style="float: left; width: 9em; margin-left: 7em;">
+                             	<input type="button" value="우편번호 검색" class="site-btn" id="postBtn" style="float: left; width: 9em;">
                                 &nbsp;
                             </div>
-                            </div>
-                            <div class="row">
+                            
+                         
                             <div class="checkout__input">
-                                <input type="text"  placeholder="주소" name="addr1" id="addr1" readonly>
+                                <input type="text"  placeholder="주소" name="addr1" id="addr1" style="margin-top: 15px;" readonly>
                                 &nbsp;
                                 <input type="text"  placeholder="상세주소" name="addr2" id="addr2" style="margin-top: -15px;" autocomplete="off">
                             </div>
-     						</div>
+     						
                                
                             </div>
-                            <button type="submit" class="site-btn register-btn">REGISTER</button>
+                            <input type="button" class="site-btn register-btn" id="btn1" value="REGISTER"></input>
                         </form>
                         <div class="switch-login">
                             <a href="./login.html" class="or-login">Or Login</a>
