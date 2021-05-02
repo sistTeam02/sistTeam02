@@ -23,7 +23,7 @@
     padding: 0px 36em;
     text-align: center;
 }
-.qna_tr,.qna_update_tr{
+.qna_tr,.qna_update_tr,.qna_search_tr{
 	background-color: #fbfbfb;
     border: 1px double black;
     height: 48px;
@@ -66,8 +66,18 @@ display: none;
 	text-align: center;
 	width: 130px;
 }
-.search_tr{
-	text-align: center;
+.admin_search{
+	display: none;
+}
+.admin_table_div{
+	overflow-y: auto;
+    overflow-x: hidden;
+    height: 33em;
+    float: left;
+    width: 74em;
+}
+.qna_search_tr_content{
+display: none;
 }
 </style>
 <script type="text/javascript" src="https://code.jquery.com/jquery.js"></script>
@@ -81,6 +91,7 @@ $(document).ready(function() {
 });
 /* 전체보기클릭 이벤트 */
 $(document).on("click","#qna_allData",function(){
+	$('.admin_table_div').attr('class','admin_table_div1');
 	let button=0;
 	$('.admin_table tr').remove();
 	 page=1;
@@ -89,6 +100,7 @@ $(document).on("click","#qna_allData",function(){
 });
 /* 답변수정버튼클릭 */
 $(document).on("click","#qna_UpdateData",function(){
+	$('.admin_table_div').attr('class','admin_table_div1');
 	let button=1;
 	$('.admin_table tr').remove();
 	 page=1;
@@ -97,7 +109,11 @@ $(document).on("click","#qna_UpdateData",function(){
 /* Qna검색버튼클릭 */
 $(document).on("click","#qna_search",function(){
 	let button=2;
-	$('.admin_table tr').remove();
+	$('.admin_table tr').remove();//목록삭제
+	$('.admin_search tr').remove();//검색창삭제
+	$('.pageBtn').remove();//페이지버튼삭제
+	$('.moveBtn').remove();//페이지 이동버튼삭제
+	$('.admin_search').show();
 	make_searchbar();
 });
 /* 페이지이동 이벤트 */
@@ -144,6 +160,22 @@ $(document).on("click",".qna_cBtnUpdate",function(){
  	$('.qna_update_tr_content').hide();
 	$('.admin_qna_update_textarea_tr').hide();
 
+});
+/* 검색창입력 */
+$(document).on("keydown","#qna_searchbar",function(){
+	let keyword=$(this).val();
+	console.log(keyword);
+	page=1;//임시
+	let sbutton=$(this).prev().val();
+	if(keyword!=""){
+	
+	search_keyword(keyword, sbutton, page);
+	}
+});
+/* 검색후 tr클릭 */
+$(document).on("click",".qna_search_tr",function(){
+	$('.qna_search_tr_content').hide();
+	$(this).next().show();
 });
 /* 페이지10개이동 */
 $(document).on('click','#moveBtn_r',function(){
@@ -225,6 +257,19 @@ function make_tr(json,button) {
 	              			"</td>"+
 	              		"</tr>"
 			);
+		}
+	}else if(button==2){
+		for(i=0;i<json.length;i++){
+		$('.admin_table').append(
+				"<tr class='qna_search_tr' no="+json[i].no+" id=qna_tr"+i+">"+
+				 "<td>"+json[i].no+"</td>"+
+	               "<td id=id"+i+">"+json[i].id+"</td>"+
+	                                    "<td>"+json[i].subject+"</td>"+
+	                                    "<td>"+json[i].regdate+"</td>"+
+	                                    "<td>"+json[i].answer+"</td>"+                          
+	                                "</tr>"+
+	                         "<tr class='qna_search_tr_content' id=qna_content_tr"+i+"><td colspan=5><textarea class='qna_textarea'>"+json[i].content+"</textarea></td></tr>"
+		);
 		}
 	}
 }
@@ -319,17 +364,46 @@ function answer_data(no,page) {
 	}
 	/* 검색창생성 */
  function make_searchbar() {
-	$('.admin_table').append(
-			"<tr class='search_tr'><td><input type='search' id='qna_searchbar'></td></tr>"
+	$('.admin_search').append(
+			
+			"<tr class='search_tr'><td>"+
+			"<select>"+
+			"<option no=0>ID</option>"+
+			"<option no=1>제목</option>"+
+			"<option no=2>내용</option>"+
+			"</select>"+
+			"<input type='text' id='qna_searchbar'></td></tr>"
 	);
 }
+	function search_keyword(keyword,sbutton,page) {
+		$.ajax({
+			type:'post',
+			data:{'page':page,'keyword':keyword,"sbutton":sbutton},
+			url:'../admin/search_qnaData.do',
+			success:function(result){
+				let json=JSON.parse(result);
+				let button=2;
+				$('.qna_search_tr').remove();
+				make_tr(json, button);
+				$('.admin_table_div1').attr('class','admin_table_div');//autoflow생성
+
+			},error:function(error){
+				alert("검색창에러")
+			}
+		})
+	}
 </script>
 
 </head>
 <body>
-	<table class="admin_table">
+	<table class="admin_search">
 	
 	</table>
+	<div class="admin_table_div1">
+		<table class="admin_table">
+		
+		</table>
+	</div>
 	<div class="row_button">
 
     </div>

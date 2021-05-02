@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-
+import com.sist.vo.DietFoodVO;
 import com.sist.vo.QnABoardVO;
 import com.sist.vo.QnABoard_ReplyVO;
 import com.sist.vo.User_order_basketVO;
@@ -45,8 +45,7 @@ public class AdminDAO extends SqlSessionDaoSupport{
 		return getSqlSession().selectList("adminQnAUpdateListData",map);
 	}
 	public int QnAUpdateTotalpage(){
-		return getSqlSession().selectOne("QnAUpdateTotalpage");
-		
+		return getSqlSession().selectOne("QnAUpdateTotalpage");		
 	}
 	/*QnA답변 인서트+update*/
 	@Transactional(propagation=Propagation.REQUIRED,rollbackFor=Exception.class)
@@ -57,5 +56,11 @@ public class AdminDAO extends SqlSessionDaoSupport{
 	public void adminQnaUpdate(QnABoard_ReplyVO vo){
 		getSqlSession().update("QnAboard_reply_update", vo);
 	}
-	
+	public List<QnABoardVO> qnaSearchData(Map map){
+		return getSqlSession().selectList("QnASearchData",map);		
+	}
+	/*품절관리*/
+	public List<DietFoodVO> manageShopList(Map map){
+		return getSqlSession().selectList("manageShopList",map);
+	}
 }

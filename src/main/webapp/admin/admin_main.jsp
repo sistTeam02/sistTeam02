@@ -39,7 +39,7 @@ float: left;
 }
 .admin_button{
 	margin: 0px 14px;
-    width: 76px;
+    width: 78px;
     border-radius: 9px;
     background-color: #f8f9faa8;
 }
@@ -71,8 +71,7 @@ float: left;
 	            <div class="admin_tab_div">
 	            	<ul class="admin_tab">
 	            		<li><a href="../main/admin_main.do?no=0">QnA관리</a></li>
-	            		<li>공지사항</li>
-	            		<li>쇼핑몰관리</li>
+	            		<li><a href="../main/admin_main.do?no=1">쇼핑몰관리</a></li>
 	            		<li>통계</li>
 	            	</ul>
 	            </div>

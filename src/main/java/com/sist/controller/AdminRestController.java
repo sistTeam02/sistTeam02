@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sist.dao.AdminDAO;
+import com.sist.vo.DietFoodVO;
 import com.sist.vo.QnABoardVO;
 import com.sist.vo.QnABoard_ReplyVO;
 import com.sist.vo.User_order_basketVO;
@@ -209,5 +210,64 @@ public class AdminRestController {
 		}
 		return result;
 	}
+	@PostMapping("admin/search_qnaData.do")
+	public String admin_search_qnaData(int page,String keyword,String sbutton){
+		String json="";
+		String sc="";
+		try {
+			switch (sbutton) {
+			case "ID":sc="id";
+				break;
+			case "제목":sc="subject";
+				break;
+			case "내용":sc="content";
+				break;
 
+			}
+			Map map=new HashMap();
+			map.put("keyword", keyword);
+			map.put("sc", sc);
+			List<QnABoardVO> list=dao.qnaSearchData(map);
+			JSONArray arr=new JSONArray();
+			for(QnABoardVO vo:list){
+				JSONObject obj=new JSONObject();
+				obj.put("id",vo.getId());
+				obj.put("no",vo.getNo());
+				obj.put("subject",vo.getSubject());
+				obj.put("regdate",vo.getRegdate());
+				obj.put("content",vo.getContent());
+				obj.put("answer",vo.getAnswer());
+				arr.add(obj);
+			}
+			json=arr.toJSONString();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return json;
+	}
+	/*품절관리 리스트*/
+	@PostMapping("admin/manage_stockList.do")
+	public String manageShopList(int page){
+		String json="";
+		try {
+			int rowSize=20;
+			int start=1+(page-1)*rowSize;
+			int end=rowSize*page;
+			Map map=new HashMap();
+			map.put("start", start);
+			map.put("end", end);
+			List<DietFoodVO> list=dao.manageShopList(map);
+			JSONArray arr=new JSONArray();
+			for(DietFoodVO vo:list){
+				JSONObject obj=new JSONObject();
+				obj.put("stockNO", vo.getStockNo());
+				obj.put("title", vo.getTitle());
+				arr.add(obj);
+			}
+			json=arr.toJSONString();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return json;
+	}
 }

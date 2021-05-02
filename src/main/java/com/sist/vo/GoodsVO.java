@@ -10,6 +10,7 @@ public class GoodsVO {
 	private String title;
 	private String poster;
 	private int price;
+	private String stockNo;
 	public int getNo() {
 		return no;
 	}
@@ -33,6 +34,12 @@ public class GoodsVO {
 	}
 	public void setPrice(int price) {
 		this.price = price;
+	}
+	public String getStockNo() {
+		return stockNo;
+	}
+	public void setStockNo(String stockNo) {
+		this.stockNo = stockNo;
 	}
 	
 }

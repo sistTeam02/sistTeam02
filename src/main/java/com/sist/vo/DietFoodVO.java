@@ -14,6 +14,8 @@ public class DietFoodVO {
 	private String poster;
 	private String price;
 	private String link;
+	private GoodsVO goodsvo;
+	private String stockNo;
 	public int getNo() {
 		return no;
 	}
@@ -49,6 +51,18 @@ public class DietFoodVO {
 	}
 	public void setLink(String link) {
 		this.link = link;
+	}
+	public GoodsVO getGoodsvo() {
+		return goodsvo;
+	}
+	public void setGoodsvo(GoodsVO goodsvo) {
+		this.goodsvo = goodsvo;
+	}
+	public String getStockNo() {
+		return stockNo;
+	}
+	public void setStockNo(String stockNo) {
+		this.stockNo = stockNo;
 	}
 	
 }

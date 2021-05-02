@@ -74,4 +74,32 @@
 		msg=#{msg},regdate=#{regdate}
 		WHERE mno=#{mno}	
 	</update>
+	<!-- 검색리스트 -->
+	<select id="QnASearchData" resultType="QnABoardVO" parameterType="hashmap">
+		SELECT no,id,subject,regdate,answer,content from qnaboard where answer='N' and  ${sc} Like '%'||#{keyword}||'%' order by regdate DESC
+	</select>
+	
+	
+	<resultMap type="DietFoodVO" id="DietFoodVO">
+		<id property="no" column="no"/>
+		<id property="title" column="title"/>
+		<id property="stockNo" column="stockNo"/>
+		<collection property="goodsvo" resultMap="GoodsVO"/>
+	</resultMap>
+	<resultMap type="GoodsVO" id="GoodsVO">
+		<id property="no" column="no"/>
+		<id property="title" column="title"/>
+		<id property="stockNo" column="stockNo"/>
+	</resultMap>
+	<!-- 상품 전체리스트 출력 -->
+	<select id="manageShopList" resultMap="DietFoodVO" parameterType="hashmap">
+		Select stockNo,title, num
+		from(SELECT stockNo,title,rownum as num
+		from(SELECT to_char(no) stockNo,title 
+		from goods_list
+		UNION all
+		SELECT 'd'||to_char(no) stockNo,title
+		from dietfood_list))
+		WHERE num Between #{start} and #{end}
+	</select>
 </mapper>
