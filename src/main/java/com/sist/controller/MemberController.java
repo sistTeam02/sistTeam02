@@ -43,12 +43,21 @@ public class MemberController {
 		return "member/login_ok";
 	}
 	
-	//회원가입
+	//회원가입 페이지
 	@GetMapping("member/register.do")
 	public String register_page(Model model)
 	{
 		model.addAttribute("main_jsp","../member/register.jsp");
 		return "main/main";
+	}
+	//회원 중복 체크
+	
+	//회원가입 완료
+	@PostMapping("member/register_ok.do")
+	public String registerDo(Model model)
+	{
+		
+		return "redirect: ../main/main.do";
 	}
 	/*
 	 * @RequestMapping("member/post_result.do")//주소 출력

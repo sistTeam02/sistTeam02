@@ -18,6 +18,7 @@
 		ADDR2             VARCHAR2(200) 
 		ADMIN             VARCHAR2(2)   
 	 -->
+	 <!-- 회원가입 -->
 	<insert id="memberJoin" parameterType="MemberVO">
 	  INSERT INTO member VALUES(
 	  	#{id},
@@ -35,11 +36,15 @@
 	  )
 	</insert>
 	
-	<!-- id 중복체크 -->
+	<!-- 회원가입시: id 중복체크 -->
 	<select id="memberIdCheck" resultType="MemberVO" parameterType="String">
 	  SELECT COUNT(*) FROM member
 	  WHERE id=#{id}
 	</select>
+	
+	<!--주소 불러오기 -->
+	
+	
 	
 	<!-- 로그인 처리 -->
 	<!-- ID 존재여부 -->

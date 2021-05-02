@@ -5,6 +5,103 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<!-- <style type="text/css">
+.post{
+width: 20em;
+height: 28em;
+position: relative;
+right: -49em;
+top: -34em;
+display: table;
+overflow: auto;
+}
+.checkout__input input{
+	color:black;
+}
+.checkout {
+    padding-top: 25px;
+    padding-bottom: 60px;
+}
+.checkout__input input{
+margin-left: 20em;
+}
+#checkBtn,#postBtn{
+	margin-left: 3em;
+	width: 6.5em;
+	background-color: #ddf2bc
+}
+.checkout__input{
+	width: 1140px;
+}
+#checkBtn:hover,#postBtn:hover,#btn1:hover,#findBtn:hover,#okBtn:hover{
+    color: #fff;
+    background-color: #7fad39;
+    border-color: #7fad39;
+}
+#checkBtn:focus,#postBtn:focus,#btn1:focus{
+	 box-shadow: 0 0 0 .2rem #ddf2bc;
+}
+#btn2:focus{
+	box-shadow: 0 0 0 .2rem #ecd2d2;
+}
+#btn2:hover{
+	 color: #fff;
+    background-color:#9b344ae3;
+    border-color: #fff;
+}
+#tel1,#phone1{
+float:left;
+width: 5em; 
+}
+#tel1::placeholder{
+	font-size: 8pt;
+}
+#tel2,#phone2{
+width: 10em;
+float:left;
+margin-left:2em; 
+}
+#btn1{
+	margin-left: 29em;
+}
+#btn2{
+	margin-left: 2em;
+}
+#btn1,#btn2{
+	text-align:center;
+	width: 6.5em;
+	background-color: #ddf2bc;
+	float: left;
+	padding-left: 8px;	
+}
+#pwd1{
+margin-left: 2em;
+}
+#addr1,#addr2{
+	width: 27em;
+}
+#checkSpan{
+	height:24px;
+	display: block;
+	text-align: left;
+	margin-left: 20em;
+	color: red;
+	
+} 
+.table{
+	font-size: 11pt;
+}
+.table th{
+	background-color: #ddf2bc;
+	border-bottom: 1px #0000003d solid;
+}
+#findBtn,#okBtn{
+	background-color: #ddf2bc;
+	width: 5em;
+	text-align: center;
+	height: 2.2em;
+}
+</style> -->
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
 $(function(){
@@ -50,7 +147,14 @@ $(function(){
  	});//아이디
  	
  	$('#postBtn').click(function(){
- 		$('.post').show();
+ 		/* $('.post').show(); */
+ 		new daum.Postcode({
+			oncomplete:function(data)
+			{
+				$('#post').val(data.zonecode);
+				$('#addr1').val(data.address);
+			}
+		}).open();
  	});
 	$('#findBtn').click(function(){
 	
@@ -130,7 +234,7 @@ $(function(){
                 <div class="col-lg-6 offset-lg-3">
                     <div class="register-form">
                         <h2>Register</h2>
-                        <form action="#">
+                        <form action="../member/register_ok.do" method="post" id="join_form">
                             <div class="group-input">
                                 <label for="username">Username (ID)*</label>
                                 <input type="text" id="username" style="float:left;">
@@ -182,6 +286,7 @@ $(function(){
             </div>
         </div>
     </div>
+    
     <!-- Register Form Section End -->
      <div class="post">
             	<table class="table" style="height: 105px; border: 1px solid black;">

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
 import com.sist.vo.MemberVO;
+import com.sist.vo.ZipcodeVO;
 
 import java.util.*;
 
@@ -45,6 +46,22 @@ public class MemberDAO extends SqlSessionDaoSupport{
 			}
 		}
 		return result;
-				
+			
+	}
+	
+	//아이디 중복체크
+	public int memberIdCount(String id)
+	{
+		int count=getSqlSession().selectOne("memberIdCheck",id);
+		
+		return count;
+	}
+	//주소 불러오기
+	public List<ZipcodeVO> joinAddress(String dong)
+	{
+		List<ZipcodeVO> list = new ArrayList<ZipcodeVO>();
+	
+		
+		return list;
 	}
 }
