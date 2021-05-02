@@ -289,4 +289,57 @@ public class AdminRestController {
 		dao.stockchange(map);
 		return result;
 	}
+	@GetMapping("admin/manageShopTotalpage.do")
+	public String manageShopTotalpage(){
+		String totalpage="";
+		int total=dao.manageShopTotalpage();
+		totalpage=total+"";
+		return totalpage;
+	}
+	@PostMapping("admin/findShopStock.do")
+	public String findShopStock(String table,String keyword){
+		String json="";
+		JSONArray arr=new JSONArray();
+		try {
+			Map map=new HashMap();
+			if(table.equals("식품")){
+				map.put("table", "dietfood_list");
+				map.put("keyword", keyword);
+				List<DietFoodVO> list=dao.findShopStock(map);
+				for(DietFoodVO vo:list){
+					JSONObject obj=new JSONObject();
+					obj.put("stockNo", "d"+vo.getNo());
+					obj.put("title", vo.getTitle());
+					if(vo.getStock().equals("Y")){
+						obj.put("stock", "판매중");
+					}else{
+						obj.put("stock", "품절");
+					}
+					
+					arr.add(obj);
+				}
+			}else{
+				map.put("table", "goods_list");
+				map.put("keyword", keyword);
+				List<DietFoodVO> list=dao.findShopStock(map);
+				for(DietFoodVO vo:list){
+					JSONObject obj=new JSONObject();
+					obj.put("stockNo", vo.getNo());
+					obj.put("title", vo.getTitle());
+					if(vo.getStock().equals("Y")){
+						obj.put("stock", "판매중");
+					}else{
+						obj.put("stock", "품절");
+					}
+					
+					arr.add(obj);
+				}
+			}
+			
+			json=arr.toJSONString();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return json;
+	}
 }

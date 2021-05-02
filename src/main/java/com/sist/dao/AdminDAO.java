@@ -72,4 +72,12 @@ public class AdminDAO extends SqlSessionDaoSupport{
 			getSqlSession().update("updateStockY",map);
 		}
 	}
+	/*상품검색*/
+	public List<DietFoodVO> findShopStock(Map map){
+		return getSqlSession().selectList("findShopStock",map);
+	}
+	/*상품토탈페이지*/
+	public int manageShopTotalpage(){
+		return getSqlSession().selectOne("manageShopTotalpage");
+	}
 }

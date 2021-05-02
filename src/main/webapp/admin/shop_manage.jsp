@@ -16,6 +16,11 @@
     height: 8em;
     background-color: #d6f9f9;
 }
+.find_div{
+overflow-y:auto;
+overflow-x:hidden;
+height: 40em;  
+}
 </style>
 <script type="text/javascript" src="https://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
@@ -31,8 +36,10 @@ $(document).ready(function() {
 });
 /* 품절관리버튼 */
 $(document).on('click','#manage_stock',function(){
+	$('.find_div').attr('class','nomal_div');//오버플로우 해제
 	$('.stock_searchbar').show();
 	$('.manage_table tr').remove();
+	$('.row_button button').remove();
 	page=1;
 	button=1;
 	getStockList(page,button);
@@ -56,6 +63,37 @@ $(document).on('click','.soldoutBtn',function(){
 	updateStock(no,cno);
 	
 });
+/* 페이지화살표 클릭 */
+ $(document).on('click','#moveBtn_l',function(){
+	 let a=$(this).next().text();
+	 $('.manage_table tr').remove();
+	 $('.row_button button').remove();
+	 getStockList(Number(a)-10,button);
+ });
+ $(document).on('click','#moveBtn_r',function(){
+	 let a=$(this).prev().text();
+	 $('.manage_table tr').remove();
+	 $('.row_button button').remove();
+	 getStockList(Number(a)+1,button);
+ });
+ /* 페이지 클릭 */
+  $(document).on('click','.pageBtn',function(){
+  	page=$(this).text();
+  	button=1;
+  	$('.manage_table tr').remove();
+  	$('.row_button button').remove();
+	getStockList(page,button);
+  	
+  }); 
+/* 검색어 입력 */
+ $(document).on("keydown","#findShop_input",function(){
+	 let table=$(this).parent().prev().children().val();
+	 let keyword=$(this).val();
+	 console.log(keyword);
+	 if(keyword!=""){
+	 	findData(keyword, table);
+	 }
+ }); 
 /* 첫화면테이블 */
 function mainpage_table() {
 		$('.manage_table').append(
@@ -64,6 +102,7 @@ function mainpage_table() {
 }
 /* 상품리스트가져오기 */
 function getStockList(page,button) {
+	let totalpage=getTotalpage();
 	$.ajax({
 		type:'post',
 		data:{'page':page},
@@ -71,6 +110,14 @@ function getStockList(page,button) {
 		success:function(result){
 			let json=JSON.parse(result);
 			 make_tr(json,button);
+			 let startpage=Math.floor((page-1)/10)*10+1;
+			 let endpage=Math.floor((page-1)/10)*10+10;
+			 if(endpage>totalpage){
+				 endpage=totalpage}
+			 for(i=startpage;i<=endpage;i++){
+			 	make_pageBtn(i, button);
+			 }
+			 pageBtn_makeicon(page, totalpage);
 		},error:function(error){
 			alert("상품리스트 출력에러")
 		}
@@ -79,6 +126,18 @@ function getStockList(page,button) {
 }
 function make_tr(json,button){
 	if(button==1){
+		for(i=0;i<json.length;i++){
+			$('.manage_table').append(
+				"<tr>"+
+					"<td class='stock_no'>"+json[i].stockNo+"</td>"+
+					"<td>"+json[i].title+"</td>"+
+					"<td class='isStock' id=isStock"+i+">"+json[i].stock+"</td>"+
+					"<td><button class='soldoutBtn'></button></td>"+
+				"</tr>"	
+			);
+		}
+		makeText_soldoutBtn();
+	}else if(button==2){
 		for(i=0;i<json.length;i++){
 			$('.manage_table').append(
 				"<tr>"+
@@ -108,7 +167,8 @@ function updateStock(no,cno) {
 }
 /*품절 버튼 text생성*/
 function makeText_soldoutBtn() {
-	for(i=0;i<20;i++){
+	let count=$('.isStock').length;
+	for(i=0;i<count;i++){
 		let str=$('#isStock'+i).text();
 		if(str.includes("품절")){
 			$('#isStock'+i).next().children().text("품절취소");
@@ -117,6 +177,61 @@ function makeText_soldoutBtn() {
 		}
 	}
 }
+/* 토탈페이지 */
+function getTotalpage() {
+	let totalpage="";
+	$.ajax({
+		type:'get',
+		url:'../admin/manageShopTotalpage.do',
+		async: false,
+		success:function(result){
+			totalpage=result;
+		},error:function(error){
+			alert("총페이지 불러오기 에러");
+		}
+	
+	})
+	return totalpage;
+}
+/* 페이지만들기 */
+function make_pageBtn(page,button) {
+	$('.row_button').append(
+			"<button class=pageBtn id=pageBtn"+page+" buttonnum="+button+">"+page+"</button>"
+		);
+	}
+/* 페이지 화살표만들기 */
+function pageBtn_makeicon(page,totalpage) {
+	if(page>10){
+	$('.row_button').prepend(
+			"<button class=moveBtn id=moveBtn_l><i class=ti-angle-left></i></button>"
+		);
+	}
+	if(totalpage>10 && page+10<totalpage){
+	$('.row_button').append(
+			"<button class=moveBtn id=moveBtn_r><i class=ti-angle-right></i></button>"
+		);
+	}
+}
+/* 검색 데이터가져오기 admin/findShopStock.do*/
+function findData(keyword,table) {
+	$.ajax({
+		type:'post',
+		url:'../admin/findShopStock.do',
+		data:{'keyword':keyword,'table':table},
+		success:function(result){
+			let json=JSON.parse(result);
+			button=2
+			$('.manage_table tr').remove();
+			 $('.row_button button').remove();
+			 make_tr(json,button);
+			 $('.nomal_div').attr('class','find_div');
+		},error:function(error){
+			alert("검색 에러");
+		}
+	
+	})
+}
+
 </script>
 </head>
 <body>
@@ -129,12 +244,17 @@ function makeText_soldoutBtn() {
 					</select>
 				</td>
 				<td>
-					상품 검색: <input type="text" size="15">
+					상품 검색: <input type="text" size="15" id="findShop_input">
 				</td>
 			</tr>	
 	</table>
+	<div class="find_div">
 	<table class="manage_table">
 		
 	</table>
+	</div>
+	<div class="row_button">
+
+    </div>
 </body>
 </html>

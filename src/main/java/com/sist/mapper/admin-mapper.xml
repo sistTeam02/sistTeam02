@@ -104,6 +104,14 @@
 		from dietfood_list))
 		WHERE num Between #{start} and #{end}
 	</select>
+	<!-- 상품 총페이지 -->
+	<select id="manageShopTotalpage" resultType="int">
+		SELECT CEIL(count(no)/20.0)
+		FROM (SELECT no from dietfood_list
+		union all
+		SELECT no
+		FROM goods_list)
+	</select>
 	<!-- 품절상태가져오기 -->
 	<select id="IsShopStock" parameterType="hashmap" resultType="String">
 		SELECT stock from ${table} where no=#{no} 
@@ -118,4 +126,10 @@
 		stock='N'
 		where no=#{no}
 	</update>
+	<!-- 상품검색 -->
+	<select id="findShopStock" parameterType="hashmap" resultMap="DietFoodVO">
+		select no,title,stock
+		from ${table}
+		where title Like '%'||#{keyword}||'%'
+	</select>
 </mapper>

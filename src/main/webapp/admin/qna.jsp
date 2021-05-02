@@ -298,12 +298,12 @@ function make_pageBtn(page,button) {
 	}
 /* 페이지 화살표 아이콘생성 */
 function pageBtn_makeicon(page,totalpage) {
-	if(totalpage>10){
+	if(page>10){
 	$('.row_button').prepend(
 			"<button class=moveBtn id=moveBtn_l><i class=ti-angle-left></i></button>"
 		);
 	}
-	if(page>10){
+	if(totalpage>10 && page+10<totalpage){
 	$('.row_button').append(
 			"<button class=moveBtn id=moveBtn_r><i class=ti-angle-right></i></button>"
 		);
