@@ -104,4 +104,18 @@
 		from dietfood_list))
 		WHERE num Between #{start} and #{end}
 	</select>
+	<!-- 품절상태가져오기 -->
+	<select id="IsShopStock" parameterType="hashmap" resultType="String">
+		SELECT stock from ${table} where no=#{no} 
+	</select>
+	<update id="updateStockY" parameterType="hashmap">
+		update ${table} set
+		stock='Y'
+		where no=#{no}
+	</update>
+	<update id="updateStockN" parameterType="hashmap">
+		update ${table} set
+		stock='N'
+		where no=#{no}
+	</update>
 </mapper>

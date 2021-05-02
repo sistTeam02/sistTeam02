@@ -63,4 +63,13 @@ public class AdminDAO extends SqlSessionDaoSupport{
 	public List<DietFoodVO> manageShopList(Map map){
 		return getSqlSession().selectList("manageShopList",map);
 	}
+	/*품절상태가져오기*/
+	public void stockchange(Map map){
+		String stockState=getSqlSession().selectOne("IsShopStock",map);
+		if(stockState.equals("Y")){
+			getSqlSession().update("updateStockN",map);
+		}else{
+			getSqlSession().update("updateStockY",map);
+		}
+	}
 }

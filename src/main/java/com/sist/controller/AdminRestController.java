@@ -276,4 +276,17 @@ public class AdminRestController {
 		}
 		return json;
 	}
+	@PostMapping("admin/updateShopStock.do")
+	public String updateShopStock(int no,int cno){
+		String result="";
+		Map map=new HashMap();
+		if(cno==1){
+			map.put("table", "goods_list");
+		}else if(cno==2){
+			map.put("table", "dietfood_list");
+		}
+		map.put("no", no);
+		dao.stockchange(map);
+		return result;
+	}
 }

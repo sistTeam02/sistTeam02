@@ -39,10 +39,22 @@ $(document).on('click','#manage_stock',function(){
 });
 
 
-/* 품절 상태변경 버튼클릭 */
+/* 품절 상태변경 버튼클릭 cno=1 goods,cno=2 food*/
 $(document).on('click','.soldoutBtn',function(){
 	let no=$(this).parent().prevAll('.stock_no').text();
-	alert(no);
+	let cno=1;
+	if(no.includes("d")){
+		cno=2;
+		no=no.replace(/d/g, "");
+	}
+	let text=$(this).parent().prev().text();
+	if(text=="품절"){
+		$(this).parent().prev().text('판매중');
+	}else{
+		$(this).parent().prev().text('품절');
+	}
+	updateStock(no,cno);
+	
 });
 /* 첫화면테이블 */
 function mainpage_table() {
@@ -72,18 +84,39 @@ function make_tr(json,button){
 				"<tr>"+
 					"<td class='stock_no'>"+json[i].stockNo+"</td>"+
 					"<td>"+json[i].title+"</td>"+
-					"<td class='isStock'>"+json[i].stock+"</td>"+
-					"<td><button class='soldoutBtn'>품절처리</button></td>"+
+					"<td class='isStock' id=isStock"+i+">"+json[i].stock+"</td>"+
+					"<td><button class='soldoutBtn'></button></td>"+
 				"</tr>"	
 			);
 		}
+		makeText_soldoutBtn();
 	}	
 }
 /* 품절업데이트 버튼클릭후*/
-function updateStock(text,no,cno) {
-		
+function updateStock(no,cno) {
+		$.ajax({
+			type:'post',
+			data:{'no':no,'cno':cno},
+			url:'../admin/updateShopStock.do',
+			success:function(result){
+				makeText_soldoutBtn();
+			},error:function(error){
+				alert("품절 업데이트 오류");
+			}
+				
+		})
 }
-
+/*품절 버튼 text생성*/
+function makeText_soldoutBtn() {
+	for(i=0;i<20;i++){
+		let str=$('#isStock'+i).text();
+		if(str.includes("품절")){
+			$('#isStock'+i).next().children().text("품절취소");
+		}else{
+			$('#isStock'+i).next().children().text("품절처리");
+		}
+	}
+}
 </script>
 </head>
 <body>
