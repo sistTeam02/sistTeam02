@@ -236,26 +236,30 @@ $(function(){
                         <h2>Register</h2>
                         <form action="../member/register_ok.do" method="post" id="join_form">
                             <div class="group-input">
-                                <label for="username">Username (ID)*</label>
-                                <input type="text" id="id" name="id" style="float:left; margin-bottom: -15px;" autocomplete="off">
-                                <span>&nbsp;</span>
-                                <input type="button" value="중복체크" class="site-btn" style="float:left" id="checkBtn" >
-                                <span id="checkSpan"></span>
-                                
-                                 <div class="checkout__input">
+                             	<div class="checkout__input">
+	                                <label for="username">Username (ID)*</label>
+	                                <input type="text" id="id" name="id" style="float:left; margin-bottom: -15px;width: 11em;" autocomplete="off">
+	                                <span>&nbsp;</span>
+	                                <input type="button" value="중복체크" class="site-btn" style="float:left; width: 9em;" id="checkBtn" >
+	                                 <div class=row">
+                            			<span id="checkSpan"></span>
+                           			 </div>
+                               		<br>
+                               		<label></label>
                                     <p>이름<span>*</span><span style="color: black;margin-left:15em; ">닉네임</span></p>
-                                   <input type="text" name="name" id="name" class="input-sm" autocomplete="off">
-                                   <input type="text" name="nickname" id="nickname" class="input-sm" placeholder="사용하실 닉네임" autocomplete="off">
+                                   <input type="text" name="name" id="name" class="input-sm"  placeholder="사용자 이름" style="float:left;width: 50%;">
+                                   <input type="text" name="nickname" id="nickname" class="input-sm" placeholder="사용하실 닉네임" autocomplete="off"  style="float:left;width: 50%;">
                                 </div>
                                 
                                 
                             </div>
                             <div class="group-input">
                                 <label for="pass">Password *</label>
-                                <input type="password" name="pwd" id="pwd" class="input-sm"  style="float:left;margin-bottom:15px;" placeholder="비밀번호 입력">
+                                <input type="password" name="pwd" id="pwd" class="input-sm"  style="float:left;margin-bottom:15px; width: 50%" placeholder="비밀번호 입력">
 		                        <!-- <input type="password" name="pwd" id="pwd1" class="input-sm"  style="float:left" placeholder="재입력"> -->
                                  <span>&nbsp;</span>
-                                  <p>생년월일<span>*</span></p>
+                                 <br><br><br>
+                                  <p style="width: 100%">생년월일<span>*</span></p>
                                   <input type="date" size=20 name="birth" value="2021-01-01" min="1921-01-01" max="2121-12-31" >
                                 <span>&nbsp;</span>
                                   <p>email<span>*</span></p>
@@ -264,11 +268,11 @@ $(function(){
                                	 <p>Tel<span>*</span></p>
                                   <!--  	<input type="text" size=5 name="tel1" id="tel1" class="input-sm" value="지역번호" style="width: 9em; float: left;">
                                    	<input type="text" size=10 name="tel2" id="tel2" class="input-sm" autocomplete="off" placeholder="-포함 입력" style="width: 11em;"> -->
-                                   	<input type="text" size=10 name="tel" id="tel" class="input-sm" autocomplete="off" placeholder="-포함 입력" style="width: 11em;">
+                                   	<input type="text" size=10 name="tel" id="tel" class="input-sm" autocomplete="off" placeholder="-포함 입력" style="width: 50%;">
                                	 <p>Phone<span>*</span></p>
                                    <!-- 	<input type="text" size=5 name="phone1" id="phone1" class="input-sm" readonly value="010" style="width: 9em; float: left;">
                                    	<input type="text" size=10 name="phone2" id="phone2" class="input-sm" autocomplete="off" placeholder="-포함 입력" style="width: 11em;"> -->
-                                   	<input type="text" size=10 name="phone" id="phone" class="input-sm" autocomplete="off" placeholder="-포함 입력" style="width: 11em;">
+                                   	<input type="text" size=10 name="phone" id="phone" class="input-sm" autocomplete="off" placeholder="-포함 입력" style="width: 50%;">
                                <!-- 주소 1우편번호2주소 3상세주소  #######################################-->
               				<div style="height: 10px"></div>
               				

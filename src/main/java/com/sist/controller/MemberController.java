@@ -57,7 +57,7 @@ public class MemberController {
 	{
 		int count = mDao.memberIdCount(id);
 		model.addAttribute("count",count);
-		return "member/idCheck_result.jsp";
+		return "member/idCheck_result";
 	}
 	
 	//회원가입 완료
