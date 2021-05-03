@@ -7,6 +7,18 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript">
+$(function(){
+	$("div.loading-more").slice(0, 9).show(); // 최초 9개 선택
+	$("#load").click(function(e){ // Load More를 위한 클릭 이벤트e
+		e.preventDefault();
+		$("div:hidden").slice(0, 9).show(); // 숨김 설정된 다음 10개를 선택하여 표시
+		if($("div:hidden").length == 0){ // 숨겨진 DIV가 있는지 체크
+			alert("더 이상 항목이 없습니다"); // 더 이상 로드할 항목이 없는 경우 경고
+		}
+	});
+});
+</script>
 </head>
 <body>
     <!-- Breadcrumb Section Begin -->
@@ -67,29 +79,8 @@
                         </div>
                         <a href="#" class="filter-btn">Filter</a>
                     </div>
-                    
-                    <div class="filter-widget">
-                        <h4 class="fw-title">Size</h4>
-                        <div class="fw-size-choose">
-                            <div class="sc-item">
-                                <input type="radio" id="s-size">
-                                <label for="s-size">s</label>
-                            </div>
-                            <div class="sc-item">
-                                <input type="radio" id="m-size">
-                                <label for="m-size">m</label>
-                            </div>
-                            <div class="sc-item">
-                                <input type="radio" id="l-size">
-                                <label for="l-size">l</label>
-                            </div>
-                            <div class="sc-item">
-                                <input type="radio" id="xs-size">
-                                <label for="xs-size">xs</label>
-                            </div>
-                        </div>
-                    </div>
                 </div>
+                
                 <div class="col-lg-9 order-1 order-lg-2">
                     <div class="product-show-option">
                         <div class="row">
@@ -129,7 +120,7 @@
          </div>
          <div class="loading-more" style="height:30px">
              <i class="icon_loading"></i>
-                  <a href="#">
+                  <a href="#" id="load">
                        Loading More
                   </a>
           </div>

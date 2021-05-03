@@ -51,9 +51,9 @@ public class DietFoodController {
 	}
 	
 	@RequestMapping("shop/dfood_detail.do")
-	public String dfood_detail(int uno,Model model)
+	public String dfood_detail(int no,Model model)
 	{
-		DietFoodDetailVO vo=dDao.dfoodDetailData(uno);
+		DietFoodDetailVO vo=dDao.dfoodDetailData(no);
 		model.addAttribute("vo", vo);
 		return "shop/dfood_detail";
 	}

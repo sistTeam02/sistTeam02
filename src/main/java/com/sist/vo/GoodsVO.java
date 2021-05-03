@@ -1,9 +1,10 @@
 package com.sist.vo;
 /*
- *  NO        NUMBER        
-	TITLE     VARCHAR2(300) 
-	POSTER    VARCHAR2(400) 
-	PRICE     NUMBER        
+ *  NO     NOT NULL NUMBER        
+	TITLE           VARCHAR2(300) 
+	POSTER          VARCHAR2(400) 
+	PRICE           NUMBER        
+	STOCK           VARCHAR2(20)  
  */
 public class GoodsVO {
 	private int no;

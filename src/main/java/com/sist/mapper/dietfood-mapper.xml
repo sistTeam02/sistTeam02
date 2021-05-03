@@ -4,18 +4,17 @@
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sist.mapper.dietfood-mapper">
   <!-- 
-	NO        NUMBER         
-	UNO       NUMBER         
-	TITLE     VARCHAR2(1000) 
-	POSTER    VARCHAR2(3000) 
-	PRICE     VARCHAR2(40)   
-	LINK      VARCHAR2(3000) 
+	NO     NOT NULL NUMBER         
+	TITLE           VARCHAR2(1000) 
+	POSTER          VARCHAR2(3000) 
+	PRICE           VARCHAR2(40)   
+	STOCK           VARCHAR2(20)   
    -->
   <!-- dietFood 목록 -->
   <select id="dfoodListData" resultType="DietFoodVO" parameterType="hashmap">
-    SELECT no,uno,title,poster,price,link,num
-    FROM (SELECT no,uno,title,poster,price,link,rownum as num
-    FROM (SELECT /*+ INDEX_ASC(dietfood_list dfl_no_pk) */ no,uno,title,poster,price,link
+    SELECT no,title,poster,price,stock,num
+    FROM (SELECT no,title,poster,price,stock,rownum as num
+    FROM (SELECT /*+ INDEX_ASC(dietfood_list dfl_no_pk) */ no,title,poster,price,stock
     FROM dietfood_list))
     WHERE num BETWEEN #{start} AND #{end}
   </select>
@@ -26,6 +25,6 @@
   <!-- dietFood 상세데이터 -->
   <select id="dfoodDetailData" resultType="DietFoodDetailVO" parameterType="int">
     SELECT * FROM dietfood_list
-    WHERE uno=#{uno}
+    WHERE no=#{no}
   </select>
 </mapper>

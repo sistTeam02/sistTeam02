@@ -30,9 +30,9 @@ public class DietFoodDAO extends SqlSessionDaoSupport {
 		return getSqlSession().selectOne("dfoodTotalPage");
 	}
 	
-	public DietFoodDetailVO dfoodDetailData(int uno)
+	public DietFoodDetailVO dfoodDetailData(int no)
 	{
-		return getSqlSession().selectOne("dfoodDetailData", uno);
+		return getSqlSession().selectOne("dfoodDetailData", no);
 	}
 	
 }

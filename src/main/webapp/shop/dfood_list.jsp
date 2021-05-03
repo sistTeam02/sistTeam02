@@ -79,7 +79,7 @@
                         <div class="row">
                            <c:forEach var="vo" items="${list }">
                                <div class="col-lg-4">
-                                  <a href="shop_detail.do?no=${vo.no }">
+                                  <a href="dfood_detail.do?no=${vo.no }">
                                      <img src="${vo.poster }">
                                         <div class="pi-text text-center">
 	                                       <p>${vo.title }</p>

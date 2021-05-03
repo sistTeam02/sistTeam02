@@ -62,13 +62,13 @@ $(function(){
                     <div class="col-lg-3 text-right col-md-3">
                         <ul class="nav-right">
                             <li class="heart-icon">
-                                <a href="#">
+                                <a href="#"><!-- 찜 리스트 -->
                                     <i class="icon_heart_alt"></i>
                                     <span>1</span>
                                 </a>
                             </li>
                             <li class="cart-icon">
-                                <a href="#">
+                                <a href="#"><!-- 장바구니 -->
                                     <i class="icon_bag_alt"></i>
                                     <span>3</span>
                                 </a>
@@ -108,7 +108,7 @@ $(function(){
                                         <h5>$120.00</h5>
                                     </div>
                                     <div class="select-button">
-                                        <a href="#" class="primary-btn view-card">VIEW CARD</a>
+                                        <a href="../shop/user_basket.do" class="primary-btn view-card">VIEW CARD</a>
                                         <a href="#" class="primary-btn checkout-btn">CHECK OUT</a>
                                     </div>
                                 </div>
@@ -168,7 +168,7 @@ $(function(){
                         </li>
                         <li><a href="#">쇼핑</a>
                             <ul class="dropdown">
-                                <li><a href="./blog-details.html">장바구니</a></li>
+                                <li><a href="../shop/user_basket.do">장바구니</a></li>
                                 <li><a href="./shopping-cart.html">주문확인</a></li>
                             </ul>
                         </li>
