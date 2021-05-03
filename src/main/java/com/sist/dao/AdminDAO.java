@@ -80,4 +80,9 @@ public class AdminDAO extends SqlSessionDaoSupport{
 	public int manageShopTotalpage(){
 		return getSqlSession().selectOne("manageShopTotalpage");
 	}
+	@Transactional(propagation=Propagation.REQUIRED,rollbackFor=Exception.class)
+	public void insertShopList_detail(Map map){
+		getSqlSession().insert("insertShopData",map);
+		getSqlSession().insert("insertShopListData",map);
+	}
 }

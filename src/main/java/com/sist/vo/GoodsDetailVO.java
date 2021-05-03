@@ -8,6 +8,7 @@ package com.sist.vo;
  */
 public class GoodsDetailVO {
 	private int no;
+	private int cno;
 	private String title;
 	private String poster;
 	private int price;
@@ -41,6 +42,12 @@ public class GoodsDetailVO {
 	}
 	public void setDetail_poster(String detail_poster) {
 		this.detail_poster = detail_poster;
+	}
+	public int getCno() {
+		return cno;
+	}
+	public void setCno(int cno) {
+		this.cno = cno;
 	}
 	
 }

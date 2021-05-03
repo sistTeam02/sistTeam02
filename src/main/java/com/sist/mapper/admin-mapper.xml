@@ -132,4 +132,17 @@
 		from ${table}
 		where title Like '%'||#{keyword}||'%'
 	</select>
+	<!-- 상품추가 -->
+	<insert id="insertShopData" parameterType="hashmap">
+		<selectKey keyProperty="no" resultType="int" order="BEFORE">
+			SELECT NVL(Max(no)+1,1) from ${table}
+		</selectKey>
+		INSERT INTO ${table} VALUES(#{no},#{title},#{poster},#{price},#{detail_poster})
+	</insert>
+	<insert id="insertShopListData" parameterType="hashmap">
+		<selectKey keyProperty="no" resultType="int" order="BEFORE">
+			SELECT NVL(Max(no)+1,1) from ${table}
+		</selectKey>
+		INSERT INTO ${list_table}(no,title,poster,price) VALUES(#{no},#{title},#{poster},#{price})
+	</insert>
 </mapper>
