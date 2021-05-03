@@ -16,9 +16,8 @@
  <selectKey keyProperty="no" resultType="int" order="BEFORE">
   SELECT NVL(MAX(no)+1,1) as no FROM freeboard
  </selectKey>
-  INSERT INTO freeboard VALUES(
+  INSERT INTO freeboard(no,name,subject,pwd,content,regdate,hit) VALUES(
      #{no},
-     #{id},
      #{name},
      #{subject},
      #{pwd},
