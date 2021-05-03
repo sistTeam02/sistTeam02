@@ -46,4 +46,5 @@ public class MypageDAO extends SqlSessionDaoSupport{
 	public int mypageChatPlanDataTotalPage(){
 		return getSqlSession().selectOne("mypageChatPlanDataTotalPage");
 	}
+	
 }

@@ -16,6 +16,7 @@ public class MypageController {
 	private MypageDAO fdao;
 	
 	
+	
 	//메인으로 전송
 	//관심목록(찜&장바구니)
 	@GetMapping("mypage/like_list.do")
@@ -41,7 +42,7 @@ public class MypageController {
 	@GetMapping("mypage/mypage_schedule.do")
 	public String mypage_schdule(String page,String pageP,Model model){
 		
-		//^잘라서 출력하고싶다~~~~~~
+		//^잘라서 출력
 		//채팅데이터 불러오기
 		/*String sList="";
 		List<Chat_foodVO> fList=fdao.mypage_chat_food(id);
@@ -88,6 +89,8 @@ public class MypageController {
 		List<Chat_planVO> pList=fdao.mypageChatPlanListData(map);
 		int totalpageP=fdao.mypageChatPlanDataTotalPage();
 		
+		
+		
 		final int BLOCKP=10;
 		int startPageP=((curpageP-1)/BLOCKP*BLOCKP)+1;
 		int endPageP=((curpageP-1)/BLOCKP*BLOCKP)+BLOCKP;
@@ -101,8 +104,6 @@ public class MypageController {
 		model.addAttribute("BLOCKP",BLOCKP);
 		model.addAttribute("startPageP",startPageP);
 		model.addAttribute("endPageP",endPageP);
-		/*model.addAttribute("fList",fList);
-		model.addAttribute("pList",pList);*/
 		
 		model.addAttribute("bread_jsp","../mypage/bread3.jsp");
 		model.addAttribute("mypage_jsp","../mypage/mypage_schedule.jsp");
