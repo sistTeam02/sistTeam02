@@ -142,7 +142,7 @@ function make_cal(year,month){
 							      </tr>
 							    </thead>
 							    <tbody>
-							    <c:forEach var="vo" items="${fList }">
+							    <c:forEach var="vo" items="${list }">
 							      <tr>
 							        <td>${vo.fooddate }</td>
 							        <td>${vo.whenfood }</td>
@@ -152,6 +152,21 @@ function make_cal(year,month){
 							      </c:forEach>
 							    </tbody>
 							  </table>
+							  <table class="table">
+							  	<tr>
+							  		<td class="text-center">
+							  			<ul class="pagination">
+							  				<li><a href="#">&lt;</a></li>
+							  				<c:forEach var="i" begin="${startPage }" end="${endPage }">
+							  					<li><a href="../mypage/mypage_schedule.do?page=${i }">${i }</a></li>
+							  				</c:forEach>
+							  					<li><a href="#">&gt;</a>
+							  			</ul>
+							  		</td>
+							  	</tr>
+							  </table>
+							  
+							 
 							</div>
 							<div style="height:20px"></div>
 							 <p>채팅에 기록된 운동을 출력합니다</p> 

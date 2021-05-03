@@ -1,10 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sist.mapper.mypage-mapper">
-	<select id="mypage_chat_food" resultType="Chat_foodVO" parameterType="string">
+	<!-- <select id="mypage_chat_food" resultType="Chat_foodVO" parameterType="string">
 	 SELECT fooddate,whenfood,foodname,foodkcal,foodgram FROM chat_food
 	</select>
 	<select id="mypage_chat_plan" resultType="Chat_PlanVO" parameterType="string">
 		SELECT plandate,time,sport FROM chat_plan
+	</select> -->
+	<!-- 채팅 음식 목록 출력 -->
+	<select id="mypageChatFoodListData" resultType="Chat_foodVO" parameterType="hashmap">
+		SELECT fooddate,whenfood,foodname,foodkcal,foodgram,num
+		FROM (SELECT fooddate,whenfood,foodname,foodkcal,foodgram,rownum as num
+		FROM (SELECT fooddate,whenfood,foodname,foodkcal,foodgram
+		FROM chat_food))
+		WHERE num BETWEEN #{start} AND #{end}	
+	</select>
+	<!-- 음식 총페이지 출력 -->
+	<select id="mypageChatFoodDataTotalPage" resultType="int">
+		SELECT CEIL(COUNT(*)/10.0) FROM chat_food
 	</select>
 </mapper>

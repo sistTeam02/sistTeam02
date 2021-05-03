@@ -39,17 +39,45 @@ public class MypageController {
 
 	//나만의 계획(채팅정보 불러오기)
 	@GetMapping("mypage/mypage_schedule.do")
-	public String mypage_schdule(String id,Model model){
+	public String mypage_schdule(String page,Model model){
 		
 		//^잘라서 출력하고싶다~~~~~~
-		String sList="";
+		//채팅데이터 불러오기
+		/*String sList="";
 		List<Chat_foodVO> fList=fdao.mypage_chat_food(id);
 		List<Chat_planVO> pList=fdao.mypage_chat_plan(id);
+		*/
+		//페이지 나누기
+		if(page==null)
+			page="1";
+		int curpage=Integer.parseInt(page);
+		Map map=new HashMap();
+		int rowSize=10;
+		int start=(rowSize*curpage)-(rowSize-1);
+		int end=rowSize*curpage;
+		map.put("start",start);
+		map.put("end", end);
+		List<Chat_foodVO> list=fdao.mypageChatFoodListData(map);
+		int totalpage=fdao.mypageChatFoodDataTotalPage();
+		
+		final int BLOCK=10;
+		int startPage=((curpage-1)/BLOCK*BLOCK)+1;
+		int endPage=((curpage-1)/BLOCK*BLOCK)+BLOCK;
+		int allPage=totalpage;
+		if(endPage>allPage)
+			endPage=allPage;
 		
 		
+		model.addAttribute("list",list);
+		model.addAttribute("curpage",curpage);
+		model.addAttribute("allPage",allPage);
+		model.addAttribute("BLOCK",BLOCK);
+		model.addAttribute("startPage",startPage);
+		model.addAttribute("endPage",endPage);
 		
-		model.addAttribute("fList",fList);
-		model.addAttribute("pList",pList);
+		
+		/*model.addAttribute("fList",fList);
+		model.addAttribute("pList",pList);*/
 		
 		model.addAttribute("bread_jsp","../mypage/bread3.jsp");
 		model.addAttribute("mypage_jsp","../mypage/mypage_schedule.jsp");
