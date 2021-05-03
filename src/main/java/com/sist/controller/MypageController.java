@@ -39,7 +39,7 @@ public class MypageController {
 
 	//나만의 계획(채팅정보 불러오기)
 	@GetMapping("mypage/mypage_schedule.do")
-	public String mypage_schdule(String page,Model model){
+	public String mypage_schdule(String page,String pageP,Model model){
 		
 		//^잘라서 출력하고싶다~~~~~~
 		//채팅데이터 불러오기
@@ -47,7 +47,7 @@ public class MypageController {
 		List<Chat_foodVO> fList=fdao.mypage_chat_food(id);
 		List<Chat_planVO> pList=fdao.mypage_chat_plan(id);
 		*/
-		//페이지 나누기
+		//페이지 나누기(음식)
 		if(page==null)
 			page="1";
 		int curpage=Integer.parseInt(page);
@@ -57,7 +57,7 @@ public class MypageController {
 		int end=rowSize*curpage;
 		map.put("start",start);
 		map.put("end", end);
-		List<Chat_foodVO> list=fdao.mypageChatFoodListData(map);
+		List<Chat_foodVO> fList=fdao.mypageChatFoodListData(map);
 		int totalpage=fdao.mypageChatFoodDataTotalPage();
 		
 		final int BLOCK=10;
@@ -67,8 +67,7 @@ public class MypageController {
 		if(endPage>allPage)
 			endPage=allPage;
 		
-		
-		model.addAttribute("list",list);
+		model.addAttribute("fList",fList);
 		model.addAttribute("curpage",curpage);
 		model.addAttribute("allPage",allPage);
 		model.addAttribute("BLOCK",BLOCK);
@@ -76,6 +75,32 @@ public class MypageController {
 		model.addAttribute("endPage",endPage);
 		
 		
+		//페이지나누기(운동)
+		if(pageP==null)
+			pageP="1";
+		int curpageP=Integer.parseInt(pageP);
+		Map mapP=new HashMap();
+		int rowSizeP=10;
+		int startP=(rowSizeP*curpageP)-(rowSizeP-1);
+		int endP=rowSizeP*curpageP;
+		map.put("startP",startP);
+		map.put("endP", endP);
+		List<Chat_planVO> pList=fdao.mypageChatPlanListData(map);
+		int totalpageP=fdao.mypageChatPlanDataTotalPage();
+		
+		final int BLOCKP=10;
+		int startPageP=((curpageP-1)/BLOCKP*BLOCKP)+1;
+		int endPageP=((curpageP-1)/BLOCKP*BLOCKP)+BLOCKP;
+		int allPageP=totalpageP;
+		if(endPageP>allPageP)
+			endPageP=allPageP;
+		
+		model.addAttribute("pList",pList);
+		model.addAttribute("curpageP",curpageP);
+		model.addAttribute("allPageP",allPageP);
+		model.addAttribute("BLOCKP",BLOCKP);
+		model.addAttribute("startPageP",startPageP);
+		model.addAttribute("endPageP",endPageP);
 		/*model.addAttribute("fList",fList);
 		model.addAttribute("pList",pList);*/
 		

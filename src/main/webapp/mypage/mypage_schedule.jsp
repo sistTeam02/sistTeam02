@@ -142,7 +142,7 @@ function make_cal(year,month){
 							      </tr>
 							    </thead>
 							    <tbody>
-							    <c:forEach var="vo" items="${list }">
+							    <c:forEach var="vo" items="${fList }">
 							      <tr>
 							        <td>${vo.fooddate }</td>
 							        <td>${vo.whenfood }</td>
@@ -188,6 +188,19 @@ function make_cal(year,month){
 							      </c:forEach>
 							    </tbody>
 							    </table>
+							    <table class="table">
+							  	<tr>
+							  		<td class="text-center">
+							  			<ul class="pagination">
+							  				<li><a href="#">&lt;</a></li>
+							  				<c:forEach var="j" begin="${startPageP }" end="${endPageP }">
+							  					<li><a href="../mypage/mypage_schedule.do?page=${j }">${j }</a></li>
+							  				</c:forEach>
+							  					<li><a href="#">&gt;</a>
+							  			</ul>
+							  		</td>
+							  	</tr>
+							  </table>
 							<div class="container" align="right">
 							  <button type="button" class="btn btn-lg btn-default" onclick="location.href='../chat/chat_main.do'">나만의 계획 세우러 가기</button>
 							</div>

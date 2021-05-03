@@ -40,4 +40,10 @@ public class MypageDAO extends SqlSessionDaoSupport{
 	public int mypageChatFoodDataTotalPage(){
 		return getSqlSession().selectOne("mypageChatFoodDataTotalPage");
 	}
+	public List<Chat_planVO> mypageChatPlanListData(Map map){
+		return getSqlSession().selectList("mypageChatPlanListData",map);
+	}
+	public int mypageChatPlanDataTotalPage(){
+		return getSqlSession().selectOne("mypageChatPlanDataTotalPage");
+	}
 }

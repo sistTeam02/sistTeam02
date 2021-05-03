@@ -19,4 +19,16 @@
 	<select id="mypageChatFoodDataTotalPage" resultType="int">
 		SELECT CEIL(COUNT(*)/10.0) FROM chat_food
 	</select>
+	<!-- 채팅 운동 목록 출력 -->
+	<select id="mypageChatPlanListData" resultType="Chat_PlanVO" parameterType="hashmap">
+	 SELECT plandate,time,sport,num
+		FROM (SELECT plandate,time,sport,rownum as num
+		FROM (SELECT plandate,time,sport
+		FROM chat_plan))
+		WHERE num BETWEEN #{startP} AND #{endP}
+	</select>
+	<!-- 운동 총페이지 출력 -->
+	<select id="mypageChatPlanDataTotalPage" resultType="int">
+		SELECT CEIL(COUNT(*)/10.0) FROM chat_plan
+	</select>
 </mapper>
