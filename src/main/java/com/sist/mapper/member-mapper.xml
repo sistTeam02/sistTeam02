@@ -20,7 +20,7 @@
 	 -->
 	 <!-- 회원가입 -->
 	<insert id="memberJoin" parameterType="MemberVO">
-	  INSERT INTO member VALUES(
+	  INSERT INTO member(id,pwd,name,birth,tel,phone,email,post,nickname,addr1,addr2) VALUES(
 	  	#{id},
 	  	#{pwd},
 	  	#{name},
@@ -31,8 +31,7 @@
 	  	#{post},
 	  	#{nickname},
 	  	#{addr1},
-	  	#{addr2},
-	  	n
+	  	#{addr2}
 	  )
 	</insert>
 	

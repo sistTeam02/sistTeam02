@@ -240,11 +240,20 @@ $(function(){
                                 <input type="text" id="id" name="id" style="float:left; margin-bottom: -15px;" autocomplete="off">
                                 <span>&nbsp;</span>
                                 <input type="button" value="중복체크" class="site-btn" style="float:left" id="checkBtn" >
+                                <span id="checkSpan"></span>
+                                
+                                 <div class="checkout__input">
+                                    <p>이름<span>*</span><span style="color: black;margin-left:15em; ">닉네임</span></p>
+                                   <input type="text" name="name" id="name" class="input-sm" autocomplete="off">
+                                   <input type="text" name="nickname" id="nickname" class="input-sm" placeholder="사용하실 닉네임" autocomplete="off">
+                                </div>
+                                
+                                
                             </div>
                             <div class="group-input">
                                 <label for="pass">Password *</label>
-                                <input type="text" id="pass">
-                                <input type="text" id="con-pass"  placeholder="Confirm Password *">
+                                <input type="password" name="pwd" id="pwd" class="input-sm"  style="float:left;margin-bottom:15px;" placeholder="비밀번호 입력">
+		                        <!-- <input type="password" name="pwd" id="pwd1" class="input-sm"  style="float:left" placeholder="재입력"> -->
                                  <span>&nbsp;</span>
                                   <p>생년월일<span>*</span></p>
                                   <input type="date" size=20 name="birth" value="2021-01-01" min="1921-01-01" max="2121-12-31" >
@@ -252,9 +261,14 @@ $(function(){
                                   <p>email<span>*</span></p>
                                    	<input type="text" size=45 name="email" id="email" class="input-sm" placeholder="user01@google.com" style="width:20em;" autocomplete="off">
                                 <span>&nbsp;</span>
+                               	 <p>Tel<span>*</span></p>
+                                  <!--  	<input type="text" size=5 name="tel1" id="tel1" class="input-sm" value="지역번호" style="width: 9em; float: left;">
+                                   	<input type="text" size=10 name="tel2" id="tel2" class="input-sm" autocomplete="off" placeholder="-포함 입력" style="width: 11em;"> -->
+                                   	<input type="text" size=10 name="tel" id="tel" class="input-sm" autocomplete="off" placeholder="-포함 입력" style="width: 11em;">
                                	 <p>Phone<span>*</span></p>
-                                   	<input type="text" size=5 name="phone1" id="phone1" class="input-sm" readonly value="010" style="width: 9em; float: left;">
-                                   	<input type="text" size=10 name="phone2" id="phone2" class="input-sm" autocomplete="off" placeholder="-포함 입력" style="width: 11em;">
+                                   <!-- 	<input type="text" size=5 name="phone1" id="phone1" class="input-sm" readonly value="010" style="width: 9em; float: left;">
+                                   	<input type="text" size=10 name="phone2" id="phone2" class="input-sm" autocomplete="off" placeholder="-포함 입력" style="width: 11em;"> -->
+                                   	<input type="text" size=10 name="phone" id="phone" class="input-sm" autocomplete="off" placeholder="-포함 입력" style="width: 11em;">
                                <!-- 주소 1우편번호2주소 3상세주소  #######################################-->
               				<div style="height: 10px"></div>
               				
@@ -275,7 +289,7 @@ $(function(){
      						
                                
                             </div>
-                            <input type="button" class="site-btn register-btn" id="btn1" value="REGISTER"></input>
+                            <input type="submit" class="site-btn register-btn" id="btn1" value="REGISTER"></input>
                         </form>
                         <div class="switch-login">
                             <a href="./login.html" class="or-login">Or Login</a>

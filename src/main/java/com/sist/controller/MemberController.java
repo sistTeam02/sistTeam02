@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.sist.dao.*;
 
@@ -51,11 +52,21 @@ public class MemberController {
 		return "main/main";
 	}
 	//회원 중복 체크
+	@RequestMapping("member/idCheck_result.do")
+	public String registerIdCheck(String id,Model model)
+	{
+		int count = mDao.memberIdCount(id);
+		model.addAttribute("count",count);
+		return "member/idCheck_result.jsp";
+	}
 	
 	//회원가입 완료
 	@PostMapping("member/register_ok.do")
-	public String registerDo(Model model)
+	public String registerDo(MemberVO vo)
 	{
+	
+		//DAO연결
+		mDao.registerMember(vo);
 		
 		return "redirect: ../main/main.do";
 	}

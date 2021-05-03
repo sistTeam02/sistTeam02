@@ -52,7 +52,7 @@ public class MemberDAO extends SqlSessionDaoSupport{
 	//아이디 중복체크
 	public int memberIdCount(String id)
 	{
-		int count=getSqlSession().selectOne("memberIdCheck",id);
+		int count=getSqlSession().selectOne("memberIdCount",id);
 		
 		return count;
 	}
@@ -63,5 +63,10 @@ public class MemberDAO extends SqlSessionDaoSupport{
 	
 		
 		return list;
+	}
+	//회원가입
+	public void registerMember(MemberVO vo)
+	{
+		getSqlSession().insert("memberJoin",vo);
 	}
 }
