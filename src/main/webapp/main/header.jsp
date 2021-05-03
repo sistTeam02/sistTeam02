@@ -2,7 +2,19 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-
+<script type="text/javascript" src="https://code.jquery.com/jquery.js"></script>
+<script type="text/javascript">
+$(function(){
+	
+	$('#main_button').click(function(){
+		let selectvalue=$('#category_selected option:selected').val();
+		let search=$('#main_text').val();
+		//console.log(selectvalue);
+		//location.href="../main/search.do?no="+selectvalue+"&search="+search;
+		console.log("../main/search.do?no="+selectvalue+"&search="+search);
+	})
+});
+</script>
 <body>
 	 <!-- Page Preloder -->
     <div id="preloder">
@@ -34,10 +46,16 @@
                     </div>
                     <div class="col-lg-7 col-md-7">
                         <div class="advanced-search">
-                            <button type="button" class="category-btn">All Categories</button>
+                            <!-- <button type="button" class="category-btn">카테고리</button>-->
+                            <select class=category-btn id="category_selected">
+                            	<option value="0">카테고리 전체</option>
+                            	<option value="1">홈 트레이닝</option>
+                            	<option value="2">건강 식품</option>
+                            	<option value="3">운동 기구 & 용품</option>
+                            </select>
                             <div class="input-group">
-                                <input type="text" placeholder="What do you need?">
-                                <button type="button"><i class="ti-search"></i></button>
+                                <input type="text" placeholder="무엇을 찾으시나요?" id="main_text">
+                                <button type="button" id="main_button"><i class="ti-search"></i></button>
                             </div>
                         </div>
                     </div>

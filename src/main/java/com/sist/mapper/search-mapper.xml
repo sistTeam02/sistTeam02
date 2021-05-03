@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sist.mapper.search-mapper">
+
+
+	<select id="searchGoods" parameterType="String" resultType="GoodsVO">
+		SELECT no, title, poster, price, rownum FROM goods_list 
+		WHERE title LIKE '%'||#{search}||'%' AND <![CDATA[rownum <= 8]]>
+	</select>
+	<select id="searchDietfood" parameterType="String" resultType="DietFoodVO">
+		SELECT no, title, poster, price, rownum FROM dietfood_list 
+		WHERE title LIKE '%'||#{search}||'%' AND <![CDATA[rownum <= 8]]>
+	</select>
+
+
+	<select id="searchGoodsAll" parameterType="hashmap" resultType="GoodsVO">
+		SELECT no, title, poster, price, num 
+		FROM (SELECT no, title, poster, price, rownum as num
+		FROM (SELECT no, title, poster, price 
+		FROM goods_list WHERE title LIKE '%'||#{search}||'%' ORDER BY no ASC)) 
+        WHERE num BETWEEN #{start} AND {end};
+	</select>
+	<select id="searchDietfoodAll" parameterType="hashmap" resultType="DietFoodVO">
+		SELECT no, title, poster, price, num 
+		FROM (SELECT no, title, poster, price, rownum as num
+		FROM (SELECT no, title, poster, price 
+		FROM dietfood_list WHERE title LIKE '%'||#{search}||'%' ORDER BY no ASC)) 
+        WHERE num BETWEEN #{start} AND {end};
+	</select>
+</mapper>
