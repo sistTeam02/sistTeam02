@@ -43,73 +43,81 @@ public class MypageController {
 	public String mypage_schdule(String page,String pageP,Model model){
 		
 		//^잘라서 출력
-		//채팅데이터 불러오기
-		/*String sList="";
-		List<Chat_foodVO> fList=fdao.mypage_chat_food(id);
-		List<Chat_planVO> pList=fdao.mypage_chat_plan(id);
-		*/
-		//페이지 나누기(음식)
-		if(page==null)
-			page="1";
-		int curpage=Integer.parseInt(page);
-		Map map=new HashMap();
-		int rowSize=10;
-		int start=(rowSize*curpage)-(rowSize-1);
-		int end=rowSize*curpage;
-		map.put("start",start);
-		map.put("end", end);
-		List<Chat_foodVO> fList=fdao.mypageChatFoodListData(map);
-		int totalpage=fdao.mypageChatFoodDataTotalPage();
-		
-		final int BLOCK=10;
-		int startPage=((curpage-1)/BLOCK*BLOCK)+1;
-		int endPage=((curpage-1)/BLOCK*BLOCK)+BLOCK;
-		int allPage=totalpage;
-		if(endPage>allPage)
-			endPage=allPage;
-		
-		model.addAttribute("fList",fList);
-		model.addAttribute("curpage",curpage);
-		model.addAttribute("allPage",allPage);
-		model.addAttribute("BLOCK",BLOCK);
-		model.addAttribute("startPage",startPage);
-		model.addAttribute("endPage",endPage);
-		
-		
-		//페이지나누기(운동)
-		if(pageP==null)
-			pageP="1";
-		int curpageP=Integer.parseInt(pageP);
-		Map mapP=new HashMap();
-		int rowSizeP=10;
-		int startP=(rowSizeP*curpageP)-(rowSizeP-1);
-		int endP=rowSizeP*curpageP;
-		map.put("startP",startP);
-		map.put("endP", endP);
-		List<Chat_planVO> pList=fdao.mypageChatPlanListData(map);
-		int totalpageP=fdao.mypageChatPlanDataTotalPage();
-		
-		
-		
-		final int BLOCKP=10;
-		int startPageP=((curpageP-1)/BLOCKP*BLOCKP)+1;
-		int endPageP=((curpageP-1)/BLOCKP*BLOCKP)+BLOCKP;
-		int allPageP=totalpageP;
-		if(endPageP>allPageP)
-			endPageP=allPageP;
-		
-		model.addAttribute("pList",pList);
-		model.addAttribute("curpageP",curpageP);
-		model.addAttribute("allPageP",allPageP);
-		model.addAttribute("BLOCKP",BLOCKP);
-		model.addAttribute("startPageP",startPageP);
-		model.addAttribute("endPageP",endPageP);
-		
-		model.addAttribute("bread_jsp","../mypage/bread3.jsp");
-		model.addAttribute("mypage_jsp","../mypage/mypage_schedule.jsp");
-		model.addAttribute("main_jsp","../mypage/mypage_main.jsp");
-		return "main/main";
+				//채팅데이터 불러오기
+				/*String sList="";
+				List<Chat_foodVO> fList=fdao.mypage_chat_food(id);
+				List<Chat_planVO> pList=fdao.mypage_chat_plan(id);
+				*/
+				//페이지 나누기(음식)
+				if(page==null)
+					page="1";
+				int curpage=Integer.parseInt(page);
+				Map map=new HashMap();
+				int rowSize=10;
+				int start=(rowSize*curpage)-(rowSize-1);
+				int end=rowSize*curpage;
+				map.put("start", start);
+				map.put("end", end);
+				
+				List<Chat_foodVO> fList=fdao.mypageChatFoodListData(map);
+				int totalpage=fdao.mypageChatFoodDataTotalPage();
+				
+				final int BLOCK=10;
+				int startPage=((curpage-1)/BLOCK*BLOCK)+1;
+				int endPage=((curpage-1)/BLOCK*BLOCK)+BLOCK;
+				int allPage=totalpage;
+				if(endPage>allPage)
+					endPage=allPage;
+				
+				model.addAttribute("fList",fList);
+				model.addAttribute("curpage",curpage);
+				model.addAttribute("allPage",allPage);
+				model.addAttribute("BLOCK",BLOCK);
+				model.addAttribute("startPage",startPage);
+				model.addAttribute("endPage",endPage);
+				
+				
+				//페이지나누기(운동)
+				if(pageP==null)
+					pageP="1";
+				int curpageP=Integer.parseInt(pageP);
+				Map mapP=new HashMap();
+				int rowSizeP=10;
+				int startP=(rowSizeP*curpageP)-(rowSizeP-1);
+				int endP=rowSizeP*curpageP;
+				mapP.put("startP", startP);
+				mapP.put("endP", endP);
+				
+				List<Chat_planVO> pList=fdao.mypageChatPlanListData(mapP);
+				for(Chat_planVO vo:pList){
+					String s=vo.getSport();
+					s=s.replace("^"," ");
+					vo.setSport(s);
+				}
+				
+				int totalpageP=fdao.mypageChatPlanDataTotalPage();
+				
+				final int BLOCKP=10;
+				int startPageP=((curpageP-1)/BLOCKP*BLOCKP)+1;
+				int endPageP=((curpageP-1)/BLOCKP*BLOCKP)+BLOCKP;
+				int allPageP=totalpageP;
+				if(endPageP>allPageP)
+					endPageP=allPageP;
+				
+				model.addAttribute("pList",pList);
+				model.addAttribute("curpageP",curpageP);
+				model.addAttribute("allPageP",allPageP);
+				model.addAttribute("BLOCKP",BLOCKP);
+				model.addAttribute("startPageP",startPageP);
+				model.addAttribute("endPageP",endPageP);
+				
+				model.addAttribute("bread_jsp","../mypage/bread3.jsp");
+				model.addAttribute("mypage_jsp","../mypage/mypage_schedule.jsp");
+				model.addAttribute("main_jsp","../mypage/mypage_main.jsp");
+				return "main/main";
 	}
+	
+	
 	//회원정보수정
 	@GetMapping("mypage/mypage_update.do")
 	public String mypage_update(Model model){
@@ -120,5 +128,6 @@ public class MypageController {
 		model.addAttribute("main_jsp","../mypage/mypage_main.jsp");
 		return "main/main";
 	}
+	
 	
 }

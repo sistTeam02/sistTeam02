@@ -194,7 +194,7 @@ function make_cal(year,month){
 							  			<ul class="pagination">
 							  				<li><a href="#">&lt;</a></li>
 							  				<c:forEach var="j" begin="${startPageP }" end="${endPageP }">
-							  					<li><a href="../mypage/mypage_schedule.do?page=${j }">${j }</a></li>
+							  					<li><a href="../mypage/mypage_schedule.do?pageP=${j }">${j }</a></li>
 							  				</c:forEach>
 							  					<li><a href="#">&gt;</a>
 							  			</ul>

@@ -14,6 +14,7 @@
 		FROM (SELECT fooddate,whenfood,foodname,foodkcal,foodgram
 		FROM chat_food))
 		WHERE num BETWEEN #{start} AND #{end}	
+		ORDER BY fooddate DESC
 	</select>
 	<!-- 음식 총페이지 출력 -->
 	<select id="mypageChatFoodDataTotalPage" resultType="int">
@@ -21,11 +22,12 @@
 	</select>
 	<!-- 채팅 운동 목록 출력 -->
 	<select id="mypageChatPlanListData" resultType="Chat_PlanVO" parameterType="hashmap">
-	 SELECT plandate,time,sport,num
+		SELECT plandate,time,sport,num
 		FROM (SELECT plandate,time,sport,rownum as num
 		FROM (SELECT plandate,time,sport
 		FROM chat_plan))
-		WHERE num BETWEEN #{startP} AND #{endP}
+		WHERE num BETWEEN #{startP} AND #{endP}	
+		ORDER BY plandate DESC
 	</select>
 	<!-- 운동 총페이지 출력 -->
 	<select id="mypageChatPlanDataTotalPage" resultType="int">
