@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.swing.plaf.synth.SynthScrollBarUI;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.sist.dao.AdminDAO;
 import com.sist.vo.DietFoodVO;
+import com.sist.vo.GoodsDetailVO;
 import com.sist.vo.QnABoardVO;
 import com.sist.vo.QnABoard_ReplyVO;
 import com.sist.vo.User_order_basketVO;
@@ -340,6 +343,32 @@ public class AdminRestController {
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
+		return json;
+	}
+	@PostMapping("admin/shop_updateData.do")
+	public String admin_shop_updateData(GoodsDetailVO vo){
+		String json="";
+		Map map=new HashMap();
+		if(vo.getCno()==1){//식품
+			map.put("table", "dietfood_list");
+		}else{//운동용품
+			map.put("table", "goods_list");
+		}
+		 map.put("no", vo.getNo());
+		 DietFoodVO fvo=dao.shop_updateBeforeData(map);
+		 JSONObject obj=new JSONObject();
+		 try {
+			obj.put("no", fvo.getNo());
+			obj.put("title", fvo.getTitle());
+			obj.put("price", fvo.getPrice());
+			json=obj.toJSONString();
+		} catch (Exception ex) {
+			obj.put("no", "");
+			obj.put("title", "");
+			obj.put("price", "");
+			json=obj.toJSONString();
+		}
+		 
 		return json;
 	}
 }

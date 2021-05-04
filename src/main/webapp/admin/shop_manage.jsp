@@ -32,6 +32,15 @@ height: 40em;
 .insert_table_Btn{
 	 margin: 0px 20px;
 }
+#update_no{
+margin-left: 77px;
+display: none;
+}
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
 </style>
 <script type="text/javascript" src="https://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
@@ -43,6 +52,8 @@ $(document).ready(function() {
 	$('#qna_allData').attr('id','manage_stock');
 	$('#qna_UpdateData').text('상품등록');
 	$('#qna_UpdateData').attr('id','product_insert');
+	$('#qna_search').text('상품수정');
+	$('#qna_search').attr('id','product_update');
 	$('.insert_div').hide();
 	mainpage_table();//첫화면 생성
 });
@@ -64,8 +75,22 @@ $(document).on('click','#product_insert',function(){
 	$('.manage_table tr').remove();
 	$('.row_button button').remove();
 	$('.insert_div').show();
+	$('#update_no').hide();
+	$('#form').attr('action','../admin/insert_product.do');//폼테그 주소수정
 	
 });
+/* 상품수정버튼 */
+ $(document).on('click','#product_update',function(){
+		$('.find_div').attr('class','nomal_div');//오버플로우 해제
+		$('.stock_searchbar').hide();
+		$('.manage_table tr').remove();
+		$('.row_button button').remove();
+		$('.insert_div').show();
+		$('#update_no').show();
+		$('#form').attr('action','../admin/update_product.do');//폼테그 주소수정
+
+	});
+
 /* 품절 상태변경 버튼클릭 cno=1 goods,cno=2 food*/
 $(document).on('click','.soldoutBtn',function(){
 	let no=$(this).parent().prevAll('.stock_no').text();
@@ -106,7 +131,7 @@ $(document).on('click','.soldoutBtn',function(){
   	
   }); 
 /* 검색어 입력 */
- $(document).on("keydown","#findShop_input",function(){
+ $(document).on("keyup","#findShop_input",function(){
 	 let table=$(this).parent().prev().children().val();
 	 let keyword=$(this).val();
 	 console.log(keyword);
@@ -114,6 +139,17 @@ $(document).on('click','.soldoutBtn',function(){
 	 	findData(keyword, table);
 	 }
  });
+ /* 업데이트 no검색 update_no_input*/
+  $(document).on("keyup","#update_no_input",function(){
+	 let cno=$('.insert_input:checked').val();
+	 let no=$('#update_no_input').val();
+	if(no!="" && cno!=undefined){
+		make_updateData(cno,no);
+	}else{
+		$('#title_input').val('');
+		$('#price_input').val('');
+	}
+  });
  $(function(){
 		let fileindex=1;
 	$('.plusBtn').click(function() {
@@ -273,8 +309,23 @@ function findData(keyword,table) {
 	
 	})
 }
-function make_insertTable(){
-	
+/* 업데이트전 데이터 가져오기 */
+function make_updateData(cno,no){
+	$.ajax({
+		type:'post',
+		data:{'cno':cno,'no':no},
+		url:'../admin/shop_updateData.do',
+		success:function(result){
+			let json=JSON.parse(result);
+			$('#title_input').val(json.title);
+			let price=json.price.replace(/,/g, "");
+			$('#price_input').val(price);
+			$('#update_hidden_no').attr('value',json.no);
+		},error:function(error){
+			alert("수정불러오기 오류");
+		}
+		
+	})
 }
 </script>
 </head>
@@ -301,7 +352,7 @@ function make_insertTable(){
 
     </div>
     <div class="insert_div" style="display:none;">
-	    <form method="post" action="../admin/insert_product.do" enctype="multipart/form-data">
+	    <form method="post" action="../admin/insert_product.do" enctype="multipart/form-data" id="form">
 	    <table class="insert_table" id="insert_table_main">
 	    	<tr>
 	    		<th width=30%>카테고리</th>
@@ -310,19 +361,20 @@ function make_insertTable(){
 	    			<input type="radio" value="1" name="cno" class="insert_input">식품</label>
 	    			<label>
 	    			<input type="radio" value="2"name="cno" class="insert_input">운동용품</label>
+	    			<span id="update_no">번호 <input type="number" style="width: 70px;" id="update_no_input"></span>
 	    		</td>
-	    			
 	    	</tr>
 	    	<tr>
 	    		<th width=30%>상품명</th>
 	    		<td>
-	    			<input type="text" size="30" class="insert_input" name="title">
+	    			<input type="text" size="30" class="insert_input" name="title" id="title_input">
+	    			<input type="hidden" name="no" value="1" id="update_hidden_no">
 	    		</td>
 	    	</tr>
 	    	<tr>
 	    		<th width=30%>가격</th>
 	    		<td>
-	    			<input type="text" size="10" class="insert_input" name="price">
+	    			<input type="text" size="10" class="insert_input" name="price" id="price_input">
 	    		</td>
 	    	</tr>
 	    	<tr>

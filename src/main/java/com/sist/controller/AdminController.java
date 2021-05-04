@@ -3,6 +3,8 @@ package com.sist.controller;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.multipart;
 
 import java.io.File;
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -54,7 +56,6 @@ public class AdminController {
 			MultipartFile mpf=request.getFile(itr.next());//파일명 입력
 			 String filename=mpf.getOriginalFilename();
 			 String filepath="C:/upload/"+filename;
-			 System.out.println("이름"+filename);
 			 if(i==0){
 				 list_filename=filename;
 			 }else{
@@ -70,17 +71,62 @@ public class AdminController {
 			if(vo.getCno()==1){//식품
 				map.put("table", "dietfood_detail");
 				map.put("list_table", "dietfood_list");
+				DecimalFormat df=new DecimalFormat("###,###");
+				map.put("price", df.format(vo.getPrice()));
 			}else{
 				map.put("table", "goods_detail");
 				map.put("list_table", "goods_list");
+				map.put("price", vo.getPrice());
 			} 
 			map.put("title", vo.getTitle());
 			map.put("poster", list_filename);
-			map.put("price", vo.getPrice());
 			map.put("detail_poster", detail_filename);
 			dao.insertShopList_detail(map);
 			 
 		
+		
+		return "redirect: ../main/admin_main.do?no=1";
+	}
+	@PostMapping("admin/update_product.do")
+	public String admin_update_product(MultipartHttpServletRequest request,Model model,GoodsDetailVO vo){
+		String list_filename="";
+		String detail_filename="";
+		Iterator<String> itr=request.getFileNames();
+		Map map=new HashMap();
+		int i=0;
+		
+		while(itr.hasNext()){
+			MultipartFile mpf=request.getFile(itr.next());//파일명 입력
+			 String filename=mpf.getOriginalFilename();
+			 String filepath="C:/upload/"+filename;
+			 if(filename=="")break;//파일없으면 탈출
+			 if(i==0){
+				 list_filename=filename;
+			 }else{
+				 detail_filename+=filename+"^";
+			 }
+			 i++;
+			 try {
+				mpf.transferTo(new File(filepath));
+			} catch (Exception ex) {
+				ex.printStackTrace();
+			}
+		}
+			if(vo.getCno()==1){//식품
+				map.put("table", "dietfood_detail");
+				map.put("list_table", "dietfood_list");
+				DecimalFormat df=new DecimalFormat("###,###");
+				map.put("price", df.format(vo.getPrice()));
+			}else{
+				map.put("table", "goods_detail");
+				map.put("list_table", "goods_list");
+				map.put("price", vo.getPrice());
+			}
+			map.put("no", vo.getNo());
+			map.put("title", vo.getTitle());
+			map.put("poster", list_filename);
+			map.put("detail_poster", detail_filename);
+			dao.updateShopList_detail(map);
 		
 		return "redirect: ../main/admin_main.do?no=1";
 	}

@@ -85,4 +85,12 @@ public class AdminDAO extends SqlSessionDaoSupport{
 		getSqlSession().insert("insertShopData",map);
 		getSqlSession().insert("insertShopListData",map);
 	}
+	public DietFoodVO shop_updateBeforeData(Map map){
+		return getSqlSession().selectOne("shop_updateBeforeData", map);
+	}
+	@Transactional(propagation=Propagation.REQUIRED,rollbackFor=Exception.class)
+	public void updateShopList_detail(Map map){
+		getSqlSession().insert("shop_updateListData",map);
+		getSqlSession().insert("shop_updateDetailData",map);
+	}
 }

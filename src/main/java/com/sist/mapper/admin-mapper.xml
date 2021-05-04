@@ -141,8 +141,35 @@
 	</insert>
 	<insert id="insertShopListData" parameterType="hashmap">
 		<selectKey keyProperty="no" resultType="int" order="BEFORE">
-			SELECT NVL(Max(no)+1,1) from ${table}
+			SELECT NVL(Max(no)+1,1) from ${list_table}
 		</selectKey>
 		INSERT INTO ${list_table}(no,title,poster,price) VALUES(#{no},#{title},#{poster},#{price})
 	</insert>
+	<!-- 상품 업데이트전 불러오기 -->
+	<select id="shop_updateBeforeData" parameterType="hashmap" resultType="DietFoodVO">
+	SELECT no,title,price 
+	from ${table}
+	where no=#{no}
+	</select>
+	<!-- 상품업데이트 -->
+	<update id="shop_updateListData" parameterType="hashmap">
+		Update ${list_table} set
+		title=#{title},price=#{price} 
+		<if test="poster!=null">
+		,poster=#{poster}
+		</if>
+		where no=#{no}
+	</update>
+	<update id="shop_updateDetailData" parameterType="hashmap">
+		Update ${table} set
+		title=#{title},price=#{price} 
+		<if test="poster!=null">
+		,poster=#{poster}
+		</if>
+		<if test="detail_poster!=null">
+		,detail_poster=#{detail_poster}
+		</if>
+		where no=#{no}
+	</update>
+	
 </mapper>
