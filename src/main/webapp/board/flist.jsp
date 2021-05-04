@@ -26,7 +26,7 @@ h1 {
   <table class="table">
   <tr>
    <td class="text-right">
-    <a href="../board/freeboard_insert.do" class="btn btn-sm btn-warning">글쓰기</a> 
+    <a href="../board/finsert.do" class="btn btn-sm btn-warning">글쓰기</a> 
    </td>
   </tr>
   </table>
@@ -42,7 +42,7 @@ h1 {
      <tr>
       <td width=10% class="text-center">${vo.no }</td>
       <td width=45%>
-       <a href="../board/freeboard_detail.do?no=${vo.no}&page=${curpage}">${vo.subject }</a>
+       <a href="../board/fdetail.do?no=${vo.no}&page=${curpage}">${vo.subject }</a>
        </td>
       <td width=15% class="text-center">${vo.name }</td>
       <td width=20% class="text-center"><fmt:formatDate value="${vo.regdate }" pattern="yyyy-MM-dd"/> </td>
@@ -53,7 +53,7 @@ h1 {
    <table class="table">
     <tr>
      <td class="text-left">
-     <form method=post action="../board/freeboard_find.do">
+     <form method=post action="../board/ffind.do">
       Search:<select name="fs" class="input-sm">
        <option value="N">이름</option>
        <option value="S">제목</option>
@@ -73,7 +73,7 @@ h1 {
          <ul class="pagination">
              <li><a href="#">&lt;</a></li>
 	         <c:forEach var="i" begin="${startPage }" end="${endPage }">
-	           <li><a href="../board/freeboard_list.do?page=${i }">${i }</a></li>
+	           <li><a href="../board/flist.do?page=${i }">${i }</a></li>
 	         </c:forEach>
 	         <li><a href="#">&gt;</a></li>
 	     </ul>

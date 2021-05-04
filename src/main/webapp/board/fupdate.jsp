@@ -21,7 +21,7 @@ h1 {
   <div class="container">
    <h1>수정하기</h1>
    <div class="row">
-    <form method="post" action="../board/freeboard_update_ok.do"><!-- .do : BoardController -->
+    <form method="post" action="../board/fupdate_ok.do"><!-- .do : BoardController -->
     <table class="table table-hover">
      <tr>
        <td width=15% class="text-right danger">이름</td>

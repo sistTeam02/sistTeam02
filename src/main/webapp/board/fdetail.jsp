@@ -64,9 +64,9 @@ $(function(){
        </tr>
        <tr>
          <td colspan="4" class="text-right">
-           <a href="../board/freeboard_update.do?no=${vo.no }&page=${page}" class="btn btn-xs btn-success">수정</a>
-           <a href="../board/freeboard_delete.do?no=${vo.no }&page=${page}" class="btn btn-xs btn-warning">삭제</a>
-           <a href="../board/freeabord_list.do?page=${page }" class="btn btn-xs btn-info">목록</a>
+           <a href="../board/fupdate.do?no=${vo.no }&page=${page}" class="btn btn-xs btn-success">수정</a>
+           <a href="../board/fdelete.do?no=${vo.no }&page=${page}" class="btn btn-xs btn-warning">삭제</a>
+           <a href="../board/flist.do?page=${page }" class="btn btn-xs btn-info">목록</a>
          </td>
        </tr>
      </table>

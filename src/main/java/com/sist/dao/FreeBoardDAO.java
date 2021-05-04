@@ -88,20 +88,29 @@ public class FreeBoardDAO extends SqlSessionDaoSupport{
 			return bCheck;
 		}
 
-		// 삭제
-		public boolean freeboardDelete(int no,String pwd)
-		{
-			boolean bCheck=false;
-			String db_pwd=getSqlSession().selectOne("freeboardGetPassword", no);
-			System.out.println("db_pwd="+db_pwd+",pwd="+pwd);
-			if(db_pwd.equals(pwd))
-			{
-				bCheck=true;
-				getSqlSession().delete("freeboardDelete",no);
-				getSqlSession().delete("freeboardReplyDelete", no);
-			}
-			return bCheck;
-		}
+		@Transactional(propagation=Propagation.REQUIRED,rollbackFor=Exception.class)
+	     public boolean freeboardDelete(int no,String pwd)
+	     {
+	    	 boolean bCheck=false;
+	    	 // 비밀번호 읽기
+	    	 String db_pwd=getSqlSession().selectOne("freeboardGetPassword",no);
+	    	 System.out.println("db_pwd="+db_pwd+",pwd="+pwd);
+	    	 if(pwd.equals(db_pwd))
+	    	 {
+	    		 bCheck=true;
+	    		 /*
+	    		  *   conn.setAutoCommit(false)
+	    		  */
+	    		 getSqlSession().delete("freeboardReplyDelete",no);
+	    		 getSqlSession().delete("freeboardDelete",no);
+	    		 /*
+	    		  *  conn.commit()  => @Around
+	    		  *  => 오류 발생 => conn.rollback() => @AfterThrowing
+	    		  *  => 정상 수행 => conn.setAutoCommit(true) => @After(finally)
+	    		  */
+	    	 }
+	    	 return bCheck;
+	     }
 
 }
 

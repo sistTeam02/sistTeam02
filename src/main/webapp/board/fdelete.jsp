@@ -21,14 +21,14 @@ h1 {
  <div class="container">
   <h1>삭제하기</h1>
   <div class="row">
-  <form method="post" action="../board/freeboard_delete_ok.do">
+  <form method="post" action="../board/fdelete_ok.do">
    <table class="table">
     <tr id="del" style="display:none">
        <td colspan="4" class="text-right">
-        <form method=post action="../board/freeboard_delete_ok.jsp" id="frm">
+        <form method=post action="../board/fdelete_ok.jsp" id="frm">
         비밀번호:<input type=password name=pwd size=10 class="input-sm">
-                 <input type=hidden name=no value="#{no}">
-                 <input type=hidden name=page value="#{page }">
+                 <input type=hidden name=no value="${no}">
+                 <input type=hidden name=page value="${page }">
                  <input type=button value="삭제" class="btn btn-sm btn-primary" id="delBtn">
         </form>
        </td>

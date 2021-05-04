@@ -42,14 +42,16 @@ public class FreeBoardController {
 	   model.addAttribute("list", list);
 	   model.addAttribute("curpage", curpage);
 	   model.addAttribute("totalpage", totalpage);
+	   model.addAttribute("main_jsp", "../board/flist.jsp");
 	   
-	   return "board/flist";
+	   return "main/main";
    }
    // 글쓰기
    @GetMapping("board/finsert.do")
-   public String board_insert()
+   public String board_insert(Model model)
    {
-	   return "board/finsert";
+	   model.addAttribute("main_jsp", "../board/finsert.jsp");
+	   return "main/main";
    }
    @PostMapping("board/finsert_ok.do")
    public String board_finsert_ok(FreeBoardVO vo)
@@ -66,8 +68,9 @@ public class FreeBoardController {
 	   //List<ReplyVO> rList=service.replyListData(no);
 	   model.addAttribute("vo", vo);
 	   model.addAttribute("page", page);
+	   model.addAttribute("main_jsp", "../board/fdetail.jsp");
 	   //model.addAttribute("rList", rList);
-	   return "board/fdetail";
+	   return "main/main";
    }
    @PostMapping("board/ffind.do")
    public String board_ffind(String fs,String ss,Model model)
@@ -83,7 +86,8 @@ public class FreeBoardController {
 	   int count=fDao.freeboardFindDataCount(map);
 	   model.addAttribute("list", list);
 	   model.addAttribute("count", count);
-	   return "board/ffind";
+	   model.addAttribute("main_jsp", "../board/ffind.jsp");
+	   return "main/main";
    }
    /*
     *   사용자 
@@ -104,7 +108,8 @@ public class FreeBoardController {
 	   // 데이터를 JSP로 전송
 	   model.addAttribute("vo", vo);
 	   model.addAttribute("page", page);
-	   return "board/fupdate";
+	   model.addAttribute("main_jsp", "../board/fupdate.jsp");
+	   return "main/main";
    }
    @PostMapping("board/fupdate_ok.do")
    public String board_fupdate_ok(FreeBoardVO vo,int page,Model model)
@@ -139,75 +144,7 @@ public class FreeBoardController {
 	   return "board/fdelete_ok";
    }
    
-   @PostMapping("board/reply_insert.do")
-   public String board_reply_insert(int bno,String msg,int page,RedirectAttributes ra,HttpSession session)
-   {
-	   ReplyVO vo=new ReplyVO();
-	   vo.setBno(bno);
-	   vo.setMsg(msg);
-	   String name=(String)session.getAttribute("name");
-	   String id=(String)session.getAttribute("id");
-	   vo.setName(name);
-	   vo.setId(id);
-	   
-	   // ReplyDAO로 전송 
-	   rDao.replyInsert(vo);
-	   // .do?bno=10&page=1
-	   ra.addAttribute("bno", bno);
-	   ra.addAttribute("page", page);
-	   return "redirect:reply_list.do"; // detail.do?no=1&page=1
-   }
-   
-   @PostMapping("board/reply_update.do")
-   public String board_reply_update(int no,int bno,int page,String msg,RedirectAttributes ra)
-   {
-	   // 수정 => DAO
-	   ReplyVO vo=new ReplyVO();
-	   vo.setNo(no);
-	   vo.setMsg(msg);
-	   rDao.replyUpdate(vo);
-	   // 수정 후에 데이터를 보내준다 
-	   ra.addAttribute("bno",bno);
-	   ra.addAttribute("page",page);
-	   return "redirect:reply_list.do";
-   }
-   
-   @PostMapping("board/reply_to_reply_insert.do")
-   public String board_reply_to_reply(int pno,int bno, String msg,int page,RedirectAttributes ra,HttpSession session)
-   {
-	   // 댓글 추가 작업 ==> DAO
-	   ReplyVO vo=new ReplyVO();
-	   String name=(String)session.getAttribute("name");
-	   String id=(String)session.getAttribute("id");
-	   vo.setName(name);
-	   vo.setId(id);
-	   vo.setBno(bno);
-	   vo.setMsg(msg);
-	   rDao.replyToReplyInsert(pno, vo);
-	   ra.addAttribute("bno", vo.getBno());
-	   ra.addAttribute("page", page);
-	   return "redirect:reply_list.do";
-   }
-   
-   @GetMapping("board/reply_delete.do")
-   public String board_reply_delete(int no,int bno,int page,RedirectAttributes ra)
-   {
-	   // 삭제 처리 ==> DAO(service)
-	   rDao.replyDelete(no);
-	   ra.addAttribute("bno", bno);
-	   ra.addAttribute("page", page);
-	   return "redirect:reply_list.do";
-   }
-   
-   @GetMapping("board/reply_list.do")
-   public String board_reply_list(int bno, int page, Model model)
-   {
-	   List<ReplyVO> rList=rDao.replyListData(bno);
-	   model.addAttribute("page", page);
-	   model.addAttribute("rList", rList);
-	   model.addAttribute("no", bno);
-	   return "board/reply_list";
-   }
+  
    
    
 }

@@ -71,7 +71,7 @@ $(document).ready(function(){
        <table class="table">
         <tr>
           <td class="text-right">
-            <a href="../board/freeboard_list.do" class="btn btn-sm btn-primary">목록</a>
+            <a href="../board/flist.do" class="btn btn-sm btn-primary">목록</a>
           </td>
         </tr>
        </table>
