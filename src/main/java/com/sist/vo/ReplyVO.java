@@ -17,7 +17,7 @@ import java.util.Date;
  */
 public class ReplyVO {
 	private int no;
-	private int mno;
+	private int bno;
 	private String id;
 	private String name;
 	private String msg;
@@ -71,11 +71,11 @@ public class ReplyVO {
 	public void setNo(int no) {
 		this.no = no;
 	}
-	public int getMno() {
-		return mno;
+	public int getBno() {
+		return bno;
 	}
-	public void setMno(int mno) {
-		this.mno = mno;
+	public void setBno(int bno) {
+		this.bno = bno;
 	}
 	public String getId() {
 		return id;

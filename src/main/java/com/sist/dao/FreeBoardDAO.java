@@ -51,7 +51,7 @@ public class FreeBoardDAO extends SqlSessionDaoSupport{
 		}
 		public FreeBoardVO freeboardUpdateData(int no)
 		{
-			return getSqlSession().selectOne("freeboardUpdateData", no);
+			return getSqlSession().selectOne("freeboardDetailData", no);
 		}
 		//찾기
 		public List<FreeBoardVO> freeboardFindData(Map map)

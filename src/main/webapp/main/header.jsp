@@ -147,7 +147,7 @@ $(function(){
                         </li>
                         <li><a href="#">커뮤니티</a>
                             <ul class="dropdown">
-                                <li><a href="../board/freeboard_list.do">자유게시판(운동팁 공유)</a></li>
+                                <li><a href="../board/flist.do">자유게시판(운동팁 공유)</a></li>
                                 <li><a href="#">고객문의 게시판</a></li>
                                 <li><a href="#">공지사항</a></li>
                             </ul>

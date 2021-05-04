@@ -24,7 +24,7 @@ $(function(){
 	// 파일 읽기(Ajax) => 자바스크립트에서 자바의 데이터를 출력 할 경우 => Jquery, EL => $ => 그래프
 	$.ajax({
 		type:'GET',
-		url:'reply_list.do',
+		url:'../board/reply_list.do',
 		data:{"bno":<c:out value="${vo.no}"/>,"page":<c:out value="${page}"/>},
 		success:function(result)
 		{
@@ -64,9 +64,9 @@ $(function(){
        </tr>
        <tr>
          <td colspan="4" class="text-right">
-           <a href="freeboard_update.do?no=${vo.no }&page=${page}" class="btn btn-xs btn-success">수정</a>
-           <a href="freeboard_delete.do?no=${vo.no }&page=${page}" class="btn btn-xs btn-warning">삭제</a>
-           <a href="freeabord_list.do?page=${page }" class="btn btn-xs btn-info">목록</a>
+           <a href="../board/freeboard_update.do?no=${vo.no }&page=${page}" class="btn btn-xs btn-success">수정</a>
+           <a href="../board/freeboard_delete.do?no=${vo.no }&page=${page}" class="btn btn-xs btn-warning">삭제</a>
+           <a href="../board/freeabord_list.do?page=${page }" class="btn btn-xs btn-info">목록</a>
          </td>
        </tr>
      </table>
