@@ -20,4 +20,10 @@ public class HometDAO extends SqlSessionDaoSupport{
 	public List<HometMainVO> hometListData(Map map) {
 		return getSqlSession().selectList("hometListData",map);
 	}
+	
+	// 총페이지 
+    public int hometTotalPage()
+    {
+    	return getSqlSession().selectOne("hometTotalPage");
+    }
 }
