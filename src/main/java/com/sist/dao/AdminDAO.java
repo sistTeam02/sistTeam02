@@ -93,4 +93,9 @@ public class AdminDAO extends SqlSessionDaoSupport{
 		getSqlSession().insert("shop_updateListData",map);
 		getSqlSession().insert("shop_updateDetailData",map);
 	}
+	@Transactional(propagation=Propagation.REQUIRED,rollbackFor=Exception.class)
+	public void deleteShopList_detail(Map map){
+		getSqlSession().insert("shop_deleteListData",map);
+		getSqlSession().insert("shop_deleteDetailData",map);
+	}
 }

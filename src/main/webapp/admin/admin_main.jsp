@@ -62,7 +62,7 @@ float: left;
 		<td><button class="admin_button" id="qna_allData">전체보기</button>
 			<button class="admin_button" id="qna_UpdateData">답변수정</button>
 			<button class="admin_button" id="qna_search">QnA검색</button>
-			<button class="admin_button">버튼</button></td>
+			<button class="admin_button" id="temp">미정</button></td>
 	</tr>
 	</table>
 	<div class="faq-section spad" style="padding-top: 5px;">

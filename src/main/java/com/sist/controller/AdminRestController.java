@@ -283,9 +283,9 @@ public class AdminRestController {
 	public String updateShopStock(int no,int cno){
 		String result="";
 		Map map=new HashMap();
-		if(cno==1){
+		if(cno==2){
 			map.put("table", "goods_list");
-		}else if(cno==2){
+		}else if(cno==1){
 			map.put("table", "dietfood_list");
 		}
 		map.put("no", no);
@@ -370,5 +370,20 @@ public class AdminRestController {
 		}
 		 
 		return json;
+	}
+	@PostMapping("admin/shop_deleteData.do")
+	public String admin_shop_deleteData(int no,int cno){
+		String result="";
+		Map map=new HashMap();
+		if(cno==1){//식품
+			map.put("table", "dietfood_detail");
+			map.put("list_table", "dietfood_list");
+		}else{//운동용품
+			map.put("table", "goods_detail");
+			map.put("list_table", "goods_list");
+		}
+		map.put("no", no);
+		dao.deleteShopList_detail(map);
+		return result;
 	}
 }

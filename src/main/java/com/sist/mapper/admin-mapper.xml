@@ -171,5 +171,13 @@
 		</if>
 		where no=#{no}
 	</update>
-	
+	<!-- 상품삭제 -->
+	<delete id="shop_deleteListData" parameterType="hashmap">
+		Delete from ${list_table}
+		WHERE no=#{no}
+	</delete>
+	<delete id="shop_deleteDetailData" parameterType="hashmap">
+		Delete from ${table}
+		WHERE no=#{no}
+	</delete>
 </mapper>

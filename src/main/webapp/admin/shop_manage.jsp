@@ -54,6 +54,8 @@ $(document).ready(function() {
 	$('#qna_UpdateData').attr('id','product_insert');
 	$('#qna_search').text('상품수정');
 	$('#qna_search').attr('id','product_update');
+	$('#temp').text('상품삭제');
+	$('#temp').attr('id','product_delete');	
 	$('.insert_div').hide();
 	mainpage_table();//첫화면 생성
 });
@@ -90,13 +92,23 @@ $(document).on('click','#product_insert',function(){
 		$('#form').attr('action','../admin/update_product.do');//폼테그 주소수정
 
 	});
-
+ /* 상품삭제버튼 */
+ $(document).on('click','#product_delete',function(){
+ 	$('.insert_div').hide();
+ 	$('.find_div').attr('class','nomal_div');//오버플로우 해제
+ 	$('.stock_searchbar').show();
+ 	$('.manage_table tr').remove();
+ 	$('.row_button button').remove();
+ 	page=1;
+ 	button=3;
+ 	getStockList(page,button);
+ });
 /* 품절 상태변경 버튼클릭 cno=1 goods,cno=2 food*/
 $(document).on('click','.soldoutBtn',function(){
 	let no=$(this).parent().prevAll('.stock_no').text();
-	let cno=1;
+	let cno=2;
 	if(no.includes("d")){
-		cno=2;
+		cno=1;
 		no=no.replace(/d/g, "");
 	}
 	let text=$(this).parent().prev().text();
@@ -106,6 +118,18 @@ $(document).on('click','.soldoutBtn',function(){
 		$(this).parent().prev().text('품절');
 	}
 	updateStock(no,cno);
+	
+});
+/* 삭제버튼 */
+$(document).on('click','.deleteBtn',function(){
+	$(this).parent().prev().text('삭제완료').css('color','red');
+	let no=$(this).parent().prevAll('.stock_no').text();
+	let cno=2;
+	if(no.includes("d")){
+		cno=1;
+		no=no.replace(/d/g, "");
+	}
+	deleteShopList(no,cno);
 	
 });
 /* 페이지화살표 클릭 */
@@ -134,10 +158,19 @@ $(document).on('click','.soldoutBtn',function(){
  $(document).on("keyup","#findShop_input",function(){
 	 let table=$(this).parent().prev().children().val();
 	 let keyword=$(this).val();
+	 button++;
 	 console.log(keyword);
 	 if(keyword!=""){
-	 	findData(keyword, table);
+	 	findData(keyword, table,button);
+	 }else{
+		 $('.insert_div').hide();
+		 $('.find_div').attr('class','nomal_div');//오버플로우 해제
+		 $('.stock_searchbar').show();
+		 $('.manage_table tr').remove();
+		 $('.row_button button').remove();
+		 getStockList(1,button-1);
 	 }
+	 button--;
  });
  /* 업데이트 no검색 update_no_input*/
   $(document).on("keyup","#update_no_input",function(){
@@ -226,7 +259,29 @@ function make_tr(json,button){
 			);
 		}
 		makeText_soldoutBtn();
-	}	
+	}else if(button==3){
+		for(i=0;i<json.length;i++){
+			$('.manage_table').append(
+				"<tr>"+
+					"<td class='stock_no'>"+json[i].stockNo+"</td>"+
+					"<td>"+json[i].title+"</td>"+
+					"<td class='isStock' id=isStock"+i+">"+json[i].stock+"</td>"+
+					"<td><button class='deleteBtn'>삭제</button></td>"+
+				"</tr>"	
+			);
+		}
+	}else if(button==4){
+		for(i=0;i<json.length;i++){
+			$('.manage_table').append(
+				"<tr>"+
+					"<td class='stock_no'>"+json[i].stockNo+"</td>"+
+					"<td>"+json[i].title+"</td>"+
+					"<td class='isStock' id=isStock"+i+">"+json[i].stock+"</td>"+
+					"<td><button class='deleteBtn'>삭제</button></td>"+
+				"</tr>"	
+			);
+		}
+	}
 }
 /* 품절업데이트 버튼클릭후*/
 function updateStock(no,cno) {
@@ -255,6 +310,7 @@ function makeText_soldoutBtn() {
 		}
 	}
 }
+
 /* 토탈페이지 */
 function getTotalpage() {
 	let totalpage="";
@@ -291,14 +347,13 @@ function pageBtn_makeicon(page,totalpage) {
 	}
 }
 /* 검색 데이터가져오기 admin/findShopStock.do*/
-function findData(keyword,table) {
+function findData(keyword,table,button) {
 	$.ajax({
 		type:'post',
 		url:'../admin/findShopStock.do',
 		data:{'keyword':keyword,'table':table},
 		success:function(result){
 			let json=JSON.parse(result);
-			button=2
 			$('.manage_table tr').remove();
 			 $('.row_button button').remove();
 			 make_tr(json,button);
@@ -323,6 +378,20 @@ function make_updateData(cno,no){
 			$('#update_hidden_no').attr('value',json.no);
 		},error:function(error){
 			alert("수정불러오기 오류");
+		}
+		
+	})
+}
+function deleteShopList(no,cno){
+	$.ajax({
+		type:'post',
+		data:{'cno':cno,'no':no},
+		url:'../admin/shop_deleteData.do',
+		success:function(result){
+			let json=JSON.parse(result);
+			
+		},error:function(error){
+			alert("삭제 오류");
 		}
 		
 	})
