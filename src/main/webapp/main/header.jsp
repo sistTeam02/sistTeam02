@@ -10,8 +10,13 @@ $(function(){
 		let selectvalue=$('#category_selected option:selected').val();
 		let search=$('#main_text').val();
 		//console.log(selectvalue);
-		//location.href="../main/search.do?no="+selectvalue+"&search="+search;
-		console.log("../main/search.do?no="+selectvalue+"&search="+search);
+		if(selectvalue==0){
+			location.href="../main/search.do?no="+selectvalue+"&search="+search;
+		}
+		else{
+			location.href="../main/search_category.do?no="+selectvalue+"&search="+search;
+		}
+		//console.log("../main/search.do?no="+selectvalue+"&search="+search);
 	})
 });
 </script>

@@ -2,7 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sist.mapper.search-mapper">
 
-
 	<select id="searchGoods" parameterType="String" resultType="GoodsVO">
 		SELECT no, title, poster, price, rownum FROM goods_list 
 		WHERE title LIKE '%'||#{search}||'%' AND <![CDATA[rownum <= 8]]>
@@ -18,13 +17,21 @@
 		FROM (SELECT no, title, poster, price, rownum as num
 		FROM (SELECT no, title, poster, price 
 		FROM goods_list WHERE title LIKE '%'||#{search}||'%' ORDER BY no ASC)) 
-        WHERE num BETWEEN #{start} AND {end};
+        WHERE num BETWEEN #{start} AND #{end}
+	</select>
+	<select id="searchGoodsAllPage" resultType="int" parameterType="string">
+		SELECT CEIL(COUNT(*)/12.0) FROM goods_list 
+		WHERE title LIKE '%'||#{search}||'%'
 	</select>
 	<select id="searchDietfoodAll" parameterType="hashmap" resultType="DietFoodVO">
 		SELECT no, title, poster, price, num 
 		FROM (SELECT no, title, poster, price, rownum as num
 		FROM (SELECT no, title, poster, price 
 		FROM dietfood_list WHERE title LIKE '%'||#{search}||'%' ORDER BY no ASC)) 
-        WHERE num BETWEEN #{start} AND {end};
+        WHERE num BETWEEN #{start} AND #{end}
+	</select>
+	<select id="searchDietfoodAllPage" resultType="int" parameterType="string">
+		SELECT CEIL(COUNT(*)/12.0) FROM dietfood_list 
+		WHERE title LIKE '%'||#{search}||'%'
 	</select>
 </mapper>
