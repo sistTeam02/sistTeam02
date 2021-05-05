@@ -21,12 +21,12 @@ h1 {
   <div class="container">
    <h1>수정하기</h1>
    <div class="row">
-    <form method="post" action="../board/fupdate_ok.do"><!-- .do : BoardController -->
+    <form method="post" action="../board/qupdate_ok.do"><!-- .do : BoardController -->
     <table class="table table-hover">
      <tr>
-       <td width=15% class="text-right info">이름</td>
+       <td width=15% class="text-right info">아이디</td>
        <td width=85%>
-        <input type=text name=name size=15 class="input-sm" value="${vo.name }">
+        <input type=text name=name size=15 class="input-sm" value="${vo.id }">
         <input type=hidden name=no value="${vo.no }">
         <input type=hidden name=page value="${page }">
        </td>

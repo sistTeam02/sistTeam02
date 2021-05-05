@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <script type="text/javascript" src="https://code.jquery.com/jquery.js"></script>
@@ -34,8 +35,13 @@ $(function(){
                   
                 </div>
                 <div class="ht-right">
+                	<c:if test="${sessionScope.id==null}">
                          <a href="../member/login.do" class="login-panel"><i class="fa fa-user"></i>Login</a>
                          <a href="../member/register.do" class="login-panel"><i class="fa fa-user"></i>Sign Up</a>
+                	</c:if>
+                	<c:if test="${sessionScope.id!=null}">
+                		 <a href="../member/logout.do" class="login-panel"><i class="fa fa-user"></i>로그아웃</a>
+                	</c:if>
                 </div>
             </div>
         </div>
@@ -118,7 +124,9 @@ $(function(){
                                     </div>
                                 </div>
                             </li>
-                            <li class="cart-price">User01님</li>
+                            <c:if test="${sessionScope.id!=null }">
+                            <li class="cart-price">${name }님</li>
+                            </c:if>
                         </ul>
                     </div>
                 </div>

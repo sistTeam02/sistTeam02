@@ -42,19 +42,19 @@ $(function(){
     <div class="row">
      <table class="table">
        <tr>
-        <th width=20% class="danger text-center">번호</th>
+        <th width=20% class="info text-center">번호</th>
         <td width=30% class="text-center">${vo.no }</td>
-        <th width=20% class="danger text-center">작성일</th>
+        <th width=20% class="info text-center">작성일</th>
         <td width=30% class="text-center"><fmt:formatDate value="${vo.regdate }" pattern="yyyy-MM-dd"/></td>
        </tr>
        <tr>
-        <th width=20% class="danger text-center">이름</th>
+        <th width=20% class="info text-center">이름</th>
         <td width=30% class="text-center">${vo.name}</td>
-        <th width=20% class="danger text-center">조회수</th>
+        <th width=20% class="info text-center">조회수</th>
         <td width=30% class="text-center">${vo.hit }</td>
        </tr>
        <tr>
-         <th width=20% class="danger text-center">제목</th>
+         <th width=20% class="info text-center">제목</th>
          <td colspan="3">${vo.subject}</td>
        </tr>
        <tr>

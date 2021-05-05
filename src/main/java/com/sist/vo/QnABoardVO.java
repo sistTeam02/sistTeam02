@@ -21,7 +21,7 @@ public class QnABoardVO {
 	private String id;
 	private String subject;
 	private String pwd;
-	private String regdate;
+	private Date regdate;
 	private int hit;
 	private String answer;
 	private String content;
@@ -66,10 +66,10 @@ public class QnABoardVO {
 		this.pwd = pwd;
 	}
 
-	public String getRegdate() {
+	public Date getRegdate() {
 		return regdate;
 	}
-	public void setRegdate(String regdate) {
+	public void setRegdate(Date regdate) {
 		this.regdate = regdate;
 	}
 	public int getHit() {

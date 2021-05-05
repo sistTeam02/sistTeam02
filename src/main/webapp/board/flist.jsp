@@ -31,7 +31,7 @@ h1 {
   </tr>
   </table>
    <table class="table">
-    <tr class="danger">
+    <tr class="info">
      <th width=10% class="text-center">번호</th>
      <th width=45% class="text-center">제목</th>
      <th width=15% class="text-center">이름</th>
