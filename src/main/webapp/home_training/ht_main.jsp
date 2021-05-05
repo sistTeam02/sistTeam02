@@ -172,7 +172,7 @@ h1 {
                             <div class="col-lg-4 col-sm-6">
                                 <div class="product-item">
                                     <div class="pi-pic">
-                                        <img src="../img/products/product-1.jpg" alt="">
+                                        <img src="${vo.poster }" alt="">
                                         <div class="sale pp-sale">Sale</div>
                                         <div class="icon">
                                             <i class="icon_heart_alt"></i>
@@ -184,12 +184,11 @@ h1 {
                                         </ul>
                                     </div>
                                     <div class="pi-text">
-                                        <div class="catagory-name">Towel</div>
+                                        <div class="catagory-name">${vo.title}</div>
                                         <a href="#">
                                             <h5>Pure Pineapple</h5>
                                         </a>
                                         <div class="product-price">
-                                            ${vo.no }
                                             <span>$35.00</span>
                                         </div>
                                     </div>
