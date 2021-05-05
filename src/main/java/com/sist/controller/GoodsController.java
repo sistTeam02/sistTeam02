@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.*;
@@ -57,8 +58,8 @@ public class GoodsController {
 	@GetMapping("shop/shop_detail.do")
 	public String shop_detail(int no,Model model)
 	{
-		GoodsDetailVO vo=gDao.goodsDetailData(no);
-		model.addAttribute("vo", vo);
+		GoodsDetailVO gvo=gDao.goodsDetailData(no);
+		model.addAttribute("gvo", gvo);
 		return "shop/shop_detail";
 	}
 }

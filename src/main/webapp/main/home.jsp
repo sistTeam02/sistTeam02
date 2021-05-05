@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -180,109 +181,48 @@
                 <div class="col-lg-8">
                     <div class="filter-control">
                         <ul>
-                            <li class="active">Clothings</li>
-                            <li>HandBag</li>
-                            <li>Shoes</li>
-                            <li>Accessories</li>
+                            <li class="active">운동용품</li>
+                            <li>건강식품</li>
                         </ul>
                     </div>
                     <div class="product-slider owl-carousel">
-                        <div class="product-item">
-                            <div class="pi-pic">
-                                <img src="../img/products/man-1.jpg" alt="">
-                                <div class="sale">Sale</div>
-                                <div class="icon">
-                                    <i class="icon_heart_alt"></i>
-                                </div>
-                                <ul>
-                                    <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
-                                    <li class="quick-view"><a href="#">+ Quick View</a></li>
-                                    <li class="w-icon"><a href="#"><i class="fa fa-random"></i></a></li>
-                                </ul>
-                            </div>
-                            <div class="pi-text">
-                                <div class="catagory-name">Coat</div>
-                                <a href="#">
-                                    <h5>Pure Pineapple</h5>
-                                </a>
-                                <div class="product-price">
-                                    $14.00
-                                    <span>$35.00</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product-item">
-                            <div class="pi-pic">
-                                <img src="../img/products/man-2.jpg" alt="">
-                                <div class="icon">
-                                    <i class="icon_heart_alt"></i>
-                                </div>
-                                <ul>
-                                    <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
-                                    <li class="quick-view"><a href="#">+ Quick View</a></li>
-                                    <li class="w-icon"><a href="#"><i class="fa fa-random"></i></a></li>
-                                </ul>
-                            </div>
-                            <div class="pi-text">
-                                <div class="catagory-name">Shoes</div>
-                                <a href="#">
-                                    <h5>Guangzhou sweater</h5>
-                                </a>
-                                <div class="product-price">
-                                    $13.00
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product-item">
-                            <div class="pi-pic">
-                                <img src="../img/products/man-3.jpg" alt="">
-                                <div class="icon">
-                                    <i class="icon_heart_alt"></i>
-                                </div>
-                                <ul>
-                                    <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
-                                    <li class="quick-view"><a href="#">+ Quick View</a></li>
-                                    <li class="w-icon"><a href="#"><i class="fa fa-random"></i></a></li>
-                                </ul>
-                            </div>
-                            <div class="pi-text">
-                                <div class="catagory-name">Towel</div>
-                                <a href="#">
-                                    <h5>Pure Pineapple</h5>
-                                </a>
-                                <div class="product-price">
-                                    $34.00
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product-item">
-                            <div class="pi-pic">
-                                <img src="../img/products/man-4.jpg" alt="">
-                                <div class="icon">
-                                    <i class="icon_heart_alt"></i>
-                                </div>
-                                <ul>
-                                    <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
-                                    <li class="quick-view"><a href="#">+ Quick View</a></li>
-                                    <li class="w-icon"><a href="#"><i class="fa fa-random"></i></a></li>
-                                </ul>
-                            </div>
-                            <div class="pi-text">
-                                <div class="catagory-name">Towel</div>
-                                <a href="#">
-                                    <h5>Converse Shoes</h5>
-                                </a>
-                                <div class="product-price">
-                                    $34.00
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                        <div class="product-list">
+                           <c:forEach var="gvo" items="${gvo.list }">
+                               <div class="product-item" style="width:262.5px;height:410.5px">
+                                     <div class="pi-pic" style="width:262.5px;height:262.5px">
+                                        <img src="${gvo.poster }">
+                                        <!-- <div class="sale pp-sale">Sale</div> -->
+                                        <div class="icon">
+                                          <!-- 찜으로 이동 -->
+                                          <a href="#">
+                                            <i class="icon_heart_alt"></i>
+                                          </a>
+                                        </div>
+                                        <ul class="text-left">
+                                          <!-- 장바구니로 이동 -->
+                                            <li class="w-icon active">
+                                              <a href="../shop/user_basket.do"><i class="icon_bag_alt"></i></a>
+                                            </li>
+                                        </ul>
+                                     </div> 
+                                     <a href="shop_detail.do?no=${gvo.no }">
+                                        <div class="pi-text text-center">
+	                                       <p>${gvo.title }</p>
+	                                    </div>
+	                                 </a>
+	                                 <div class="product-price text-center" style="font-size:13pt;font-weight:bold;color:#648cff;height:55px">
+	                                    <span><fmt:formatNumber value="${gvo.price }"/>&nbsp;원</span>
+	                                 </div>
+	                              </div>
+                            </c:forEach>
+                         </div>
+				      </div>
+                   </div>
                 </div>
                 <div class="col-lg-3 offset-lg-1">
-                    <div class="product-large set-bg m-large" data-setbg="../img/products/man-large.jpg">
-                        <h2>Men’s</h2>
-                        <a href="#">Discover More</a>
+                    <div class="product-large set-bg m-large" data-setbg="../img/shop_poster.jpg">
+                        <h2>운동용품</h2>
+                        <a href="../shop/shop_list.do">더보기</a>
                     </div>
                 </div>
             </div>

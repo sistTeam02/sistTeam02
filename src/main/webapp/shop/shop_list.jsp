@@ -7,6 +7,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
 $(function(){
 	$("div.loading-more").slice(0, 9).show(); // 최초 9개 선택
@@ -43,10 +44,10 @@ $(function(){
               <!-- 사이트 바 -->
                 <div class="col-lg-3 col-md-6 col-sm-8 order-2 order-lg-1 produts-sidebar-filter">
                     <div class="filter-widget">
-                        <h4 class="fw-title">Categories</h4>
+                        <h4 class="fw-title">카테고리</h4>
                         <ul class="filter-catagories">
-                            <li><a href="../shop/shop_detail.do">Sports Products</a></li>
-                            <li><a href="##">Diet Food</a></li>
+                            <li><a href="../shop/shop_detail.do">운동기구&용품</a></li>
+                            <li><a href="../shop/dfood_list.do">건강식품</a></li>
                         </ul>
                     </div>
                     <!-- <div class="filter-widget">
@@ -62,7 +63,7 @@ $(function(){
                         </div>
                     </div> -->
                     <div class="filter-widget">
-                        <h4 class="fw-title">Price</h4>
+                        <h4 class="fw-title">가격</h4>
                         <div class="filter-range-wrap">
                             <div class="range-slider">
                                 <div class="price-input">
@@ -101,16 +102,35 @@ $(function(){
                     </div>
                     <div class="product-list">
                         <div class="row">
-                           <c:forEach var="vo" items="${list }">
-                               <div class="col-lg-4">
-                                  <a href="shop_detail.do?no=${vo.no }">
-                                     <img src="${vo.poster }">
+                           <c:forEach var="gvo" items="${list }">
+                             <div class="col-lg-4">
+                               <div class="product-item" style="width:262.5px;height:410.5px">
+                                     <div class="pi-pic" style="width:262.5px;height:262.5px">
+                                        <img src="${gvo.poster }">
+                                        <!-- <div class="sale pp-sale">Sale</div> -->
+                                        <div class="icon">
+                                          <!-- 찜으로 이동 -->
+                                          <a href="#">
+                                            <i class="icon_heart_alt"></i>
+                                          </a>
+                                        </div>
+                                        <ul class="text-left">
+                                          <!-- 장바구니로 이동 -->
+                                            <li class="w-icon active">
+                                              <a href="../shop/user_basket.do"><i class="icon_bag_alt"></i></a>
+                                            </li>
+                                            <!-- <li class="quick-view"><a href="#">+ Quick View</a></li> -->
+                                            <!-- <li class="w-icon"><a href="#"><i class="fa fa-random"></i></a></li> -->
+                                        </ul>
+                                     </div> 
+                                     <a href="shop_detail.do?no=${gvo.no }">
                                         <div class="pi-text text-center">
-	                                       <p>${vo.title }</p>
+	                                       <p>${gvo.title }</p>
 	                                    </div>
-	                              </a>
-	                              <div class="product-price text-center" style="font-size:13pt;font-weight:bold;color:#648cff;height:55px">
-	                                 <span><fmt:formatNumber value="${vo.price }"/>&nbsp;원</span>
+	                                 </a>
+	                                 <div class="product-price text-center" style="font-size:13pt;font-weight:bold;color:#648cff;height:55px">
+	                                    <span><fmt:formatNumber value="${gvo.price }"/>&nbsp;원</span>
+	                                 </div>
 	                              </div>
                                </div>
                             </c:forEach>    
