@@ -43,7 +43,7 @@ h1 {
        <tr>
        <c:if test="${vo.filecount!=0 }">
          <tr>
-           <th width=20% class="danger text-center">첨부파일</th>
+           <th width=20% class="info text-center">첨부파일</th>
            <td colspan="3">
              <ul style="list-style-type: none">
                <c:forEach var="f" items="${fn }" varStatus="s">

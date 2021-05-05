@@ -21,7 +21,7 @@ h1 {
 <body>
  <div style="height:50px"></div>
  <div class="container">
-  <h1>자유게시판</h1>
+  <h1>공지사항</h1>
   <div class="row">
   <table class="table">
   <tr>

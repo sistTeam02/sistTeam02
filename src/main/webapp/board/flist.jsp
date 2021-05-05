@@ -23,6 +23,23 @@ h1 {
  <div class="container">
   <h1>자유게시판</h1>
   <div class="row">
+  <div class="col-lg-3 col-md-6 col-sm-8 order-2 order-lg-1">
+   <table class="table">
+    <tr class="info">
+     <th>커뮤니티</th>
+    </tr>
+    <tr>
+     <th><a href="../board/flist.do" style="text-align:center">자유게시판</a></th>
+    </tr>
+    <tr>
+     <th><a href="../board/qlist.do">문의게시판</a></th>
+    </tr>
+    <tr>
+     <th><a href="../board/nlist.do">공지사항</a></th>
+    </tr>
+   </table>
+  </div>
+  <div class="col-lg-9 order-1 order-lg-2">
   <table class="table">
   <tr>
    <td class="text-right">
@@ -83,6 +100,7 @@ h1 {
     </tr>
    </table>
   </div>
+ </div>
  </div>
 </body>
 </html>

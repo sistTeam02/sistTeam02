@@ -63,7 +63,7 @@ $(function(){
        </td>
      </tr>
      <tr>
-       <td width="15%" class="text-right danger">첨부파일</td>
+       <td width="15%" class="text-right info">첨부파일</td>
        <td width=85%>
          <table class="table">
            <tr>
