@@ -38,7 +38,9 @@ public class MemberDAO extends SqlSessionDaoSupport{
 			
 			if(db_pwd.equals(pwd))
 			{
-				result=name; //비밀번호ok 로그인
+				String admin=vo.getAdmin();					
+				result=name+"|"+admin;
+				
 			}
 			else
 			{

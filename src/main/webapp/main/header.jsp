@@ -125,7 +125,7 @@ $(function(){
                                 </div>
                             </li>
                             <c:if test="${sessionScope.id!=null }">
-                            <li class="cart-price">${name }님</li>
+                            <li class="cart-price">${name }${admin=='y'?"(관리자)":" "}님</li>
                             </c:if>
                         </ul>
                     </div>
@@ -166,19 +166,31 @@ $(function(){
                             </ul>
                         </li>
 						<li><a href="../chat/chat_main.do">채팅</a>
-							<ul class="dropdown">
-								<li><a href="../main/admin.do">관리자 결제승인</a></li>
-								<li><a href="../main/admin_main.do">관리자페이지</a></li>
-							</ul>
 						</li>
-                        <li><a href="../mypage/like_list.do">마이페이지</a>
-                            <ul class="dropdown">
-                                <li><a href="../mypage/like_list.do">운동&쇼핑몰 찜리스트</a></li>
-                                <li><a href="../mypage/buy_list.do">프로그램 신청 내역</a></li>
-                                <li><a href="../mypage/mypage_schedule.do">나만의 계획</a></li>
-                                <li><a href="../mypage/mypage_update.do">회원정보 수정</a></li>
-                            </ul>
-                        </li>
+					
+						
+						
+						<c:if test="${sessionScope.id!=null }">
+							<c:if test="${sessionScope.admin=='y' }">
+							<li><a href="#">관리자페이지</a>
+								<ul class="dropdown">
+									<li><a href="../main/admin.do">관리자 결제승인</a></li>
+									<li><a href="../main/admin_main.do">관리자페이지</a></li>
+								</ul>
+							</li>
+							</c:if>
+							<c:if test="${sessionScope.admin=='n' }">
+	                        <li><a href="../mypage/like_list.do">마이페이지</a>
+	                            <ul class="dropdown">
+	                                <li><a href="../mypage/like_list.do">운동&쇼핑몰 찜리스트</a></li>
+	                                <li><a href="../mypage/buy_list.do">프로그램 신청 내역</a></li>
+	                                <li><a href="../mypage/mypage_schedule.do">나만의 계획</a></li>
+	                                <li><a href="../mypage/mypage_update.do">회원정보 수정</a></li>
+	                            </ul>
+	                        </li>
+	                        </c:if>
+                        </c:if>
+                        
                         <li><a href="#">쇼핑</a>
                             <ul class="dropdown">
                                 <li><a href="../shop/user_basket.do">장바구니</a></li>

@@ -33,11 +33,19 @@ public class MemberController {
 	public String member_login_ok(String id,String pwd,Model model,HttpSession session)
 	{	
 		String result=mDao.isLogin(id, pwd);
+	
 		if(!(result.equals("NOID")||result.equals("NOPWD")))
 		{
+			StringTokenizer st =new StringTokenizer(result,"|");
+			String name=st.nextToken();
+			String admin=st.nextToken();
+			result = "OK";
+			
 			//로그인된 상태
 			session.setAttribute("id", id);
-			session.setAttribute("name", result);
+			session.setAttribute("name", name);
+			session.setAttribute("admin", admin);
+		
 		}
 		model.addAttribute("result",result);
 		
