@@ -52,7 +52,7 @@
       WHERE id=#{id}
 	</select>
 	<select id="memberPasswordCheck" resultType="MemberVO" parameterType="string">
-	  SELECT pwd,name FROM member
+	  SELECT pwd,name,admin FROM member
 	  WHERE id=#{id}
 	</select>
 	
