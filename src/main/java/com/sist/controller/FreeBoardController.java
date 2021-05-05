@@ -65,7 +65,7 @@ public class FreeBoardController {
    {
 	   // 데이터 읽기 => DAO연결 
 	   FreeBoardVO vo=fDao.freeboardDetailData(no);
-	   //List<ReplyVO> rList=service.replyListData(no);
+	   List<ReplyVO> rList=rDao.replyListData(no);
 	   model.addAttribute("vo", vo);
 	   model.addAttribute("page", page);
 	   model.addAttribute("main_jsp", "../board/fdetail.jsp");

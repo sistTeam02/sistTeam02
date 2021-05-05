@@ -157,7 +157,7 @@ $(function(){
                             <ul class="dropdown">
                                 <li><a href="../board/flist.do">자유게시판(운동팁 공유)</a></li>
                                 <li><a href="../board/qlist.do">고객문의 게시판</a></li>
-                                <li><a href="#">공지사항</a></li>
+                                <li><a href="../board/nlist.do">공지사항</a></li>
                             </ul>
                         </li>
                         <li><a href="../walk/walk.do">산책로</a>
