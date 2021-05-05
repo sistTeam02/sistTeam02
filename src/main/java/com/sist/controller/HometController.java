@@ -33,12 +33,27 @@ public class HometController {
 		List<HometMainVO> list = dao.hometListData(map);
 		int totalPage = dao.hometTotalPage();
 		
+		
+		final int BLOCK=10;
+		int startPage=((curpage-1)/BLOCK*BLOCK)+1; // 1~10 => startPage=1 , 11~20 => 11
+		int endPage=((curpage-1)/BLOCK*BLOCK)+BLOCK; // 1~10 => endPage=10, 11~20 => 20
+		if(endPage>totalPage)
+			endPage=totalPage;
+		
 		//ViewResolver로 데이터를 전송
 		model.addAttribute("list", list);
 		model.addAttribute("curpage", curpage);
 		model.addAttribute("totalPage", totalPage);
+		model.addAttribute("BLOCK", BLOCK);
 		
 		model.addAttribute("main_jsp", "../home_training/ht_main.jsp");
+		return "main/main";
+	}
+	
+	@GetMapping("home_training/ht_detail_free.do")
+	public String home_training_detail_free(int no, Model model) {
+		
+		
 		return "main/main";
 	}
 }

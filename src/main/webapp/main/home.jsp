@@ -138,25 +138,24 @@
     <!-- Women Banner Section End -->
 
     <!-- Deal Of The Week Section Begin-->
-    <section class="deal-of-week set-bg spad" data-setbg="../img/time-bg.jpg">
-        <div class="container">
+    <section class="deal-of-week set-bg spad" data-setbg="../img/maaa.png">
+        <div class="container" >
             <div class="col-lg-6 text-center">
                 <div class="section-title">
-                    <h2>Deal Of The Week</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed<br /> do ipsum dolor sit amet,
-                        consectetur adipisicing elit </p>
+                    <h2>수강 기간 할인권</h2>
+                    <!-- <p>홈트계 끝판왕 힙으뜸의 필라테스 트레이닝</p> -->
                     <div class="product-price">
-                        $35.00
-                        <span>/ HanBag</span>
+                    	홈트계 끝판왕 힙으뜸의 필라테스 트레이닝
+                        <span>바로가기</span>
                     </div>
                 </div>
                 <div class="countdown-timer" id="countdown">
                     <div class="cd-item">
-                        <span>56</span>
+                        <span>2</span>
                         <p>Days</p>
                     </div>
                     <div class="cd-item">
-                        <span>12</span>
+                        <span>08</span>
                         <p>Hrs</p>
                     </div>
                     <div class="cd-item">
@@ -168,7 +167,7 @@
                         <p>Secs</p>
                     </div>
                 </div>
-                <a href="#" class="primary-btn">Shop Now</a>
+                <a href="#" class="primary-btn">자세히</a>
             </div>
         </div>
     </section>

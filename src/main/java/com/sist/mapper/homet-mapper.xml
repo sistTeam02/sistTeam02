@@ -24,4 +24,9 @@
 	<select id="hometTotalPage" resultType="int">
 		SELECT CEIL(COUNT(*)/10.0) FROM hometraining_main
 	</select>
+	
+	<select id="hometDetailData" resultType="HometMainVO" parameterType="int">
+		SELECT 
+	
+	</select>
 </mapper>

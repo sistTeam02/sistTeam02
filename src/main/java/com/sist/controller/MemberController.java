@@ -68,7 +68,16 @@ public class MemberController {
 		//DAO연결
 		mDao.registerMember(vo);
 		
+		return "redirect: ../member/login.do";
+	}
+	
+	//로그아웃
+	@GetMapping("member/logout.do")
+	public String logout_ok(Model model,HttpSession session)
+	{
+		session.invalidate();
 		return "redirect: ../main/main.do";
+		
 	}
 	/*
 	 * @RequestMapping("member/post_result.do")//주소 출력
