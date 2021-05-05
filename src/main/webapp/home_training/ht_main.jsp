@@ -28,9 +28,8 @@ h1 {
                     <div class="filter-widget">
                         <h4 class="fw-title">Categories</h4>
                         <ul class="filter-catagories">
-                            <li><a href="#">Men</a></li>
-                            <li><a href="#">Women</a></li>
-                            <li><a href="#">Kids</a></li>
+                            <li><a href="#">무료 강의</a></li>
+                            <li><a href="#">유료 강의</a></li>
                         </ul>
                     </div>
                     <div class="filter-widget">
@@ -172,7 +171,9 @@ h1 {
                             <div class="col-lg-4 col-sm-6">
                                 <div class="product-item">
                                     <div class="pi-pic">
-                                        <img src="${vo.poster }" alt="">
+                                    	<a href="../home_training/ht_detail_free.do?${vo.no }">
+                                        	<img src="${vo.poster }" alt="">
+                                        </a>
                                         <div class="sale pp-sale">Sale</div>
                                         <div class="icon">
                                             <i class="icon_heart_alt"></i>
@@ -186,10 +187,10 @@ h1 {
                                     <div class="pi-text">
                                         <div class="catagory-name">${vo.title}</div>
                                         <a href="#">
-                                            <h5>Pure Pineapple</h5>
+                                            <h5>${vo.part }</h5>
                                         </a>
-                                        <div class="product-price">
-                                            <span>$35.00</span>
+                                        <div>
+                                            <span>${vo.good }</span>
                                         </div>
                                     </div>
                                 </div>
