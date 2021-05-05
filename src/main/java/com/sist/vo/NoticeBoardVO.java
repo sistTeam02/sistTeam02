@@ -1,6 +1,9 @@
 package com.sist.vo;
 
 import java.util.Date;
+import java.util.List;
+
+import org.springframework.web.multipart.MultipartFile;
 
 /*
  *  NO        NOT NULL NUMBER         
@@ -27,6 +30,29 @@ public class NoticeBoardVO {
 	private String filesize;
 	private int filecount;
 	private int hit;
+	private String dbday; // 날짜를 변환해서 받는다 
+    private List<MultipartFile> files; // 파일업로드시 저장 => 여러개가 넘어온다 
+    private MemberVO mvo=new MemberVO();
+    
+    
+	public MemberVO getMvo() {
+		return mvo;
+	}
+	public void setMvo(MemberVO mvo) {
+		this.mvo = mvo;
+	}
+	public String getDbday() {
+		return dbday;
+	}
+	public void setDbday(String dbday) {
+		this.dbday = dbday;
+	}
+	public List<MultipartFile> getFiles() {
+		return files;
+	}
+	public void setFiles(List<MultipartFile> files) {
+		this.files = files;
+	}
 	public int getNo() {
 		return no;
 	}

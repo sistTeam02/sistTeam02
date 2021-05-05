@@ -92,6 +92,7 @@
 </delete>
 
 <!-- ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+
 <select id="qnaboardListData" resultType="QnABoardVO" parameterType="hashmap">
  SELECT no,subject,id,regdate,hit,answer,num
  FROM (SELECT no,subject,id,regdate,hit,answer,rownum as num 
@@ -107,14 +108,13 @@
  <selectKey keyProperty="no" resultType="int" order="BEFORE">
   SELECT NVL(MAX(no)+1,1) as no FROM qnaboard
  </selectKey>
-  INSERT INTO qnaboard(no,id,subject,content,pwd,hit,answer,regdate) VALUES(
+  INSERT INTO qnaboard(no,id,subject,content,pwd,hit,regdate) VALUES(
      #{no},
      #{id},
      #{subject},
      #{content},
      #{pwd},
      0,
-     #{answer},
      SYSDATE
    )
 </insert>
@@ -182,8 +182,102 @@
   DELETE FROM qnaboard
   WHERE mno=#{mno}
 </delete>
-</mapper>
 
+<!-- ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+<select id="noticeboardListData" resultType="NoticeBoardVO" parameterType="hashmap">
+ SELECT no,subject,name,regdate,hit,num
+ FROM (SELECT no,subject,name,regdate,hit,rownum as num 
+ FROM (SELECT /*+ INDEX_DESC(noticeboard nb_no_pk) */no,subject,name,regdate,hit
+ FROM noticeboard))
+ WHERE num BETWEEN #{start} AND #{end}
+</select>
+<select id="noticeboardTotalPage" resultType="int">
+ SELECT CEIL(COUNT(*)/10.0) FROM noticeboard
+</select>
+<!-- 글쓰기 -->
+<insert id="noticeboardInsert" parameterType="NoticeBoardVO">
+ <selectKey keyProperty="no" resultType="int" order="BEFORE">
+  SELECT NVL(MAX(no)+1,1) as no FROM noticeboard
+ </selectKey>
+  INSERT INTO noticeboard(no,name,subject,content,pwd,hit,regdate,filename,filesize,filecount) VALUES(
+     #{no},
+     #{id},
+     #{subject},
+     #{content},
+     #{pwd},
+     0,
+     SYSDATE,
+     #{filename},
+     #{filesize},
+     #{filecount}
+   )
+</insert>
+<!-- 상세보기 조회수 증가 -->
+<update id="noticeboardHitIncrement" parameterType="int">
+  UPDATE noticeboard SET
+  hit=hit+1
+  WHERE no=#{no}
+</update>
+<!-- 상세보기 -->
+<select id="noticeboardDetailData" resultType="NoticeBoardVO" parameterType="int">
+  SELECT no,name,subject,content,regdate,hit
+  FROM noticeboard
+  WHERE no=#{no}
+</select>
+<!-- 찾기 -->
+<sql id="nsql">
+ <trim prefix="(" suffix=")" prefixOverrides="OR">
+  <foreach collection="fsArr" item="fs">
+   <trim prefix="OR">
+    <choose>
+     <when test="fs=='N'.toString()">
+       name LIKE '%'||#{ss}||'%'
+     </when>
+     <when test="fs=='S'.toString()">
+       name LIKE '%'||#{ss}||'%'
+     </when>
+     <when test="fs=='C'.toString()">
+       name LIKE '%'||#{ss}||'%'
+     </when>
+    </choose>
+   </trim>
+  </foreach>
+ </trim>
+</sql>
+<select id="noticeboardFindData" resultType="NoticeBoardVO" parameterType="hashmap">
+ <bind name="pattern" value="'%'+ss+'%'"/>
+   SELECT no,subject,name,regdate,hit
+   FROM noticeboard
+   WHERE 
+   <include refid="nsql"/>
+</select>
+<select id="noticeboardFindDataCount" resultType="int" parameterType="hashmap">
+  SELECT COUNT(*)
+  FROM noticeboard
+  WHERE
+  <include refid="nsql"/>
+</select>
+<!-- 수정 -->
+<select id="noticeboardGetPassword" resultType="string" parameterType="int">
+ SELECT pwd FROM noticeboard
+ WHERE no=#{no}
+</select>
+<update id="noticeboardUpdate" parameterType="NoticeBoardVO">
+ UPDATE noticeboard SET
+ name=#{name}, subject=#{subject}, content=#{content}
+ WHERE no=#{no}
+</update>
+<!-- 삭제 -->
+<delete id="noticeboardDelete" parameterType="int">
+  DELETE FROM noticeboard
+  WHERE no=#{no}
+</delete>
+<!-- 파일정보 읽기 -->
+  <select id="noticeboardFileInfoData" resultType="NoticeBoardVO" parameterType="int">
+    SELECT filename,filecount FROM spring_databoard
+    WHERE no=#{no}
+  </select>
+</mapper>
 
 
 

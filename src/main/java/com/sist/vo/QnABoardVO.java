@@ -26,8 +26,16 @@ public class QnABoardVO {
 	private String answer;
 	private String content;
 	private QnABoard_ReplyVO qnABoard_ReplyVO;
+	private MemberVO mvo=new MemberVO();
 	
 	
+	
+	public MemberVO getMvo() {
+		return mvo;
+	}
+	public void setMvo(MemberVO mvo) {
+		this.mvo = mvo;
+	}
 	public QnABoard_ReplyVO getQnABoard_ReplyVO() {
 		return qnABoard_ReplyVO;
 	}

@@ -21,6 +21,14 @@ public class FreeBoardVO {
 	private String content;
 	private Date regdate;
 	private int hit;
+	private MemberVO mvo=new MemberVO();
+	
+	public MemberVO getMvo() {
+		return mvo;
+	}
+	public void setMvo(MemberVO mvo) {
+		this.mvo = mvo;
+	}
 	public int getNo() {
 		return no;
 	}
