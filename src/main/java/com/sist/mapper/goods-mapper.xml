@@ -31,7 +31,9 @@
 		DETAIL_POSTER    CLOB          
    -->
   <select id="goodsDetailData" resultType="GoodsDetailVO" parameterType="int">
-    SELECT gd.no,gd.title,gd.poster,gd.price,gd.detail_poster FROM goods_detail gd,goods_list gl
-    WHERE gd.no=gl.no AND gd.no=#{no}
+    SELECT gl.no,gd.title,gd.poster,gd.price,gd.detail_poster 
+    FROM goods_detail gd,goods_list gl
+    WHERE gd.no=gl.no 
+      AND gd.no=#{no}
   </select>
 </mapper>

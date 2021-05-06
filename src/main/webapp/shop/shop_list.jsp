@@ -9,7 +9,7 @@
 <title>Insert title here</title>
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
-$(function(){
+/* $(function(){
 	$("div.loading-more").slice(0, 9).show(); // 최초 9개 선택
 	$("#load").click(function(e){ // Load More를 위한 클릭 이벤트e
 		e.preventDefault();
@@ -17,9 +17,56 @@ $(function(){
 		if($("div:hidden").length == 0){ // 숨겨진 DIV가 있는지 체크
 			alert("더 이상 항목이 없습니다"); // 더 이상 로드할 항목이 없는 경우 경고
 		}
+	}); */
+	$("#price").click(function(){
+		$(this).append(
+				 "<li class='test'>건강식품</li>"
+				 
+				 
+		)
 	});
+	
+	
+ });
+$(document).on("click",".test",function(){
+	alert("a");
 });
+ function make_json(){
+	$.ajax({
+		type:'get',
+		url:'../shop/detail_json.do',
+		success:function(result){
+			let json=JSON.parse(result); //변수명 상관없음 let aa
+			make_tr(json);
+			/* 여기서 제어 */
+		},error:function(error){
+			alert("에러");
+		}
+	})
+}
+function 출력함수(){
+	
+}
+$(document).ready(function(){//문서 출력하자마자  아래 함수실행
+	출력함수();
+})
+
+function 추가함수(){
+	
+	$.ajax({
+		이전출력부분제거();
+		출력함수();
+	})
+}
 </script>
+<style type="text/css">
+.checkBtn{
+	background-color: gray;
+}
+.okBtn{
+	display: none;
+}
+</style>
 </head>
 <body>
     <!-- Breadcrumb Section Begin -->
@@ -29,7 +76,7 @@ $(function(){
                 <div class="col-lg-12">
                     <div class="breadcrumb-text">
                         <a href="../main/main.do"><i class="fa fa-home"></i> Home</a>
-                        <span>Shop</span>
+                        <span class="active">Shop</span>
                     </div>
                 </div>
             </div>
@@ -46,24 +93,12 @@ $(function(){
                     <div class="filter-widget">
                         <h4 class="fw-title">카테고리</h4>
                         <ul class="filter-catagories">
-                            <li><a href="../shop/shop_detail.do">운동기구&용품</a></li>
+                            <li><a href="../shop/shop_list.do">운동기구&용품</a></li>
                             <li><a href="../shop/dfood_list.do">건강식품</a></li>
                         </ul>
                     </div>
-                    <!-- <div class="filter-widget">
-                        <h4 class="fw-title">Brand</h4>
-                        <div class="fw-brand-check">
-                            <div class="bc-item">
-                                <label for="bc-calvin">
-                                    Calvin Klein
-                                    <input type="checkbox" id="bc-calvin">
-                                    <span class="checkmark"></span>
-                                </label>
-                            </div>
-                        </div>
-                    </div> -->
                     <div class="filter-widget">
-                        <h4 class="fw-title">가격</h4>
+                        <h4 class="fw-title" id="price">가격</h4>
                         <div class="filter-range-wrap">
                             <div class="range-slider">
                                 <div class="price-input">
@@ -79,6 +114,16 @@ $(function(){
                             </div>
                         </div>
                         <a href="#" class="filter-btn">Filter</a>
+                    </div>
+                    <div class="filter-widget">
+                        <h4 class="fw-title">최근 본 상품</h4>
+                        <div class="fw-brand-check">
+                            <div class="bc-item">
+                               <c:forEach var="poster" items="${gvo.list }">
+                                  <img src="${gvo.poster }" width=150px height=150px>
+                               </c:forEach>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 
@@ -123,7 +168,7 @@ $(function(){
                                             <!-- <li class="w-icon"><a href="#"><i class="fa fa-random"></i></a></li> -->
                                         </ul>
                                      </div> 
-                                     <a href="shop_detail.do?no=${gvo.no }">
+                                     <a href="shop_detail_before.do?no=${gvo.no }">
                                         <div class="pi-text text-center">
 	                                       <p>${gvo.title }</p>
 	                                    </div>

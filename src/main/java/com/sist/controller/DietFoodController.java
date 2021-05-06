@@ -55,6 +55,7 @@ public class DietFoodController {
 	{
 		DietFoodDetailVO vo=dDao.dfoodDetailData(no);
 		model.addAttribute("vo", vo);
-		return "shop/dfood_detail";
+		model.addAttribute("main_jsp", "../shop/dfood_detail.jsp");
+		return "main/main";
 	}
 }
