@@ -82,7 +82,12 @@
 	                                    </div>
 	                              </a>
 	                              <div class="product-price text-center" style="font-size:13pt;font-weight:bold;color:#648cff;height:55px">
+	                              	<c:if test="${no!=3 }">
 	                                  <span>${vo.price }&nbsp;원</span>
+	                                 </c:if>
+	                                 <c:if test="${no==3 }">
+	                                 	<span><fmt:formatNumber type="number" maxFractionDigits="3" value="${vo.price}" />&nbsp;원</span>
+	                                 </c:if>
 	                              </div>
                                </div>
                             </c:forEach>    
@@ -92,7 +97,10 @@
 <!-- pagination -->
 		<div style="height:30px"></div>
 		<ul class="pagination" >
-		<c:forEach var="i" step="1" begin="1" end="${totalpage }">
+		<c:if test="${startPage>1 }">
+		  <a href="../main/search_category.do?no=${no }&search=${search }&page=${startPage-1}"><li class="page">&lt;</li></a>
+		 </c:if>
+		<c:forEach var="i" step="1" begin="${startPage }" end="${endPage }">
 			<a href="../main/search_category.do?no=${no }&search=${search }&page=${i}">
 			<c:if test="${curpage==i}">
 		  		<li class="page_active">
@@ -102,6 +110,9 @@
 		  	</c:if>
 		  ${i }</li></a>
 		</c:forEach>
+		<c:if test="${endPage<allPage }">
+		  <a href="../main/search_category.do?no=${no }&search=${search }&page=${endPage+1}"><li class="page">&gt;</li></a>
+		 </c:if>
 		</ul>
       </div>
     </section>

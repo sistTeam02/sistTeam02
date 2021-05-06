@@ -11,7 +11,11 @@ $(function(){
 		let selectvalue=$('#category_selected option:selected').val();
 		let search=$('#main_text').val();
 		//console.log(selectvalue);
-		if(selectvalue==0){
+		if(search.trim()==''){
+			alert('검색어를 입력해 주세요.');
+			$('#main_text').focus();
+		}
+		else if(selectvalue==0){
 			location.href="../main/search.do?no="+selectvalue+"&search="+search;
 		}
 		else{

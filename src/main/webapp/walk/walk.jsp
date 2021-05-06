@@ -60,7 +60,7 @@
   text-decoration: none;
   color: #ffffff;
 }
-select {
+select.re {
 	width: 130px;
 	padding: .4em .4em;
 	border: 1px solid #999;
@@ -272,9 +272,9 @@ var areaSelectMaker = function(target){
 			<span class="button loc" value="제주 공원">제주</span>
 			 -->
 			 
-			<select name="addressRegion" id="addressRegion1"></select>&nbsp;&nbsp;
-		    <select name="addressDo" id="addressDo1"></select>&nbsp;&nbsp;
-		    <select name="addressSiGunGu" id="addressSiGunGu1"></select>
+			<select name="addressRegion" id="addressRegion1" class="re"></select>&nbsp;&nbsp;
+		    <select name="addressDo" id="addressDo1" class="re"></select>&nbsp;&nbsp;
+		    <select name="addressSiGunGu" id="addressSiGunGu1" class="re"></select>
 	
 		</div>
 		<div style="height:20px"></div>

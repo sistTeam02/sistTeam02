@@ -45,6 +45,9 @@ public class MainSearchController {
 		map.put("search", search);
 		int totalpage=0;
 		final int BLOCK=10;
+		int startPage=0;
+		int endPage=0;
+		int allPage=0;
 		/*if(no.equals("1")){//홈트
 			
 		}*/
@@ -52,16 +55,29 @@ public class MainSearchController {
 			List<DietFoodVO> dlist=sdao.searchDietfoodAll(map);
 			totalpage=sdao.searchDietfoodAllPage(search);
 			model.addAttribute("list",dlist);
+			startPage=((curpage-1)/BLOCK*BLOCK)+1;
+			endPage=((curpage-1)/BLOCK*BLOCK)+BLOCK;
+			allPage=totalpage;
+			if(endPage>allPage)
+				   endPage=allPage;
 		}
 		else if(no.equals("3")){//운동기구
 			List<GoodsVO> glist=sdao.searchGoodsAll(map);
 			totalpage=sdao.searchGoodsAllPage(search);
 			model.addAttribute("list",glist);
+			startPage=((curpage-1)/BLOCK*BLOCK)+1;
+			endPage=((curpage-1)/BLOCK*BLOCK)+BLOCK;
+			allPage=totalpage;
+			if(endPage>allPage)
+				   endPage=allPage;
 		}
 		model.addAttribute("no",no);
 		model.addAttribute("totalpage",totalpage);
 		model.addAttribute("curpage",curpage);
 		model.addAttribute("search",search);
+		model.addAttribute("startPage", startPage);
+		model.addAttribute("endPage", endPage);
+		model.addAttribute("allPage", allPage);
 		model.addAttribute("main_jsp","../main/search_category.jsp");
 		return "main/main";
 	}
