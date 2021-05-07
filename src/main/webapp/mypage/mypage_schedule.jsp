@@ -75,6 +75,17 @@ function make_cal(year,month){
 		}
 		  $('#calender').text(year+"."+month);
 	}
+/*
+ $(document).on('click','선택자',function(){
+	
+	});
+}) 
+ 
+ */
+//달력 월 출력 함수
+function month(){
+	 
+ }
 
 
 </script>
