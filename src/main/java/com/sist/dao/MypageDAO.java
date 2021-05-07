@@ -41,7 +41,7 @@ public class MypageDAO extends SqlSessionDaoSupport{
 		WHERE id=#{id}
 	</update>
 	 */
-	public MemberVO mypageUpdateAllData(int id){
+	public MemberVO mypageUpdateAllData(String id){
 		return getSqlSession().selectOne("mypageUpdateAllData",id);
 	}
 	public void mypageUpdate(MemberVO vo){

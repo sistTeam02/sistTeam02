@@ -5,103 +5,16 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<!-- <style type="text/css">
-.post{
-width: 20em;
-height: 28em;
-position: relative;
-right: -49em;
-top: -34em;
-display: table;
-overflow: auto;
-}
-.checkout__input input{
-	color:black;
-}
-.checkout {
-    padding-top: 25px;
-    padding-bottom: 60px;
-}
-.checkout__input input{
-margin-left: 20em;
-}
-#checkBtn,#postBtn{
-	margin-left: 3em;
-	width: 6.5em;
-	background-color: #ddf2bc
-}
-.checkout__input{
-	width: 1140px;
-}
-#checkBtn:hover,#postBtn:hover,#btn1:hover,#findBtn:hover,#okBtn:hover{
-    color: #fff;
-    background-color: #7fad39;
-    border-color: #7fad39;
-}
-#checkBtn:focus,#postBtn:focus,#btn1:focus{
-	 box-shadow: 0 0 0 .2rem #ddf2bc;
-}
-#btn2:focus{
-	box-shadow: 0 0 0 .2rem #ecd2d2;
-}
-#btn2:hover{
-	 color: #fff;
-    background-color:#9b344ae3;
-    border-color: #fff;
-}
-#tel1,#phone1{
-float:left;
-width: 5em; 
-}
-#tel1::placeholder{
-	font-size: 8pt;
-}
-#tel2,#phone2{
-width: 10em;
-float:left;
-margin-left:2em; 
-}
-#btn1{
-	margin-left: 29em;
-}
-#btn2{
-	margin-left: 2em;
-}
-#btn1,#btn2{
-	text-align:center;
-	width: 6.5em;
-	background-color: #ddf2bc;
-	float: left;
-	padding-left: 8px;	
-}
-#pwd1{
-margin-left: 2em;
-}
-#addr1,#addr2{
-	width: 27em;
-}
-#checkSpan{
-	height:24px;
-	display: block;
-	text-align: left;
-	margin-left: 20em;
-	color: red;
-	
-} 
-.table{
-	font-size: 11pt;
-}
-.table th{
-	background-color: #ddf2bc;
-	border-bottom: 1px #0000003d solid;
-}
-#findBtn,#okBtn{
-	background-color: #ddf2bc;
-	width: 5em;
-	text-align: center;
-	height: 2.2em;
-}
-</style> -->
+<style type="text/css">
+h2{
+     text-decoration: overline #648CFF;
+     }
+.table-hover{
+    font-size:large;
+    width:1000px;
+    border-bottom : 1px solid #648CFF;
+ }
+</style>
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
 $(function(){
@@ -110,7 +23,6 @@ $(function(){
 	
  	
  	$('#postBtn').click(function(){
- 		/* $('.post').show(); */
  		new daum.Postcode({
 			oncomplete:function(data)
 			{
@@ -135,7 +47,6 @@ $(function(){
 			success:function(result)
 			{
 				$('#print').html(result);
-				//$('.post').css("overflow","auto");
 				$('#result_table tr').click(function(){
 					let total=$(this)					
 					total=total.text().trim();
@@ -160,7 +71,9 @@ $(function(){
 	$('#okBtn').click(function(){
 		$('.post').hide();
 	});
-	
+	$('#btn1').click(function(){
+ 			$('#join_form').submit();
+ 	});
 });
 
 
@@ -169,20 +82,18 @@ $(function(){
 
 </head>
 <body>
-
-
     <!-- Register Section Begin -->
     <div class="register-login-section spad">
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 offset-lg-3">
                     <div class="register-form">
-                        <h2>수정하기</h2>
-                        <form action="../member/register_ok.do" method="post" id="join_form">
+                        <h2>회원정보 수정</h2>
+                        <form action="../mypage/mypage_update_ok.do" method="post" id="join_form">
                             <div class="group-input">
                              	<div class="checkout__input">
-	                                <label for="username">Username (ID)*</label>
-	                                <input type="text" id="id" name="id" style="float:left; margin-bottom: -15px;width: 11em;" autocomplete="off">
+	                                <label for="id">Username (ID)*</label>
+	                                <input type="text" id="id" name="id" style="float:left; margin-bottom: -15px;width: 11em;" autocomplete="off" value=${id } readonly>
 	                                <span>&nbsp;</span>
 	                                 <div class="row">
                             			<span id="checkSpan"></span>
@@ -191,53 +102,49 @@ $(function(){
                                		<label></label>
                                		<br>
                                     <p>이름<span>*</span><span style="color: black;margin-left:15em; ">닉네임</span></p>
-                                   <input type="text" name="name" id="name" class="input-sm"  placeholder="사용자 이름" style="float:left;width: 50%;">
-                                   <input type="text" name="nickname" id="nickname" class="input-sm" placeholder="사용하실 닉네임" autocomplete="off"  style="float:left;width: 50%;">
+                                   <input type="text" name="name" id="name" class="input-sm"  placeholder="사용자 이름" style="float:left;width: 50%;" value="${name }">
+                                   <input type="text" name="nickname" id="nickname" class="input-sm" placeholder="사용하실 닉네임" autocomplete="off"  style="float:left;width: 50%;" value="nickname">
                                 </div>
                                 
                                 
                             </div>
                             <div class="group-input">
-                                <label for="pass">Password *</label>
-                                <input type="password" name="pwd" id="pwd" class="input-sm"  style="float:left;margin-bottom:15px; width: 50%" placeholder="비밀번호 입력">
-		                        <!-- <input type="password" name="pwd" id="pwd1" class="input-sm"  style="float:left" placeholder="재입력"> -->
-                                 <span>&nbsp;</span>
-                                 <br><br><br>
+                                <label for="pwd">Password *</label>
+                                <input type="password" name="pwd" id="pwd" class="input-sm"  style="float:left;margin-bottom:15px; width: 50%" placeholder="비밀번호 입력" value="${password }">
+		                        <span>&nbsp;</span>
+                                 <br><br><br><br><br>
                                   <p style="width: 100%">생년월일<span>*</span></p>
-                                  <input type="date" size=20 name="birth" value="2021-01-01" min="1921-01-01" max="2121-12-31" >
+                                  <input type="date" size=20 name="birth" value="2021-01-01" min="1921-01-01" max="2121-12-31" value="${birthday }" readonly>
                                 <span>&nbsp;</span>
                                   <p>email<span>*</span></p>
-                                   	<input type="text" size=45 name="email" id="email" class="input-sm" placeholder="user01@google.com" style="width:20em;" autocomplete="off">
+                                   	<input type="text" size=45 name="email" id="email" class="input-sm" placeholder="user01@google.com" style="width:20em;" autocomplete="off" value="${email }">
                                 <span>&nbsp;</span>
                                	 <p>Tel<span>*</span></p>
-                                  <!--  	<input type="text" size=5 name="tel1" id="tel1" class="input-sm" value="지역번호" style="width: 9em; float: left;">
-                                   	<input type="text" size=10 name="tel2" id="tel2" class="input-sm" autocomplete="off" placeholder="-포함 입력" style="width: 11em;"> -->
-                                   	<input type="text" size=10 name="tel" id="tel" class="input-sm" autocomplete="off" placeholder="-포함 입력" style="width: 50%;">
+                                   	<input type="text" size=10 name="tel" id="tel" class="input-sm" autocomplete="off" placeholder="-포함 입력" style="width: 50%;" value="${tel }" }>
                                	 <p>Phone<span>*</span></p>
-                                   <!-- 	<input type="text" size=5 name="phone1" id="phone1" class="input-sm" readonly value="010" style="width: 9em; float: left;">
-                                   	<input type="text" size=10 name="phone2" id="phone2" class="input-sm" autocomplete="off" placeholder="-포함 입력" style="width: 11em;"> -->
-                                   	<input type="text" size=10 name="phone" id="phone" class="input-sm" autocomplete="off" placeholder="-포함 입력" style="width: 50%;">
+                                   	<input type="text" size=10 name="phone" id="phone" class="input-sm" autocomplete="off" placeholder="-포함 입력" style="width: 50%;" value="${phone }">
                                <!-- 주소 1우편번호2주소 3상세주소  #######################################-->
               				<div style="height: 10px"></div>
               				
                             <div class="checkout__input">
                           		<span></span>
                                 <p>Address<span>*</span></p>
-                                <input type="text" name="post" id="post" class="checkout__input__add " readonly placeholder="우편번호(000-000)" style="float: left; width: 11em;">
+                                <input type="text" name="post" id="post" class="checkout__input__add " readonly placeholder="우편번호(000-000)" style="float: left; width: 11em;" value="${post }">
                              	<input type="button" value="우편번호 검색" class="site-btn" id="postBtn" style="float: left; width: 9em;">
                                 &nbsp;
                             </div>
                             
                          
                             <div class="checkout__input">
-                                <input type="text"  placeholder="주소" name="addr1" id="addr1" style="margin-top: 15px;" readonly>
+                                <input type="text"  placeholder="주소" name="addr1" id="addr1" style="margin-top: 15px;" readonly value="${addr1 }">
                                 &nbsp;
-                                <input type="text"  placeholder="상세주소" name="addr2" id="addr2" style="margin-top: -15px;" autocomplete="off">
+                                <input type="text"  placeholder="상세주소" name="addr2" id="addr2" style="margin-top: -15px;" autocomplete="off" value="${addr2 }">
                             </div>
      						
                                
                             </div>
-                            <input type="submit" class="site-btn register-btn" id="btn1" value="수정하기"></input>
+                            <input type="submit" class="site-btn register-btn" id="updateBtn" value="수정하기"></input>
+                            <input type="button" class="site-btn register-btn" onclick="javascript:history.back()" value="취소"></input>
                         </form>
                       
                     </div>

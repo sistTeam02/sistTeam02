@@ -34,7 +34,7 @@
 		SELECT CEIL(COUNT(*)/10.0) FROM chat_plan
 	</select>
 	<!-- 마이페이지 전체 데이터 불러오기 -->
-	<select id="mypageUpdateAllData" resultType="MemberVO" parameterType="int">
+	<select id="mypageUpdateAllData" resultType="MemberVO" parameterType="string">
 	 SELECT id,pwd,name,birth,tel,phone,email,post,nickname,add1,add2
 	 FROM member WHERE id=#{id}
 	</select>

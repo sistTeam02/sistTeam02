@@ -14,8 +14,8 @@ public class MypageController {
 	
 	@Autowired
 	private MypageDAO fdao;
-	
-	
+	@Autowired
+	private MemberDAO mdao;
 	
 	//메인으로 전송
 	//관심목록(찜&장바구니)
@@ -43,11 +43,7 @@ public class MypageController {
 	public String mypage_schdule(String page,String pageP,Model model){
 		
 		//^잘라서 출력
-				//채팅데이터 불러오기
-				/*String sList="";
-				List<Chat_foodVO> fList=fdao.mypage_chat_food(id);
-				List<Chat_planVO> pList=fdao.mypage_chat_plan(id);
-				*/
+				
 				//페이지 나누기(음식)
 				if(page==null)
 					page="1";
@@ -120,12 +116,19 @@ public class MypageController {
 	
 	//회원정보수정
 	@GetMapping("mypage/mypage_update.do")
-	public String mypage_update(Model model){
+	public String mypage_update(String id,Model model){
+		MemberVO vo=new MemberVO();
 		
 		
 		model.addAttribute("bread_jsp","../mypage/bread4.jsp");
 		model.addAttribute("mypage_jsp","../mypage/mypage_update.jsp");
 		model.addAttribute("main_jsp","../mypage/mypage_main.jsp");
+		return "main/main";
+	}
+	//수정정보 가져오기-> 저장하기
+	@PostMapping("mypage/mypage_update_ok.do")
+	public String mypage_update_ok(MemberVO vo){
+		fdao.mypageUpdate(vo);
 		return "main/main";
 	}
 	
