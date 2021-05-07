@@ -33,4 +33,5 @@
 	<select id="mypageChatPlanDataTotalPage" resultType="int">
 		SELECT CEIL(COUNT(*)/10.0) FROM chat_plan
 	</select>
+	
 </mapper>
