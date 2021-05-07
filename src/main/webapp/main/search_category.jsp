@@ -70,6 +70,9 @@
     <!-- Product Shop Section Begin -->
     <section class="product-shop spad">
         <div class="container">
+        	<div class="row">
+        		<!-- 키워드 버튼 -->
+        	</div>
             <div class="row">         
                     <div class="product-list">
                         <div class="row">

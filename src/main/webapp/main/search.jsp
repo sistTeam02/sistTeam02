@@ -7,16 +7,27 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+h4{
+	color: darkgray;
+}
+a{
+	color: black;
+}
+a:hover{
+	color: black;
+}
+</style>
 </head>
 <body>
     <!-- Breadcrumb Section Begin -->
-    <div class="breacrumb-section">
+	 <div class="breacrumb-section">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="breadcrumb-text">
                         <a href="../main/main.do"><i class="fa fa-home"></i> Home</a>
-                        <span>'${search }'의 전체 검색 결과</span>
+                        <span>'${search }' 의 검색 결과</span>
                     </div>
                 </div>
             </div>
@@ -27,72 +38,156 @@
     <!-- Product Shop Section Begin -->
     <section class="product-shop spad">
         <div class="container">
-        	<h4 style="color: gray">홈 트레이닝 검색 결과</h4>
-        	<div style="height:20px"></div>
-            <div class="row" style="height:100px">
-                    
-            </div>
-
-        	<h4 style="color: gray">운동 기구 & 용품 검색 결과</h4>
-        	<div style="height:20px"></div>
             <div class="row">
-                    <div class="product-list">
+                <div class="col-lg-3 col-md-6 col-sm-8 order-2 order-lg-1 produts-sidebar-filter">
+                    <div class="filter-widget">
+                        <h4 class="fw-title">검색 카테고리</h4>
+                        <ul class="filter-catagories">
+                            <li><a href="#">홈 트레이닝</a></li>
+                            <li><a href="../main/search_category.do?no=3&search=${search }">운동 기구/용품</a></li>
+                            <li><a href="../main/search_category.do?no=2&search=${search }">건강 식품</a></li>
+                        </ul>
+                    </div>
+                    <div class="filter-widget">
+                        <h4 class="fw-title">검색 순위</h4>
+                        <div class="fw-brand-check">
+                        	<table class=table>
+                        	<c:forEach var="ke" items="${klist }" varStatus="s">
+	                            <tr>
+	                            	<th width="20%">${s.count }</th>
+	                            	<td width="80%"><a href="../main/search.do?no=0&search=${ke.keyword }">${ke.keyword }</a></td>
+	                            </tr>
+                            </c:forEach>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-lg-9 order-1 order-lg-2">
+                   <!--  <div class="product-show-option">
                         <div class="row">
-                           <c:forEach var="vo" items="${glist }">
-                               <div class="col-lg-3">
-                                  <a href="shop_detail.do?no=${vo.no }">
-                                     <img src="${vo.poster }">
-                                        <div class="pi-text text-center">
-	                                       <p>${vo.title }</p>
-	                                    </div>
-	                              </a>
-	                              <div class="product-price text-center" style="font-size:13pt;font-weight:bold;color:#648cff;height:55px">
-	                                  <span><fmt:formatNumber type="number" maxFractionDigits="3" value="${vo.price}" />&nbsp;원</span>
-	                              </div>
-                               </div>
-                            </c:forEach>    
-                         </div>
-                     </div>
-             </div>
-             <div style="height:20px"></div>
-             <div class="loading-more" style="height:30px">
-             <i class="icon_loading"></i>
-                  <a href="../main/search_category.do?no=3&search=${search }">
-                      	 더 보기
-                  </a>
-          	</div>
-              <div style="height:60px"></div>
-             <h4 style="color: gray">건강 식품 검색 결과</h4>
-             <div style="height:20px"></div>
-             <div class="row">
-                    <div class="product-list">
+                            <div class="col-lg-7 col-md-7">
+
+                            </div>
+                        </div>
+                    </div>-->
+                    <!-- 
+                    	<div class="product-list">
+         				<h4>홈 트레이닝 검색 결과</h4>
                         <div class="row">
-                           <c:forEach var="vo" items="${dlist }">
-                               <div class="col-lg-3">
-                                  <a href="shop_detail.do?no=${vo.no }">
-                                     <img src="${vo.poster }">
-                                        <div class="pi-text text-center">
-	                                       <p>${vo.title }</p>
+                        	<c:forEach var="hvo" items="${hlist }">
+	                            <div class="col-lg-4 col-sm-6">
+	                                <div class="product-item">
+	                                    <div class="pi-pic">
+	                                        <img src="${hvo.poster }" alt="">
 	                                    </div>
-	                              </a>
-	                              <div class="product-price text-center" style="font-size:13pt;font-weight:bold;color:#648cff;height:55px">
-	                                  <span>${vo.price }&nbsp;원</span>
-	                              </div>
-                               </div>
-                            </c:forEach>    
-                         </div>
-                     </div>
-             </div>
-             <div style="height:20px"></div>
-             <div class="loading-more" style="height:30px">
-             <i class="icon_loading"></i>
-                  <a href="../main/search_category.do?no=2&search=${search }">
-                      	 더 보기
-                  </a>
-          </div>
-         </div>
-         
-      </div>
+	                                    <div class="pi-text">
+	                                        <div class="catagory-name">홈 트레이닝</div>
+	                                        <a href="#">
+	                                            <h5>${hvo.title }</h5>
+	                                        </a>
+	                                        <div class="product-price">
+												${hvo.price }원
+	                                        </div>
+	                                    </div>
+	                                </div>
+	                            </div>
+							</c:forEach>
+                        </div>
+                    </div>
+                    <c:if test="${!empty hlist}">
+	                    <div class="loading-more">
+	                        <i class="icon_loading"></i>
+	                        <a href="../main/search_category.do?no=1&search=${search }">
+	                           		 홈 트레이닝 더 보기
+	                        </a>
+	                    </div>
+                    </c:if>
+                    <c:if test="${empty hlist }">
+                   		<div style="height:50px"></div>
+                    	<h5 style="text-align: center">검색 결과가 없습니다.</h5>
+                    	<div style="height:50px"></div>
+                    </c:if>
+                    -->
+                    <div class="height:50px"></div>
+                    <hr>
+                    <div class="product-list">
+         				<h4>운동 기구/용품 검색 결과</h4>
+                        <div class="row">
+                        	<c:forEach var="gvo" items="${glist }">
+	                            <div class="col-lg-4 col-sm-6">
+	                                <div class="product-item">
+	                                    <div class="pi-pic">
+	                                        <img src="${gvo.poster }" alt="">
+	                                    </div>
+	                                    <div class="pi-text">
+	                                        <div class="catagory-name">운동 기구/용품</div>
+	                                        <a href="#">
+	                                            <h5>${gvo.title }</h5>
+	                                        </a>
+	                                        <div class="product-price">
+												<fmt:formatNumber type="number" maxFractionDigits="3" value="${gvo.price}" />&nbsp;원
+	                                        </div>
+	                                    </div>
+	                                </div>
+	                            </div>
+							</c:forEach>
+                        </div>
+                    </div>
+                    <c:if test="${!empty glist}">
+	                    <div class="loading-more">
+	                        <i class="icon_loading"></i>
+	                        <a href="../main/search_category.do?no=3&search=${search }">
+	                           		 운동 기구/용품 더 보기
+	                        </a>
+	                    </div>
+                    </c:if>
+                    <c:if test="${empty glist }">
+                   		<div style="height:50px"></div>
+                    	<h5 style="text-align: center">검색 결과가 없습니다.</h5>
+                    	<div style="height:50px"></div>
+                    </c:if>
+                    <div class="height:50px"></div>
+                    <hr>
+                    <div class="product-list">
+                    	<h4>건강 식품 검색 결과</h4>
+                        <div class="row">
+                        	<c:forEach var="dvo" items="${dlist }">
+	                            <div class="col-lg-4 col-sm-6">
+	                                <div class="product-item">
+	                                    <div class="pi-pic">
+	                                        <img src="${dvo.poster }" alt="">
+	                                    </div>
+	                                    <div class="pi-text">
+	                                        <div class="catagory-name">건강 식품</div>
+	                                        <a href="#">
+	                                            <h5>${dvo.title }</h5>
+	                                        </a>
+	                                        <div class="product-price">
+	                                            ${dvo.price }원
+	                                        </div>
+	                                    </div>
+	                                </div>
+	                            </div>
+							</c:forEach>
+                        </div>
+                    </div>
+                    <c:if test="${!empty dlist }">
+	                    <div class="loading-more">
+	                        <i class="icon_loading"></i>
+	                        <a href="../main/search_category.do?no=2&search=${search }">
+	                          	  건강 식품 더 보기
+	                        </a>
+	                    </div>
+                    </c:if>
+                    <c:if test="${empty dlist }">
+                    	<div style="height:50px"></div>
+                    	<h5 style="text-align: center">검색 결과가 없습니다.</h5>
+                    	<div style="height:50px"></div>
+                    </c:if>
+                </div>
+            </div>
+        </div>
     </section>
     <!-- Product Shop Section End -->
 </body>

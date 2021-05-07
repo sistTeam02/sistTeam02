@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.sist.vo.DietFoodVO;
 import com.sist.vo.GoodsVO;
+import com.sist.vo.KeywordVO;
 @Repository
 public class SearchDAO extends SqlSessionDaoSupport{
 	@Autowired
@@ -70,5 +71,42 @@ public class SearchDAO extends SqlSessionDaoSupport{
 	}
 	public int searchDietfoodAllPage(String search){
 		return getSqlSession().selectOne("searchDietfoodAllPage",search);
+	}
+	
+	/*
+	 * <insert id="searchNewKeywordInsert" parameterType="String">
+		INSERT INTO search_rank (
+			SELECT NVL(MAX(no)+1,1) FROM search_rank, 
+			#{keyword},
+			1
+		)
+	</insert>
+	
+	<update id="searchKeywordUpdate" parameterType="String">
+		UPDATE search_rank SET cnt=cnt+1 
+		WHERE keyword=#{keyword}
+	</update>
+	
+	<select id="searchKeywordIsExist" parameterType="String" resultType="int">
+		SELECT COUNT(*) FROM search_rank 
+		WHERE keyword=#{keyword}
+	</select>
+	 */
+	public void searchInsert(String keyword){
+		int result=getSqlSession().selectOne("searchKeywordIsExist", keyword);
+		if(result==1)
+			getSqlSession().update("searchKeywordUpdate", keyword);
+		else
+			getSqlSession().insert("searchNewKeywordInsert", keyword);
+	}
+	/*
+	 * <select id="searchRank" resultType="com.sist.vo.KeywordVO">
+		SELECT no, keyword, cnt, rownum FROM search_rank 
+		ORDER BY cnt DESC 
+		WHERE <![CDATA[rownum <= 10]]>
+		</select>
+	 */
+	public List<KeywordVO> keywordList(){
+		return getSqlSession().selectList("searchRank");
 	}
 }

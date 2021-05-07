@@ -13,6 +13,7 @@ import com.sist.dao.SearchDAO;
 import com.sist.dao.WalkDAO;
 import com.sist.vo.DietFoodVO;
 import com.sist.vo.GoodsVO;
+import com.sist.vo.KeywordVO;
 
 @Controller
 public class MainSearchController {
@@ -22,8 +23,12 @@ public class MainSearchController {
 	
 	@GetMapping("main/search.do")
 	public String main_search(String search, Model model){
+		String keyword=search;
+		sdao.searchInsert(keyword);
+		List<KeywordVO> klist=sdao.keywordList();
 		List<GoodsVO> glist=sdao.searchGoods(search);
 		List<DietFoodVO> dlist=sdao.searchDietfood(search);
+		model.addAttribute("klist",klist);
 		model.addAttribute("glist",glist);
 		model.addAttribute("dlist",dlist);
 		model.addAttribute("search",search);
@@ -33,6 +38,8 @@ public class MainSearchController {
 	
 	@GetMapping("main/search_category.do")
 	public String main_search_category(String no, String search, String page, Model model){
+		String keyword=search;
+		sdao.searchInsert(keyword);
 		Map map=new HashMap();
 		if(page==null)
 			page="1";

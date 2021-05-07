@@ -4,11 +4,11 @@
 
 	<select id="searchGoods" parameterType="String" resultType="GoodsVO">
 		SELECT no, title, poster, price, rownum FROM goods_list 
-		WHERE title LIKE '%'||#{search}||'%' AND <![CDATA[rownum <= 8]]>
+		WHERE title LIKE '%'||#{search}||'%' AND <![CDATA[rownum <= 6]]>
 	</select>
 	<select id="searchDietfood" parameterType="String" resultType="DietFoodVO">
 		SELECT no, title, poster, price, rownum FROM dietfood_list 
-		WHERE title LIKE '%'||#{search}||'%' AND <![CDATA[rownum <= 8]]>
+		WHERE title LIKE '%'||#{search}||'%' AND <![CDATA[rownum <= 6]]>
 	</select>
 
 
@@ -33,5 +33,30 @@
 	<select id="searchDietfoodAllPage" resultType="int" parameterType="string">
 		SELECT CEIL(COUNT(*)/12.0) FROM dietfood_list 
 		WHERE title LIKE '%'||#{search}||'%'
+	</select>
+	
+	<insert id="searchNewKeywordInsert" parameterType="string">
+		INSERT INTO search_rank VALUES(
+			(SELECT NVL(MAX(no)+1,1) FROM search_rank), 
+			#{keyword},
+			1
+		)
+	</insert>
+	
+	<update id="searchKeywordUpdate" parameterType="string">
+		UPDATE search_rank SET cnt=cnt+1 
+		WHERE keyword=#{keyword}
+	</update>
+	
+	<select id="searchKeywordIsExist" parameterType="string" resultType="int">
+		SELECT COUNT(*) FROM search_rank 
+		WHERE keyword=#{keyword}
+	</select>
+	
+	<select id="searchRank" resultType="com.sist.vo.KeywordVO">
+		SELECT no, keyword, cnt, num FROM
+		(SELECT no, keyword, cnt, rownum as num FROM 
+        (SELECT no, keyword, cnt FROM search_rank ORDER BY cnt DESC))
+		WHERE <![CDATA[num <= 10]]>
 	</select>
 </mapper>
