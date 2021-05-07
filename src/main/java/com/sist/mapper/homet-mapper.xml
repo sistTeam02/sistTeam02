@@ -25,8 +25,9 @@
 		SELECT CEIL(COUNT(*)/10.0) FROM hometraining_main
 	</select>
 	
-	<select id="hometDetailData" resultType="HometMainVO" parameterType="int">
-		SELECT 
-	
+	<select id="hometDetailFree" resultType="HometDetailFreeVO" parameterType="int">
+		SELECT title1, title2, UPLOADDAY, hit, comment_hit, video, video_time, video_part, video_grade, video_kcal, embed_txt, embed_img
+		FROM hometraining_detail
+		WHERE no = #{no}
 	</select>
 </mapper>

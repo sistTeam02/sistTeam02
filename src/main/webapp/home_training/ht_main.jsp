@@ -17,6 +17,33 @@ h1 {
   text-align: center;
 }
 </style>
+<!-- 1.jsp화면 구성
+2.ajax호출
+3.restcontroller에서 db데이터연걸
+4.제이슨생성(배열 or object)
+5.받은 제이슨 출력 -->
+<script type="text/javascript" src="https://code.jquery.com/jquery.js"></script>
+<script type="text/javascript">
+/* 1 */
+$(function(){
+	$('#json').click(function(){
+		/* 2 */
+		let no=1107;/* 임의의 데이터 */
+		$.ajax({
+			type:'post',
+			data:{'no':no},
+			url:'../home_training/ht_test.do',
+			success:function(result){
+				alert(result);
+			},error:function(error){
+				alert("에러");
+			}
+		
+		})
+	})
+	
+})
+</script>
 </head>
 
 <body>
@@ -30,6 +57,7 @@ h1 {
                         <ul class="filter-catagories">
                             <li><a href="#">무료 강의</a></li>
                             <li><a href="#">유료 강의</a></li>
+                            <li id="json">제이슨 불러오기</li>
                         </ul>
                     </div>
                     <div class="filter-widget">
@@ -171,7 +199,8 @@ h1 {
                             <div class="col-lg-4 col-sm-6">
                                 <div class="product-item">
                                     <div class="pi-pic">
-                                    	<a href="../home_training/ht_detail_free.do?${vo.no }">
+                                    
+                                    	<a href="../home_training/ht_detail_free.do?no=${vo.no }">
                                         	<img src="${vo.poster }" alt="">
                                         </a>
                                         <div class="sale pp-sale">Sale</div>

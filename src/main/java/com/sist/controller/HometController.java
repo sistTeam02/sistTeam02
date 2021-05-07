@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import com.sist.dao.HometDAO;
+import com.sist.vo.HometDetailFreeVO;
 import com.sist.vo.HometMainVO;
 
 @Controller
@@ -49,11 +50,21 @@ public class HometController {
 		model.addAttribute("main_jsp", "../home_training/ht_main.jsp");
 		return "main/main";
 	}
-	
+	             
 	@GetMapping("home_training/ht_detail_free.do")
 	public String home_training_detail_free(int no, Model model) {
+		System.out.println("+=============================================");
+		System.out.println("no:"+no);
+		HometDetailFreeVO vo = dao.hometDetailFree(no);
+		String key = vo.getVideo().substring(vo.getVideo().lastIndexOf("v")+2);
+		System.out.println("키값: " + key);
 		
 		
+		model.addAttribute("vo",vo);
+		model.addAttribute("key", key);
+		model.addAttribute("main_jsp", "../home_training/ht_detail_free.jsp");
+		
+		System.out.println("보내기-------------------------");
 		return "main/main";
 	}
 }

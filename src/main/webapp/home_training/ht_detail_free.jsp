@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="zxx">
 
@@ -37,25 +38,18 @@
                 <div class="col-lg-12">
                     <div class="blog-details-inner">
                         <div class="blog-detail-title">
-                            <h2>The Personality Trait That Makes People Happier</h2>
+                            <h2>${vo.title2 }</h2>
                             <p>travel <span>- May 19, 2019</span></p>
                         </div>
                         <div class="blog-large-pic">
-                            <img src="../img/blog/blog-detail.jpg" alt="">
+                            <%-- <iframe src="${vo.video }" controls="controls" autoplay muted playsinline width="1140px" height="600px"> --%>
+                            <iframe width="1140px" height="600px" 
+								src="https://www.youtube.com/embed/${key }?controls=0">
+							</iframe>
                         </div>
-                        <div class="blog-detail-desc">
-                            <p>psum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-                                labore et dolore magna aliqua.Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                                laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure Lorem ipsum dolor sit
-                                amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore
-                                magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                                aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate.
-                            </p>
-                        </div>
+                        
                         <div class="blog-quote">
-                            <p>“ Technology is nothing. What's important is that you have a faith in people, that
-                                they're basically good and smart, and if you give them tools, they'll do wonderful
-                                things with them.” <span>- Steven Jobs</span></p>
+                            <p>“ ${vo.embed_txt }” <span>- 작성자</span></p>
                         </div>
                         <div class="blog-more">
                             <div class="row">
