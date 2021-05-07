@@ -5,21 +5,119 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<style type="text/css">
-.table-hover{
-	border-bottom : 1px solid #648CFF;
+<!-- <style type="text/css">
+.post{
+width: 20em;
+height: 28em;
+position: relative;
+right: -49em;
+top: -34em;
+display: table;
+overflow: auto;
 }
- h2{
-     text-decoration: overline #648CFF;
-     }
-</style>
+.checkout__input input{
+	color:black;
+}
+.checkout {
+    padding-top: 25px;
+    padding-bottom: 60px;
+}
+.checkout__input input{
+margin-left: 20em;
+}
+#checkBtn,#postBtn{
+	margin-left: 3em;
+	width: 6.5em;
+	background-color: #ddf2bc
+}
+.checkout__input{
+	width: 1140px;
+}
+#checkBtn:hover,#postBtn:hover,#btn1:hover,#findBtn:hover,#okBtn:hover{
+    color: #fff;
+    background-color: #7fad39;
+    border-color: #7fad39;
+}
+#checkBtn:focus,#postBtn:focus,#btn1:focus{
+	 box-shadow: 0 0 0 .2rem #ddf2bc;
+}
+#btn2:focus{
+	box-shadow: 0 0 0 .2rem #ecd2d2;
+}
+#btn2:hover{
+	 color: #fff;
+    background-color:#9b344ae3;
+    border-color: #fff;
+}
+#tel1,#phone1{
+float:left;
+width: 5em; 
+}
+#tel1::placeholder{
+	font-size: 8pt;
+}
+#tel2,#phone2{
+width: 10em;
+float:left;
+margin-left:2em; 
+}
+#btn1{
+	margin-left: 29em;
+}
+#btn2{
+	margin-left: 2em;
+}
+#btn1,#btn2{
+	text-align:center;
+	width: 6.5em;
+	background-color: #ddf2bc;
+	float: left;
+	padding-left: 8px;	
+}
+#pwd1{
+margin-left: 2em;
+}
+#addr1,#addr2{
+	width: 27em;
+}
+#checkSpan{
+	height:24px;
+	display: block;
+	text-align: left;
+	margin-left: 20em;
+	color: red;
+	
+} 
+.table{
+	font-size: 11pt;
+}
+.table th{
+	background-color: #ddf2bc;
+	border-bottom: 1px #0000003d solid;
+}
+#findBtn,#okBtn{
+	background-color: #ddf2bc;
+	width: 5em;
+	text-align: center;
+	height: 2.2em;
+}
+</style> -->
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
 $(function(){
 	
 	$('.post').hide();
+	
+ 	
  	$('#postBtn').click(function(){
- 		$('.post').show();
+ 		/* $('.post').show(); */
+ 		new daum.Postcode({
+			oncomplete:function(data)
+			{
+				$('#post').val(data.zonecode);
+				$('#addr1').val(data.address);
+			}
+		}).open();
  	});
 	$('#findBtn').click(function(){
 	
@@ -62,13 +160,7 @@ $(function(){
 	$('#okBtn').click(function(){
 		$('.post').hide();
 	});
-	$('#btn1').click(function(){
- 		if(index==1){//아이디 중복인데 회원가입 버튼누름
- 			$('#id').focus();
- 		}else{
- 			$('#join_form').submit();
- 		}
- 	});//중복이 안되어야 가입가능
+	
 });
 
 
@@ -77,62 +169,83 @@ $(function(){
 
 </head>
 <body>
-   <!-- Register Section Begin -->
+
+
+    <!-- Register Section Begin -->
     <div class="register-login-section spad">
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 offset-lg-3">
                     <div class="register-form">
-                        <h2>회원 정보 수정</h2>
-                        <form action="#">
+                        <h2>수정하기</h2>
+                        <form action="../member/register_ok.do" method="post" id="join_form">
                             <div class="group-input">
-                                <label for="username">Username (ID)*</label>
-                                <input type="text" id="username" style="float:left;">
-                                <span>&nbsp;</span>
+                             	<div class="checkout__input">
+	                                <label for="username">Username (ID)*</label>
+	                                <input type="text" id="id" name="id" style="float:left; margin-bottom: -15px;width: 11em;" autocomplete="off">
+	                                <span>&nbsp;</span>
+	                                 <div class="row">
+                            			<span id="checkSpan"></span>
+                           			 </div>
+                               		<br>
+                               		<label></label>
+                               		<br>
+                                    <p>이름<span>*</span><span style="color: black;margin-left:15em; ">닉네임</span></p>
+                                   <input type="text" name="name" id="name" class="input-sm"  placeholder="사용자 이름" style="float:left;width: 50%;">
+                                   <input type="text" name="nickname" id="nickname" class="input-sm" placeholder="사용하실 닉네임" autocomplete="off"  style="float:left;width: 50%;">
+                                </div>
+                                
                                 
                             </div>
                             <div class="group-input">
                                 <label for="pass">Password *</label>
-                                <input type="text" id="pass">
-                                <input type="text" id="con-pass"  placeholder="Confirm Password *">
+                                <input type="password" name="pwd" id="pwd" class="input-sm"  style="float:left;margin-bottom:15px; width: 50%" placeholder="비밀번호 입력">
+		                        <!-- <input type="password" name="pwd" id="pwd1" class="input-sm"  style="float:left" placeholder="재입력"> -->
                                  <span>&nbsp;</span>
-                                  <p>생년월일<span>*</span></p>
+                                 <br><br><br>
+                                  <p style="width: 100%">생년월일<span>*</span></p>
                                   <input type="date" size=20 name="birth" value="2021-01-01" min="1921-01-01" max="2121-12-31" >
                                 <span>&nbsp;</span>
                                   <p>email<span>*</span></p>
                                    	<input type="text" size=45 name="email" id="email" class="input-sm" placeholder="user01@google.com" style="width:20em;" autocomplete="off">
                                 <span>&nbsp;</span>
-                                  <p>TEL</p>
-                                        <p>Phone<span>*</span></p>
-                                       	<input type="text" size=5 name="phone1" id="phone1" class="input-sm" readonly value="010" >
-                                       	<input type="text" size=10 name="phone2" id="phone2" class="input-sm" autocomplete="off" placeholder="-포함 입력">
-                               
+                               	 <p>Tel<span>*</span></p>
+                                  <!--  	<input type="text" size=5 name="tel1" id="tel1" class="input-sm" value="지역번호" style="width: 9em; float: left;">
+                                   	<input type="text" size=10 name="tel2" id="tel2" class="input-sm" autocomplete="off" placeholder="-포함 입력" style="width: 11em;"> -->
+                                   	<input type="text" size=10 name="tel" id="tel" class="input-sm" autocomplete="off" placeholder="-포함 입력" style="width: 50%;">
+                               	 <p>Phone<span>*</span></p>
+                                   <!-- 	<input type="text" size=5 name="phone1" id="phone1" class="input-sm" readonly value="010" style="width: 9em; float: left;">
+                                   	<input type="text" size=10 name="phone2" id="phone2" class="input-sm" autocomplete="off" placeholder="-포함 입력" style="width: 11em;"> -->
+                                   	<input type="text" size=10 name="phone" id="phone" class="input-sm" autocomplete="off" placeholder="-포함 입력" style="width: 50%;">
                                <!-- 주소 1우편번호2주소 3상세주소  #######################################-->
-              				<div class="row">
+              				<div style="height: 10px"></div>
+              				
                             <div class="checkout__input">
                           		<span></span>
                                 <p>Address<span>*</span></p>
                                 <input type="text" name="post" id="post" class="checkout__input__add " readonly placeholder="우편번호(000-000)" style="float: left; width: 11em;">
-                             	<input type="button" value="우편번호 검색" class="btn btn-sm" id="postBtn" style="float: left; width: 9em; margin-left: 7em;">
+                             	<input type="button" value="우편번호 검색" class="site-btn" id="postBtn" style="float: left; width: 9em;">
                                 &nbsp;
                             </div>
-                            </div>
-                            <div class="row">
+                            
+                         
                             <div class="checkout__input">
-                                <input type="text"  placeholder="주소" name="addr1" id="addr1" readonly>
+                                <input type="text"  placeholder="주소" name="addr1" id="addr1" style="margin-top: 15px;" readonly>
                                 &nbsp;
                                 <input type="text"  placeholder="상세주소" name="addr2" id="addr2" style="margin-top: -15px;" autocomplete="off">
                             </div>
-     						</div>
+     						
                                
                             </div>
-                            <button type="submit" class="site-btn register-btn">수정하기</button>
+                            <input type="submit" class="site-btn register-btn" id="btn1" value="수정하기"></input>
                         </form>
+                      
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    
     <!-- Register Form Section End -->
      <div class="post">
             	<table class="table" style="height: 105px; border: 1px solid black;">
