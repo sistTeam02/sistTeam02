@@ -105,12 +105,14 @@ public class AdminRestController {
 			map.put("end", end);
 			List<QnABoardVO> list=dao.userQnAListData(map);
 			JSONArray arr=new JSONArray();
+			SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
 			for(QnABoardVO vo:list){
 				JSONObject obj=new JSONObject();
 				obj.put("id",vo.getId());
 				obj.put("no",vo.getNo());
 				obj.put("subject",vo.getSubject());
-				obj.put("regdate",vo.getRegdate());
+				String regdate=sdf.format(vo.getRegdate());
+				obj.put("regdate",regdate);
 				obj.put("content",vo.getContent());
 				obj.put("answer",vo.getAnswer());
 				arr.add(obj);
@@ -164,12 +166,14 @@ public class AdminRestController {
 			map.put("end", end);
 			List<QnABoardVO> list=dao.userQnAUpdateListData(map);
 			JSONArray arr=new JSONArray();
+			SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
 			for(QnABoardVO vo:list){
 				JSONObject obj=new JSONObject();
 				obj.put("id",vo.getId());
 				obj.put("no",vo.getNo());
 				obj.put("subject",vo.getSubject());
-				obj.put("regdate",vo.getRegdate());
+				String regdate=sdf.format(vo.getRegdate());
+				obj.put("regdate",regdate);
 				obj.put("content",vo.getContent());
 				obj.put("answer",vo.getAnswer());
 				obj.put("msg",vo.getQnABoard_ReplyVO().getMsg());
@@ -231,13 +235,15 @@ public class AdminRestController {
 			map.put("keyword", keyword);
 			map.put("sc", sc);
 			List<QnABoardVO> list=dao.qnaSearchData(map);
+			SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
 			JSONArray arr=new JSONArray();
 			for(QnABoardVO vo:list){
 				JSONObject obj=new JSONObject();
 				obj.put("id",vo.getId());
 				obj.put("no",vo.getNo());
 				obj.put("subject",vo.getSubject());
-				obj.put("regdate",vo.getRegdate());
+				String regdate=sdf.format(vo.getRegdate());
+				obj.put("regdate",regdate);
 				obj.put("content",vo.getContent());
 				obj.put("answer",vo.getAnswer());
 				arr.add(obj);
