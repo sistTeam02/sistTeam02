@@ -201,6 +201,12 @@ $(function(){
                                 <li><a href="./shopping-cart.html">주문확인</a></li>
                             </ul>
                         </li>
+                        <li><a href="#">유튜브</a>
+                            <ul class="dropdown">
+                                <li><a href="../youtube/you_list.do">리스트</a></li>
+                                
+                            </ul>
+                        </li>
                     </ul>
                 </nav>
                 <div id="mobile-menu-wrap"></div>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sist.mapper.youtube-mapper">
+	
+	<!-- 총데이터 -->
+	<select id="youtubeListData" resultType="YoutubeVO" parameterType="hashmap">
+	  SELECT videoid,no,regdate,title,thumbnails,channeltitle,description,num
+	  FROM ( SELECT videoid,no,regdate,title,thumbnails,channeltitle,description,rownum as num
+	  FROM ( SELECT videoid,no,regdate,title,thumbnails,channeltitle,description
+	  FROM youtube_data))
+	  WHERE num BETWEEN #{start} AND #{end}
+	</select>
+
+	<!-- 총 페이지 개수 -->
+	<select id="youtubeTotalPage" resultType="int">
+		SELECT CEIL(COUNT(*)/12.0) FROM youtube_data
+	</select>
+	
+	<!-- 디테일 데이터 -->
+	<select id="detailYoutubeData" resultType="youtubeVO" parameterType="int">
+	 	 SELECT no,regdate,title,thumbnails,channeltitle,description
+	 	 FROM youtube_data
+	 	 WHERE no=#{no}
+	</select>
+	
+	
+</mapper>
