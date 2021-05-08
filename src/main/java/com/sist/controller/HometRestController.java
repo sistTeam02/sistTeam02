@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sist.dao.HometDAO;
-import com.sist.vo.HometDetailFreeVO;
+import com.sist.vo.HometDetailVO;
 
 @RestController
 public class HometRestController {
@@ -16,7 +16,7 @@ public class HometRestController {
 	public String test_ht_test(int no){
 		String json="";
 		try {
-			HometDetailFreeVO vo=dao.hometDetailFree(no);
+			HometDetailVO vo=dao.hometDetailFree(no);
 			JSONObject obj=new JSONObject();
 			/*title1, title2, UPLOADDAY, hit, comment_hit, video, video_time,*/
 			obj.put("title1",vo.getTitle1());

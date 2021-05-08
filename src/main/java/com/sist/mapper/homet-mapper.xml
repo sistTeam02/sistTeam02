@@ -25,9 +25,23 @@
 		SELECT CEIL(COUNT(*)/10.0) FROM hometraining_main
 	</select>
 	
-	<select id="hometDetailFree" resultType="HometDetailFreeVO" parameterType="int">
+	<select id="hometDetailFree" resultType="com.sist.vo.HometDetailVO" parameterType="int">
 		SELECT title1, title2, UPLOADDAY, hit, comment_hit, video, video_time, video_part, video_grade, video_kcal, embed_txt, embed_img
 		FROM hometraining_detail
 		WHERE no = #{no}
 	</select>
+	
+	<!-- 챌린지 메인 페이지 리스트 -->
+	<select id="hometChallengeListData" resultType="HometMainVO">
+		SELECT * FROM hometraining_main
+		WHERE title like '%'||'챌린지'||'%'
+		ORDER BY NO DESC
+	</select>
+	
+	<!-- 챌린지 디테일 페이지 -->
+	<select id="hometChallengeDetail" resultType="HometDetailVO">
+	
+	</select>
+	
+	
 </mapper>

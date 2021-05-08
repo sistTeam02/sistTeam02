@@ -5,7 +5,7 @@ import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.sist.vo.HometDetailFreeVO;
+import com.sist.vo.HometDetailVO;
 import com.sist.vo.HometMainVO;
 
 import java.util.*;
@@ -22,14 +22,26 @@ public class HometDAO extends SqlSessionDaoSupport{
 		return getSqlSession().selectList("hometListData",map);
 	}
 	
+	// 챌린지 목록 출력
+	public List<HometMainVO> hometChallengeListData() {
+		return getSqlSession().selectList("hometChallengeListData");
+	}
+	
 	// 총페이지 
     public int hometTotalPage()
     {
     	return getSqlSession().selectOne("hometTotalPage");
     }
     
+    // 챌린지 총 페이지
+    public int hometChallengeTotalPage() {
+    	return getSqlSession().selectOne("hometChallengeTotalPage");
+    }    
+    
+    
+    
     // 상세페이지
-    public HometDetailFreeVO hometDetailFree(int no) {
+    public HometDetailVO hometDetailFree(int no) {
     	return getSqlSession().selectOne("hometDetailFree", no);
     }
 }

@@ -15,7 +15,7 @@ package com.sist.vo;
 	EMBED_TXT      VARCHAR2(4000) 
 	EMBED_IMG      VARCHAR2(4000) 
  */
-public class HometDetailFreeVO {
+public class HometDetailVO {
 	private int no;
 	private String title1;
 	private String title2;

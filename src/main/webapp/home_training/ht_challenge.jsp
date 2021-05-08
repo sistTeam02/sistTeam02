@@ -195,7 +195,7 @@ $(function(){
                     <div class="product-list">
                         <div class="row">
                         <!-- forEach  -->
-                        <c:forEach var="vo" items="${list }">
+                        <c:forEach var="vo" items="${cList }">
                             <div class="col-lg-4 col-sm-6">
                                 <div class="product-item">
                                     <div class="pi-pic">

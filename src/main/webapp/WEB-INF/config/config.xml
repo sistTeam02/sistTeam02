@@ -24,7 +24,7 @@
     <typeAlias type="com.sist.vo.HometMainVO" alias="HometMainVO"/>
     <typeAlias type="com.sist.vo.QnABoard_ReplyVO" alias="QnABoard_ReplyVO"/>    
     <typeAlias type="com.sist.vo.User_basketVO" alias="User_basketVO"/>
-    <typeAlias type="com.sist.vo.HometDetailFreeVO" alias="HometDetailFreeVO"/>
+    <typeAlias type="com.sist.vo.HometDetailVO" alias="HometDetailVO"/>
   	<typeAlias type="com.sist.vo.YoutubeVO" alias="YoutubeVO"/>
   </typeAliases>
   <mappers>
