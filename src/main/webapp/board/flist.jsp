@@ -84,21 +84,44 @@ h1 {
       <button class="btn btn-sm btn0-primary">검색</button>
       </form>
      </td>
+     </tr>
+     </table>
      <table class="table">
      <tr>
        <td class="text-center">
          <ul class="pagination">
-             <li><a href="#">&lt;</a></li>
+           <c:if test="${startPage>1 }">
+             <li><a href="../board/flist.do?page=${startPage-1}">&lt;</a></li>
+           </c:if>
 	         <c:forEach var="i" begin="${startPage }" end="${endPage }">
-	           <li><a href="../board/flist.do?page=${i }">${i }</a></li>
+	           <li><a href="../board/list.do?page=${i }">${i }</a></li>
 	         </c:forEach>
-	         <li><a href="#">&gt;</a></li>
+	         <c:if test="${endPage<totalpage }">
+	         <li><a href="../board/flist.do?page=${endPage+1}">&gt;</a></li>
+	         </c:if>
 	     </ul>
        </td>
      </tr>
    </table>
-    </tr>
-   </table>
+     <!--  <div style="height:30px"></div>
+     <ul class="pagination" >
+		<c:if test="${startPage>1 }">
+		  <a href="../board/flist.do?page=${startPage-1}"><li class="page">&lt;</li></a>
+		 </c:if>
+		<c:forEach var="i" step="1" begin="${startPage }" end="${endPage }">
+			<a href="../board/flist.do?page=${i}">
+			<c:if test="${curpage==i}">
+		  		<li class="page_active">
+		  	</c:if>
+		  	<c:if test="${curpage!=i }">
+		  		<li class="page">
+		  	</c:if>
+		  ${i }</li></a>
+		</c:forEach>
+		<c:if test="${endPage<allPage }">
+		  <a href="../board/flist.do?page=${endPage+1}"><li class="page">&gt;</li></a>
+		 </c:if>
+		</ul> -->
   </div>
  </div>
  </div>

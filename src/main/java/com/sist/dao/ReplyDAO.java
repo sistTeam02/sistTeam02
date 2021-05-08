@@ -41,7 +41,7 @@ public class ReplyDAO extends SqlSessionDaoSupport{
 	{
 		// 1. 상위정보
 		ReplyVO pvo=getSqlSession().selectOne("replyParentInfoData", root);
-		getSqlSession().update("replyGroupStepIncement", pvo);
+		getSqlSession().update("replyGroupStepIncrement", pvo);
 		// 실제 추가
 		vo.setGroup_id(pvo.getGroup_id());
 		vo.setGroup_step(pvo.getGroup_step()+1);
@@ -62,7 +62,7 @@ public class ReplyDAO extends SqlSessionDaoSupport{
 		}
 		else // 댓글이 있는 경우
 		{
-			getSqlSession().update("deptDecrement", vo.getRoot());
+			getSqlSession().update("replyMsgUpdate", no);
 		}
 		getSqlSession().update("depthDecrement", vo.getRoot());
 	}

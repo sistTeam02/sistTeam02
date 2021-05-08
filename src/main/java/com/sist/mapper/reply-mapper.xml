@@ -15,6 +15,7 @@
  INSERT INTO reply(no,bno,id,name,msg,group_id) VALUES(
    #{no},
    #{bno},
+   #{id},
    #{name},
    #{msg},
    (SELECT NVL(MAX(group_id)+1,1)FROM reply)
