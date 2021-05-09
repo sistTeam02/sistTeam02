@@ -109,4 +109,15 @@
 		SELECT CEIL(COUNT(*)/12.0) FROM dietfood_list 
 		WHERE title LIKE '%'||#{search}||'%' AND WHERE title LIKE '%'||#{keyword}||'%'
 	</select>
+	
+	<select id="searchAutocomplete" parameterType="string" resultType="string">
+		select keyword from
+		(select keyword, rownum from
+		(select keyword from goods_keyword WHERE keyword like '%'||#{search}||'%' order by rownum asc) UNION
+		select keyword, rownum from
+		(select keyword from foods_keyword where keyword like '%'||#{search}||'%' order by rownum asc) UNION
+		select keyword, rownum from
+		(select keyword from homet_keyword where keyword like '%'||#{search}||'%' order by rownum asc))
+		where <![CDATA[rownum <= 10]]>
+	</select>
 </mapper>

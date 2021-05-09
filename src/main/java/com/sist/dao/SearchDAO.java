@@ -186,4 +186,14 @@ public class SearchDAO extends SqlSessionDaoSupport{
 	public int foodsKeywordPage(Map map){
 		return getSqlSession().selectOne("foodsKeywordPage",map);
 	}
+	/*
+	 * <select id="searchAutocomplete" parameterType="string" resultType="string">
+		SELECT title FROM goods_list, dietfood_list, hometraining_main 
+		WHERE title LIKE '%'||#{search}||'%'
+	</select>
+	 * 
+	 */
+	public List<String> searchAutocomplete(String search){
+		return getSqlSession().selectList("searchAutocomplete", search);
+	}
 }
