@@ -18,11 +18,9 @@
 			alert("더 이상 항목이 없습니다"); // 더 이상 로드할 항목이 없는 경우 경고
 		}
 	}); */
-	$("#price").click(function(){
+	$("#load").click(function(){
 		$(this).append(
 				 "<li class='test'>건강식품</li>"
-				 
-				 
 		)
 	});
 	

@@ -15,20 +15,37 @@
  -->
   
   <!-- 장바구니 목록 -->
-  <select id="basketListData" resultType="User_basketVO" parameterType="int">
-    SELECT 
+  <select id="basketListData" resultType="User_basketVO" parameterType="String">
+	SELECT id,no,pno,title,poster,price,ordercount,(price*ordercount) money,orderdate,state
+	FROM user_basket
+	WHERE id=#{id}
+<!--     SELECT 
     	u.id as id,
     	u.no as no,
     	u.pno as pno,
-    	g.title,d.title,
-    	g.poster,d.poster,
-    	g.price,d.price,
-    	u.ordercount,(u.price*u.ordercount) money
+    	g.title as title,
+    	g.poster as poster,
+    	g.price as price,
+    	u.ordercount,(g.price*u.ordercount) money
     FROM 
-    	user_basket u,dietfood_list d,goods_list g,member m
+    	user_basket u,goods_list g,member m
     WHERE m.id=u.id
-    	AND (u.pno=d.no OR u.pno=g.no)
+    	AND u.pno=g.no
     	AND u.id={id}
+    UNION ALL
+    SELECT
+    	u.id as id,
+    	u.no as no,
+    	u.pno as pno,
+    	d.title as title,
+    	d.poster as poster,
+    	d.price as price,
+    	u.ordercount,(d.price*u.ordercount) money
+    FROM 
+    	user_basket u,dietfood_list d,member m
+    WHERE m.id=u.id
+    	AND u.pno=d.no
+    	AND u.id={id} -->
   </select>
   
   <!-- 장바구니 추가 -->
@@ -48,7 +65,7 @@
   </insert>
 
   <!-- 장바구니 금액 합계 -->
-  <select id="basketMoney" resultType="int">
+  <select id="basketMoney" resultType="String">
     SELECT NVL(SUM(price*ordercount), 0) money
     FROM user_basket u,dietfood_list d,goods_list g
     WHERE u.pno=d.no 
@@ -71,7 +88,7 @@
   </delete>
 
   <!-- 장바구니 상품 갯수 -->
-  <select id="basketCount" resultType="User_basketVO" parameterType="hashmap">
+  <select id="basketCount" resultType="User_basketVO" parameterType="User_basketVO">
     SELECT COUNT(*)
     FROM user_basket
     WHERE id=#{id}
