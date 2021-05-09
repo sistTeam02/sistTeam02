@@ -199,14 +199,12 @@
  <selectKey keyProperty="no" resultType="int" order="BEFORE">
   SELECT NVL(MAX(no)+1,1) as no FROM noticeboard
  </selectKey>
-  INSERT INTO noticeboard(no,name,subject,content,pwd,hit,regdate,filename,filesize,filecount) VALUES(
+  INSERT INTO noticeboard(no,name,subject,content,pwd,filename,filesize,filecount) VALUES(
      #{no},
-     #{id},
+     #{name},
      #{subject},
      #{content},
      #{pwd},
-     0,
-     SYSDATE,
      #{filename},
      #{filesize},
      #{filecount}

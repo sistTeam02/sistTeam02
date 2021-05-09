@@ -1,5 +1,7 @@
 package com.sist.controller;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,9 +22,52 @@ public class FreeBordRestController {
 	@Autowired
 	private FreeBoardDAO fDao;
 	@Autowired
-	private ReplyDAO rDao;
-	@Autowired
     private NoticeBoardDAO nDao;
+	
+	// 찾기
+	   @PostMapping("board/ffind.do")
+	   public String board_ffind(String fs,String ss,Model model)
+	   {
+		   String json="";
+		   try
+		   {
+		   FindVO vo=new FindVO();
+		   vo.setFs(fs);
+		   vo.setSs(ss);
+		   Map map=new HashMap();
+		   map.put("fs",fs);
+		   map.put("ss", ss);
+		   map.put("fsArr", vo.getFsArr());
+		   List<FreeBoardVO> list=fDao.freeboardFindData(map);
+		   int count=fDao.freeboardFindDataCount(map);
+		   JSONArray arr=new JSONArray();
+			for(FreeBoardVO fvo:list){
+				/*
+				 *  NO      NOT NULL NUMBER         
+					ID               VARCHAR2(34)   
+					NAME    NOT NULL VARCHAR2(34)   
+					SUBJECT NOT NULL VARCHAR2(1000) 
+					PWD     NOT NULL VARCHAR2(10)   
+					CONTENT NOT NULL CLOB           
+					REGDATE          DATE           
+					HIT              NUMBER 
+				 */
+				JSONObject obj=new JSONObject();
+				obj.put("no",fvo.getNo());
+				obj.put("name",fvo.getName());
+				obj.put("subject",fvo.getSubject() );
+				obj.put("regdate",fvo.getRegdate());
+				obj.put("hit",fvo.getHit());
+				arr.add(obj);
+			}
+			json=arr.toJSONString();
+
+		   }catch(Exception ex)
+		   {
+			   ex.printStackTrace();
+		   }
+		   return "json";
+	   }
 	   
 	   ////////////////////////  공지사항  ////////////////////////////////////
 	   @RequestMapping(value="board/ndelete_ok.do")

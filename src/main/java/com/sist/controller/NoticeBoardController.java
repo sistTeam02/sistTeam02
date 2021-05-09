@@ -45,10 +45,22 @@ public class NoticeBoardController {
 		   List<NoticeBoardVO> list=nDao.noticeboardListData(map);
 		   int totalpage=nDao.noticeboardTotalPage();
 		   
+		   final int BLOCK=5;
+		   int startPage=((curpage-1)/BLOCK*BLOCK)+1;
+		   int endPage=((curpage-1)/BLOCK*BLOCK)+BLOCK;
+		   int allPage=totalpage;
+		   if(endPage>allPage)
+		   {
+			   endPage=allPage;
+		   }
+		   
 		   // JSP 전송 
 		   model.addAttribute("list", list);
 		   model.addAttribute("curpage", curpage);
-		   model.addAttribute("totalpage", totalpage);
+		   model.addAttribute("allPage", allPage);
+		   model.addAttribute("BLOCK", BLOCK);
+		   model.addAttribute("startPage", startPage);
+		   model.addAttribute("endPage", endPage);
 		   model.addAttribute("main_jsp", "../board/nlist.jsp");
 		   
 		   return "main/main";
@@ -63,6 +75,8 @@ public class NoticeBoardController {
 	   @PostMapping("board/ninsert_ok.do")
 	   public String board_ninsert_ok(NoticeBoardVO vo)
 	   {
+		   try
+		   {
 		   List<MultipartFile> list=vo.getFiles();
 		   if(list==null) // 업로드가 안된 상태
 		   {
@@ -84,7 +98,10 @@ public class NoticeBoardController {
 					  // 오라클에 파일명을 묶어서 저장  a.jpg,b.png,c.jpg
 				      tempFile+=strFile+",";
 				      tempSize+=file.length()+",";
-				   }catch(Exception ex){}
+				   }catch(Exception ex)
+				   {
+					   ex.printStackTrace();
+				   }
 				   
 			   }
 			   tempFile=tempFile.substring(0,tempFile.lastIndexOf(","));
@@ -92,6 +109,10 @@ public class NoticeBoardController {
 			   vo.setFilename(tempFile);
 			   vo.setFilesize(tempSize);
 			   vo.setFilecount(list.size());
+		   }
+		   }catch(Exception ex)
+		   {
+			   ex.printStackTrace();
 		   }
 		   //DAO연결 
 		   nDao.noticeboardInsert(vo);

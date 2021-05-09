@@ -17,29 +17,25 @@ h1 {
   text-align: center;
 }
 </style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script>
+/*$(document).ready(function(){
+    $('[data-toggle="popover"]').popover();   
+});*/
+$(document).on(function(){
+	$('.ffind_input').keyup(function(){
+		
+})
+</script>
 </head>
 <body>
  <div style="height:50px"></div>
- <div class="container">
+ <div class="container-fluid">
   <h1>자유게시판</h1>
   <div class="row">
-  <div class="col-lg-3 col-md-6 col-sm-8 order-2 order-lg-1">
-   <table class="table">
-    <tr class="info">
-     <th>커뮤니티</th>
-    </tr>
-    <tr>
-     <th><a href="../board/flist.do" style="text-align:center">자유게시판</a></th>
-    </tr>
-    <tr>
-     <th><a href="../board/qlist.do">문의게시판</a></th>
-    </tr>
-    <tr>
-     <th><a href="../board/nlist.do">공지사항</a></th>
-    </tr>
-   </table>
-  </div>
-  <div class="col-lg-9 order-1 order-lg-2">
+  <jsp:include page="board_menu.jsp"/>
+  <div class="col-lg-9">
   <table class="table">
   <tr>
    <td class="text-right">
@@ -48,7 +44,7 @@ h1 {
   </tr>
   </table>
    <table class="table">
-    <tr class="info">
+    <tr class="info find">
      <th width=10% class="text-center">번호</th>
      <th width=45% class="text-center">제목</th>
      <th width=15% class="text-center">이름</th>
@@ -56,7 +52,7 @@ h1 {
      <th width=10% class="text-center">조회수</th>
     </tr>
     <c:forEach var="vo" items="${list }">
-     <tr>
+     <tr id="find_table">
       <td width=10% class="text-center">${vo.no }</td>
       <td width=45%>
        <a href="../board/fdetail.do?no=${vo.no}&page=${curpage}">${vo.subject }</a>
@@ -67,10 +63,9 @@ h1 {
      </tr>
     </c:forEach>
    </table>
-   <table class="table">
+   <table class="find_searchbar">
     <tr>
      <td class="text-left">
-     <form method=post action="../board/ffind.do">
       Search:<select name="fs" class="input-sm">
        <option value="N">이름</option>
        <option value="S">제목</option>
@@ -80,9 +75,8 @@ h1 {
        <option value="SC">제목+내용</option>
        <option value="NSC">이름+제목+내용</option>
       </select>
-      <input type="text" name=ss size=15 class="input-sm">
+      <input type="text" name=ss size=15 id="ffind_input">
       <button class="btn btn-sm btn0-primary">검색</button>
-      </form>
      </td>
      </tr>
      </table>
@@ -90,15 +84,11 @@ h1 {
      <tr>
        <td class="text-center">
          <ul class="pagination">
-           <c:if test="${startPage>1 }">
-             <li><a href="../board/flist.do?page=${startPage-1}">&lt;</a></li>
-           </c:if>
+             <li><a href="#">&lt;</a></li>
 	         <c:forEach var="i" begin="${startPage }" end="${endPage }">
-	           <li><a href="../board/list.do?page=${i }">${i }</a></li>
+	           <li><a href="../board/flist.do?page=${i }">${i }</a></li>
 	         </c:forEach>
-	         <c:if test="${endPage<totalpage }">
-	         <li><a href="../board/flist.do?page=${endPage+1}">&gt;</a></li>
-	         </c:if>
+	         <li><a href="#">&gt;</a></li>
 	     </ul>
        </td>
      </tr>

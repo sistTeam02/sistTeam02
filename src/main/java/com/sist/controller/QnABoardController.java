@@ -38,10 +38,22 @@ public class QnABoardController {
 		   List<QnABoardVO> list=qDao.qnaboardListData(map);
 		   int totalpage=qDao.qnaboardTotalPage();
 		   
+		   final int BLOCK=5;
+		   int startPage=((curpage-1)/BLOCK*BLOCK)+1;
+		   int endPage=((curpage-1)/BLOCK*BLOCK)+BLOCK;
+		   int allPage=totalpage;
+		   if(endPage>allPage)
+		   {
+			   endPage=allPage;
+		   }
+		   
 		   // JSP 전송 
 		   model.addAttribute("list", list);
 		   model.addAttribute("curpage", curpage);
-		   model.addAttribute("totalpage", totalpage);
+		   model.addAttribute("allPage", allPage);
+		   model.addAttribute("BLOCK", BLOCK);
+		   model.addAttribute("startPage", startPage);
+		   model.addAttribute("endPage", endPage);
 		   model.addAttribute("main_jsp", "../board/qlist.jsp");
 		   
 		   return "main/main";

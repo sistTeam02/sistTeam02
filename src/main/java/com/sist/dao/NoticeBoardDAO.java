@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.sist.vo.DietFoodVO;
 import com.sist.vo.NoticeBoardVO;
 
 @Repository
@@ -30,6 +31,7 @@ public class NoticeBoardDAO extends SqlSessionDaoSupport{
 		return getSqlSession().selectOne("noticeboardTotalPage");
 	}
 	// 글쓰기
+	@Transactional(propagation=Propagation.REQUIRED,rollbackFor=Exception.class)
 	public void noticeboardInsert(NoticeBoardVO vo)
 	{
 		getSqlSession().insert("noticeboardInsert", vo);
@@ -61,7 +63,9 @@ public class NoticeBoardDAO extends SqlSessionDaoSupport{
 		{
 			return getSqlSession().selectOne("noticeboardFindDataCount", map);
 		}
+
 		// 수정
+		@Transactional(propagation=Propagation.REQUIRED,rollbackFor=Exception.class)
 		public boolean noticeboardUpdate(NoticeBoardVO vo)
 		{
 			boolean bCheck=false;

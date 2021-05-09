@@ -16,23 +16,21 @@ h1 {
   text-align: center;
 }
 </style>
-<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="https://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
-let u=0;
-let i=0;
 $(function(){
-	// 파일 읽기(Ajax) => 자바스크립트에서 자바의 데이터를 출력 할 경우 => Jquery, EL => $ => 그래프
+	let bno=${vo.no};
 	$.ajax({
 		type:'GET',
-		url:'../board/reply_list.do',
-		data:{"bno":<c:out value="${vo.no}"/>,"page":<c:out value="${page}"/>},
+		url:'reply_list.do',
+		data:{'bno':bno},
 		success:function(result)
 		{
-			$('#reply_data').html(result)
+			$('#reply_data').html(result);
 		}
 	});
-	
-})
+});
 </script>
 </head>
 <body>

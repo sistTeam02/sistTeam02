@@ -23,6 +23,8 @@ h1 {
  <div class="container">
   <h1>고객문의게시판</h1>
   <div class="row">
+  <jsp:include page="board_menu.jsp"/>
+  <div class="col-lg-9">
   <table class="table">
   <tr>
    <td class="text-right">
@@ -84,6 +86,7 @@ h1 {
    </table>
     </tr>
    </table>
+   </div>
   </div>
  </div>
 </body>
