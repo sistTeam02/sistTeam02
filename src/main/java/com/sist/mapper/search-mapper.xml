@@ -59,4 +59,54 @@
         (SELECT no, keyword, cnt FROM search_rank ORDER BY cnt DESC))
 		WHERE <![CDATA[num <= 10]]>
 	</select>
+	
+	<select id="hometKeyword" resultType="string">
+		SELECT keyword FROM 
+		(SELECT keyword, rownum FROM homet_keyword ORDER BY cnt DESC )
+		WHERE <![CDATA[rownum <= 10]]>
+	</select>
+	
+	<select id="goodsKeyword" resultType="string">
+		SELECT keyword FROM 
+		(SELECT keyword, rownum FROM goods_keyword ORDER BY cnt DESC )
+		WHERE <![CDATA[rownum <= 10]]>
+	</select>
+	
+	<select id="foodsKeyword" resultType="string">
+		SELECT keyword FROM 
+		(SELECT keyword, rownum FROM foods_keyword ORDER BY cnt DESC )
+		WHERE <![CDATA[rownum <= 10]]>
+	</select>
+	
+	<select id="hometKeywordSearch" parameterType="hashmap" resultType="HometVO">
+	
+	</select>
+	
+	<select id="goodsKeywordSearch" parameterType="hashmap" resultType="GoodsVO">
+		SELECT no, title, poster, price, num 
+		FROM (SELECT no, title, poster, price, rownum as num
+		FROM (SELECT no, title, poster, price 
+		FROM goods_list WHERE title LIKE '%'||#{search}||'%' AND WHERE title LIKE '%'||#{keyword}||'%'
+		ORDER BY no ASC)) 
+        WHERE num BETWEEN #{start} AND #{end}
+	</select>
+	
+	<select id="foodsKeywordSearch" parameterType="hashmap" resultType="DietFoodVO">
+		SELECT no, title, poster, price, num 
+		FROM (SELECT no, title, poster, price, rownum as num
+		FROM (SELECT no, title, poster, price 
+		FROM dietfood_list WHERE title LIKE '%'||#{search}||'%' AND WHERE title LIKE '%'||#{keyword}||'%'
+		ORDER BY no ASC)) 
+        WHERE num BETWEEN #{start} AND #{end}
+	</select>
+	
+	<select id="goodsKeywordPage" parameterType="hashmap" resultType="int">
+		SELECT CEIL(COUNT(*)/12.0) FROM goods_list 
+		WHERE title LIKE '%'||#{search}||'%' AND WHERE title LIKE '%'||#{keyword}||'%'
+	</select>
+	
+	<select id="foodsKeywordPage" parameterType="hashmap" resultType="int">
+		SELECT CEIL(COUNT(*)/12.0) FROM dietfood_list 
+		WHERE title LIKE '%'||#{search}||'%' AND WHERE title LIKE '%'||#{keyword}||'%'
+	</select>
 </mapper>

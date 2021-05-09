@@ -1,5 +1,6 @@
 package com.sist.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -55,12 +56,15 @@ public class MainSearchController {
 		int startPage=0;
 		int endPage=0;
 		int allPage=0;
+		List<String> klist=new ArrayList<String>();
+		
 		/*if(no.equals("1")){//홈트
-			
+			klist=sdao.hometKeyword();
 		}*/
 		/*else*/ if(no.equals("2")){//건강식품
 			List<DietFoodVO> dlist=sdao.searchDietfoodAll(map);
 			totalpage=sdao.searchDietfoodAllPage(search);
+			klist=sdao.foodsKeyword();
 			model.addAttribute("list",dlist);
 			startPage=((curpage-1)/BLOCK*BLOCK)+1;
 			endPage=((curpage-1)/BLOCK*BLOCK)+BLOCK;
@@ -71,6 +75,7 @@ public class MainSearchController {
 		else if(no.equals("3")){//운동기구
 			List<GoodsVO> glist=sdao.searchGoodsAll(map);
 			totalpage=sdao.searchGoodsAllPage(search);
+			klist=sdao.goodsKeyword();
 			model.addAttribute("list",glist);
 			startPage=((curpage-1)/BLOCK*BLOCK)+1;
 			endPage=((curpage-1)/BLOCK*BLOCK)+BLOCK;
@@ -78,6 +83,7 @@ public class MainSearchController {
 			if(endPage>allPage)
 				   endPage=allPage;
 		}
+		model.addAttribute("klist",klist);
 		model.addAttribute("no",no);
 		model.addAttribute("totalpage",totalpage);
 		model.addAttribute("curpage",curpage);

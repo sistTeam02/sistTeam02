@@ -109,4 +109,81 @@ public class SearchDAO extends SqlSessionDaoSupport{
 	public List<KeywordVO> keywordList(){
 		return getSqlSession().selectList("searchRank");
 	}
+	
+	/*
+	 * <select id="hometKeyword" resultType="string">
+		SELECT keyword FROM 
+		(SELECT keyword, rownum FROM homet_keyword ORDER BY cnt DESC )
+		WHERE <![CDATA[rownum <= 10]]>
+	</select>
+	
+	<select id="goodsKeyword" resultType="string">
+		SELECT keyword FROM 
+		(SELECT keyword, rownum FROM goods_keyword ORDER BY cnt DESC )
+		WHERE <![CDATA[rownum <= 10]]>
+	</select>
+	
+	<select id="foodsKeyword" resultType="string">
+		SELECT keyword FROM 
+		(SELECT keyword, rownum FROM foods_keyword ORDER BY cnt DESC )
+		WHERE <![CDATA[rownum <= 10]]>
+	</select>
+	 */
+	
+	public List<String> hometKeyword(){
+		return getSqlSession().selectList("hometKeyword");
+	}
+	
+	public List<String> goodsKeyword(){
+		return getSqlSession().selectList("goodsKeyword");
+	}
+	
+	public List<String> foodsKeyword(){
+		return getSqlSession().selectList("foodsKeyword");
+	}
+	/*
+	 * <select id="goodsKeywordSearch" parameterType="hashmap" resultType="GoodsVO">
+		SELECT no, title, poster, price, num 
+		FROM (SELECT no, title, poster, price, rownum as num
+		FROM (SELECT no, title, poster, price 
+		FROM goods_list WHERE title LIKE '%'||#{search}||'%' AND WHERE title LIKE '%'||#{keyword}||'%'
+		ORDER BY no ASC)) 
+        WHERE num BETWEEN #{start} AND #{end}
+	</select>
+	
+	<select id="foodsKeywordSearch" parameterType="hashmap" resultType="DietFoodVO">
+		SELECT no, title, poster, price, num 
+		FROM (SELECT no, title, poster, price, rownum as num
+		FROM (SELECT no, title, poster, price 
+		FROM dietfood_list WHERE title LIKE '%'||#{search}||'%' AND WHERE title LIKE '%'||#{keyword}||'%'
+		ORDER BY no ASC)) 
+        WHERE num BETWEEN #{start} AND #{end}
+	</select>
+	 */
+	
+	public List<GoodsVO> goodsKeywordSearch(Map map){
+		return getSqlSession().selectList("goodsKeywordSearch", map);
+	}
+	
+	public List<DietFoodVO> foodsKeywordSearch (Map map){
+		return getSqlSession().selectList("foodsKeywordSearch",	map);
+	}
+	/*
+	 * <select id="goodsKeywordPage" parameterType="hashmap" resultType="int">
+		SELECT CEIL(COUNT(*)/12.0) FROM goods_list 
+		WHERE title LIKE '%'||#{search}||'%' AND WHERE title LIKE '%'||#{keyword}||'%'
+	</select>
+	
+	<select id="foodsKeywordPage" parameterType="hashmap" resultType="int">
+		SELECT CEIL(COUNT(*)/12.0) FROM dietfood_list 
+		WHERE title LIKE '%'||#{search}||'%' AND WHERE title LIKE '%'||#{keyword}||'%'
+	</select>
+	 */
+	public int goodsKeywordPage(Map map){
+		return getSqlSession().selectOne("goodsKeywordPage",map);
+	}
+	
+	public int foodsKeywordPage(Map map){
+		return getSqlSession().selectOne("foodsKeywordPage",map);
+	}
 }

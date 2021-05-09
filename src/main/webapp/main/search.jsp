@@ -43,6 +43,7 @@ a:hover{
                     <div class="filter-widget">
                         <h4 class="fw-title">검색 카테고리</h4>
                         <ul class="filter-catagories">
+                        	<li><a href="../main/search.do?no=0&search=${search }">카테고리 전체</a></li>
                             <li><a href="#">홈 트레이닝</a></li>
                             <li><a href="../main/search_category.do?no=3&search=${search }">운동 기구/용품</a></li>
                             <li><a href="../main/search_category.do?no=2&search=${search }">건강 식품</a></li>
@@ -113,6 +114,7 @@ a:hover{
                     <hr>
                     <div class="product-list">
          				<h4>운동 기구/용품 검색 결과</h4>
+         				<div class="height:30px"></div>
                         <div class="row">
                         	<c:forEach var="gvo" items="${glist }">
 	                            <div class="col-lg-4 col-sm-6">
@@ -151,6 +153,7 @@ a:hover{
                     <hr>
                     <div class="product-list">
                     	<h4>건강 식품 검색 결과</h4>
+                    	<div class="height:30px"></div>
                         <div class="row">
                         	<c:forEach var="dvo" items="${dlist }">
 	                            <div class="col-lg-4 col-sm-6">

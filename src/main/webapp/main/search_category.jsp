@@ -45,7 +45,25 @@
 .pagination{
 	 justify-content: center; 
 }
+.btn {
+  -webkit-border-radius: 15;
+  -moz-border-radius: 15;
+  border-radius: 15px;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 15px;
+  background: #648bff;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
+}
+
+.btn:hover {
+  background: #3cb0fd;
+  text-decoration: none;
+  color: #ffffff;
+}
 </style>
+
 </head>
 <body>
     <!-- Breadcrumb Section Begin -->
@@ -70,9 +88,7 @@
     <!-- Product Shop Section Begin -->
     <section class="product-shop spad">
         <div class="container">
-        	<div class="row">
-        		<!-- 키워드 버튼 -->
-        	</div>
+        	
             <div class="row">         
                     <div class="product-list">
                         <div class="row">
