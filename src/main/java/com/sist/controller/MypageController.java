@@ -1,5 +1,9 @@
 package com.sist.controller;
 import java.util.*;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import com.sist.dao.*;
 import com.sist.vo.*;
 
@@ -8,8 +12,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 @Controller
+@SessionAttributes("id")
 public class MypageController {
 	
 	@Autowired
@@ -40,10 +46,16 @@ public class MypageController {
 
 	//나만의 계획(채팅정보 불러오기)
 	@GetMapping("mypage/mypage_schedule.do")
-	public String mypage_schdule(String page,String pageP,Model model){
-		
-		//^잘라서 출력
+	public String mypage_schdule(HttpServletRequest request,String id,String page,String pageP,Model model){
 				
+		
+		
+		//세션에 저장된 아이디 가져오기
+		HttpSession session=request.getSession();
+		//String user_id=(String)session.getAttribute("id");
+
+		System.out.println("id:"+id);
+		
 				//페이지 나누기(음식)
 				if(page==null)
 					page="1";
@@ -56,8 +68,13 @@ public class MypageController {
 				map.put("end", end);
 				
 				List<Chat_foodVO> fList=fdao.mypageChatFoodListData(map);
-				int totalpage=fdao.mypageChatFoodDataTotalPage();
-				
+				int totalpage=fdao.mypageChatFoodDataTotalPage(id);
+				for(Chat_foodVO vo:fList){
+					session.setAttribute("id",vo.getId() );
+				}
+				map.put("id",id);
+						
+						
 				final int BLOCK=10;
 				int startPage=((curpage-1)/BLOCK*BLOCK)+1;
 				int endPage=((curpage-1)/BLOCK*BLOCK)+BLOCK;
@@ -65,6 +82,7 @@ public class MypageController {
 				if(endPage>allPage)
 					endPage=allPage;
 				
+				model.addAttribute("id",id);
 				model.addAttribute("fList",fList);
 				model.addAttribute("curpage",curpage);
 				model.addAttribute("allPage",allPage);
@@ -83,7 +101,7 @@ public class MypageController {
 				int endP=rowSizeP*curpageP;
 				mapP.put("startP", startP);
 				mapP.put("endP", endP);
-				
+				mapP.put("id", id);
 				List<Chat_planVO> pList=fdao.mypageChatPlanListData(mapP);
 				for(Chat_planVO vo:pList){
 					String s=vo.getSport();
@@ -91,7 +109,7 @@ public class MypageController {
 					vo.setSport(s);
 				}
 				
-				int totalpageP=fdao.mypageChatPlanDataTotalPage();
+				int totalpageP=fdao.mypageChatPlanDataTotalPage(id);
 				
 				final int BLOCKP=10;
 				int startPageP=((curpageP-1)/BLOCKP*BLOCKP)+1;
@@ -100,6 +118,7 @@ public class MypageController {
 				if(endPageP>allPageP)
 					endPageP=allPageP;
 				
+				model.addAttribute("id",id);
 				model.addAttribute("pList",pList);
 				model.addAttribute("curpageP",curpageP);
 				model.addAttribute("allPageP",allPageP);
@@ -113,7 +132,8 @@ public class MypageController {
 				return "main/main";
 	}
 	
-	
+
+
 	//회원정보수정
 	@GetMapping("mypage/mypage_update.do")
 	public String mypage_update(String id,Model model){

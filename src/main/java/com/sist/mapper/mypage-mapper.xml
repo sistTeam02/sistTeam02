@@ -9,29 +9,29 @@
 	</select> -->
 	<!-- 채팅 음식 목록 출력 -->
 	<select id="mypageChatFoodListData" resultType="Chat_foodVO" parameterType="hashmap">
-		SELECT fooddate,whenfood,foodname,foodkcal,foodgram,num
-		FROM (SELECT fooddate,whenfood,foodname,foodkcal,foodgram,rownum as num
-		FROM (SELECT fooddate,whenfood,foodname,foodkcal,foodgram
+		SELECT id,fooddate,whenfood,foodname,foodkcal,foodgram,num
+		FROM (SELECT id,fooddate,whenfood,foodname,foodkcal,foodgram,rownum as num
+		FROM (SELECT id,fooddate,whenfood,foodname,foodkcal,foodgram
 		FROM chat_food))
-		WHERE num BETWEEN #{start} AND #{end}	
+		WHERE num BETWEEN #{start} AND #{end}
 		ORDER BY fooddate DESC
 	</select>
 	<!-- 음식 총페이지 출력 -->
-	<select id="mypageChatFoodDataTotalPage" resultType="int">
-		SELECT CEIL(COUNT(*)/10.0) FROM chat_food
+	<select id="mypageChatFoodDataTotalPage" resultType="int" parameterType="string">
+		SELECT CEIL(COUNT(*)/10.0) FROM chat_food WHERE id=#{id}
 	</select>
 	<!-- 채팅 운동 목록 출력 -->
 	<select id="mypageChatPlanListData" resultType="Chat_PlanVO" parameterType="hashmap">
-		SELECT plandate,time,sport,num
-		FROM (SELECT plandate,time,sport,rownum as num
-		FROM (SELECT plandate,time,sport
+		SELECT id,plandate,time,sport,num
+		FROM (SELECT id,plandate,time,sport,rownum as num
+		FROM (SELECT id,plandate,time,sport
 		FROM chat_plan))
 		WHERE num BETWEEN #{startP} AND #{endP}	
 		ORDER BY plandate DESC
 	</select>
 	<!-- 운동 총페이지 출력 -->
-	<select id="mypageChatPlanDataTotalPage" resultType="int">
-		SELECT CEIL(COUNT(*)/10.0) FROM chat_plan
+	<select id="mypageChatPlanDataTotalPage" resultType="int" parameterType="string">
+		SELECT CEIL(COUNT(*)/10.0) FROM chat_plan WHERE id=#{id}
 	</select>
 	<!-- 마이페이지 전체 데이터 불러오기 -->
 	<select id="mypageUpdateAllData" resultType="MemberVO" parameterType="string">

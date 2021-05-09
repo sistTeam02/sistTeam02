@@ -19,13 +19,13 @@ public class MypageDAO extends SqlSessionDaoSupport{
 	public List<Chat_foodVO> mypageChatFoodListData(Map map){
 		return getSqlSession().selectList("mypageChatFoodListData",map);
 	}
-	public int mypageChatFoodDataTotalPage(){
+	public int mypageChatFoodDataTotalPage(String id){
 		return getSqlSession().selectOne("mypageChatFoodDataTotalPage");
 	}
 	public List<Chat_planVO> mypageChatPlanListData(Map map){
 		return getSqlSession().selectList("mypageChatPlanListData",map);
 	}
-	public int mypageChatPlanDataTotalPage(){
+	public int mypageChatPlanDataTotalPage(String id){
 		return getSqlSession().selectOne("mypageChatPlanDataTotalPage");
 	}
 	/*
