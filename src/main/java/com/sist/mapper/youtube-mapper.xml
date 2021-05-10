@@ -18,7 +18,7 @@
 	
 	<!-- 디테일 데이터 -->
 	<select id="detailYoutubeData" resultType="youtubeVO" parameterType="int">
-	 	 SELECT no,regdate,title,thumbnails,channeltitle,description
+	 	 SELECT no,videoid,regdate,title,thumbnails,channeltitle,description
 	 	 FROM youtube_data
 	 	 WHERE no=#{no}
 	</select>

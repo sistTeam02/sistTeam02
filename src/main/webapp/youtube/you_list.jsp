@@ -94,7 +94,7 @@
                         <div class="row">
                            <c:forEach var="vo" items="${list }">
                                <div class="col-lg-3">
-                                  <a href="#">
+                                  <a href="../youtube/you_detail.do?no=${vo.no }">
                                      <img src="${vo.thumbnails }">
                                         <div class="pi-text text-center">
 	                                       <p>${vo.title }</p>
