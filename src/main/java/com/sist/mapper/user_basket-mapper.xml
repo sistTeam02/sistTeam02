@@ -2,37 +2,65 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sist.mapper.user_basket-mapper">
   <!-- 
-	    ID                  VARCHAR2(40)   고객id
-		NO         NOT NULL NUMBER         고유키
-		PNO                 NUMBER         제품번호
-		TITLE               VARCHAR2(1000) 
-		POSTER              VARCHAR2(400)  
-		PRICE               NUMBER         
-		ORDERCOUNT          NUMBER   기본값 1
-		CNO                 NUMBER   카테고리 번호(1:운동용품, 2:다이어트식품)?
-		ORDDATE             DATE 
-		STATE				NUMBER   결제 상태(기본값 0) 
+	ID                  VARCHAR2(40)   고객id
+	NO         NOT NULL NUMBER         고유키
+	PNO                 NUMBER         제품번호
+	TITLE               VARCHAR2(1000) 
+	POSTER              VARCHAR2(400)  
+	PRICE               NUMBER         
+	ORDERCOUNT          NUMBER   기본값 1
+	CNO                 NUMBER   카테고리 번호(0:운동용품, 1:다이어트식품)
+	ORDDATE             DATE 
+	STATE				NUMBER   결제 상태(기본값 0) 
+	ADDRESS             VARCHAR2(500)  
+	TOTAL_PRICE         NUMBER         
  -->
+  <!-- 장바구니 추가 -->
+  <insert id="basketInsert" parameterType="User_basketVO">
+    <selectKey keyProperty="no" resultType="int" order="BEFORE">
+      SELECT NVL(MAX(no)+1,1) as no FROM user_basket
+    </selectKey>  
+    INSERT INTO user_basket VALUES(
+		#{id},
+		#{no},
+		#{pno},
+		#{title},
+		#{poster},
+		#{price},
+		1,
+		#{cno},
+		SYSDATE,
+		0,
+		#{address},
+		#{total_price}
+	)
+  </insert>
   
   <!-- 장바구니 목록 -->
-  <select id="basketListData" resultType="User_basketVO" parameterType="String">
-	SELECT id,no,pno,title,poster,price,ordercount,(price*ordercount) money,orderdate,state
-	FROM user_basket
-	WHERE id=#{id}
-<!--     SELECT 
-    	u.id as id,
-    	u.no as no,
-    	u.pno as pno,
-    	g.title as title,
-    	g.poster as poster,
-    	g.price as price,
-    	u.ordercount,(g.price*u.ordercount) money
+  <resultMap type="User_basketVO" id="user_basketMap">
+    <result property="id" column="id"/>
+    <result property="no" column="no"/>
+    <result property="dvo.no" column="pno"/>
+    <!-- <result property="gvo.no" column="pno"/> -->
+    <result property="dvo.title" column="title"/>
+    <!-- <result property="gvo.title" column="title"/> -->
+    <result property="dvo.poster" column="poster"/>
+    <result property="dvo.price" column="price"/>
+    <result property="orddate" column="orddate"/>
+    <result property="dvo.cno" column="cno"/>
+    <!-- <result property="gvo.cno" column="cno"/> -->
+    <result property="orderdate" column="orderdate"/>
+    <result property="address" column="address"/>
+    <result property="total_price" column="total_price"/>
+  </resultMap>
+  <select id="basketListData" resultMap="user_basketMap" parameterType="string">
+    SELECT 
+    	id,u.no,pno,g.title,g.poster,g.price,ordercount,(g.price*ordercount) money,g.cno,orddate,total_price
     FROM 
-    	user_basket u,goods_list g,member m
-    WHERE m.id=u.id
-    	AND u.pno=g.no
-    	AND u.id={id}
-    UNION ALL
+    	user_basket u,goods_list g
+    WHERE u.pno=g.no
+    	AND id=#{id}
+ <!-- UNION ALL
     SELECT
     	u.id as id,
     	u.no as no,
@@ -48,32 +76,7 @@
     	AND u.id={id} -->
   </select>
   
-  <!-- 장바구니 추가 -->
-  <insert id="basketInsert" parameterType="User_basketVO">
-    INSERT INTO user_basket VALUES(
-		#{id},
-		(ub_no_seq.nextval),
-		#{pno},
-		#{title},
-		#{poster},
-		#{price},
-		1,
-		#{cno},
-		SYSDATE,
-		0
-	)
-  </insert>
-
-  <!-- 장바구니 금액 합계 -->
-  <select id="basketMoney" resultType="String">
-    SELECT NVL(SUM(price*ordercount), 0) money
-    FROM user_basket u,dietfood_list d,goods_list g
-    WHERE u.pno=d.no 
-    	OR u.pno=g.no
-    	AND u.id=${id}
-  </select>
-  
-  <!-- 장바구니 수정 -->
+  <!-- 장바구니 상품 수량 수정 -->
   <select id="basketModify" parameterType="User_basketVO">
     UPDATE user_basket
       SET ordercount=#{ordercount}
@@ -102,4 +105,5 @@
     WHERE id=#{id}
       AND pno=#{pno}
   </update>
+  
 </mapper>

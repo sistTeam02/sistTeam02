@@ -14,6 +14,14 @@ public class DietFoodVO {
 	private GoodsVO goodsvo;
 	private String stockNo;
 	private String stock;
+	private int cno;
+	
+	public int getCno() {
+		return cno;
+	}
+	public void setCno(int cno) {
+		this.cno = cno;
+	}
 	public int getNo() {
 		return no;
 	}

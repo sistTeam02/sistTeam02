@@ -30,13 +30,45 @@ public class UserBasketController {
 		private Date orddate;
 		private int state;   // 결제상태(default 0)
 	 */
-	// 장바구니 목록
-	@RequestMapping("shop/user_basket.do")
-	public String basketListData(Model model,HttpSession session)
+	
+	// 장바구니 추가
+	@RequestMapping("shop/basket_insert.do")
+	public String insert(int pno,String price,int su,HttpSession session,Model model)
 	{
 		String id=(String)session.getAttribute("id");
-		Map<String,Object> map=new HashMap<String,Object>();
-//		List<User_basketVO> uList=uDao.basketListData(id);  // 장바구니 정보
+		String address=(String)session.getAttribute("address");
+		String sp=price.replaceAll("[^0-9]", "");
+		System.out.println("id:"+id);
+		System.out.println("address:"+address);
+		System.out.println("sp:"+sp);
+		int total=Integer.parseInt(sp)*su;
+		
+		User_basketVO vo=new User_basketVO();
+		vo.setAddress(address);
+		vo.setId(id);
+		vo.setPno(pno);
+		vo.setOrdercount(su);
+		vo.setTotal_price(total);
+		vo.setPrice(Integer.parseInt(sp));
+		
+		// db
+		uDao.basketInsert(vo);
+		/*// 장바구니에 기존 상품이 있는지 검사
+		int ordercount=uDao.basketCount(vo.getNo(), id);
+		if(ordercount==0)
+			uDao.basketInsert(vo);  // 없으면 insert
+		else{
+			uDao.basketUpdate(vo);  // 있으면 update
+		}*/
+		return "redirect:../shop/user_basket.do";
+	}
+	// 장바구니 목록
+	@RequestMapping("shop/user_basket.do")
+	public String basketListData(HttpSession session,Model model)
+	{
+		String id=(String)session.getAttribute("id");
+		List<User_basketVO> uList=uDao.basketListData(id);  // 장바구니 정보
+//		Map<String,Object> map=new HashMap<String,Object>();
 //		int money=uDao.basketMoney(id);  // 장바구니 전체 금액 호출
 //		// 로그인 안되어있으면, 로그인 페이지로 이동
 //		if(id==null)
@@ -46,26 +78,10 @@ public class UserBasketController {
 //		map.put("uList", uList);  // 장바구니 정보 map에 저장
 //		map.put("ordercount", uList.size());  // 장바구니 상품의 유무
 //		map.put("money", money);  // 장바구니 전체 금액
-		model.addAttribute("map", map);
+		model.addAttribute("uList", uList);
 		model.addAttribute("main_jsp", "../shop/user_basket.jsp");
 		return "main/main";
 	}
-	
-//	// 장바구니 추가
-//	@RequestMapping("shop/basket_insert.do")
-//	public String insert(@ModelAttribute User_basketVO vo,HttpSession session)
-//	{
-//		String id=(String)session.getAttribute("id");
-//		vo.setId(id);
-//		// 장바구니에 기존 상품이 있는지 검사
-//		int ordercount=uDao.basketCount(vo.getNo(), id);
-//		if(ordercount==0)
-//			uDao.basketInsert(vo);  // 없으면 insert
-//		else{
-//			uDao.basketUpdate(vo);  // 있으면 update
-//		}
-//		return "redirect:../shop/user_basket.do";
-//	}
 //	
 //	// 장바구니 삭제
 //	@RequestMapping("shop/basket_delete.do")

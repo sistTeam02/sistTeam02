@@ -61,39 +61,39 @@
                                 </tr>
                             </thead>
                             <tbody>
-                              <%-- <c:forEach var="vo" items="list"> --%>
+                              <c:forEach var="vo" items="list">
                                 <tr>
-                                    <td class="cart-pic first-row"><img src="../img/cart-page/product-1.jpg" alt=""></td>
+                                    <td class="cart-pic first-row"><img src="${vo.poster }"></td>
                                     <td class="cart-title first-row">
-                                        <h5>Pure Pineapple</h5>
+                                        <h5>${vo.title }</h5>
                                     </td>
-                                    <td class="p-price first-row">$60.00</td>
+                                    <td class="p-price first-row">${vo.price }</td>
                                     <td class="qua-col first-row">
                                         <div class="quantity">
                                             <div class="pro-qty">
-                                                <input type="text" value="1">
+                                                ${vo.ordercount }
                                             </div>
                                         </div>
                                     </td>
-                                    <td class="total-price first-row">$60.00</td>
+                                    <td class="total-price first-row">${vo.price }</td>
                                     <td class="close-td first-row"><i class="ti-close"></i></td>
                                 </tr>
-                              <%-- </c:forEach>  --%> 
+                              </c:forEach>
                             </tbody>
                         </table>
                     </div>
                     <div class="row">
                         <div class="col-lg-4">
                             <div class="cart-buttons">
-                                <a href="../shop/shop_list.do" class="primary-btn continue-shop">Continue shopping</a>
-                                <a href="#" class="primary-btn up-cart">Update cart</a>
+                                <a href="../shop/shop_list.do" class="primary-btn continue-shop">계속 쇼핑하기</a>
+                                <a href="#" class="primary-btn up-cart">장바구니 수정</a>
                             </div>
                         </div>
                         <div class="col-lg-4 offset-lg-4">
                             <div class="proceed-checkout">
                                 <ul>
                                     <!-- <li class="subtotal">Subtotal <span>$240.00</span></li> -->
-                                    <li class="cart-total">총 금액 <span>$240.00</span></li>
+                                    <li class="cart-total">총 금액 <span>${vo.total_price }</span></li>
                                 </ul>
                                 <a href="#" class="proceed-btn">결제하기</a>
                             </div>
