@@ -15,18 +15,18 @@ public class MypageDAO extends SqlSessionDaoSupport{
 		// TODO Auto-generated method stub
 		super.setSqlSessionFactory(sqlSessionFactory);
 	}
-	
+
 	public List<Chat_foodVO> mypageChatFoodListData(Map map){
 		return getSqlSession().selectList("mypageChatFoodListData",map);
 	}
 	public int mypageChatFoodDataTotalPage(String id){
-		return getSqlSession().selectOne("mypageChatFoodDataTotalPage");
+		return getSqlSession().selectOne("mypageChatFoodDataTotalPage",id);
 	}
 	public List<Chat_planVO> mypageChatPlanListData(Map map){
 		return getSqlSession().selectList("mypageChatPlanListData",map);
 	}
 	public int mypageChatPlanDataTotalPage(String id){
-		return getSqlSession().selectOne("mypageChatPlanDataTotalPage");
+		return getSqlSession().selectOne("mypageChatPlanDataTotalPage",id);
 	}
 	/*
 	 * <!-- 마이페이지 전체 데이터 불러오기 -->
