@@ -65,16 +65,13 @@ a:hover{
 
                 </div>
                 <div class="col-lg-9 order-1 order-lg-2">
-                   <!--  <div class="product-show-option">
-                        <div class="row">
-                            <div class="col-lg-7 col-md-7">
 
-                            </div>
-                        </div>
-                    </div>-->
                     <!-- 
-                    	<div class="product-list">
+                    	 <div class="height:50px"></div>
+                    <hr>
+                    <div class="product-list">
          				<h4>홈 트레이닝 검색 결과</h4>
+         				<div class="height:30px"></div>
                         <div class="row">
                         	<c:forEach var="hvo" items="${hlist }">
 	                            <div class="col-lg-4 col-sm-6">
@@ -88,7 +85,7 @@ a:hover{
 	                                            <h5>${hvo.title }</h5>
 	                                        </a>
 	                                        <div class="product-price">
-												${hvo.price }원
+												<fmt:formatNumber type="number" maxFractionDigits="3" value="${gvo.price}" />&nbsp;원
 	                                        </div>
 	                                    </div>
 	                                </div>
@@ -99,7 +96,7 @@ a:hover{
                     <c:if test="${!empty hlist}">
 	                    <div class="loading-more">
 	                        <i class="icon_loading"></i>
-	                        <a href="../main/search_category.do?no=1&search=${search }">
+	                        <a href="../main/search_category.do?no=3&search=${search }">
 	                           		 홈 트레이닝 더 보기
 	                        </a>
 	                    </div>
@@ -110,6 +107,7 @@ a:hover{
                     	<div style="height:50px"></div>
                     </c:if>
                     -->
+                    
                     <div class="height:50px"></div>
                     <hr>
                     <div class="product-list">
@@ -158,12 +156,14 @@ a:hover{
                         	<c:forEach var="dvo" items="${dlist }">
 	                            <div class="col-lg-4 col-sm-6">
 	                                <div class="product-item">
+	                                	<a href="../shop/dfood_detail.do?no=${dvo.no }">
 	                                    <div class="pi-pic">
 	                                        <img src="${dvo.poster }" alt="">
 	                                    </div>
+	                                    </a>
 	                                    <div class="pi-text">
 	                                        <div class="catagory-name">건강 식품</div>
-	                                        <a href="#">
+	                                        <a href="../shop/dfood_detail.do?no=${dvo.no }">
 	                                            <h5>${dvo.title }</h5>
 	                                        </a>
 	                                        <div class="product-price">
