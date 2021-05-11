@@ -20,13 +20,12 @@ public class User_basketVO {
 	private int pno;    // 제품번호
 	private String title;
 	private String poster;
-	private int price;
+	private String price;
 	private int ordercount;  // (default 1)
 	private int cno;     // 카테고리 번호
 	private Date orddate;
 	private int state;   // 결제상태(default 0)
 	private String address;
-	private int total_price;
 	private GoodsVO gvo=new GoodsVO();
 	private DietFoodVO dvo=new DietFoodVO();
 	
@@ -35,12 +34,6 @@ public class User_basketVO {
 	}
 	public void setAddress(String address) {
 		this.address = address;
-	}
-	public int getTotal_price() {
-		return total_price;
-	}
-	public void setTotal_price(int total_price) {
-		this.total_price = total_price;
 	}
 	public GoodsVO getGvo() {
 		return gvo;
@@ -90,12 +83,6 @@ public class User_basketVO {
 	public void setPoster(String poster) {
 		this.poster = poster;
 	}
-	public int getPrice() {
-		return price;
-	}
-	public void setPrice(int price) {
-		this.price = price;
-	}
 	public int getOrdercount() {
 		return ordercount;
 	}
@@ -113,6 +100,12 @@ public class User_basketVO {
 	}
 	public void setOrddate(Date orddate) {
 		this.orddate = orddate;
+	}
+	public String getPrice() {
+		return price;
+	}
+	public void setPrice(String price) {
+		this.price = price;
 	}
 	
 }

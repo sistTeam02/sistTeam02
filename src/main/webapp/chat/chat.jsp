@@ -231,9 +231,12 @@ thisday=0;
 let fileurl="";
 let filename="";
 let file="";
-let id="admin"; /* 임시데이터 ===========================*/
+let id="";
 let page=1;
 totalpage=0;
+$(document).ready(function(){
+	id=$('#sport_memo_tr').attr('user_id');
+})
 /* 왼쪽제어 */
 $(function () {
 	/* 나 머먹었어 */
@@ -952,7 +955,7 @@ $(document).on('click', '.ti-align-left' , function(){
 							<th>운동</th>
 							<th>세트수</th>
 						</tr>
-						<tr id="sport_memo_tr">	
+						<tr id="sport_memo_tr" user_id="${sessionScope.id} ">	
 							<td>
 								<input type="text" size="10" class="sport_memo_input" id="sport_memo_name0">
 							</td>
