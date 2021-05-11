@@ -10,7 +10,24 @@
     <meta name="keywords" content="Fashi, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+<script type="text/javascript">
 
+function order_basketList(){
+	$.ajax({
+		type:'post',
+		url:'../basket/userBasketList.do'
+		success:function(result){
+			
+		},error:function(error){
+			alert("장바구니 리스트호출 에러")
+		}
+		
+		
+	})
+}
+
+</script>
+</head>
 <body>
     <!-- Breadcrumb Section Begin -->
     <div class="breacrumb-section">
