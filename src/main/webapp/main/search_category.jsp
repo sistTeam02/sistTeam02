@@ -74,7 +74,8 @@
                     <div class="breadcrumb-text">
                         <a href="../main/main.do"><i class="fa fa-home"></i> Home</a>
                         <span>'${search }'의 
-            <c:if test="${no==1 }">홈 트레이닝</c:if>
+            <c:if test="${no==1 }">무료 홈 트레이닝</c:if>
+            <c:if test="${no==4 }">유튜브 홈 트레이닝</c:if>
             <c:if test="${no==2 }">건강 식품</c:if>            
             <c:if test="${no==3 }">운동 기구 /용품</c:if>       
                          검색 결과</span>
@@ -94,12 +95,31 @@
                         <div class="row">
                            <c:forEach var="vo" items="${list }">
                                <div class="col-lg-3">
-                                  <a href="shop_detail.do?no=${vo.no }">
+                               <c:if test="${no==2 }">
+                                  <a href="../shop/dfood_detail.do?no=${vo.no }">     
+                               </c:if>
+                               <c:if test="${no==3 }">
+                                  <a href="../shop/shop_detail_before.do?no=${vo.no }">
+                               </c:if>
+                               <c:if test="${no==1 }">
+                                  <a href="#">
+                               </c:if>
+                                <c:if test="${no==4 }">
+                                  <a href="../youtube/you_detail.do?no=${vo.no }">
+                               </c:if>
+                               		<c:if test="${no!=4 }">
                                      <img src="${vo.poster }">
+                                    </c:if>
+                                    <c:if test="${no==4 }">
+                                     <img src="${vo.thumbnails }">
+                                    </c:if>
+ 
                                         <div class="pi-text text-center">
 	                                       <p>${vo.title }</p>
 	                                    </div>
 	                              </a>
+	                          
+	                              <c:if test="${no!=1 && no!=4 }">
 	                              <div class="product-price text-center" style="font-size:13pt;font-weight:bold;color:#648cff;height:55px">
 	                              	<c:if test="${no!=3 }">
 	                                  <span>${vo.price }&nbsp;원</span>
@@ -108,6 +128,7 @@
 	                                 	<span><fmt:formatNumber type="number" maxFractionDigits="3" value="${vo.price}" />&nbsp;원</span>
 	                                 </c:if>
 	                              </div>
+	                              </c:if>
                                </div>
                             </c:forEach>    
                          </div>

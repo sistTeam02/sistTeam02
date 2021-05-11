@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sist.mapper.search-mapper">
-
+	<select id="searchHomet" parameterType="String" resultType="HometMainVO">
+		SELECT no, title, poster, rownum FROM hometraining_main 
+		WHERE title LIKE '%'||#{search}||'%' AND <![CDATA[rownum <= 6]]>
+	</select>
 	<select id="searchGoods" parameterType="String" resultType="GoodsVO">
 		SELECT no, title, poster, price, rownum FROM goods_list 
 		WHERE title LIKE '%'||#{search}||'%' AND <![CDATA[rownum <= 6]]>
@@ -10,8 +13,23 @@
 		SELECT no, title, poster, price, rownum FROM dietfood_list 
 		WHERE title LIKE '%'||#{search}||'%' AND <![CDATA[rownum <= 6]]>
 	</select>
+	<select id="searchYoutube" parameterType="String" resultType="YoutubeVO">
+		SELECT no, title, thumbnails, rownum FROM youtube_data_v2 
+		WHERE title LIKE '%'||#{search}||'%' AND <![CDATA[rownum <= 6]]>
+	</select>
 
-
+	
+	<select id="searchHometAll" parameterType="hashmap" resultType="HometMainVO">
+		SELECT no, title, poster, num 
+		FROM (SELECT no, title, poster, rownum as num
+		FROM (SELECT no, title, poster
+		FROM hometraining_main WHERE title LIKE '%'||#{search}||'%' ORDER BY no ASC)) 
+        WHERE num BETWEEN #{start} AND #{end}
+	</select>
+	<select id="searchHometAllPage" resultType="int" parameterType="string">
+		SELECT CEIL(COUNT(*)/12.0) FROM hometraining_main 
+		WHERE title LIKE '%'||#{search}||'%'
+	</select>
 	<select id="searchGoodsAll" parameterType="hashmap" resultType="GoodsVO">
 		SELECT no, title, poster, price, num 
 		FROM (SELECT no, title, poster, price, rownum as num
@@ -34,6 +52,20 @@
 		SELECT CEIL(COUNT(*)/12.0) FROM dietfood_list 
 		WHERE title LIKE '%'||#{search}||'%'
 	</select>
+	
+	<select id="searchYoutubeAll" parameterType="hashmap" resultType="YoutubeVO">
+		SELECT no, title, thumbnails, num 
+		FROM (SELECT no, title, thumbnails, rownum as num
+		FROM (SELECT no, title, thumbnails
+		FROM youtube_data_v2 WHERE title LIKE '%'||#{search}||'%' ORDER BY no ASC)) 
+        WHERE num BETWEEN #{start} AND #{end}
+	</select>
+	<select id="searchYoutubeAllPage" resultType="int" parameterType="string">
+		SELECT CEIL(COUNT(*)/12.0) FROM youtube_data_v2 
+		WHERE title LIKE '%'||#{search}||'%'
+	</select>
+	
+	
 	
 	<insert id="searchNewKeywordInsert" parameterType="string">
 		INSERT INTO search_rank VALUES(

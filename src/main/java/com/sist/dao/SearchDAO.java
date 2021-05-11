@@ -10,7 +10,10 @@ import org.springframework.stereotype.Repository;
 
 import com.sist.vo.DietFoodVO;
 import com.sist.vo.GoodsVO;
+import com.sist.vo.HometMainVO;
+import com.sist.vo.HometVO;
 import com.sist.vo.KeywordVO;
+import com.sist.vo.YoutubeVO;
 @Repository
 public class SearchDAO extends SqlSessionDaoSupport{
 	@Autowired
@@ -46,7 +49,15 @@ public class SearchDAO extends SqlSessionDaoSupport{
 	</select>
 	 */
 	//홈트
-	
+	/*
+	 * <select id="searchhomet" parameterType="String" resultType="HometVO">
+		SELECT no, title, poster, rownum FROM hometraining_main 
+		WHERE title LIKE '%'||#{search}||'%' AND <![CDATA[rownum <= 6]]>
+	</select>
+	 */
+	public List<HometMainVO> searchHomet(String search){
+		return getSqlSession().selectList("searchHomet", search);
+	}
 	//운동용품
 	public List<GoodsVO> searchGoods(String search){
 		return getSqlSession().selectList("searchGoods",search);
@@ -55,9 +66,26 @@ public class SearchDAO extends SqlSessionDaoSupport{
 	public List<DietFoodVO> searchDietfood(String search){
 		return getSqlSession().selectList("searchDietfood",search);
 	}
+	/*
+	 * <select id="searchYoutube" parameterType="String" resultType="YoutubeVO">
+		SELECT no, title, poster, rownum FROM youtube_data_v2 
+		WHERE title LIKE '%'||#{search}||'%' AND <![CDATA[rownum <= 6]]>
+	</select>
+	 */
+	//유튜브 검색
+	public List<YoutubeVO> searchYoutube (String search){
+		return getSqlSession().selectList("searchYoutube",search);
+	}
 	
 	//홈트만 검색
-	
+	//<select id="searchHometAll" parameterType="hashmap" resultType="HometVO">
+	public List<HometMainVO> searchHometAll(Map map){
+		return getSqlSession().selectList("searchHometAll", map);
+	}
+	//<select id="searchHometAllPage" resultType="int" parameterType="string">
+	public int searchHometAllPage (String search){
+		return getSqlSession().selectOne("searchHometAllPage", search);
+	}
 	//운동용품만 검색
 	public List<GoodsVO> searchGoodsAll(Map map){
 		return getSqlSession().selectList("searchGoodsAll", map);
@@ -69,8 +97,21 @@ public class SearchDAO extends SqlSessionDaoSupport{
 	public List<DietFoodVO> searchDietfoodAll(Map map){
 		return getSqlSession().selectList("searchDietfoodAll", map);
 	}
+	
 	public int searchDietfoodAllPage(String search){
 		return getSqlSession().selectOne("searchDietfoodAllPage",search);
+	}
+	//유튜브만 검색
+	/*
+	 * 
+	<select id="searchYoutubeAll" parameterType="hashmap" resultType="YoutubeVO">
+	<select id="searchYoutubeAllPage" resultType="int" parameterType="string">
+	 */
+	public List<YoutubeVO> searchYoutubeAll(Map map){
+		return getSqlSession().selectList("searchYoutubeAll", map);
+	}
+	public int searchYoutubeAllPage(String search){
+		return getSqlSession().selectOne("searchYoutubeAllPage",search);
 	}
 	
 	/*

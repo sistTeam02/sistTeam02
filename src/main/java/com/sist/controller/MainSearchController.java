@@ -14,7 +14,10 @@ import com.sist.dao.SearchDAO;
 import com.sist.dao.WalkDAO;
 import com.sist.vo.DietFoodVO;
 import com.sist.vo.GoodsVO;
+import com.sist.vo.HometMainVO;
+import com.sist.vo.HometVO;
 import com.sist.vo.KeywordVO;
+import com.sist.vo.YoutubeVO;
 
 @Controller
 public class MainSearchController {
@@ -29,6 +32,10 @@ public class MainSearchController {
 		List<KeywordVO> klist=sdao.keywordList();
 		List<GoodsVO> glist=sdao.searchGoods(search);
 		List<DietFoodVO> dlist=sdao.searchDietfood(search);
+		List<HometMainVO> hlist=sdao.searchHomet(search);
+		List<YoutubeVO> ylist=sdao.searchYoutube(search);
+		model.addAttribute("ylist",ylist); 
+		model.addAttribute("hlist",hlist);
 		model.addAttribute("klist",klist);
 		model.addAttribute("glist",glist);
 		model.addAttribute("dlist",dlist);
@@ -58,13 +65,21 @@ public class MainSearchController {
 		int allPage=0;
 		List<String> klist=new ArrayList<String>();
 		
-		/*if(no.equals("1")){//홈트
-			klist=sdao.hometKeyword();
-		}*/
+		if(no.equals("1")){//홈트
+			List<HometMainVO> hlist=sdao.searchHometAll(map);
+			totalpage=sdao.searchHometAllPage(search);
+		
+			model.addAttribute("list",hlist);
+			startPage=((curpage-1)/BLOCK*BLOCK)+1;
+			endPage=((curpage-1)/BLOCK*BLOCK)+BLOCK;
+			allPage=totalpage;
+			if(endPage>allPage)
+				   endPage=allPage;
+		}
 		/*else*/ if(no.equals("2")){//건강식품
 			List<DietFoodVO> dlist=sdao.searchDietfoodAll(map);
 			totalpage=sdao.searchDietfoodAllPage(search);
-			klist=sdao.foodsKeyword();
+			
 			model.addAttribute("list",dlist);
 			startPage=((curpage-1)/BLOCK*BLOCK)+1;
 			endPage=((curpage-1)/BLOCK*BLOCK)+BLOCK;
@@ -75,7 +90,7 @@ public class MainSearchController {
 		else if(no.equals("3")){//운동기구
 			List<GoodsVO> glist=sdao.searchGoodsAll(map);
 			totalpage=sdao.searchGoodsAllPage(search);
-			klist=sdao.goodsKeyword();
+	
 			model.addAttribute("list",glist);
 			startPage=((curpage-1)/BLOCK*BLOCK)+1;
 			endPage=((curpage-1)/BLOCK*BLOCK)+BLOCK;
@@ -83,7 +98,18 @@ public class MainSearchController {
 			if(endPage>allPage)
 				   endPage=allPage;
 		}
-		model.addAttribute("klist",klist);
+		else if(no.equals("4")){//유튜브
+			List<YoutubeVO> ylist=sdao.searchYoutubeAll(map);
+			totalpage=sdao.searchYoutubeAllPage(search);
+	
+			model.addAttribute("list",ylist);
+			startPage=((curpage-1)/BLOCK*BLOCK)+1;
+			endPage=((curpage-1)/BLOCK*BLOCK)+BLOCK;
+			allPage=totalpage;
+			if(endPage>allPage)
+				   endPage=allPage;
+		}
+		
 		model.addAttribute("no",no);
 		model.addAttribute("totalpage",totalpage);
 		model.addAttribute("curpage",curpage);

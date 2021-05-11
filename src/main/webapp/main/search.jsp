@@ -44,7 +44,8 @@ a:hover{
                         <h4 class="fw-title">검색 카테고리</h4>
                         <ul class="filter-catagories">
                         	<li><a href="../main/search.do?no=0&search=${search }">카테고리 전체</a></li>
-                            <li><a href="#">홈 트레이닝</a></li>
+                            <li><a href="../main/search_category.do?no=1&search=${search }">무료 홈 트레이닝</a></li>
+                            <li><a href="../main/search_category.do?no=4&search=${search }">유튜브 홈 트레이닝</a></li>
                             <li><a href="../main/search_category.do?no=3&search=${search }">운동 기구/용품</a></li>
                             <li><a href="../main/search_category.do?no=2&search=${search }">건강 식품</a></li>
                         </ul>
@@ -66,12 +67,12 @@ a:hover{
                 </div>
                 <div class="col-lg-9 order-1 order-lg-2">
 
-                    <!-- 
+                    
                     	 <div class="height:50px"></div>
                     <hr>
                     <div class="product-list">
-         				<h4>홈 트레이닝 검색 결과</h4>
-         				<div class="height:30px"></div>
+         				<h4>무료 홈 트레이닝 검색 결과</h4>
+         				<div style="height:30px"></div>
                         <div class="row">
                         	<c:forEach var="hvo" items="${hlist }">
 	                            <div class="col-lg-4 col-sm-6">
@@ -80,13 +81,10 @@ a:hover{
 	                                        <img src="${hvo.poster }" alt="">
 	                                    </div>
 	                                    <div class="pi-text">
-	                                        <div class="catagory-name">홈 트레이닝</div>
+	                                        <div class="catagory-name">무료</div>
 	                                        <a href="#">
 	                                            <h5>${hvo.title }</h5>
 	                                        </a>
-	                                        <div class="product-price">
-												<fmt:formatNumber type="number" maxFractionDigits="3" value="${gvo.price}" />&nbsp;원
-	                                        </div>
 	                                    </div>
 	                                </div>
 	                            </div>
@@ -96,8 +94,8 @@ a:hover{
                     <c:if test="${!empty hlist}">
 	                    <div class="loading-more">
 	                        <i class="icon_loading"></i>
-	                        <a href="../main/search_category.do?no=3&search=${search }">
-	                           		 홈 트레이닝 더 보기
+	                        <a href="../main/search_category.do?no=1&search=${search }">
+	                           		무료 홈 트레이닝 더 보기
 	                        </a>
 	                    </div>
                     </c:if>
@@ -106,23 +104,63 @@ a:hover{
                     	<h5 style="text-align: center">검색 결과가 없습니다.</h5>
                     	<div style="height:50px"></div>
                     </c:if>
-                    -->
+                    
+                     	 <div class="height:50px"></div>
+                    <hr>
+                    <div class="product-list">
+         				<h4>유튜브 홈 트레이닝 검색 결과</h4>
+         				<div style="height:30px"></div>
+                        <div class="row">
+                        	<c:forEach var="yvo" items="${ylist }">
+	                            <div class="col-lg-4 col-sm-6">
+	                                <div class="product-item">
+	                                	<a href="../youtube/you_detail.do?no=${yvo.no }">
+	                                    <div class="pi-pic">
+	                                        <img src="${yvo.thumbnails }" alt="">
+	                                    </div>
+	                                    </a>
+	                                    <div class="pi-text">
+	                                        <div class="catagory-name">유튜브</div>
+	                                        <a href="../youtube/you_detail.do?no=${yvo.no }">
+	                                            <h5>${yvo.title }</h5>
+	                                        </a>
+	                                    </div>
+	                                </div>
+	                            </div>
+							</c:forEach>
+                        </div>
+                    </div>
+                    <c:if test="${!empty ylist}">
+	                    <div class="loading-more">
+	                        <i class="icon_loading"></i>
+	                        <a href="../main/search_category.do?no=4&search=${search }">
+	                           		유튜브 홈 트레이닝 더 보기
+	                        </a>
+	                    </div>
+                    </c:if>
+                    <c:if test="${empty ylist }">
+                   		<div style="height:50px"></div>
+                    	<h5 style="text-align: center">검색 결과가 없습니다.</h5>
+                    	<div style="height:50px"></div>
+                    </c:if>
                     
                     <div class="height:50px"></div>
                     <hr>
                     <div class="product-list">
          				<h4>운동 기구/용품 검색 결과</h4>
-         				<div class="height:30px"></div>
+         				<div style="height:30px"></div>
                         <div class="row">
                         	<c:forEach var="gvo" items="${glist }">
 	                            <div class="col-lg-4 col-sm-6">
 	                                <div class="product-item">
-	                                    <div class="pi-pic">
-	                                        <img src="${gvo.poster }" alt="">
-	                                    </div>
+	                                	<a href="../shop/shop_detail_before.do?no=${gvo.no }">
+		                                    <div class="pi-pic">
+		                                        <img src="${gvo.poster }" alt="">
+		                                    </div>
+	                                    </a>
 	                                    <div class="pi-text">
 	                                        <div class="catagory-name">운동 기구/용품</div>
-	                                        <a href="#">
+	                                        <a href="../shop/shop_detail_before.do?no=${gvo.no }">
 	                                            <h5>${gvo.title }</h5>
 	                                        </a>
 	                                        <div class="product-price">
@@ -151,7 +189,7 @@ a:hover{
                     <hr>
                     <div class="product-list">
                     	<h4>건강 식품 검색 결과</h4>
-                    	<div class="height:30px"></div>
+                    	<div style="height:30px"></div>
                         <div class="row">
                         	<c:forEach var="dvo" items="${dlist }">
 	                            <div class="col-lg-4 col-sm-6">
