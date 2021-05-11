@@ -55,7 +55,7 @@ $(function(){
                     <div class="filter-widget">
                         <h4 class="fw-title">Categories</h4>
                         <ul class="filter-catagories">
-                             <li><a href="../home_training/ht_main.do">무료 강의</a></li>
+                            <li><a href="../home_training/ht_main.do">무료 강의</a></li>
                             <li><a href="../home_training/ht_pay.do">유료 강의</a></li>
                             <li><a href="../home_training/ht_challenge.do">30일 챌린지</a></li>
                         </ul>
@@ -195,13 +195,12 @@ $(function(){
                     <div class="product-list">
                         <div class="row">
                         <!-- forEach  -->
-                        <c:forEach var="vo" items="${cList }">
+                        <c:forEach var="vo" items="${pList }">
                             <div class="col-lg-4 col-sm-6">
                                 <div class="product-item">
                                     <div class="pi-pic">
-                                    
-                                    	<a href="../home_training/ht_challenge_detail.do?no=${vo.no }">
-                                        	<img src="${vo.poster }" alt="">
+                                    	<a href="../home_training/ht_detail_pay.do?no=${vo.no }">
+                                        	<img src="${vo.thumbnails}" alt="">
                                         </a>
                                         <div class="sale pp-sale">Sale</div>
                                         <div class="icon">
@@ -216,11 +215,8 @@ $(function(){
                                     <div class="pi-text">
                                         <div class="catagory-name">${vo.title}</div>
                                         <a href="#">
-                                            <h5>${vo.part }</h5>
+                                            <h5>${vo.channelTitle }</h5>
                                         </a>
-                                        <div>
-                                            <span>${vo.good }</span>
-                                        </div>
                                     </div>
                                 </div>
                             </div>

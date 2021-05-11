@@ -31,6 +31,17 @@
 		WHERE no = #{no}
 	</select>
 	
+	<!-- 유료 페이지 리스트 -->
+	<select id="hometPayListData" resultType="HometPayVO">
+		SELECT * FROM youtube_data
+	</select>
+	
+	<!-- 유료 디테일 페이지 -->
+	<select id="hometPayDetail" resultType="HometPayVO" parameterType="int">
+		SELECT * FROM youtube_data
+		WHERE no = #{no}
+	</select>
+	
 	<!-- 챌린지 메인 페이지 리스트 -->
 	<select id="hometChallengeListData" resultType="HometMainVO">
 		SELECT * FROM challenge_main

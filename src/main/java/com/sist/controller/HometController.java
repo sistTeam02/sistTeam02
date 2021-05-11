@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import com.sist.dao.HometDAO;
 import com.sist.vo.HometDetailVO;
 import com.sist.vo.HometMainVO;
+import com.sist.vo.HometPayVO;
 
 @Controller
 public class HometController {
@@ -68,6 +69,36 @@ public class HometController {
 		return "main/main";
 	}
 	
+	@GetMapping("home_training/ht_pay.do")
+	public String home_training_pay(String page, Model model) {
+		System.out.println("page:" + page);
+		if(page == null) {
+			page ="1";
+		}
+		int curpage = Integer.parseInt(page);
+		Map map = new HashMap();
+		int rowSize = 10;
+		int start = (rowSize * curpage) - (rowSize - 1);
+		int end = rowSize * curpage;
+		map.put("start", start);
+		map.put("end", end);
+		List<HometPayVO> pList = dao.hometPayListData(map);
+		
+		
+		model.addAttribute("pList",pList);
+		model.addAttribute("main_jsp", "../home_training/ht_pay.jsp");
+		return "main/main";
+	}
+	
+	@GetMapping("home_training/ht_detail_pay.do")
+	public String home_training_pay_detail(int no, Model model) {
+		
+		HometPayVO vo = dao.hometPayDetail(no);
+		model.addAttribute("vo", vo);
+		model.addAttribute("main_jsp", "../home_training/ht_detail_pay.jsp");
+		return "main/main";
+	}
+	
 	@GetMapping("home_training/ht_challenge.do")
 	public String home_training_challenge(Model model) {
 		System.out.println("챌린지 페이지 ===============");
@@ -80,6 +111,7 @@ public class HometController {
 		
 	}
 	
+    
 	@GetMapping("home_training/ht_challenge_detail.do")
 	public String home_training_challenge_detail(int no, Model model) {
 		System.out.println("챌린지 디테일 페이지==================");
@@ -92,4 +124,10 @@ public class HometController {
 		model.addAttribute("main_jsp", "../home_training/ht_challenge_detail.jsp");
 		return "main/main";
 	}
+	
+	
+	
+	
+	
+	
 }
