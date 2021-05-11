@@ -36,44 +36,11 @@
 	)
   </insert>
   
-  <!-- 장바구니 목록 -->
-  <resultMap type="User_basketVO" id="user_basketMap">
-    <result property="id" column="id"/>
-    <result property="no" column="no"/>
-    <result property="dvo.no" column="pno"/>
-    <!-- <result property="gvo.no" column="pno"/> -->
-    <result property="dvo.title" column="title"/>
-    <!-- <result property="gvo.title" column="title"/> -->
-    <result property="dvo.poster" column="poster"/>
-    <result property="dvo.price" column="price"/>
-    <result property="orddate" column="orddate"/>
-    <result property="dvo.cno" column="cno"/>
-    <!-- <result property="gvo.cno" column="cno"/> -->
-    <result property="orderdate" column="orderdate"/>
-    <result property="address" column="address"/>
-    <result property="total_price" column="total_price"/>
-  </resultMap>
-  <select id="basketListData" resultMap="user_basketMap" parameterType="string">
-    SELECT 
-    	id,u.no,pno,g.title,g.poster,g.price,ordercount,(g.price*ordercount) money,g.cno,orddate,total_price
-    FROM 
-    	user_basket u,goods_list g
-    WHERE u.pno=g.no
-    	AND id=#{id}
- <!-- UNION ALL
-    SELECT
-    	u.id as id,
-    	u.no as no,
-    	u.pno as pno,
-    	d.title as title,
-    	d.poster as poster,
-    	d.price as price,
-    	u.ordercount,(d.price*u.ordercount) money
-    FROM 
-    	user_basket u,dietfood_list d,member m
-    WHERE m.id=u.id
-    	AND u.pno=d.no
-    	AND u.id={id} -->
+  <!-- 장바구니 목록 상품 -->
+  <select id="basketListData" resultType="User_basketVO" parameterType="String">
+  	SELECT id,no,pno,title,poster,price,ordercount,cno,orddate
+  	from user_basket
+  	WHERE id=#{id} and (cno=1 or cno=2) 
   </select>
   
   <!-- 장바구니 상품 수량 수정 -->

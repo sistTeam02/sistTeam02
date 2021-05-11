@@ -48,8 +48,6 @@ public class UserBasketController {
 		vo.setId(id);
 		vo.setPno(pno);
 		vo.setOrdercount(su);
-		vo.setTotal_price(total);
-		vo.setPrice(Integer.parseInt(sp));
 		
 		// db
 		uDao.basketInsert(vo);
@@ -67,45 +65,8 @@ public class UserBasketController {
 	public String basketListData(HttpSession session,Model model)
 	{
 		String id=(String)session.getAttribute("id");
-		List<User_basketVO> uList=uDao.basketListData(id);  // 장바구니 정보
-//		Map<String,Object> map=new HashMap<String,Object>();
-//		int money=uDao.basketMoney(id);  // 장바구니 전체 금액 호출
-//		// 로그인 안되어있으면, 로그인 페이지로 이동
-//		if(id==null)
-//		{
-//			return "redirect:../member/login.do";
-//		}
-//		map.put("uList", uList);  // 장바구니 정보 map에 저장
-//		map.put("ordercount", uList.size());  // 장바구니 상품의 유무
-//		map.put("money", money);  // 장바구니 전체 금액
-		model.addAttribute("uList", uList);
+		model.addAttribute("id", id);
 		model.addAttribute("main_jsp", "../shop/user_basket.jsp");
 		return "main/main";
 	}
-//	
-//	// 장바구니 삭제
-//	@RequestMapping("shop/basket_delete.do")
-//	public String basketDelete(@RequestParam int no)
-//	{
-//		uDao.basketDelete(no);
-//		return "redirect:../shop/user_basket.do";
-//	}
-//	
-//	// 장바구니 수정
-//	@RequestMapping("shop/basket_update.do")
-//	public String basketUpdate(@RequestParam int[] ordercount,@RequestParam int[] pno,HttpSession session)
-//	{
-//		// session의 id
-//		String id=(String)session.getAttribute("id");
-//		// 레코드의 갯수만큼 반복문 실행
-//		for(int i=0;i<pno.length;i++)
-//		{
-//			User_basketVO vo=new User_basketVO();
-//			vo.setId(id);
-//			vo.setOrdercount(ordercount[i]);
-//			vo.setPno(pno[i]);
-//			uDao.basketUpdate(vo);
-//		}
-//		return "redirect:../shop/user_basket.do";
-//	}
 }

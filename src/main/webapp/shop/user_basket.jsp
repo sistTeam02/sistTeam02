@@ -10,22 +10,7 @@
     <meta name="keywords" content="Fashi, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Fashi | Template</title>
 
-    <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css?family=Muli:300,400,500,600,700,800,900&display=swap" rel="stylesheet">
-
-    <!-- Css Styles -->
-    <link rel="stylesheet" href="../css/bootstrap.min.css" type="text/css">
-    <link rel="stylesheet" href="../css/font-awesome.min.css" type="text/css">
-    <link rel="stylesheet" href="../css/themify-icons.css" type="text/css">
-    <link rel="stylesheet" href="../css/elegant-icons.css" type="text/css">
-    <link rel="stylesheet" href="../css/owl.carousel.min.css" type="text/css">
-    <link rel="stylesheet" href="../css/nice-select.css" type="text/css">
-    <link rel="stylesheet" href="../css/jquery-ui.min.css" type="text/css">
-    <link rel="stylesheet" href="../css/slicknav.min.css" type="text/css">
-    <link rel="stylesheet" href="../css/style.css" type="text/css">
-</head>
 <body>
     <!-- Breadcrumb Section Begin -->
     <div class="breacrumb-section">
@@ -61,24 +46,22 @@
                                 </tr>
                             </thead>
                             <tbody>
-                              <c:forEach var="vo" items="list">
                                 <tr>
-                                    <td class="cart-pic first-row"><img src="${vo.poster }"></td>
+                                    <td class="cart-pic first-row"><img src="poster "></td>
                                     <td class="cart-title first-row">
                                         <h5>${vo.title }</h5>
                                     </td>
-                                    <td class="p-price first-row">${vo.price }</td>
+                                    <td class="p-price first-row">price </td>
                                     <td class="qua-col first-row">
                                         <div class="quantity">
                                             <div class="pro-qty">
-                                                ${vo.ordercount }
+                                              ordercount 
                                             </div>
                                         </div>
                                     </td>
-                                    <td class="total-price first-row">${vo.price }</td>
+                                    <td class="total-price first-row">총금액 </td>
                                     <td class="close-td first-row"><i class="ti-close"></i></td>
                                 </tr>
-                              </c:forEach>
                             </tbody>
                         </table>
                     </div>
@@ -93,7 +76,7 @@
                             <div class="proceed-checkout">
                                 <ul>
                                     <!-- <li class="subtotal">Subtotal <span>$240.00</span></li> -->
-                                    <li class="cart-total">총 금액 <span>${vo.total_price }</span></li>
+                                    <li class="cart-total">총 금액 <span></span></li>
                                 </ul>
                                 <a href="#" class="proceed-btn">결제하기</a>
                             </div>
@@ -105,17 +88,6 @@
     </section>
     <!-- Shopping Cart Section End -->
     
-    <!-- Js Plugins -->
-    <script src="../js/jquery-3.3.1.min.js"></script>
-    <script src="../js/bootstrap.min.js"></script>
-    <script src="../js/jquery-ui.min.js"></script>
-    <!-- <script src="../js/jquery.countdown.min.js"></script> -->
-    <script src="../js/jquery.nice-select.min.js"></script>
-    <script src="../js/jquery.zoom.min.js"></script>
-    <script src="../js/jquery.dd.min.js"></script>
-    <script src="../js/jquery.slicknav.js"></script>
-    <script src="../js/owl.carousel.min.js"></script>
-    <script src="../js/main.js"></script>
 </body>
 
 </html>
