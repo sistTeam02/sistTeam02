@@ -15,7 +15,7 @@ import com.sist.dao.WalkDAO;
 import com.sist.vo.DietFoodVO;
 import com.sist.vo.GoodsVO;
 import com.sist.vo.HometMainVO;
-import com.sist.vo.HometVO;
+import com.sist.vo.HometPayVO;
 import com.sist.vo.KeywordVO;
 import com.sist.vo.YoutubeVO;
 

@@ -56,8 +56,8 @@ $(function(){
                         <h4 class="fw-title">Categories</h4>
                         <ul class="filter-catagories">
                             <li><a href="../home_training/ht_main.do">무료 강의</a></li>
-                            <li><a href="../home_training/ht_challenge.do">챌린지</a></li>
-                            <li id="json">제이슨 불러오기</li>
+                            <li><a href="../home_training/ht_pay.do">유료 강의</a></li>
+                            <li><a href="../home_training/ht_challenge.do">30일 챌린지</a></li>
                         </ul>
                     </div>
                     <div class="filter-widget">

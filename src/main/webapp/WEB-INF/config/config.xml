@@ -9,7 +9,6 @@
     <typeAlias type="com.sist.vo.GoodsDetailVO" alias="GoodsDetailVO"/>
     <typeAlias type="com.sist.vo.DietFoodVO" alias="DietFoodVO"/>
     <typeAlias type="com.sist.vo.DietFoodDetailVO" alias="DietFoodDetailVO"/>
-    <typeAlias type="com.sist.vo.HometVO" alias="HometVO"/>
     <typeAlias type="com.sist.vo.Chat_foodVO" alias="Chat_foodVO"/>
     <typeAlias type="com.sist.vo.KcalVO" alias="KcalVO"/>
     <typeAlias type="com.sist.vo.Chat_planVO" alias="Chat_planVO"/>
@@ -21,9 +20,10 @@
     <typeAlias type="com.sist.vo.ReplyVO" alias="ReplyVO"/>
     <typeAlias type="com.sist.vo.User_order_basketVO" alias="User_order_basketVO"/>
     <typeAlias type="com.sist.vo.WalkReplyVO" alias="WalkReplyVO"/>
-    <typeAlias type="com.sist.vo.HometMainVO" alias="HometMainVO"/>
     <typeAlias type="com.sist.vo.QnABoard_ReplyVO" alias="QnABoard_ReplyVO"/>    
     <typeAlias type="com.sist.vo.User_basketVO" alias="User_basketVO"/>
+    <typeAlias type="com.sist.vo.HometMainVO" alias="HometMainVO"/>
+    <typeAlias type="com.sist.vo.HometPayVO" alias="HometPayVO"/>
     <typeAlias type="com.sist.vo.HometDetailVO" alias="HometDetailVO"/>
   	<typeAlias type="com.sist.vo.YoutubeVO" alias="YoutubeVO"/>
   </typeAliases>
