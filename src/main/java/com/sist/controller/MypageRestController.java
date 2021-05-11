@@ -108,24 +108,10 @@ public class MypageRestController {
 			arr.add(obj);	
 		}
 		json=arr.toJSONString();
-		
-		/*String jsonN="";
-		Map mapP=new HashMap();
-		mapP.put("id", id);
-		mapP.put("plandate", date);
-		List<Chat_planVO> pList=mdao.mypagePlanDayData(map);
-		JSONArray arrR=new JSONArray();
-		for(Chat_planVO vo:pList){
-			JSONObject objJ=new JSONObject();
-			objJ.put("id", id);
-			objJ.put("plandate", vo.getPlandate());
-			objJ.put("time", vo.getTime());
-			objJ.put("sport", vo.getSport());
-			arrR.add(objJ);
-		}
-		jsonN=arrR.toJSONString();*/
+		System.out.println(json);
 		return json;
 	}
+	
 	@PostMapping("mypage/schedulePlan_ok.do")
 	public String mypage_schedulePlan_ok(String date,HttpSession session){
 		String id=(String)session.getAttribute("id");

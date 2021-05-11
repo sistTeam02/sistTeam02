@@ -94,8 +94,29 @@ function make_cal(year,month){
 		data:{"date":date},
 		url:arr[number],
 		success:function(result){
+		 if(number==0){
+			let json=JSON.parse(result.toString());
+			let count = Object.keys(result).length; //배열 개수
+			let foodData="";
+			for(let i=0;i<count;i++){
+				foodData+="식사시간:"+json[i].whenfood
+						+", 먹은음식:"+json[i].foodname
+						+", 음식 칼로리(kcal)/용량(g):"+json[i].foodkcal+"(kcal)/"+json[i].foodgram+"(g)  "
+						alert(foodData);
+			}
 			
-			alert(result)
+		 } 
+		 if(number==1){
+				let json=JSON.parse(result.toString());
+				let count = Object.keys(result).length; //배열 개수
+				let planData="";
+				for(let i=0;i<count;i++){
+					planData+="운동시간:"+json[i].time
+							+", 실천운동:"+json[i].sport.replace("^","세트")+" "
+							alert(planData);
+				}
+		 } 
+			//alert(result)
 		}
 		
 	})
