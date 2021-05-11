@@ -54,7 +54,7 @@ public class MypageController {
 		String id=(String)session.getAttribute("id");
 		//HttpSession session=request.getSession();
 		//String user_id=(String)session.getAttribute("id");
-		System.out.println("id");
+		System.out.println(id);
 		
 				//페이지 나누기(음식)
 				if(page==null)

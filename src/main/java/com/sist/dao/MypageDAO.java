@@ -47,6 +47,14 @@ public class MypageDAO extends SqlSessionDaoSupport{
 	public void mypageUpdate(MemberVO vo){
 		 getSqlSession().update("mypageUpdate",vo);
 	}
+	//<select id="mypageFoodDayData" resultType="Chat_foodVO" parameterType="hashmap">
+	public List<Chat_foodVO> mypageFoodDayData(Map map){
+		return getSqlSession().selectList("mypageFoodDayData",map);
+	}
+	//<select id="mypagePlanDayData" resultType="Chat_planVO" parameterType="hashmap">
+	public List<Chat_planVO> mypagePlanDayData(Map map){
+		return getSqlSession().selectList("mypagePlanDayData",map);
+	}
 	
 	
 }

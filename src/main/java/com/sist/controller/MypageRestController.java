@@ -6,12 +6,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.google.gson.JsonObject;
 import com.sist.dao.*;
 import com.sist.vo.*;
 
 
 
 import java.util.*;
+
+import javax.servlet.http.HttpSession;
 
 
 @RestController
@@ -82,6 +85,68 @@ public class MypageRestController {
 		}
 		dList=dList.substring(0,dList.length());
 		return dList;
+	}
+	@PostMapping("mypage/scheduleFood_ok.do")
+	public String mypage_scheduleFood_ok(String date,HttpSession session){
+		String id=(String)session.getAttribute("id");
+		String json="";
+		
+		Map map=new HashMap();
+		map.put("id", id);
+		map.put("fooddate",date);
+		
+		List<Chat_foodVO> fList=mdao.mypageFoodDayData(map);
+		JSONArray arr=new JSONArray();
+		for(Chat_foodVO vo:fList){
+			JSONObject obj=new JSONObject();
+			obj.put("id",vo.getId());
+			obj.put("fooddate",vo.getFooddate());
+			obj.put("whenfood", vo.getWhenfood());
+			obj.put("foodname", vo.getFoodname());
+			obj.put("foodkcal", vo.getFoodkcal());
+			obj.put("foodgram", vo.getFoodgram());
+			arr.add(obj);	
+		}
+		json=arr.toJSONString();
+		
+		/*String jsonN="";
+		Map mapP=new HashMap();
+		mapP.put("id", id);
+		mapP.put("plandate", date);
+		List<Chat_planVO> pList=mdao.mypagePlanDayData(map);
+		JSONArray arrR=new JSONArray();
+		for(Chat_planVO vo:pList){
+			JSONObject objJ=new JSONObject();
+			objJ.put("id", id);
+			objJ.put("plandate", vo.getPlandate());
+			objJ.put("time", vo.getTime());
+			objJ.put("sport", vo.getSport());
+			arrR.add(objJ);
+		}
+		jsonN=arrR.toJSONString();*/
+		return json;
+	}
+	@PostMapping("mypage/schedulePlan_ok.do")
+	public String mypage_schedulePlan_ok(String date,HttpSession session){
+		String id=(String)session.getAttribute("id");
+		String json="";
+		Map map=new HashMap();
+		map.put("id", id);
+		map.put("plandate",date);
+		
+		List<Chat_planVO> pList=mdao.mypagePlanDayData(map);
+		JSONArray arr=new JSONArray();
+		for(Chat_planVO vo:pList){
+			JSONObject obj=new JSONObject();
+			obj.put("id", vo.getId());
+			obj.put("plandate", vo.getPlandate());
+			obj.put("time", vo.getTime());
+			obj.put("sport", vo.getSport());
+			arr.add(obj);
+		}
+		json=arr.toJSONString();
+		
+		return json;
 	}
 	
 }

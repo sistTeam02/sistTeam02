@@ -13,9 +13,9 @@
 		SELECT id,fooddate,whenfood,foodname,foodkcal,foodgram,num
 		FROM (SELECT id,fooddate,whenfood,foodname,foodkcal,foodgram,rownum as num
 		FROM (SELECT id,fooddate,whenfood,foodname,foodkcal,foodgram
-		FROM chat_food))
+		FROM chat_food
+		WHERE id=#{id}))
 		WHERE num BETWEEN #{start} AND #{end}
-		AND id=#{id}
 		ORDER BY fooddate DESC
 	</select>
 	<!-- 음식 총페이지 출력 -->
@@ -27,9 +27,9 @@
 		SELECT id,plandate,time,sport,num
 		FROM (SELECT id,plandate,time,sport,rownum as num
 		FROM (SELECT id,plandate,time,sport
-		FROM chat_plan))
+		FROM chat_plan
+		WHERE id=#{id}))
 		WHERE num BETWEEN #{startP} AND #{endP}	
-		AND id=#{id}
 		ORDER BY plandate DESC
 	</select>
 	<!-- 운동 총페이지 출력 -->
@@ -47,4 +47,15 @@
 							nickname=#{nickname},add1=#{addr1},addr2=#{addr2}
 		WHERE id=#{id}
 	</update>
+	<!-- 달력 음식 출력 -->
+	<select id="mypageFoodDayData" resultType="Chat_foodVO" parameterType="hashmap">
+		SELECT id,fooddate,whenfood,foodname,foodkcal,foodgram FROM chat_food 
+		WHERE id=#{id} AND fooddate=#{fooddate}
+		ORDER BY fooddate ASC
+	</select>
+	<!-- 달력 운동 출력 -->
+	<select id="mypagePlanDayData" resultType="Chat_planVO" parameterType="hashmap">
+		SELECT id,plandate,time,sport FROM chat_plan WHERE id=#{id} AND plandate=#{plandate}
+	</select>
+	
 </mapper>

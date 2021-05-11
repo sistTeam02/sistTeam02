@@ -33,7 +33,7 @@ $(function(){ //제이쿼리 메인
 	let month=5;
 	make_cal(year,month);//밑에 만든 함수 실행
 
-	$('.ti-angle-right').click(function() {//화살표 클릭
+	$('.ti-angle-left').click(function() {//화살표 클릭
 		  $('td[id^=date]').text('');// 달력에 모든 숫자 삭제
 	if(month==1){
 			year--;
@@ -43,7 +43,7 @@ $(function(){ //제이쿼리 메인
 		}
 	make_cal(year,month);
 	});
-	$('.ti-angle-left').click(function() {//화살표 클릭
+	$('.ti-angle-right').click(function() {//화살표 클릭
 		  $('td[id^=date]').text('');
 	if(month==12){
 		 		year++;
@@ -75,17 +75,30 @@ function make_cal(year,month){
 		}
 		  $('#calender').text(year+"."+month);
 	}
-/*
- $(document).on('click','선택자',function(){
-	
+//달력 클릭시 해당 날짜 정보 출력
+ $(document).on('click','#dayBtn tr td',function(){
+	let day=$(this).text();
+	let month=$('#calender').text();
+	let date=month+"."+day
+	days(date,0);
+	days(date,1);
 	});
-}) 
+
  
- */
+ 
 //달력 월 출력 함수
-function month(){
-	 
- }
+ function days(date,number){
+	let arr=["../mypage/scheduleFood_ok.do","../mypage/schedulePlan_ok.do"]
+	$.ajax({
+		type:'post',
+		data:{"date":date},
+		url:arr[number],
+		success:function(result){
+			alert(result)
+		}
+		
+	})
+ } 
 
 
 </script>
@@ -106,7 +119,7 @@ function month(){
                   <td style="height: 3em;text-align: left;"><i class="ti-angle-right"></i></td>
                </tr>
             </table>
-				<table class="table2" style="width: 79em;height: 36em;">
+				<table class="table2" style="width: 79em;height: 36em;" id="dayBtn">
 					<tr>
 					<c:forEach begin="1" end="7" step="1" varStatus="s">
 						<td id="date${s.index }"></td>
