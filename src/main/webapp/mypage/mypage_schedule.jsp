@@ -94,6 +94,7 @@ function make_cal(year,month){
 		data:{"date":date},
 		url:arr[number],
 		success:function(result){
+			
 			alert(result)
 		}
 		

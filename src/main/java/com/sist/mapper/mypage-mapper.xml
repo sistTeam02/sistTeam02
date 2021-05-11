@@ -51,7 +51,7 @@
 	<select id="mypageFoodDayData" resultType="Chat_foodVO" parameterType="hashmap">
 		SELECT id,fooddate,whenfood,foodname,foodkcal,foodgram FROM chat_food 
 		WHERE id=#{id} AND fooddate=#{fooddate}
-		ORDER BY fooddate ASC
+		
 	</select>
 	<!-- 달력 운동 출력 -->
 	<select id="mypagePlanDayData" resultType="Chat_planVO" parameterType="hashmap">
