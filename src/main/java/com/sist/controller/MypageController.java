@@ -46,15 +46,15 @@ public class MypageController {
 
 	//나만의 계획(채팅정보 불러오기)
 	@GetMapping("mypage/mypage_schedule.do")
-	public String mypage_schdule(HttpServletRequest request,String id,String page,String pageP,Model model){
+	public String mypage_schdule(HttpSession session,String page,String pageP,Model model){
 				
 		
 		
-		//세션에 저장된 아이디 가져오기
-		HttpSession session=request.getSession();
+		//세션에 저장된 정보 가져오기
+		String id=(String)session.getAttribute("id");
+		//HttpSession session=request.getSession();
 		//String user_id=(String)session.getAttribute("id");
-
-		System.out.println("id:"+id);
+		System.out.println("id");
 		
 				//페이지 나누기(음식)
 				if(page==null)
@@ -66,13 +66,13 @@ public class MypageController {
 				int end=rowSize*curpage;
 				map.put("start", start);
 				map.put("end", end);
-				
+				map.put("id", id);
 				List<Chat_foodVO> fList=fdao.mypageChatFoodListData(map);
 				int totalpage=fdao.mypageChatFoodDataTotalPage(id);
-				for(Chat_foodVO vo:fList){
+			/*	for(Chat_foodVO vo:fList){
 					session.setAttribute("id",vo.getId() );
 				}
-				map.put("id",id);
+				map.put("id",id);*/
 						
 						
 				final int BLOCK=10;

@@ -52,6 +52,17 @@ public class YoutubeController {
 		return "main/main";
 	}
 	
+	@GetMapping("youtube/you_detail.do")
+	public String youtube_detail(int no,Model model)
+	{
+		YoutubeVO vo = yDao.detailYoutubeData(no);
+		
+		model.addAttribute("vo",vo);
+		
+		model.addAttribute("main_jsp","../youtube/you_detail.jsp");
+		return "main/main";
+	}
+	
 	
 	
 	

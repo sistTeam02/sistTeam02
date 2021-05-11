@@ -7,6 +7,7 @@
 	<select id="mypage_chat_plan" resultType="Chat_PlanVO" parameterType="string">
 		SELECT plandate,time,sport FROM chat_plan
 	</select> -->
+	
 	<!-- 채팅 음식 목록 출력 -->
 	<select id="mypageChatFoodListData" resultType="Chat_foodVO" parameterType="hashmap">
 		SELECT id,fooddate,whenfood,foodname,foodkcal,foodgram,num
@@ -14,6 +15,7 @@
 		FROM (SELECT id,fooddate,whenfood,foodname,foodkcal,foodgram
 		FROM chat_food))
 		WHERE num BETWEEN #{start} AND #{end}
+		AND id=#{id}
 		ORDER BY fooddate DESC
 	</select>
 	<!-- 음식 총페이지 출력 -->
@@ -27,6 +29,7 @@
 		FROM (SELECT id,plandate,time,sport
 		FROM chat_plan))
 		WHERE num BETWEEN #{startP} AND #{endP}	
+		AND id=#{id}
 		ORDER BY plandate DESC
 	</select>
 	<!-- 운동 총페이지 출력 -->

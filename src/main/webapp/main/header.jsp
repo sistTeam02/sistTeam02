@@ -43,12 +43,16 @@ $(function(){
 		classes: {
 			"ui-autocomplete":"highlight"
 		},
-		delay:400,
-		position:{my:"right top", at:"right botton"},
+		delay:300,
+		position:{of:'#searchdiv', my:"right top", at:"right botton"},
 		close: function(event){
 			console.log(event);
 		}
-	});
+	}).autocomplete( "instance" )._renderItem = function( ul, item ) {    //요 부분이 UI를 마음대로 변경하는 부분
+        return $( "<li>" )    //기본 tag가 li로 되어 있음 
+        .append( "<div>" + item.label + "</div>" )    //여기에다가 원하는 모양의 HTML을 만들면 UI가 원하는 모양으로 변함.
+        .appendTo( ul );
+ 		};
 	
 	
 	$('#main_button').click(function(){
@@ -103,7 +107,7 @@ $(function(){
                             </a>
                         </div>
                     </div>
-                    <div class="col-lg-7 col-md-7">
+                    <div class="col-lg-7 col-md-7" id="searchdiv">
                         <div class="advanced-search">
                             <!-- <button type="button" class="category-btn">카테고리</button>-->
                             <select class=category-btn id="category_selected">
