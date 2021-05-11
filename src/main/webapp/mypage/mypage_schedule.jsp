@@ -75,6 +75,7 @@ function make_cal(year,month){
 		}
 		  $('#calender').text(year+"."+month);
 	}
+	
 //달력 클릭시 해당 날짜 정보 출력
  $(document).on('click','#dayBtn tr td',function(){
 	let day=$(this).text();
@@ -99,7 +100,8 @@ function make_cal(year,month){
 			let count = Object.keys(result).length; //배열 개수
 			let foodData="";
 			for(let i=0;i<count;i++){
-				foodData+="식사시간:"+json[i].whenfood
+				foodData+=+"등록일:"+json[i].fooddate
+						+", 식사시간:"+json[i].whenfood
 						+", 먹은음식:"+json[i].foodname
 						+", 음식 칼로리(kcal)/용량(g):"+json[i].foodkcal+"(kcal)/"+json[i].foodgram+"(g)  "
 						alert(foodData);
@@ -111,7 +113,8 @@ function make_cal(year,month){
 				let count = Object.keys(result).length; //배열 개수
 				let planData="";
 				for(let i=0;i<count;i++){
-					planData+="운동시간:"+json[i].time
+					planData+="등록일:"+json[i].plandate
+							+", 운동시간:"+json[i].time
 							+", 실천운동:"+json[i].sport.replace("^","세트")+" "
 							alert(planData);
 				}
@@ -120,7 +123,18 @@ function make_cal(year,month){
 		}
 		
 	})
- } 
+ }
+
+//달력 효과
+$(document).ready(function(){
+	$('#dayBtn tr td').css('cursor','pointer');
+	let day=$('#dayBtn tr td').text();
+	let month=$('#calender').text();
+	/* days(date,0);
+	days(date,1) */;
+	alert(month);
+	
+});
 
 
 </script>
