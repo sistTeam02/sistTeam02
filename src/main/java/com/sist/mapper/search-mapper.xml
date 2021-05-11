@@ -110,7 +110,7 @@
 		WHERE <![CDATA[rownum <= 10]]>
 	</select>
 	
-	<select id="hometKeywordSearch" parameterType="hashmap" resultType="HometVO">
+	<select id="hometKeywordSearch" parameterType="hashmap" resultType="HometPayVO">
 	
 	</select>
 	
