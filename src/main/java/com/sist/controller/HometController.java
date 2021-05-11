@@ -79,4 +79,16 @@ public class HometController {
 		return "main/main";
 		
 	}
+	
+	@GetMapping("home_training/ht_challenge_detail.do")
+	public String home_training_challenge_detail(int no, Model model) {
+		System.out.println("챌린지 디테일 페이지==================");
+		
+		HometDetailVO vo = dao.hometChallengeDetail(no);
+		String key = vo.getVideo().substring(vo.getVideo().lastIndexOf("v")+2);
+		
+		model.addAttribute("key", key);
+		model.addAttribute("main_jsp", "../home_training/ht_challenge_detail.jsp");
+		return "main/main";
+	}
 }

@@ -33,14 +33,14 @@
 	
 	<!-- 챌린지 메인 페이지 리스트 -->
 	<select id="hometChallengeListData" resultType="HometMainVO">
-		SELECT * FROM hometraining_main
-		WHERE title like '%'||'챌린지'||'%'
-		ORDER BY NO DESC
+		SELECT * FROM challenge_main
 	</select>
 	
 	<!-- 챌린지 디테일 페이지 -->
-	<select id="hometChallengeDetail" resultType="HometDetailVO">
-	
+	<select id="hometChallengeDetail" resultType="HometDetailVO" parameterType="int">
+		SELECT * from challenge_detail
+		WHERE no = #{no}
+		
 	</select>
 	
 	

@@ -36,12 +36,16 @@ public class HometDAO extends SqlSessionDaoSupport{
     // 챌린지 총 페이지
     public int hometChallengeTotalPage() {
     	return getSqlSession().selectOne("hometChallengeTotalPage");
-    }    
-    
-    
+    }   
     
     // 상세페이지
     public HometDetailVO hometDetailFree(int no) {
     	return getSqlSession().selectOne("hometDetailFree", no);
     }
+    
+    // 챌린지 상세페이지
+    public HometDetailVO hometChallengeDetail(int no) {
+    	return getSqlSession().selectOne("hometChallengeDetail", no);
+    } 
+    
 }

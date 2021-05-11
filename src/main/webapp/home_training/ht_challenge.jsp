@@ -188,7 +188,7 @@ $(function(){
                                 </div>
                             </div>
                             <div class="col-lg-5 col-md-5 text-right">
-                                <p>Show 01- 09 Of 36 Product</p>
+                                <p>Challenge</p>
                             </div>
                         </div>
                     </div>
@@ -200,7 +200,7 @@ $(function(){
                                 <div class="product-item">
                                     <div class="pi-pic">
                                     
-                                    	<a href="../home_training/ht_detail_free.do?no=${vo.no }">
+                                    	<a href="../home_training/ht_challenge_detail.do?no=${vo.no }">
                                         	<img src="${vo.poster }" alt="">
                                         </a>
                                         <div class="sale pp-sale">Sale</div>
