@@ -19,14 +19,91 @@ h1 {
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script>
 /*$(document).ready(function(){
     $('[data-toggle="popover"]').popover();   
 });*/
-$(document).on(function(){
-	$('.ffind_input').keyup(function(){
-		
+$(document).ready(function(){
+    $('[data-toggle="popover"]').popover();   
+});
+$(document).on("keyup","#ffind_input",function(){
+	   let ss=$(this).val();
+	   let fs=$(this).val();
+	    if(ss!=""){
+           findData(fs, ss);
+	    }
+	    else{
+	    	$('td[id^=f]').show();
+	    }
+	    
+
 })
+function findData(fs,ss) {
+	$.ajax({
+		type:'post',
+		url:'../board/ffind.do',
+		data:{'fs':fs,'ss':ss},
+		success:function(json){
+			try
+			{
+			let jsonData=JSON.parse(json);
+			$('td[id^=f]').hide();
+			for(let i=0;i<json.length;i++)
+			{
+				$('#find_table').append(
+			            '<tr>'
+				       +'<td width=10% class="text-center">'+json[i].no+'</td>'
+				       +'<td width=45% class="text-left">'
+				       +'<a href="../board/fdetail.do" data-toggle="popover" title="'+json[i].subject+'" data-content="'+json[i].content+'">'+json[i].subject+'</a>'
+				       +'</td>'
+				       +'<td width=15% class="text-center">'+json[i].name+'</td>'
+				       +'<td width=20% class="text-center">'+json[i].regdate+'</td>'
+				       +'<td width=10% class="text-center">'+json[i].hit+'</td>'
+				       +'</tr>'
+				  );
+			}
+			//$('#find_table').html(Data);
+			}catch(Exception)
+			{
+				ex.printStackTrace();
+			}
+			
+		},error:function(error){
+			alert("검색 에러");
+		}
+	
+	})
+	
+}
+ /*(document).on("keyup","#find_input",function(){
+	 let ss=$(this).val();
+	 let fs=$(this).val();
+	 button++;
+	 console.log(fs);
+	 if(fs!=""){
+	 	findData(fs, ss,button);
+	 }
+	 button--;
+ });
+
+function findData(fs,ss,button) {
+	$.ajax({
+		type:'post',
+		url:'../board/ffind.do',
+		data:{'fs':fs,'ss':ss},
+		success:function(result){
+			let json=JSON.parse(result);
+			$('.find_table').remove();
+			 make_tr(json,button);
+		},error:function(error){
+			alert("검색 에러");
+		}
+	
+	})
+}*/
 </script>
 </head>
 <body>
@@ -43,23 +120,23 @@ $(document).on(function(){
    </td>
   </tr>
   </table>
-   <table class="table">
-    <tr class="info find">
-     <th width=10% class="text-center">번호</th>
-     <th width=45% class="text-center">제목</th>
-     <th width=15% class="text-center">이름</th>
-     <th width=20% class="text-center">작성일</th>
-     <th width=10% class="text-center">조회수</th>
+   <table class="table" id="find_table">
+    <tr class="info">
+     <th width=10% class="text-center" id="no">번호</th>
+     <th width=45% class="text-center" id="subject">제목</th>
+     <th width=15% class="text-center" id="name">이름</th>
+     <th width=20% class="text-center" id="regdate">작성일</th>
+     <th width=10% class="text-center" id="hit">조회수</th>
     </tr>
     <c:forEach var="vo" items="${list }">
-     <tr id="find_table">
-      <td width=10% class="text-center">${vo.no }</td>
-      <td width=45%>
+     <tr>
+      <td width=10% class="text-center" id="fno">${vo.no }</td>
+      <td width=45% id="fsubject">
        <a href="../board/fdetail.do?no=${vo.no}&page=${curpage}">${vo.subject }</a>
        </td>
-      <td width=15% class="text-center">${vo.name }</td>
-      <td width=20% class="text-center"><fmt:formatDate value="${vo.regdate }" pattern="yyyy-MM-dd"/> </td>
-      <td width=10% class="text-center">${vo.hit }</td>
+      <td width=15% class="text-center" id="fname">${vo.name }</td>
+      <td width=20% class="text-center" id="fregdate">${vo.dbday }</td>
+      <td width=10% class="text-center" id="fhit">${vo.hit }</td>
      </tr>
     </c:forEach>
    </table>
@@ -93,25 +170,6 @@ $(document).on(function(){
        </td>
      </tr>
    </table>
-     <!--  <div style="height:30px"></div>
-     <ul class="pagination" >
-		<c:if test="${startPage>1 }">
-		  <a href="../board/flist.do?page=${startPage-1}"><li class="page">&lt;</li></a>
-		 </c:if>
-		<c:forEach var="i" step="1" begin="${startPage }" end="${endPage }">
-			<a href="../board/flist.do?page=${i}">
-			<c:if test="${curpage==i}">
-		  		<li class="page_active">
-		  	</c:if>
-		  	<c:if test="${curpage!=i }">
-		  		<li class="page">
-		  	</c:if>
-		  ${i }</li></a>
-		</c:forEach>
-		<c:if test="${endPage<allPage }">
-		  <a href="../board/flist.do?page=${endPage+1}"><li class="page">&gt;</li></a>
-		 </c:if>
-		</ul> -->
   </div>
  </div>
  </div>
