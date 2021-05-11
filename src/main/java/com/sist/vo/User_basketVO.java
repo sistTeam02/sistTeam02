@@ -1,15 +1,17 @@
 package com.sist.vo;
 /*
- *  ID                  VARCHAR2(40)   
-	NO         NOT NULL NUMBER         
-	PNO                 NUMBER         
+ *  ID                  VARCHAR2(40)   고객id
+	NO         NOT NULL NUMBER         고유키
+	PNO                 NUMBER         제품번호
 	TITLE               VARCHAR2(1000) 
 	POSTER              VARCHAR2(400)  
 	PRICE               NUMBER         
-	ORDERCOUNT          NUMBER         
-	CNO                 NUMBER   
-	ORDDATE             DATE       
-	STATE				NUMBER         
+	ORDERCOUNT          NUMBER   기본값 1
+	CNO                 NUMBER   카테고리 번호(0:운동용품, 1:다이어트식품)
+	ORDDATE             DATE 
+	STATE				NUMBER   결제 상태(기본값 0) 
+	ADDRESS              VARCHAR2(500)  
+	TOTAL_PRICE          NUMBER         
  */
 import java.util.*;
 public class User_basketVO {
@@ -23,7 +25,35 @@ public class User_basketVO {
 	private int cno;     // 카테고리 번호
 	private Date orddate;
 	private int state;   // 결제상태(default 0)
+	private String address;
+	private int total_price;
+	private GoodsVO gvo=new GoodsVO();
+	private DietFoodVO dvo=new DietFoodVO();
 	
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	public int getTotal_price() {
+		return total_price;
+	}
+	public void setTotal_price(int total_price) {
+		this.total_price = total_price;
+	}
+	public GoodsVO getGvo() {
+		return gvo;
+	}
+	public void setGvo(GoodsVO gvo) {
+		this.gvo = gvo;
+	}
+	public DietFoodVO getDvo() {
+		return dvo;
+	}
+	public void setDvo(DietFoodVO dvo) {
+		this.dvo = dvo;
+	}
 	public int getState() {
 		return state;
 	}
