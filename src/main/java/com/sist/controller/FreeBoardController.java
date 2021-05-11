@@ -73,12 +73,13 @@ public class FreeBoardController {
 	   return "redirect:flist.do";
    }
    @GetMapping("board/fdetail.do")
-   public String board_fdetail(int no,Model model)
+   public String board_fdetail(int no,String page,Model model)
    {
 	   // 데이터 읽기 => DAO연결 
 	   FreeBoardVO vo=fDao.freeboardDetailData(no);
 	   //List<ReplyVO> rList=rDao.replyListData(no);
 	   model.addAttribute("vo", vo);
+	   model.addAttribute("page", page);
 	   model.addAttribute("main_jsp", "../board/fdetail.jsp");
 	   //model.addAttribute("rList", rList);
 	   return "main/main";

@@ -39,7 +39,7 @@ public class FreeBordRestController {
 		   map.put("ss", ss);
 		   map.put("fsArr", vo.getFsArr());
 		   List<FreeBoardVO> list=fDao.freeboardFindData(map);
-		   int count=fDao.freeboardFindDataCount(map);
+		   //int count=fDao.freeboardFindDataCount(map);
 		   JSONArray arr=new JSONArray();
 			for(FreeBoardVO fvo:list){
 				/*

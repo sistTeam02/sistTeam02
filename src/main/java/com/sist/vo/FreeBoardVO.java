@@ -21,6 +21,14 @@ public class FreeBoardVO {
 	private String content;
 	private Date regdate;
 	private int hit;
+	private String dbday;
+	
+	public String getDbday() {
+		return dbday;
+	}
+	public void setDbday(String dbday) {
+		this.dbday = dbday;
+	}
 	private MemberVO mvo=new MemberVO();
 	
 	public MemberVO getMvo() {

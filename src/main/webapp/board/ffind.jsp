@@ -23,6 +23,19 @@ h1 {
 $(document).ready(function(){
     $('[data-toggle="popover"]').popover();   
 });
+/*let Data="";
+for(let i=0;i<json.length;i++)
+{
+	  Data+='<tr>'
+       +'<td width=10% class="text-center">'+json[i].no+'</td>'
+       +'<td width=45% class="text-left">'
+       +'<a href="../board/fdetail.do" data-toggle="popover" title="'+json[i].subject+'" data-content="'+json[i].content+'">'+json[i].subject+'</a>'
+       +'</td>'
+       +'<td width=15% class="text-center">'+json[i].name+'</td>'
+       +'<td width=20% class="text-center"><fmt:formatDate value="'+json[i].regdate+'" pattern="yyyy-MM-dd"/></td>'
+       +'<td width=10% class="text-center">'+json[i].hit+'</td>'
+       +'</tr>'
+}*/
 </script>
 </head>
 <body>
@@ -57,11 +70,10 @@ $(document).ready(function(){
               <tr>
 	             <td width=10% class="text-center">${vo.no }</td>
 	             <td width=45% class="text-left">
-	               <a href="#" data-toggle="popover" title="${vo.subject }" data-content="${vo.content }">${vo.subject }</a>
+	               <a href="../board/fdetail.do" data-toggle="popover" title="${vo.subject }" data-content="${vo.content }">${vo.subject }</a>
 	             </td>
 	             <td width=15% class="text-center">${ vo.name}</td>
-	             <td width=20% class="text-center"><fmt:formatDate value="${vo.regdate }" 
-	                                            pattern="yyyy-MM-dd"/></td>
+	             <td width=20% class="text-center">${vo.dbday }</td>
 	             <td width=10% class="text-center">${vo.hit }</td>
 	            </tr>
             </c:forEach>
