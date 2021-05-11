@@ -321,7 +321,7 @@ $(function () {
 			sportSum+=$('#sport_memo_name'+i).val()+$('#sport_memo_number'+i).val()+"^";
 		}
 		 memo={
-			"id":"admin",/* id작업후수정 ======================*/	
+			"id":id,/* id작업후수정 =======완료==============*/	
 			"date":$('#sport_memo_date').text(),
 			"time":$('#sport_memo_time').val(),
 			"sport":sportSum
@@ -817,7 +817,7 @@ function kcal_search(keyword){
 	 user_msg("저장해줘");
 
 	 memo={
-				"id":"admin",/* id작업후수정 ======================*/	
+				"id":id,/* id작업후수정 =============완료========*/	
 				"date":sysdate,
 				"time":time,
 				"fname":name,
