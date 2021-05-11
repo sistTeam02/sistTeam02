@@ -88,6 +88,7 @@ public class HometController {
 		String key = vo.getVideo().substring(vo.getVideo().lastIndexOf("v")+2);
 		
 		model.addAttribute("key", key);
+		model.addAttribute("vo", vo);
 		model.addAttribute("main_jsp", "../home_training/ht_challenge_detail.jsp");
 		return "main/main";
 	}
