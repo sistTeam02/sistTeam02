@@ -7,6 +7,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<script src="https://unpkg.com/vue"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <style type="text/css">
 .page {
   -webkit-border-radius: 0;
@@ -66,6 +68,7 @@
 
 </head>
 <body>
+	<div id="app">
     <!-- Breadcrumb Section Begin -->
     <div class="breacrumb-section">
         <div class="container">
@@ -157,5 +160,6 @@
       </div>
     </section>
     <!-- Product Shop Section End -->
+    </div>
 </body>
 </html>
