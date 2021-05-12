@@ -69,14 +69,16 @@ public class MypageRestController {
 		return json;
 		
 	}
-	@PostMapping("mypage/schedule_date")
-	public String mypage_schedule_data(String id,String month){
+	
+	// 마이페이지 날짜 출력 데이터
+	@PostMapping("mypage/schedule_date.do")
+	public String mypage_schedule_data(String id,String day){
 		String dList="";
 		List<String> list=pdao.chat_dbDay(id);
 		for(int i=0;i<list.size();i++){
 			String db_day=list.get(i);
 			String[]arr=db_day.split("\\.");
-			int m=Integer.parseInt(month);
+			int m=Integer.parseInt(day);
 			int db_m=Integer.parseInt(arr[1]);
 			if(m==db_m){
 				db_day=arr[2];

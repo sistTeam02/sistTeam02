@@ -65,8 +65,6 @@
 		WHERE title LIKE '%'||#{search}||'%'
 	</select>
 	
-	
-	
 	<insert id="searchNewKeywordInsert" parameterType="string">
 		INSERT INTO search_rank VALUES(
 			(SELECT NVL(MAX(no)+1,1) FROM search_rank), 
@@ -92,55 +90,6 @@
 		WHERE <![CDATA[num <= 10]]>
 	</select>
 	
-	<select id="hometKeyword" resultType="string">
-		SELECT keyword FROM 
-		(SELECT keyword, rownum FROM homet_keyword ORDER BY cnt DESC )
-		WHERE <![CDATA[rownum <= 10]]>
-	</select>
-	
-	<select id="goodsKeyword" resultType="string">
-		SELECT keyword FROM 
-		(SELECT keyword, rownum FROM goods_keyword ORDER BY cnt DESC )
-		WHERE <![CDATA[rownum <= 10]]>
-	</select>
-	
-	<select id="foodsKeyword" resultType="string">
-		SELECT keyword FROM 
-		(SELECT keyword, rownum FROM foods_keyword ORDER BY cnt DESC )
-		WHERE <![CDATA[rownum <= 10]]>
-	</select>
-	
-	<select id="hometKeywordSearch" parameterType="hashmap" resultType="HometPayVO">
-	
-	</select>
-	
-	<select id="goodsKeywordSearch" parameterType="hashmap" resultType="GoodsVO">
-		SELECT no, title, poster, price, num 
-		FROM (SELECT no, title, poster, price, rownum as num
-		FROM (SELECT no, title, poster, price 
-		FROM goods_list WHERE title LIKE '%'||#{search}||'%' AND WHERE title LIKE '%'||#{keyword}||'%'
-		ORDER BY no ASC)) 
-        WHERE num BETWEEN #{start} AND #{end}
-	</select>
-	
-	<select id="foodsKeywordSearch" parameterType="hashmap" resultType="DietFoodVO">
-		SELECT no, title, poster, price, num 
-		FROM (SELECT no, title, poster, price, rownum as num
-		FROM (SELECT no, title, poster, price 
-		FROM dietfood_list WHERE title LIKE '%'||#{search}||'%' AND WHERE title LIKE '%'||#{keyword}||'%'
-		ORDER BY no ASC)) 
-        WHERE num BETWEEN #{start} AND #{end}
-	</select>
-	
-	<select id="goodsKeywordPage" parameterType="hashmap" resultType="int">
-		SELECT CEIL(COUNT(*)/12.0) FROM goods_list 
-		WHERE title LIKE '%'||#{search}||'%' AND WHERE title LIKE '%'||#{keyword}||'%'
-	</select>
-	
-	<select id="foodsKeywordPage" parameterType="hashmap" resultType="int">
-		SELECT CEIL(COUNT(*)/12.0) FROM dietfood_list 
-		WHERE title LIKE '%'||#{search}||'%' AND WHERE title LIKE '%'||#{keyword}||'%'
-	</select>
 	
 	<select id="searchAutocomplete" parameterType="string" resultType="string">
 		select keyword from
@@ -151,5 +100,13 @@
 		select keyword, rownum from
 		(select keyword from homet_keyword where keyword like '%'||#{search}||'%' order by rownum asc))
 		where <![CDATA[rownum <= 10]]>
+	</select>
+	
+	<select id="orderList" resultType="com.sist.vo.KeywordVO">
+		SELECT title as keyword, no FROM
+		(SELECT title, no, rownum FROM
+		(SELECT title, pno as no, count(*) as c FROM user_order_basket GROUP BY pno, title)
+		ORDER BY c desc)
+		WHERE <![CDATA[rownum <= 10]]>
 	</select>
 </mapper>

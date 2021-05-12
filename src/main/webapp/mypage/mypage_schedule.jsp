@@ -120,7 +120,7 @@ function make_cal(year,month){
 							+", 실천운동:"+json[i].sport.replace("^","세트")+" "+"\n"
 					alert(planData);
 				}
-				
+				alert(planData);
 				
 		 } 
 			//alert(result)
@@ -132,17 +132,16 @@ function make_cal(year,month){
 //달력 효과
 $(document).ready(function(){
 	$('#dayBtn tr td').css('cursor','pointer');
-	/* let day=$('#dayBtn tr td').text(function(){
+	 /* let day=$('#dayBtn tr td').text(function(){
 		let oneDay="";
 		for(let i=0;i<31;i++){
 			
 		}
 	});
-	let month=$('#calender').text(); */
+	let month=$('#calender').text();  */
 	
 	/* days(date,0);
 	days(date,1) */
-	//alert(month);
 	
 });
 

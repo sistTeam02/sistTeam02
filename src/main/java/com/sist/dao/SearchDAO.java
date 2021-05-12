@@ -237,4 +237,17 @@ public class SearchDAO extends SqlSessionDaoSupport{
 	public List<String> searchAutocomplete(String search){
 		return getSqlSession().selectList("searchAutocomplete", search);
 	}
+	
+	/*
+	 * <select id="orderList" resultType="String">
+		SELECT title FROM
+		(SELECT title, rownum FROM
+		(SELECT title, count(*) as c FROM user_order_basket GROUP BY title)
+		ORDER BY c desc)
+		WHERE <![CDATA[rownum <= 10]]>
+	</select>
+	 */
+	public List<KeywordVO> orderList(){
+		return getSqlSession().selectList("orderList");
+	}
 }

@@ -26,10 +26,4 @@ public class ChatController {
 		model.addAttribute("main_jsp", "../chat/chat.jsp");
 		return "main/main";
 	}
-	@GetMapping("chat/chat_insert.do")
-	public void chat_insertData(String fileurl){
-		System.out.println(fileurl);
-		System.out.println(1);	
-		
-	}
 }

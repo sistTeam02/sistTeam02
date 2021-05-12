@@ -10,6 +10,8 @@ import com.sist.vo.Chat_planVO;
 import com.sist.vo.Chat_recipeVO;
 import com.sist.vo.KcalVO;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+
 import java.util.*;
 @Repository
 public class Chat_foodDAO extends SqlSessionDaoSupport{
@@ -33,5 +35,11 @@ public class Chat_foodDAO extends SqlSessionDaoSupport{
 	}
 	public void chat_foodInsertData(Chat_foodVO vo){
 		getSqlSession().insert("chat_foodInsert", vo);
+	}
+	public List<String> filenameData(Chat_foodVO vo){
+		return getSqlSession().selectList("filenameData",vo);
+	}
+	public int total_filename(Chat_foodVO vo){
+		return getSqlSession().selectOne("totalFileName",vo);
 	}
 }

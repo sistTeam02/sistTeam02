@@ -7,6 +7,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<script src="https://unpkg.com/vue"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <style type="text/css">
 h4{
 	color: darkgray;
@@ -16,6 +18,43 @@ a{
 }
 a:hover{
 	color: black;
+}
+.btn1 {
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0px;
+  color: #ffffff;
+  font-size: 20px;
+  background: #648bff;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
+  border: none;
+  font-size: 14px;
+}
+
+.btn1:hover {
+  text-decoration: none;
+  border: none;
+}
+
+.btn2 {
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0px;
+  color: #000000;
+  font-size: 20px;
+  background: #ffffff;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
+  border: none;
+  font-size: 14px;
+  border: 1px solid lightgray;
+}
+
+.btn2:hover {
+  background: lightgray;
+  text-decoration: none;
+   border: 1px solid lightgray;
 }
 </style>
 </head>
@@ -50,16 +89,15 @@ a:hover{
                             <li><a href="../main/search_category.do?no=2&search=${search }">건강 식품</a></li>
                         </ul>
                     </div>
-                    <div class="filter-widget">
-                        <h4 class="fw-title">검색 순위</h4>
+                    <div class="filter-widget" id="app">
+                        <button :class="{btn1:isSearch,btn2:!isSearch}" value=1 v-on:click="showSearchRank()">검색 순위</button>&nbsp;&nbsp;&nbsp;
+                        <button :class="{btn1:isBuy,btn2:!isBuy}" value=2 v-on:click="showBuyRank()">구매 순위</button>
                         <div class="fw-brand-check">
                         	<table class=table>
-                        	<c:forEach var="ke" items="${klist }" varStatus="s">
-	                            <tr>
-	                            	<th width="20%">${s.count }</th>
-	                            	<td width="80%"><a href="../main/search.do?no=0&search=${ke.keyword }">${ke.keyword }</a></td>
+	                            <tr v-for="(ke, index) in list">
+	                            	<th width="20%">{{index+1}}</th>
+	                            	<td width="80%"><a :href="'../main/search.do?no=0&search='+ke.title">{{ke.title}}</a></td>
 	                            </tr>
-                            </c:forEach>
                             </table>
                         </div>
                     </div>
@@ -231,5 +269,54 @@ a:hover{
         </div>
     </section>
     <!-- Product Shop Section End -->
+    
+    <script>
+    	new Vue({
+    		el:'#app',
+    		data:{
+    			list:[],
+    			curvalue:1,
+    			isSearch:true,
+    			isBuy:false
+    		},
+    		mounted:function(){
+    			axios.get("http://localhost/controller/main/rank.do",{
+    				params:{
+    					value:this.curvalue
+    				}
+    			}).then(response=>{
+    				this.list=response.data
+    			});
+    		},
+    		methods:{
+    			showSearchRank(){
+    				this.curvalue=1;
+    				axios.get("http://localhost/controller/main/rank.do",{
+        				params:{
+        					value:this.curvalue
+        				}
+        			}).then(response=>{
+        				this.list=response.data
+        			});
+    				this.isSearch=true;
+    				this.isBuy=false;
+    			},
+    			showBuyRank(){
+    				this.curvalue=2;
+    				axios.get("http://localhost/controller/main/rank.do",{
+        				params:{
+        					value:this.curvalue
+        				}
+        			}).then(response=>{
+        				this.list=response.data
+        			});
+    				this.isSearch=false;
+    				this.isBuy=true;
+    			}
+    		}
+    	})
+    </script>
+    	
+    
 </body>
 </html>
