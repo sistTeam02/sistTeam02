@@ -149,10 +149,33 @@ public class MypageController {
 	}
 	//수정정보 가져오기-> 저장하기
 	@PostMapping("mypage/mypage_update_ok.do")
-	public String mypage_update_ok(MemberVO vo){
+	public String mypage_update_ok(MemberVO vo,Model model){
+		
 		fdao.mypageUpdate(vo);
+		
+		model.addAttribute("bread_jsp","../mypage/bread4.jsp");
+		model.addAttribute("mypage_jsp","../mypage/mypage_update.jsp");
+		model.addAttribute("main_jsp","../mypage/mypage_main.jsp");
 		return "main/main";
 	}
 	
 	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
