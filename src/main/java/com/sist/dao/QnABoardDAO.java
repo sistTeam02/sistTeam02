@@ -94,7 +94,7 @@ public class QnABoardDAO extends SqlSessionDaoSupport{
 	     {
 	    	 boolean bCheck=false;
 	    	 // 비밀번호 읽기
-	    	 String db_pwd=getSqlSession().selectOne("qnaboardGetPassword",no);
+	    	 String db_pwd=getSqlSession().selectOne("qnaboardGetPassword",pwd);
 	    	 System.out.println("db_pwd="+db_pwd+",pwd="+pwd);
 	    	 if(pwd.equals(db_pwd))
 	    	 {
@@ -112,5 +112,30 @@ public class QnABoardDAO extends SqlSessionDaoSupport{
 	    	 }
 	    	 return bCheck;
 	     }
+		
+		//////////////////////////////// 답변 /////////////////////////////////////////////
+		public List<QnABoard_ReplyVO> qnareplyListData(int mno)
+		{
+			return getSqlSession().selectList("qnareplyListData", mno);
+		}
+		// 등록
+		public void qnareplyInsert(QnABoard_ReplyVO vo)
+		{
+			getSqlSession().insert("qnareplyInsert", vo);
+		}
+		
+		// 수정
+		public void qnareplyUpdate(QnABoard_ReplyVO vo)
+		{
+			getSqlSession().update("qnareplyUpdate", vo);
+		}
+		
+
+		// 삭제
+		@Transactional(propagation=Propagation.REQUIRED, rollbackFor=Exception.class)
+		public void qnareplyDelete(int no)
+		{
+				getSqlSession().delete("qnareplyDelete", no);
+		}
 
 }

@@ -23,19 +23,6 @@ h1 {
 $(document).ready(function(){
     $('[data-toggle="popover"]').popover();   
 });
-/*let Data="";
-for(let i=0;i<json.length;i++)
-{
-	  Data+='<tr>'
-       +'<td width=10% class="text-center">'+json[i].no+'</td>'
-       +'<td width=45% class="text-left">'
-       +'<a href="../board/fdetail.do" data-toggle="popover" title="'+json[i].subject+'" data-content="'+json[i].content+'">'+json[i].subject+'</a>'
-       +'</td>'
-       +'<td width=15% class="text-center">'+json[i].name+'</td>'
-       +'<td width=20% class="text-center"><fmt:formatDate value="'+json[i].regdate+'" pattern="yyyy-MM-dd"/></td>'
-       +'<td width=10% class="text-center">'+json[i].hit+'</td>'
-       +'</tr>'
-}*/
 </script>
 </head>
 <body>
@@ -43,6 +30,8 @@ for(let i=0;i<json.length;i++)
    <div class="container">
      <h1>검색결과</h1>
      <div class="row">
+     <jsp:include page="board_menu.jsp"/>
+     <div class="col-md-9">
        <c:if test="${count==0 }">
          <table class="table">
           <tr>
@@ -59,7 +48,7 @@ for(let i=0;i<json.length;i++)
            </tr>
           </table>
           <table class="table">
-            <tr class="warning">
+            <tr class="info">
              <th width=10% class="text-center">번호</th>
              <th width=45% class="text-center">제목</th>
              <th width=15% class="text-center">이름</th>
@@ -70,10 +59,11 @@ for(let i=0;i<json.length;i++)
               <tr>
 	             <td width=10% class="text-center">${vo.no }</td>
 	             <td width=45% class="text-left">
-	               <a href="../board/fdetail.do" data-toggle="popover" title="${vo.subject }" data-content="${vo.content }">${vo.subject }</a>
+	               <a href="#" data-toggle="popover" title="${vo.subject }" data-content="${vo.content }">${vo.subject }</a>
 	             </td>
 	             <td width=15% class="text-center">${ vo.name}</td>
-	             <td width=20% class="text-center">${vo.dbday }</td>
+	             <td width=20% class="text-center"><fmt:formatDate value="${vo.regdate }" 
+	                                            pattern="yyyy-MM-dd"/></td>
 	             <td width=10% class="text-center">${vo.hit }</td>
 	            </tr>
             </c:forEach>
@@ -88,6 +78,8 @@ for(let i=0;i<json.length;i++)
         </tr>
        </table>
      </div>
+     </div>
    </div>
 </body>
 </html>
+

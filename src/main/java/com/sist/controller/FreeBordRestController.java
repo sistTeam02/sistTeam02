@@ -25,7 +25,7 @@ public class FreeBordRestController {
     private NoticeBoardDAO nDao;
 	
 	// 찾기
-	   @PostMapping("board/ffind.do")
+	  /* @PostMapping("board/ffind.do")
 	   public String board_ffind(String fs,String ss)
 	   {
 		   String json="";
@@ -51,7 +51,7 @@ public class FreeBordRestController {
 					CONTENT NOT NULL CLOB           
 					REGDATE          DATE           
 					HIT              NUMBER 
-				 */
+				 
 				JSONObject obj=new JSONObject();
 				obj.put("no",fvo.getNo());
 				obj.put("name",fvo.getName());
@@ -67,7 +67,7 @@ public class FreeBordRestController {
 			   ex.printStackTrace();
 		   }
 		   return "json";
-	   }
+	   }*/
 	   
 	   ////////////////////////  공지사항  ////////////////////////////////////
 	   @RequestMapping(value="board/ndelete_ok.do")

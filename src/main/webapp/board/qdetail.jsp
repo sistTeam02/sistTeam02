@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -20,11 +21,11 @@ h1 {
 <script src="https://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
 $(function(){
-	let bno=${vo.no};
+	let mno=${vo.no};
 	$.ajax({
 		type:'GET',
-		url:'reply_list.do',
-		data:{'bno':bno},
+		url:'qreply_list.do',
+		data:{'mno':mno},
 		success:function(result)
 		{
 			$('#reply_data').html(result);
@@ -71,10 +72,6 @@ $(function(){
     </div>
     <div style="height: 30px"></div>
     <div class="row" id="reply_data">
-    <tr>
-     <th width=20% class="info text-center">답변</th>
-        <td width=30% class="text-center">${vo.answer }</td>
-    </tr>
       
     </div>
    </div>

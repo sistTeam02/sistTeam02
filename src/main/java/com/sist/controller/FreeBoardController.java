@@ -119,12 +119,9 @@ public class FreeBoardController {
    @GetMapping("board/fdelete.do")
    public String board_fdelete(int no,String pwd,String page,Model model)
    {
-	   System.out.println("pwd="+pwd+",no="+no);
-	   boolean bCheck=fDao.freeboardDelete(no, pwd);
-	   System.out.println("bCheck="+bCheck);
-	   // delete_ok.jsp로 결과값을 전송 => 사용자가 볼 수 있게 처리 
-	   model.addAttribute("bCheck", bCheck);
 	   model.addAttribute("no", no);
+	   model.addAttribute("pwd", pwd);
+	   model.addAttribute("page", page);
 	   return "board/fdelete";
    }
    
@@ -138,6 +135,24 @@ public class FreeBoardController {
 	   // delete_ok.jsp로 결과값을 전송 => 사용자가 볼 수 있게 처리 
 	   model.addAttribute("bCheck", bCheck);
 	   return "board/fdelete_ok";
+   }
+   
+   @PostMapping("board/ffind.do")
+   public String board_ffind(String fs,String ss,Model model)
+   {
+	   FindVO vo=new FindVO();
+	   vo.setFs(fs);
+	   vo.setSs(ss);
+	   Map map=new HashMap();
+	   map.put("fs",fs);
+	   map.put("ss", ss);
+	   map.put("fsArr", vo.getFsArr());
+	   List<FreeBoardVO> list=fDao.freeboardFindData(map);
+	   int count=fDao.freeboardFindDataCount(map);
+	   model.addAttribute("list", list);
+	   model.addAttribute("count", count);
+	   model.addAttribute("main_jsp", "../board/ffind.jsp");
+	   return "main/main";
    }
    
    

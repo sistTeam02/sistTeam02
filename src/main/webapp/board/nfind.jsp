@@ -61,7 +61,7 @@ $(document).ready(function(){
 	             <td width=45% class="text-left">
 	               <a href="#" data-toggle="popover" title="${vo.subject }" data-content="${vo.content }">${vo.subject }</a>
 	             </td>
-	             <td width=15% class="text-center">${ vo.id}</td>
+	             <td width=15% class="text-center">${ vo.name}</td>
 	             <td width=20% class="text-center"><fmt:formatDate value="${vo.regdate }" 
 	                                            pattern="yyyy-MM-dd"/></td>
 	             <td width=10% class="text-center">${vo.hit }</td>
@@ -73,7 +73,7 @@ $(document).ready(function(){
        <table class="table">
         <tr>
           <td class="text-right">
-            <a href="../board/qlist.do" class="btn btn-sm btn-primary">목록</a>
+            <a href="../board/nlist.do" class="btn btn-sm btn-primary">목록</a>
           </td>
         </tr>
        </table>

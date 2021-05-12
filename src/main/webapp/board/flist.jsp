@@ -17,93 +17,6 @@ h1 {
   text-align: center;
 }
 </style>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script>
-/*$(document).ready(function(){
-    $('[data-toggle="popover"]').popover();   
-});*/
-$(function(){
-	$('#ffind').click(function(){
-		$.ajax({
-			type:'GET',
-			url:'ffind.do',
-			data:{'bno':bno},
-			success:function(result)
-			{
-				$('#find_table').html(result);
-			}
-		});
-
-	});
-});
-/*function findData(fs,ss) {
-	$.ajax({
-		type:'post',
-		url:'../board/flist.do',
-		data:{'fs':fs,'ss':ss},
-		success:function(json){
-			try
-			{
-			let jsonData=JSON.parse(json);
-			$('td[id^=f]').hide();
-			for(let i=0;i<json.length;i++)
-			{
-				$('#find_table').append(
-			            '<tr>'
-				       +'<td width=10% class="text-center">'+json[i].no+'</td>'
-				       +'<td width=45% class="text-left">'
-				       +'<a href="../board/fdetail.do" data-toggle="popover" title="'+json[i].subject+'" data-content="'+json[i].content+'">'+json[i].subject+'</a>'
-				       +'</td>'
-				       +'<td width=15% class="text-center">'+json[i].name+'</td>'
-				       +'<td width=20% class="text-center">'+json[i].regdate+'</td>'
-				       +'<td width=10% class="text-center">'+json[i].hit+'</td>'
-				       +'</tr>'
-				  );
-			}
-			//$('#find_table').html(Data);
-			}catch(Exception)
-			{
-				ex.printStackTrace();
-			}
-			
-		},error:function(error){
-			alert("검색 에러");
-		}
-	
-	})
-	
-}
- /*(document).on("keyup","#find_input",function(){
-	 let ss=$(this).val();
-	 let fs=$(this).val();
-	 button++;
-	 console.log(fs);
-	 if(fs!=""){
-	 	findData(fs, ss,button);
-	 }
-	 button--;
- });
-
-function findData(fs,ss,button) {
-	$.ajax({
-		type:'post',
-		url:'../board/ffind.do',
-		data:{'fs':fs,'ss':ss},
-		success:function(result){
-			let json=JSON.parse(result);
-			$('.find_table').remove();
-			 make_tr(json,button);
-		},error:function(error){
-			alert("검색 에러");
-		}
-	
-	})
-}*/
-</script>
 </head>
 <body>
  <div style="height:50px"></div>
@@ -136,7 +49,7 @@ function findData(fs,ss,button) {
        <a href="../board/fdetail.do?no=${vo.no}&page=${curpage}">${vo.subject }</a>
        </td>
       <td width=15% class="text-center" id="fname">${vo.name }</td>
-      <td width=20% class="text-center" id="fregdate">${vo.dbday }</td>
+      <td width=20% class="text-center"><fmt:formatDate value="${vo.regdate }" pattern="yyyy-MM-dd"/> </td>
       <td width=10% class="text-center" id="fhit">${vo.hit }</td>
      </tr>
     </c:forEach>
@@ -144,6 +57,7 @@ function findData(fs,ss,button) {
    <table class="find_searchbar">
     <tr>
      <td class="text-left">
+     <form method=post action="ffind.do">
       Search:<select name="fs" class="input-sm">
        <option value="N">이름</option>
        <option value="S">제목</option>
@@ -155,6 +69,7 @@ function findData(fs,ss,button) {
       </select>
       <input type="text" name=ss size=15 id="ffind_input">
       <button class="btn btn-sm btn0-primary" id="ffind">검색</button>
+      </form>
      </td>
      </tr>
      </table>
