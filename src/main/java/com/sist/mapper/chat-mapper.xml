@@ -5,8 +5,8 @@
 		insert into chat_plan values(#{id},#{plandate},#{time},#{sport})
 	</insert>
 	<insert id="chat_foodInsert" parameterType="Chat_foodVO">
-		insert into chat_food(id,fooddate,whenfood,foodname,foodkcal,foodgram)
-		 values(#{id},#{fooddate},#{whenfood},#{foodname},#{foodkcal},#{foodgram})
+		insert into chat_food(id,filename,fooddate,whenfood,foodname,foodkcal,foodgram)
+		 values(#{id},#{filename},#{fooddate},#{whenfood},#{foodname},#{foodkcal},#{foodgram})
 	</insert>
 	<select id="chat_foodData" resultType="Chat_foodVO" parameterType="Chat_foodVO">
 		SELECT * from chat_food 
@@ -17,7 +17,9 @@
 		WHERE plandate=#{plandate} and id=#{id}
 	</select>
 	<select id="chat_dbDay" resultType="String" parameterType="String">
-	SELECT fooddate from chat_food UNION 
+	SELECT fooddate from chat_food 
+	where id=#{id}
+	UNION 
 	SELECT plandate from chat_plan
 	where id=#{id}
 	order by fooddate
@@ -35,5 +37,13 @@
 		SELECT /*+INDEX_ASC(chat_kcal INDEX1) */no,name,gram,kcal from 
 		chat_kcal
 		where name like '%'||#{keyword}||'%'
+	</select>
+	<select id="filenameData" resultType="String" parameterType="Chat_foodVO">
+		SELECT filename from chat_food  WHERE fooddate=#{fooddate} and id=#{id}
+		order by filename asc
+	</select>
+	<select id="totalFileName" resultType="int" parameterType="Chat_foodVO">
+		SELECT count(*) from(
+		SELECT filename from chat_food  WHERE fooddate=#{fooddate} and id=#{id})
 	</select>
 </mapper>

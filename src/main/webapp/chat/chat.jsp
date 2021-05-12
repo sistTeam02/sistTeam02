@@ -231,11 +231,12 @@ thisday=0;
 let fileurl="";
 let filename="";
 let file="";
-let id="";
 let page=1;
+let id="";
 totalpage=0;
 $(document).ready(function(){
-	id=$('#sport_memo_tr').attr('user_id');
+	 id=$('#sport_memo_tr').attr('user_id');
+	 id=id.trim();
 })
 /* 왼쪽제어 */
 $(function () {
@@ -337,6 +338,7 @@ $(function () {
 				alert("오류");
 			}	
 		})
+		$('.phone').scrollTop($('.phone')[0].scrollHeight);
 	});
 	/* 안녕? */
 	$('#pBtn3').click(function() {
@@ -428,7 +430,6 @@ $(document).on('change','#search_click_gram',function(){
 	
 	click_result(name, kcal, gram, division);
 });
-
 /* 오른쪽 제어 */
 $(function(){
 
@@ -436,6 +437,23 @@ $(function(){
 	let month=5;
 	thismonth=month;
 	let hoverSwitch=0;
+	$('#img_fBtn').on("change", function(e){
+    	file = e.target.files;
+        if(file!=null&&file!=undefined){
+       		filename=file[0].name;	
+       		fileurl=window.URL.createObjectURL(file[0]);
+       		if(file[0].type.includes("image/")){
+       			hoverSwitch=1;
+       			$('#img_span').css("background-image","url("+fileurl+")");
+       			$('#img_span').css("background-size","100% 100%");
+       		}else{
+       			hoverSwitch=0;
+       			alert("이미지가 아닙니다");
+       			return;
+       			/*이미지가 아닐때 나중에처리 */
+       		}
+        }
+    })
     //드래그앤드랍
     $("#img_span").on("dragenter", function(e){
         e.preventDefault();
@@ -448,13 +466,14 @@ $(function(){
         e.preventDefault();
         e.stopPropagation();
         $(this).css("background-color", "#FFF");
+    }).on("click", function(e){
+    	e.preventDefault();
+    	$('#img_fBtn').click();
     }).on("drop", function(e){
         e.preventDefault();
      file = e.originalEvent.dataTransfer.files;
     if(file!=null&&file!=undefined){
-   		filename=file[0].name;
-   		
-   		
+   		filename=file[0].name;	
    		fileurl=window.URL.createObjectURL(file[0]);
    		if(file[0].type.includes("image/")){
    			hoverSwitch=1;
@@ -466,7 +485,6 @@ $(function(){
    			return;
    			/*이미지가 아닐때 나중에처리 */
    		}
-   	
     }
     
     });
@@ -495,7 +513,7 @@ $(function(){
 			$(this).text('');
 		});
 	let imgIndex=1;
-	$('#img_IBtn').click(function() {/* 이미지전송버튼 */
+	$('#img_IBtn').click(function() { /* 이미지전송버튼 */
 		if(fileurl!=""){
 			$('.phone > ul').append(
 					"<li class='right'>"+
@@ -520,7 +538,7 @@ $(function(){
 	        cache: false,
 	        enctype:'multipart/form-data',
 			success:function(result){
-				send_phone();
+				send_phone();//음식저장
 			},error:function(error){
 				bot_msg("사진전송이 안되었어요 다시올려주세요")
 			} 
@@ -822,9 +840,9 @@ function kcal_search(keyword){
 				"time":time,
 				"fname":name,
 				"fkcal":kcal,
-				"fgram":gram
+				"fgram":gram,
+				"filename":filename
 			}
-			
 			$.ajax({
 				type:'post',
 				data:{'memo':JSON.stringify(memo)},
@@ -837,6 +855,7 @@ function kcal_search(keyword){
 			})
 	 }
  }
+ 
  /* 사용자 메세지함수 */
  function user_msg(msg) {
 	 $('.phone > ul').append(
@@ -921,6 +940,7 @@ $(document).on('click', '.ti-align-left' , function(){
 							bot_msg(ftime);
 							bot_msg(fname);
 							bot_msg(fkcal+" kcal   "+fgram+" g");
+							
 						} 
 					}else{
 						bot_msg("기록이 존재하지 않습니다.")
@@ -929,8 +949,34 @@ $(document).on('click', '.ti-align-left' , function(){
 					alert("오류");
 				}	
 		  })
+		  image_show();
 	  });
 	  //아이콘 함수 -plan
+function image_show(){
+  let fooddate='2021.'+thismonth+'.'+thisday;
+  let filecount=0;	
+ 	$.ajax({
+		type:'get',
+		data:{'fooddate':fooddate,'id':id},
+		url:'../chat/total_foodfile.do',
+		async:false,
+		success:function(result){
+			filecount=Number(result);
+		},error:function(error){
+			alert("이미지에러")
+		}
+	})
+	console.log("b"+filecount);
+    for(i=0;i<filecount;i++){
+			$('.phone > ul').append(
+					"<li class='left'>"+
+					"<div class='box' id='bot'>"+
+						"<span class='message' id='bot_msg'><img src='../chat/chat_food_image.do?no="+i+"&id="+id+"&fooddate="+fooddate+"'></span>"+
+					"</div>"+
+				"</li>"
+			);
+   }
+ }
 </script>
 </head>
 <body>
@@ -1064,7 +1110,7 @@ $(document).on('click', '.ti-align-left' , function(){
 				  		<td>
 				  			<input type="button" value="삭제" id="img_dBtn">
 				  			<input type="button" value="식단기록" id="img_IBtn">
-				  			<input type="file"  id="img_fBtn" style="display: none;">
+				  			<input type="file"  id="img_fBtn" style="display: none;" multiple="multiple">
 				  		</td>
 			  	    </tr>
 					</table>

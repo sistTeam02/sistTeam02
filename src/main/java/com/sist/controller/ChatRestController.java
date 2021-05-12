@@ -1,6 +1,9 @@
 package com.sist.controller;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -72,6 +75,7 @@ public class ChatRestController {
 			vo.setFooddate((String) obj.get("date"));
 			vo.setWhenfood((String) obj.get("time"));
 			vo.setFoodname((String) obj.get("fname"));
+			vo.setFilename((String) obj.get("filename"));
 			Double kcal=Double.parseDouble(obj.get("fkcal").toString());
 			Double gram=Double.parseDouble(obj.get("fgram").toString());
 			vo.setFoodkcal(kcal);
@@ -88,7 +92,6 @@ public class ChatRestController {
 		Chat_planVO vo=new Chat_planVO();
 		vo.setId(id);
 		vo.setPlandate(date);
-		System.out.println(date);
 		String json="";
 		List<Chat_planVO> pList=pdao.chat_planData(vo);
 		JSONArray arr=new JSONArray();
@@ -122,9 +125,44 @@ public class ChatRestController {
 		json=arr.toJSONString();
 		return json;
 	}
+	@GetMapping("chat/chat_food_image.do")
+	public void img_show(HttpServletResponse response,Chat_foodVO vo,int no){
+		List<String> list=fdao.filenameData(vo);
+		 
+		if(list.size()>=no+1){
+			String url="c:\\upload\\";
+			try{
+			  File file=new File(url+list.get(no));
+			  BufferedInputStream bis=new BufferedInputStream(new FileInputStream(file));
+			  byte[] buffer=new byte[1024];
+			  BufferedOutputStream bos=new BufferedOutputStream(response.getOutputStream());
+			  // URL이 image라고 인식하도록 header에 저장
+			  response.setContentType("image/jpg;charset=utf-8");
+			  response.setHeader("Content-Disposition", "inline; fileName="+list.get(no));
+			   int i=0;// 읽은 바이트 
+			   while((i=bis.read(buffer, 0, 1024))!=-1) //-1 file end => EOF
+			   {
+				   // 다운로드하는 사람에게 보내라 
+				   bos.write(buffer, 0, i);
+			   }
+			   bis.close();
+			   bos.close();
+			}catch (Exception ex) {
+				ex.printStackTrace();
+			}
+		}		
+	}
+	@GetMapping("chat/total_foodfile.do")
+	public String chat_total_foodfile(Chat_foodVO vo){
+		String result="";
+		int total=fdao.total_filename(vo);
+		result=String.valueOf(total);
+		return result;
+	}
 	@PostMapping("chat/chat_dbday.do")
 	public String chat_dbday(String id,String month){
 		String dList="";
+		System.out.println(id);
 		List<String> list=pdao.chat_dbDay(id);
 		for(int i=0; i<list.size(); i++){
 			String db_day=list.get(i);
