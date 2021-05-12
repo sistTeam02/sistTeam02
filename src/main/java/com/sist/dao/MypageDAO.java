@@ -55,6 +55,8 @@ public class MypageDAO extends SqlSessionDaoSupport{
 	public List<Chat_planVO> mypagePlanDayData(Map map){
 		return getSqlSession().selectList("mypagePlanDayData",map);
 	}
-	
-	
+	//	<select id="chat_dbDay" resultType="String" parameterType="String">
+	public List<String> chat_dbDay(String id){
+		return getSqlSession().selectList("chat_dbDay",id);
+	}
 }

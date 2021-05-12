@@ -57,5 +57,11 @@
 	<select id="mypagePlanDayData" resultType="Chat_planVO" parameterType="hashmap">
 		SELECT id,plandate,time,sport FROM chat_plan WHERE id=#{id} AND plandate=#{plandate}
 	</select>
-	
+	<!-- 총 달력 날짜 데이터 -->
+	<select id="chat_dbDay" resultType="String" parameterType="String">
+	SELECT fooddate from chat_food UNION 
+	SELECT plandate from chat_plan
+	where id=#{id}
+	order by fooddate
+	</select>
 </mapper>
