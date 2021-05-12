@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -102,7 +104,7 @@
 					<div style="height:50px"></div>
                        <div class="container">
                        <h2>찜한 제품</h2>
- 						<p>장바구니에 넣은 제품 목록을 보여줍니다(hometraining_detail)</p>            
+ 						<p>장바구니에 넣은 제품 목록을 보여줍니다(goods_detail)</p>            
 							  <table class="table table-hover">
 							    <thead>
 							      <tr>
@@ -112,12 +114,13 @@
 							      </tr>
 							    </thead>
 							    <tbody>
+							      <c:forEach var="gvo" items="${list }">
 							      <tr>
-							        <td>${vo.poster}</td>
-							        <td>맨몸운동 홈트레이닝 팔굽혀펴기 몸짱 푸쉬업바</td>
-							        <td>8490원</td>
+							        <td>${gvo.poster}</td>
+							        <td>${gvo.title }</td>
+							        <td><fmt:formatNumber value="${gvo.price }"/>&nbsp;원</td>
 							      </tr>
-							      <tr>
+<%-- 							      <tr>
 							        <td>${vo.poster}</td>
 							        <td>ab슬라이드 4휠 복근 탄력 운동기구 홈트레이닝</td>
 							        <td>16500원</td>
@@ -126,7 +129,8 @@
 							        <td>${vo.poster}</td>
 							        <td>다이어트짐볼 55cm 블루 스트레칭도구 홈트레이닝 볼</td>
 							        <td>16650원</td>
-							      </tr>
+							      </tr> --%>
+							      </c:forEach>
 							    </tbody>
 							  </table>
 							</div>

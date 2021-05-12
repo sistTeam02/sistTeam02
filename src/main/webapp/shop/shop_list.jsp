@@ -7,55 +7,39 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script type="text/javascript">
-/* $(function(){
-	$("div.loading-more").slice(0, 9).show(); // 최초 9개 선택
-	$("#load").click(function(e){ // Load More를 위한 클릭 이벤트e
-		e.preventDefault();
-		$("div:hidden").slice(0, 9).show(); // 숨김 설정된 다음 10개를 선택하여 표시
-		if($("div:hidden").length == 0){ // 숨겨진 DIV가 있는지 체크
-			alert("더 이상 항목이 없습니다"); // 더 이상 로드할 항목이 없는 경우 경고
-		}
-	}); */
-	$("#load").click(function(){
-		$(this).append(
-				 "<li class='test'>건강식품</li>"
-		)
+$(function(){
+	// 추천버튼 클릭시(추천 추가 또는 추천 제거)
+	$("#goodsJjimUpdate").click(function(){
+		$.ajax({
+			url: "mypage/like_list_insert.do",
+            type: "POST",
+            data: {
+                no: ${pno},
+                id: '${id}'
+            },
+            success: function () {
+		        recCount();
+            }
+		})
 	});
-	
-	
- });
-$(document).on("click",".test",function(){
-	alert("a");
+	// 게시글 추천수
+    function recCount() {
+		$.ajax({
+			url: "mypage/like_list_count.do",
+            type: "POST",
+            data: {
+                no: ${pno}
+            },
+            success: function (count) {
+            	$(".goodsJjimCount").html(count);
+            },
+		})
+    };
+    recCount(); // 처음 시작했을 때 실행되도록 해당 함수 호출
 });
- function make_json(){
-	$.ajax({
-		type:'get',
-		url:'../shop/detail_json.do',
-		success:function(result){
-			let json=JSON.parse(result); //변수명 상관없음 let aa
-			make_tr(json);
-			/* 여기서 제어 */
-		},error:function(error){
-			alert("에러");
-		}
-	})
-}
-function 출력함수(){
-	
-}
-$(document).ready(function(){//문서 출력하자마자  아래 함수실행
-	출력함수();
-})
-
-function 추가함수(){
-	
-	$.ajax({
-		이전출력부분제거();
-		출력함수();
-	})
-}
 </script>
 <style type="text/css">
 .checkBtn{
@@ -84,6 +68,7 @@ function 추가함수(){
 
     <!-- Product Shop Section Begin -->
     <section class="product-shop spad">
+      <div class="app">
         <div class="container">
             <div class="row">
               <!-- 사이트 바 -->
@@ -116,10 +101,10 @@ function 추가함수(){
                     <div class="filter-widget">
                         <h4 class="fw-title">최근 본 상품</h4>
                         <div class="fw-brand-check">
-                            <div class="bc-item">
-                               <c:forEach var="poster" items="${gvo.list }">
-                                  <img src="${gvo.poster }" width=150px height=150px>
-                               </c:forEach>
+                            <div class="bc-item"><!--  vo-for="gvo in goods" -->
+                               <%-- <c:forEach var="poster" items="${gvo.list }"> --%>
+                                  <img :src="gvo.poster" width=100px height=100px>
+                               <%-- </c:forEach> --%>
                             </div>
                         </div>
                     </div>
@@ -139,23 +124,33 @@ function 추가함수(){
                                 </div>
                             </div>
                             <div class="col-lg-5 col-md-5 text-right">
-                                <p>Show 01- 09 Of 36 Product</p>
+                                <!-- <p>Show 01- 09 Of 36 Product</p> -->
+                                <p>총 <span id="count" style="color:#648cff">${gvo.count }</span>개의 상품</p>
                             </div>
                         </div>
                     </div>
                     <div class="product-list">
-                        <div class="row">
+                        <div class="row"><!-- v-for="gvo in goods" -->
                            <c:forEach var="gvo" items="${list }">
                              <div class="col-lg-4">
                                <div class="product-item" style="width:262.5px;height:410.5px">
                                      <div class="pi-pic" style="width:262.5px;height:262.5px">
                                         <img src="${gvo.poster }">
                                         <!-- <div class="sale pp-sale">Sale</div> -->
-                                        <div class="icon">
+                                        <div class="icon product_favorite">
                                           <!-- 찜으로 이동 -->
-                                          <a href="#">
-                                            <i class="icon_heart_alt"></i>
-                                          </a>
+                                          <c:choose>
+                                            <c:when test="${id!=null }">
+	                                          <a href="#" id="goodsJjimUpdate"><!-- 로그인시, 활성화 -->
+	                                            <i class="icon_heart_alt"></i> <!-- 활성화는 icon_heart -->
+	                                          </a>
+	                                        </c:when>
+	                                        <c:otherwise><!-- 로그인 필요 -->
+	                                          <a href="../member/login.do">
+	                                            <i class="icon_heart_alt"></i>
+	                                          </a>
+	                                        </c:otherwise>
+                                          </c:choose>
                                         </div>
                                         <ul class="text-left">
                                           <!-- 장바구니로 이동 -->
@@ -180,13 +175,21 @@ function 추가함수(){
                          </div>
                      </div>
              </div>
-         </div>
-         <div class="loading-more" style="height:30px">
-             <i class="icon_loading"></i>
+          </div>
+          <div class="loading-more" style="height:30px">
+             <!-- <i class="icon_loading"></i>
                   <a href="#" id="load">
                        Loading More
-                  </a>
+                  </a> -->
+            <tr>
+              <td class="text-right">
+	            <a href="shop_list.do?page=${curpage>1?curpage-1:curpage }" class="btn btn-sm">이전</a>
+	            ${curpage } page / ${totalpage } pages
+	            <a href="shop_list.do?page=${curpage<totalpage?curpage+1:curpage }" class="btn btn-sm">다음</a>
+	          </td>
+            </tr>
           </div>
+        </div>
       </div>
     </section>
     <!-- Product Shop Section End -->
