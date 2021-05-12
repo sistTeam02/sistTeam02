@@ -117,8 +117,13 @@ public class FreeBoardController {
    }
    
    @GetMapping("board/fdelete.do")
-   public String board_fdelete(int no,Model model)
+   public String board_fdelete(int no,String pwd,String page,Model model)
    {
+	   System.out.println("pwd="+pwd+",no="+no);
+	   boolean bCheck=fDao.freeboardDelete(no, pwd);
+	   System.out.println("bCheck="+bCheck);
+	   // delete_ok.jsp로 결과값을 전송 => 사용자가 볼 수 있게 처리 
+	   model.addAttribute("bCheck", bCheck);
 	   model.addAttribute("no", no);
 	   return "board/fdelete";
    }

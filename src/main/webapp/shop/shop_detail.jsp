@@ -367,8 +367,8 @@ $(function(){
 										</div> -->
 									</div>
 									<div class="review">
-										<div class="review_date">${svo.dbday }</div>
-										<div class="user_name">${svo.name }</div>
+										<div class="review_date">2021-05-13</div>
+										<div class="user_name">James</div>
 										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
 									</div>
 								</div>
@@ -383,12 +383,10 @@ $(function(){
 
 								<div class="add_review">
 									<form id="review_form" action="post">
-										<div class="inserts" style="display:none" id="in${svo.no }">
+										<div class="inserts" style="display:none">
 											<h1>구매 후기 남기기</h1>
-											<input type="hidden" name=no value="${svo.no }" id="rr_insert_no${svo.no }">
-	           								<input type="hidden" name=pno value="${pno }" id="rr_insert_pno${svo.no }">
-											<input value="${svo.id }" id="review_name" class="form_input input_name" type="text" name="name" placeholder="Name*" required="required" data-error="Name is required.">
-											<input value="${svo.email }" id="review_email" class="form_input input_email" type="email" name="email" placeholder="Email*" required="required" data-error="Valid email is required.">
+											<input id="review_name" class="form_input input_name" type="text" name="name" placeholder="Name*" required="required" data-error="Name is required.">
+											<input id="review_email" class="form_input input_email" type="email" name="email" placeholder="Email*" required="required" data-error="Valid email is required.">
 										</div>
 										<div>
 											<!-- <h1>평점:</h1>
@@ -399,10 +397,10 @@ $(function(){
 												<li><i class="fa fa-star" aria-hidden="true"></i></li>
 												<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
 											</ul> -->
-											<textarea id="review_message rr_insert_msg${rvo.no }" class="input_review" name="message"  placeholder="구매 후기" rows="4" required data-error="구매 후기를 남겨주세요."></textarea>
+											<textarea id="review_message" class="input_review" name="message"  placeholder="구매 후기" rows="4" required data-error="구매 후기를 남겨주세요."></textarea>
 										</div>
 										<div class="text-left text-sm-right">
-											<button id="review_submit" type="submit" class="btn1 red_button review_submit_btn trans_300" value="Submit" data-no="${svo.no}">제출하기</button>
+											<button id="review_submit" type="submit" class="btn1 red_button review_submit_btn trans_300" value="Submit">제출하기</button>
 										</div>
 									</form>
 								</div>

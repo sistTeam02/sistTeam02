@@ -48,10 +48,10 @@
        name LIKE '%'||#{ss}||'%'
      </when>
      <when test="fs=='S'.toString()">
-       name LIKE '%'||#{ss}||'%'
+       subject LIKE '%'||#{ss}||'%'
      </when>
      <when test="fs=='C'.toString()">
-       name LIKE '%'||#{ss}||'%'
+       content LIKE '%'||#{ss}||'%'
      </when>
     </choose>
    </trim>
@@ -140,10 +140,10 @@
        id LIKE '%'||#{ss}||'%'
      </when>
      <when test="fs=='S'.toString()">
-       id LIKE '%'||#{ss}||'%'
+       subject LIKE '%'||#{ss}||'%'
      </when>
      <when test="fs=='C'.toString()">
-       id LIKE '%'||#{ss}||'%'
+       content LIKE '%'||#{ss}||'%'
      </when>
     </choose>
    </trim>
@@ -232,10 +232,10 @@
        name LIKE '%'||#{ss}||'%'
      </when>
      <when test="fs=='S'.toString()">
-       name LIKE '%'||#{ss}||'%'
+       subject LIKE '%'||#{ss}||'%'
      </when>
      <when test="fs=='C'.toString()">
-       name LIKE '%'||#{ss}||'%'
+       content LIKE '%'||#{ss}||'%'
      </when>
     </choose>
    </trim>

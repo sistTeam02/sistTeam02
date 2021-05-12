@@ -26,25 +26,24 @@ h1 {
 /*$(document).ready(function(){
     $('[data-toggle="popover"]').popover();   
 });*/
-$(document).ready(function(){
-    $('[data-toggle="popover"]').popover();   
-});
-$(document).on("keyup","#ffind_input",function(){
-	   let ss=$(this).val();
-	   let fs=$(this).val();
-	    if(ss!=""){
-           findData(fs, ss);
-	    }
-	    else{
-	    	$('td[id^=f]').show();
-	    }
-	    
+$(function(){
+	$('#ffind').click(function(){
+		$.ajax({
+			type:'GET',
+			url:'ffind.do',
+			data:{'bno':bno},
+			success:function(result)
+			{
+				$('#find_table').html(result);
+			}
+		});
 
-})
-function findData(fs,ss) {
+	});
+});
+/*function findData(fs,ss) {
 	$.ajax({
 		type:'post',
-		url:'../board/ffind.do',
+		url:'../board/flist.do',
 		data:{'fs':fs,'ss':ss},
 		success:function(json){
 			try
@@ -112,11 +111,13 @@ function findData(fs,ss,button) {
   <h1>자유게시판</h1>
   <div class="row">
   <jsp:include page="board_menu.jsp"/>
-  <div class="col-lg-9">
+  <div class="col-md-9">
   <table class="table">
   <tr>
    <td class="text-right">
+   <c:if test="${sessionScope.id!=null }">
     <a href="../board/finsert.do" class="btn btn-sm btn-warning">글쓰기</a> 
+    </c:if>
    </td>
   </tr>
   </table>
@@ -153,7 +154,7 @@ function findData(fs,ss,button) {
        <option value="NSC">이름+제목+내용</option>
       </select>
       <input type="text" name=ss size=15 id="ffind_input">
-      <button class="btn btn-sm btn0-primary">검색</button>
+      <button class="btn btn-sm btn0-primary" id="ffind">검색</button>
      </td>
      </tr>
      </table>
