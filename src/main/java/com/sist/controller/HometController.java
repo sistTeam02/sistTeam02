@@ -1,10 +1,14 @@
 package com.sist.controller;
 
 import java.util.*;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sist.dao.HometDAO;
 import com.sist.vo.HometDetailVO;
@@ -18,38 +22,52 @@ public class HometController {
 	private HometDAO dao;
 	
 	@GetMapping("home_training/ht_main.do")
-	public String home_training_main(String page, Model model){
-		
-		System.out.println("page:" + page);
-		if(page == null) {
-			page ="1";
-		}
-		int curpage = Integer.parseInt(page);
-		Map map = new HashMap();
-		int rowSize = 10;
-		int start = (rowSize * curpage) - (rowSize - 1);
-		int end = rowSize * curpage;
-		map.put("start", start);
-		map.put("end", end);
-		// WHERE num BETWEEN #{start} AND #{end} => Map을 지정하는 경우에는 반드시 키명을 설정
-		List<HometMainVO> list = dao.hometListData(map);
-		int totalPage = dao.hometTotalPage();
-		
-		
-		final int BLOCK=10;
-		int startPage=((curpage-1)/BLOCK*BLOCK)+1; // 1~10 => startPage=1 , 11~20 => 11
-		int endPage=((curpage-1)/BLOCK*BLOCK)+BLOCK; // 1~10 => endPage=10, 11~20 => 20
-		if(endPage>totalPage)
-			endPage=totalPage;
-		
-		//ViewResolver로 데이터를 전송
-		model.addAttribute("list", list);
-		model.addAttribute("curpage", curpage);
-		model.addAttribute("totalPage", totalPage);
-		model.addAttribute("BLOCK", BLOCK);
-		
+	public String homet_main(Model model) {
 		model.addAttribute("main_jsp", "../home_training/ht_main.jsp");
 		return "main/main";
+	}
+	
+	@GetMapping("home_training/homet/homet_ht_main.do")
+	@ResponseBody
+	public String home_training_main(String page, Model model){
+		
+		String json = "";
+		try {
+			if (page == null) {
+				page = "1";
+			}
+			int curpage = Integer.parseInt(page);
+			Map map = new HashMap();
+			int rowSize = 10;
+			int start = (rowSize * curpage) - (rowSize - 1);
+			int end = (rowSize * curpage);
+			map.put("start", start);
+			map.put("end", end);
+			List<HometMainVO> list = dao.hometListData(map);
+			JSONArray arr = new JSONArray();
+			for (HometMainVO vo : list) {
+				JSONObject obj = new JSONObject();
+				obj.put("no", vo.getNo());
+				obj.put("title", vo.getTitle());
+				obj.put("title_link", vo.getTitle_link());
+				obj.put("poster", vo.getPoster());
+				obj.put("part", vo.getPart());
+				obj.put("good", vo.getGood());
+				arr.add(obj);
+			}
+			json = arr.toJSONString();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+
+		return json;
+	}
+	
+	@GetMapping("home_training/home_main_total.do")
+	@ResponseBody
+	public String homet_main_total() {
+		int total = dao.hometTotalPage();
+		return String.valueOf(total);
 	}
 	             
 	@GetMapping("home_training/ht_detail_free.do")

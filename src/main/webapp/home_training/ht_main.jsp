@@ -6,7 +6,8 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js"></script>
+   	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <style type="text/css">
 .row{
@@ -194,14 +195,13 @@ $(function(){
                     </div>
                     <div class="product-list">
                         <div class="row">
-                        <!-- forEach  -->
-                        <c:forEach var="vo" items="${list }">
-                            <div class="col-lg-4 col-sm-6">
+                        <!-- vue.js foreach -->
+                        <div id="app">
+                            <div class="col-lg-4 col-sm-6" v-for="vo in homet_free">
                                 <div class="product-item">
                                     <div class="pi-pic">
-                                    
-                                    	<a href="../home_training/ht_detail_free.do?no=${vo.no }">
-                                        	<img src="${vo.poster }" alt="">
+                                    	<a :href="'../home_training/ht_detail_free.do?no='+vo.no">
+                                        	<img :src="vo.poster " alt="">
                                         </a>
                                         <div class="sale pp-sale">Sale</div>
                                         <div class="icon">
@@ -214,28 +214,79 @@ $(function(){
                                         </ul>
                                     </div>
                                     <div class="pi-text">
-                                        <div class="catagory-name">${vo.title}</div>
+                                        <div class="catagory-name">{{vo.title}}</div>
                                         <a href="#">
-                                            <h5>${vo.part }</h5>
+                                            <h5>{{vo.part }}</h5>
                                         </a>
                                         <div>
-                                            <span>${vo.good }</span>
+                                            <span>{{vo.good }}</span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-         				</c:forEach>
-                    </div>
-                    </div>
-                    <table class="table">
-        <tr>
-          <td class="text-right">
-           <a href="list.do?page=${curpage>1?curpage-1:curpage }" class="btn btn-sm btn-success">이전</a>
-           ${curpage } page / ${totalpage } pages
-           <a href="list.do?page=${curpage<totalpage?curpage+1:curpage }" class="btn btn-sm btn-info">다음</a>
-          </td>
-        </tr>
-      </table>
+                    
+                    <!-- 페이지 나누기  -->
+                    <div class="row">
+				      <div class="text-center">
+				       <button class="btn btn-sm btn-danger" v-on:click="showPrevPage()">이전</button>
+				        {{curpage}} page / {{totalpage}} pages
+				       <button class="btn btn-sm btn-info" v-on:click="showNextPage()">다음</button>
+				      </div>
+				    </div>
+				    </div>
+				    </div>
+				    <!-- 페이지 나누기 -->
+				    <script>
+				    new Vue({
+				    	 el:'#app',
+				    	 data:{
+				    		 homet_free:[],
+				    		 curpage:1,
+				    		 totalpage:1
+				    	 },
+				    	 mounted:function(){
+				    		 axios.get("http://localhost/web/home_training/homet/homet_ht_main.do",{
+				    			 params:{
+				    				 page:this.curpage
+				    			 }
+				    		 }).then(response=>{
+				    			 this.homet_free=response.data
+				    			 console.log("aaa")
+				    		 });
+				    		 
+				    		 axios.get("http://localhost/web/home_training/home_main_total.do").then(response=>{
+				    			 console.log(response)
+				    			 this.totalpage=response.data
+				    		 })
+				    	 },
+				    	 methods:{
+				    		 showPrevPage(){
+				    			 this.curpage=this.curpage>1?this.curpage-1:this.curpage;
+				    			 axios.get("http://localhost/web/home_training/homet/homet_ht_main.do",{
+				    				 params:{
+				    					 page:this.curpage
+				    				 }
+				    			 }).then(response=>{
+				    				 this.homet_free=response.data
+				    				 console.log(this.homet_free);
+				    			 })
+				    		 },
+				    		 showNextPage(){
+				    			 this.curpage=this.curpage<this.totalpage?this.curpage+1:this.curpage;
+				    			 axios.get("http://localhost/web/home_training/homet/homet_ht_main.do",{
+				    				 params:{
+				    					 page:this.curpage
+				    				 }
+				    			 }).then(response=>{
+				    				 this.homet_free=response.data
+				    				 console.log(this.curpage);
+				    			 })
+				    		 }
+				    	 }
+				     })
+				    </script>
+					    </div>
+					    <!-- 페이지 나누기 끝 -->
                 </div>
             </div>
         </div>
