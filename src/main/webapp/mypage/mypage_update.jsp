@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -93,7 +94,7 @@ $(function(){
                             <div class="group-input">
                              	<div class="checkout__input">
 	                                <label for="id">Username (ID)*</label>
-	                                <input type="text" id="id" name="id" style="float:left; margin-bottom: -15px;width: 11em;" autocomplete="off" value=${id } readonly>
+	                                <input type="text" id="id" name="id" style="float:left; margin-bottom: -15px;width: 11em;" autocomplete="off" value=${vo.id } readonly>
 	                                <span>&nbsp;</span>
 	                                 <div class="row">
                             			<span id="checkSpan"></span>
@@ -102,43 +103,43 @@ $(function(){
                                		<label></label>
                                		<br>
                                     <p>이름<span>*</span><span style="color: black;margin-left:15em; ">닉네임</span></p>
-                                   <input type="text" name="name" id="name" class="input-sm"  placeholder="사용자 이름" style="float:left;width: 50%;" value="${name }">
-                                   <input type="text" name="nickname" id="nickname" class="input-sm" placeholder="사용하실 닉네임" autocomplete="off"  style="float:left;width: 50%;" value="nickname">
+                                   <input type="text" name="name" id="name" class="input-sm"  placeholder="사용자 이름" style="float:left;width: 50%;" value="${vo.name }">
+                                   <input type="text" name="nickname" id="nickname" class="input-sm" placeholder="사용하실 닉네임" autocomplete="off"  style="float:left;width: 50%;" value="${vo.nickname }">
                                 </div>
                                 
                                 
                             </div>
                             <div class="group-input">
                                 <label for="pwd">Password *</label>
-                                <input type="password" name="pwd" id="pwd" class="input-sm"  style="float:left;margin-bottom:15px; width: 50%" placeholder="비밀번호 입력" value="${password }">
+                                <input type="password" name="pwd" id="pwd" class="input-sm"  style="float:left;margin-bottom:15px; width: 50%" placeholder="비밀번호 입력" value="${vo.pwd }">
 		                        <span>&nbsp;</span>
                                  <br><br><br><br><br>
                                   <p style="width: 100%">생년월일<span>*</span></p>
-                                  <input type="date" size=20 name="birth" value="2021-01-01" min="1921-01-01" max="2121-12-31" value="${birthday }" readonly>
+                                  <input type="date" size=20 name="birth" min="1921-01-01" max="2121-12-31" value="${vo.birth }" readonly>
                                 <span>&nbsp;</span>
                                   <p>email<span>*</span></p>
-                                   	<input type="text" size=45 name="email" id="email" class="input-sm" placeholder="user01@google.com" style="width:20em;" autocomplete="off" value="${email }">
+                                   	<input type="text" size=45 name="email" id="email" class="input-sm" placeholder="user01@google.com" style="width:20em;" autocomplete="off" value="${vo.email }">
                                 <span>&nbsp;</span>
                                	 <p>Tel<span>*</span></p>
-                                   	<input type="text" size=10 name="tel" id="tel" class="input-sm" autocomplete="off" placeholder="-포함 입력" style="width: 50%;" value="${tel }" }>
+                                   	<input type="text" size=10 name="tel" id="tel" class="input-sm" autocomplete="off" placeholder="-포함 입력" style="width: 50%;" value="${vo.tel }" }>
                                	 <p>Phone<span>*</span></p>
-                                   	<input type="text" size=10 name="phone" id="phone" class="input-sm" autocomplete="off" placeholder="-포함 입력" style="width: 50%;" value="${phone }">
+                                   	<input type="text" size=10 name="phone" id="phone" class="input-sm" autocomplete="off" placeholder="-포함 입력" style="width: 50%;" value="${vo.phone }">
                                <!-- 주소 1우편번호2주소 3상세주소  #######################################-->
               				<div style="height: 10px"></div>
               				
                             <div class="checkout__input">
                           		<span></span>
                                 <p>Address<span>*</span></p>
-                                <input type="text" name="post" id="post" class="checkout__input__add " readonly placeholder="우편번호(000-000)" style="float: left; width: 11em;" value="${post }">
+                                <input type="text" name="post" id="post" class="checkout__input__add " readonly placeholder="우편번호(000-000)" style="float: left; width: 11em;" value="${vo.post }">
                              	<input type="button" value="우편번호 검색" class="site-btn" id="postBtn" style="float: left; width: 9em;">
                                 &nbsp;
                             </div>
                             
                          
                             <div class="checkout__input">
-                                <input type="text"  placeholder="주소" name="addr1" id="addr1" style="margin-top: 15px;" readonly value="${addr1 }">
+                                <input type="text"  placeholder="주소" name="addr1" id="addr1" style="margin-top: 15px;" readonly value="${vo.addr1 }">
                                 &nbsp;
-                                <input type="text"  placeholder="상세주소" name="addr2" id="addr2" style="margin-top: -15px;" autocomplete="off" value="${addr2 }">
+                                <input type="text"  placeholder="상세주소" name="addr2" id="addr2" style="margin-top: -15px;" autocomplete="off" value="${vo.addr2 }">
                             </div>
      						
                                

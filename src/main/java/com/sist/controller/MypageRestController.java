@@ -90,7 +90,6 @@ public class MypageRestController {
 	public String mypage_scheduleFood_ok(String date,HttpSession session){
 		String id=(String)session.getAttribute("id");
 		String json="";
-		
 		Map map=new HashMap();
 		map.put("id", id);
 		map.put("fooddate",date);
@@ -131,7 +130,7 @@ public class MypageRestController {
 			arr.add(obj);
 		}
 		json=arr.toJSONString();
-		
+		System.out.println(json);
 		return json;
 	}
 	

@@ -83,6 +83,7 @@ function make_cal(year,month){
 	let date=month+"."+day
 	days(date,0);
 	days(date,1);
+	
 	});
 
  
@@ -100,12 +101,13 @@ function make_cal(year,month){
 			let count = Object.keys(result).length; //배열 개수
 			let foodData="";
 			for(let i=0;i<count;i++){
-				foodData+=+"등록일:"+json[i].fooddate
+				foodData+="등록일:"+json[i].fooddate
 						+", 식사시간:"+json[i].whenfood
 						+", 먹은음식:"+json[i].foodname
-						+", 음식 칼로리(kcal)/용량(g):"+json[i].foodkcal+"(kcal)/"+json[i].foodgram+"(g)  "
+						+", 음식 칼로리(kcal)/용량(g):"+json[i].foodkcal+"(kcal)/"+json[i].foodgram+"(g)  "+"\n"
 						alert(foodData);
 			}
+			
 			
 		 } 
 		 if(number==1){
@@ -115,9 +117,11 @@ function make_cal(year,month){
 				for(let i=0;i<count;i++){
 					planData+="등록일:"+json[i].plandate
 							+", 운동시간:"+json[i].time
-							+", 실천운동:"+json[i].sport.replace("^","세트")+" "
-							alert(planData);
+							+", 실천운동:"+json[i].sport.replace("^","세트")+" "+"\n"
+					alert(planData);
 				}
+				
+				
 		 } 
 			//alert(result)
 		}
@@ -128,11 +132,17 @@ function make_cal(year,month){
 //달력 효과
 $(document).ready(function(){
 	$('#dayBtn tr td').css('cursor','pointer');
-	let day=$('#dayBtn tr td').text();
-	let month=$('#calender').text();
+	/* let day=$('#dayBtn tr td').text(function(){
+		let oneDay="";
+		for(let i=0;i<31;i++){
+			
+		}
+	});
+	let month=$('#calender').text(); */
+	
 	/* days(date,0);
-	days(date,1) */;
-	alert(month);
+	days(date,1) */
+	//alert(month);
 	
 });
 

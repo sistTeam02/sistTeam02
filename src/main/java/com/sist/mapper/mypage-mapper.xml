@@ -38,13 +38,13 @@
 	</select>
 	<!-- 마이페이지 전체 데이터 불러오기 -->
 	<select id="mypageUpdateAllData" resultType="MemberVO" parameterType="string">
-	 SELECT id,pwd,name,birth,tel,phone,email,post,nickname,add1,add2
+	 SELECT id,pwd,name,birth,tel,phone,email,post,nickname,addr1,addr2
 	 FROM member WHERE id=#{id}
 	</select>
 	<!-- 마이페이지 수정 -->
 	<update id="mypageUpdate" parameterType="MemberVO">
 		UPDATE member SET pwd=#{pwd},name=#{name},tel=#{tel},phone=#{phone},email=#{email},post=#{post},
-							nickname=#{nickname},add1=#{addr1},addr2=#{addr2}
+							nickname=#{nickname},addr1=#{addr1},addr2=#{addr2}
 		WHERE id=#{id}
 	</update>
 	<!-- 달력 음식 출력 -->

@@ -52,8 +52,6 @@ public class MypageController {
 		
 		//세션에 저장된 정보 가져오기
 		String id=(String)session.getAttribute("id");
-		//HttpSession session=request.getSession();
-		//String user_id=(String)session.getAttribute("id");
 		System.out.println(id);
 		
 				//페이지 나누기(음식)
@@ -136,10 +134,14 @@ public class MypageController {
 
 	//회원정보수정
 	@GetMapping("mypage/mypage_update.do")
-	public String mypage_update(String id,Model model){
-		MemberVO vo=new MemberVO();
+	public String mypage_update(Model model,HttpSession session){
+		String id=(String)session.getAttribute("id");
+		System.out.println(id);
+		MemberVO vo=fdao.mypageUpdateAllData(id);
+		System.out.println(vo);
 		
 		
+		model.addAttribute("vo",vo);
 		model.addAttribute("bread_jsp","../mypage/bread4.jsp");
 		model.addAttribute("mypage_jsp","../mypage/mypage_update.jsp");
 		model.addAttribute("main_jsp","../mypage/mypage_main.jsp");
