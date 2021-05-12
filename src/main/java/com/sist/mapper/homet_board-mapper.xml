@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.sist.mapper.board-mapper">
+<mapper namespace="com.sist.mapper.homet_board-mapper">
 
 <select id="homet_boardListData" resultType="HometBoardVO" parameterType="hashmap">
  SELECT no,subject,name,TO_CHAR(regdate,'YYYY-MM-DD') as dbday,hit,num

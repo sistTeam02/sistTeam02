@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.sist.vo.FreeBoardVO;
+import com.sist.vo.HometBoardVO;
 
 import java.util.*;
 @Repository
@@ -30,7 +31,7 @@ public class HometBoardDAO extends SqlSessionDaoSupport{
 		 SELECT CEIL(COUNT(*)/10.0) FROM freeboard
 		</select>
 	 */
-	public List<FreeBoardVO> freeboardListData(Map map)
+	public List<HometBoardVO> freeboardListData(Map map)
 	{
 		return getSqlSession().selectList("freeboardListData", map);
 	}
@@ -39,24 +40,24 @@ public class HometBoardDAO extends SqlSessionDaoSupport{
 		return getSqlSession().selectOne("freeboardTotalPage");
 	}
 	// 글쓰기
-	public void freeboardInsert(FreeBoardVO vo)
+	public void freeboardInsert(HometBoardVO vo)
 	{
 		getSqlSession().insert("freeboardInsert", vo);
 	}
 	// 상세보기
-		public FreeBoardVO freeboardDetailData(int no)
+		public HometBoardVO freeboardDetailData(int no)
 		{
 			getSqlSession().update("freeboardHitIncrement", no);
 			return getSqlSession().selectOne("freeboardDetailData", no);
 		}
-		public FreeBoardVO freeboardUpdateData(int no)
+		public HometBoardVO freeboardUpdateData(int no)
 		{
 			return getSqlSession().selectOne("freeboardDetailData", no);
 		}
 		
 		
 		// 수정
-		public boolean freeboardUpdate(FreeBoardVO vo)
+		public boolean freeboardUpdate(HometBoardVO vo)
 		{
 			boolean bCheck=false;
 			// 비밀번호를 가지고 온다

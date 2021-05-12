@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.sist.vo.ReplyVO;
+import com.sist.vo.HometBoardReplyVO;
 
 import java.util.*;
 
@@ -20,27 +20,27 @@ public class HometBoardReplyDAO extends SqlSessionDaoSupport{
 		// TODO Auto-generated method stub
 		super.setSqlSessionFactory(sqlSessionFactory);
 	}
-	public List<ReplyVO> replyListData(int bno)
+	public List<HometBoardReplyVO> replyListData(int bno)
 	{
 		return getSqlSession().selectList("replyListData", bno);
 	}
 	// 등록
-	public void replyInsert(ReplyVO vo)
+	public void replyInsert(HometBoardReplyVO vo)
 	{
 		getSqlSession().insert("replyInsert", vo);
 	}
 	
 	// 수정
-	public void replyUpdate(ReplyVO vo)
+	public void replyUpdate(HometBoardReplyVO vo)
 	{
 		getSqlSession().update("replyUpdate", vo);
 	}
 	
 	@Transactional(propagation=Propagation.REQUIRED, rollbackFor=Exception.class)
-	public void replyToReplyInsert(int root,ReplyVO vo)
+	public void replyToReplyInsert(int root,HometBoardReplyVO vo)
 	{
 		// 1. 상위정보
-		ReplyVO pvo=getSqlSession().selectOne("replyParentInfoData", root);
+		HometBoardReplyVO pvo=getSqlSession().selectOne("replyParentInfoData", root);
 		getSqlSession().update("replyGroupStepIncrement", pvo);
 		// 실제 추가
 		vo.setGroup_id(pvo.getGroup_id());
@@ -55,7 +55,7 @@ public class HometBoardReplyDAO extends SqlSessionDaoSupport{
 	@Transactional(propagation=Propagation.REQUIRED, rollbackFor=Exception.class)
 	public void replyDelete(int no)
 	{
-		ReplyVO vo=getSqlSession().selectOne("replyInfoData", no);
+		HometBoardReplyVO vo=getSqlSession().selectOne("replyInfoData", no);
 		if(vo.getDepth()==0) // 댓글이 없는 경우
 		{
 			getSqlSession().delete("replyDelete", no);

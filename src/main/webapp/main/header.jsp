@@ -203,7 +203,7 @@ $(function(){
 						<li><a href="../home_training/ht_main.do">홈트레이닝</a>
                             <ul class="dropdown">
                                 <li><a href="../home_training/ht_main.do">홈트레이닝 목록</a></li>
-                                <li><a href="#">수강후기 게시판</a></li>
+                                <li><a href="../homet_board/homet_boardLlist.do">수강후기 게시판</a></li>
                                 <li><a href="../youtube/you_list.do">유튜브 전체 리스트</a></li>
                                 <li><a href="../youtube/you_tuber.do">홈트 유튜버</a></li>
                             </ul>
