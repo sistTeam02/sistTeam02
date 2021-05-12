@@ -33,4 +33,29 @@ public class YoutubeDAO extends SqlSessionDaoSupport{
 	{
 		return getSqlSession().selectOne("detailYoutubeData",no);
 	}
+	//유튜버 나열
+	public List<YoutubeVO> listYoutuber(Map map)
+	{
+		return getSqlSession().selectList("listYoutuber",map);
+	}
+	//유뷰버 당 페이지
+	public List<YoutubeVO> listByYoutuber(Map map)
+	{
+		return getSqlSession().selectList("listByYoutuber",map);
+		//cno,start, end
+	}
+	//유튜버 총페이지
+	public int youtuberTotalPage()
+	{
+		return getSqlSession().selectOne("youtuberTotalPage");
+	}
+	//유튜버당 총페이지
+	public int totalpageByYoutuber(int cno)
+	{
+		return getSqlSession().selectOne("totalpageByYoutuber", cno);
+	}
+
+	
+	
+	
 }

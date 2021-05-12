@@ -62,7 +62,82 @@ public class YoutubeController {
 		model.addAttribute("main_jsp","../youtube/you_detail.jsp");
 		return "main/main";
 	}
+	@GetMapping("youtube/you_tuber.do")
+	public String youtuber_list(String page,Model model)
+	{
+		if(page==null)
+			page="1";
+		int curpage=Integer.parseInt(page);
+		Map map=new HashMap();
+		int rowSize=12;
+		int start=(rowSize*curpage)-(rowSize-1);
+		int end=rowSize*curpage;
+		map.put("start", start);
+		map.put("end", end);
+		
+		List<YoutubeVO> list=yDao.listYoutuber(map);
+		
+		// 총 페이지
+		int totalpage=yDao.youtuberTotalPage();
+		
+		final int BLOCK=10;
+		int startPage=((curpage-1)/BLOCK*BLOCK)+1;
+		int endPage=((curpage-1)/BLOCK*BLOCK)+BLOCK;
+		
+		int allPage=totalpage;
+		if(endPage>allPage)
+			endPage=allPage;
+
+		model.addAttribute("list",list);
+		model.addAttribute("BLOCK", BLOCK);
+		model.addAttribute("startPage",startPage);
+		model.addAttribute("endPage", endPage);
+		model.addAttribute("curpage", curpage);
+		model.addAttribute("allPage", allPage);
+		model.addAttribute("main_jsp","../youtube/you_tuber.jsp");
+		return "main/main";
+	}
 	
+	@GetMapping("youtube/you_tuber_detail.do")
+	public String ByYoutuber_list(String page,Model model,int cno)
+	{
+		
+		if(page==null)
+			page="1";
+		int curpage=Integer.parseInt(page);
+		Map map=new HashMap();
+		int rowSize=12;
+		int start=(rowSize*curpage)-(rowSize-1);
+		int end=rowSize*curpage;
+		map.put("start", start);
+		map.put("end", end);
+		
+		map.put("cno", cno);
+		
+		List<YoutubeVO> ylist=yDao.listByYoutuber(map);
+		
+		// 총 페이지
+		int totalpage=yDao.totalpageByYoutuber(cno);
+		
+		final int BLOCK=10;
+		int startPage=((curpage-1)/BLOCK*BLOCK)+1;
+		int endPage=((curpage-1)/BLOCK*BLOCK)+BLOCK;
+		
+		int allPage=totalpage;
+		if(endPage>allPage)
+			endPage=allPage;
+
+		model.addAttribute("ylist",ylist);
+		model.addAttribute("BLOCK", BLOCK);
+		model.addAttribute("startPage",startPage);
+		model.addAttribute("endPage", endPage);
+		model.addAttribute("curpage", curpage);
+		model.addAttribute("allPage", allPage);
+		model.addAttribute("main_jsp","../youtube/you_tuber_detail.jsp");
+		
+		
+		return "main/main";
+	}
 	
 	
 	

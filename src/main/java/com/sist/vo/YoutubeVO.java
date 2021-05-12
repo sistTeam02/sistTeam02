@@ -9,7 +9,14 @@ public class YoutubeVO {
 	private String channeltitle;
 	private String description;
 	private int no;
+	private int cno;
 	
+	public int getCno() {
+		return cno;
+	}
+	public void setCno(int cno) {
+		this.cno = cno;
+	}
 	public String getVideoid() {
 		return videoid;
 	}

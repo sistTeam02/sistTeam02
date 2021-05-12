@@ -204,6 +204,8 @@ $(function(){
                             <ul class="dropdown">
                                 <li><a href="../home_training/ht_main.do">홈트레이닝 목록</a></li>
                                 <li><a href="#">수강후기 게시판</a></li>
+                                <li><a href="../youtube/you_list.do">유튜브 전체 리스트</a></li>
+                                <li><a href="../youtube/you_tuber.do">홈트 유튜버</a></li>
                             </ul>
                         </li>
                         <li><a href="#">커뮤니티</a>
@@ -250,12 +252,7 @@ $(function(){
                                 <li><a href="./shopping-cart.html">주문확인</a></li>
                             </ul>
                         </li>
-                        <li><a href="#">유튜브</a>
-                            <ul class="dropdown">
-                                <li><a href="../youtube/you_list.do">리스트</a></li>
-                                
-                            </ul>
-                        </li>
+                       
                     </ul>
                 </nav>
                 <div id="mobile-menu-wrap"></div>

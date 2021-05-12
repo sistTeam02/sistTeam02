@@ -7,7 +7,7 @@
 	  SELECT videoid,no,regdate,title,thumbnails,channeltitle,description,num
 	  FROM ( SELECT videoid,no,regdate,title,thumbnails,channeltitle,description,rownum as num
 	  FROM ( SELECT videoid,no,regdate,title,thumbnails,channeltitle,description
-	  FROM youtube_data))
+	  FROM youtube_data_v2))
 	  WHERE num BETWEEN #{start} AND #{end}
 	</select>
 
@@ -18,10 +18,46 @@
 	
 	<!-- 디테일 데이터 -->
 	<select id="detailYoutubeData" resultType="youtubeVO" parameterType="int">
-	 	 SELECT no,videoid,regdate,title,thumbnails,channeltitle,description
-	 	 FROM youtube_data
+	 	 SELECT no,videoid,regdate,title,thumbnails,channeltitle,description,cno
+	 	 FROM youtube_data_v2
 	 	 WHERE no=#{no}
 	</select>
 	
+	<!-- 유튜버리스트 총페이지 -->
+	<select id="youtuberTotalPage" resultType="int">
+		SELECT CEIL(COUNT(*)/12.0) 
+		FROM (SELECT cno,num
+	 	 FROM (SELECT cno,rownum as num
+	 	 FROM (SELECT DISTINCT cno
+	 	 FROM youtube_data_v2 ORDER BY cno)))
+	</select>
+	
+	
+	
+	<!-- 유튜버 리스트 출력 -->
+	<select id="listYoutuber" resultType="youtubeVO" parameterType="hashmap">
+	 	 SELECT cno,channeltitle,num
+	 	 FROM (SELECT cno,channeltitle,rownum as num
+	 	 FROM (SELECT DISTINCT cno,channeltitle
+	 	 FROM youtube_data_v2 ORDER BY cno))
+	 	 WHERE num BETWEEN #{start} AND #{end}
+	 	
+	</select>
+	<!-- 유튜버 분류 -->
+	<select id="listByYoutuber" resultType="youtubeVO" parameterType="hashmap">
+	 	 SELECT no,videoid,regdate,title,thumbnails,channeltitle,description,cno,num
+	 	 FROM( SELECT no,videoid,regdate,title,thumbnails,channeltitle,description,cno,rownum as num
+	 	 FROM ( SELECT no,videoid,regdate,title,thumbnails,channeltitle,description,cno
+	 	 FROM youtube_data_v2 WHERE cno=#{cno} ORDER BY no ASC))
+	 	 WHERE num BETWEEN #{start} AND #{end}
+	</select>
+	
+	<!--유튜버 당  총페이지  계산-->
+	<select id="totalpageByYoutuber" resultType="int" parameterType="int"> 
+		 SELECT CEIL(COUNT(*)/12)
+	 	 FROM ( SELECT no,channeltitle,rownum as num
+	 	 FROM ( SELECT no,channeltitle
+	 	 FROM youtube_data_v2 WHERE cno=#{cno}))
+	</select>
 	
 </mapper>
