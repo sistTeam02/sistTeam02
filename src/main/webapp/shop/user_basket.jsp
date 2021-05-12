@@ -11,13 +11,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <script type="text/javascript">
-
+$(document).ready(function() {
+	
+	order_basketList();
+	
+});
+/* 장바구니 수량변경 */
+$(document).on("click",".qtybtn",function() {
+	let price=$(this).parents(".qua-col").prev().text();
+	let ordercount=$(this).siblings(".order_input").val();
+	let totalPrice=cal_price(price,ordercount);
+	$(this).parents(".qua-col").next().text(totalPrice);
+	totalprice();
+});
+/* 삭제버튼 클릭시 */
+$(document).on("click",".ti-close-clone",function() {
+ $(this).parent().parent().remove();
+ let no=$(this).attr('no');
+ 
+ del_order_basket(no);
+});
+$(document).on("click",".proceed-btn",function() {
+insert_purchase()
+});
 function order_basketList(){
 	$.ajax({
 		type:'post',
-		url:'../basket/userBasketList.do'
+		url:'../basket/userBasketList.do',
 		success:function(result){
-			
+			let json=JSON.parse(result);
+			make_tr(json);
+			make_icon();
+			totalprice();
 		},error:function(error){
 			alert("장바구니 리스트호출 에러")
 		}
@@ -25,7 +50,108 @@ function order_basketList(){
 		
 	})
 }
-
+function make_tr(json){
+	for(i=0;i<json.length;i++){
+		$('#cart_tbody').append(
+		  "  <tr id=table_tr"+i+">"+
+                  "<td class='cart-pic'><img src="+json[i].poster+"></td>"+
+                       "<td class='cart-title'>"+
+                         "<h5 class=title pno="+json[i].pno+" cno="+json[i].cno+">"+json[i].title+"</h5>"+
+                          "</td>"+
+                         "<td class='p-price'>"+showPrice(json[i].price)+"</td>"+
+                       "<td class='qua-col'>"+
+                           "<div class='quantity'>"+
+                              "<div class='pro-qty'>"+
+                                      "<input type='text' class='order_input' id=order_input"+i+" value="+json[i].ordercount+">"+
+                               "</div>"+
+                            "</div>"+
+                       "</td>"+
+                "<td class='total-price' id=total"+i+">"+cal_price(json[i].price,json[i].ordercount)+"</td>"+
+                "<td class='close-td'><i class='ti-close ti-close-clone' no="+json[i].no+"></i></td>"+
+                   "</tr>"
+		)
+	}
+}
+function make_icon(){ /* main.js 안에있는 함수*/
+	var proQty = $('.pro-qty');
+	proQty.prepend('<span class="dec qtybtn">-</span>');
+	proQty.append('<span class="inc qtybtn">+</span>');
+	proQty.on('click', '.qtybtn', function () {
+		var $button = $(this);
+		var oldValue = $button.parent().find('input').val();
+		if ($button.hasClass('inc')) {
+			var newVal = parseFloat(oldValue) + 1;
+		} else {
+			// Don't allow decrementing below zero
+			if (oldValue > 0) {
+				var newVal = parseFloat(oldValue) - 1;
+			} else {
+				newVal = 0;
+			}
+		}
+		$button.parent().find('input').val(newVal);
+	});
+}
+/* Json 금액합계 */
+function cal_price(price,ordercount){
+	price=price.replace(/,/g, "")
+	let totalprice=(price*ordercount).toLocaleString();
+	return totalprice
+}
+/* 금액 ,찍기 */
+function showPrice(price){
+	let strPrice=price.toLocaleString();
+	return strPrice
+}
+/* 장바구니 삭제 */
+function del_order_basket(no){
+	$.ajax({
+		type:'post',
+		data:{'no':no},
+		url:'../basket/delete_userBasket.do',
+		success:function(result){
+			
+		},error:function(error){
+			alert("장바구니 삭제에러")
+		}
+		
+	})
+}
+function totalprice(){
+	let sumprice=0;
+	let count=$(".total-price").length;
+	for(i=0; i<count;i++){
+		let price=$("#total"+i).text().replace(/,/g, "");
+		sumprice+=Number(price);
+	}
+	$('#sumprice').text(sumprice.toLocaleString());
+	
+}
+/* 결제 테이블로 이동 json생성 */
+function insert_purchase(){
+	let box=[]
+	let rowcount=$(".total-price").length;
+	
+	for(i=0;i<rowcount;i++){
+		box[i]={ 
+			"pno" : $("#table_tr"+i).children(".cart-title").children().attr("pno"),
+			"cno" : $("#table_tr"+i).children(".cart-title").children().attr("cno"),
+			"title" :$("#table_tr"+i).children(".cart-title").children().text(),
+			"price" :$("#table_tr"+i).children(".p-price").text().replace(/,/g, ""),
+			"ordercount" :$("#order_input"+i).val(),
+		}
+	}
+	$.ajax({
+		type:'post',
+		data:{"box":JSON.stringify(box)},
+		url:'../basket/userBasketInsert.do',
+		success:function(result){
+			
+		},error:function(error){
+			alert("결제에러")
+		}
+	})
+}
 </script>
 </head>
 <body>
@@ -58,27 +184,12 @@ function order_basketList(){
                                     <th class="p-name">상품명</th>
                                     <th>가격</th>
                                     <th>수량</th>
-                                    <th>총 갯수</th>
+                                    <th>총 금액</th>
                                     <th><i class="ti-close"></i></th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="cart-pic first-row"><img src="poster "></td>
-                                    <td class="cart-title first-row">
-                                        <h5>${vo.title }</h5>
-                                    </td>
-                                    <td class="p-price first-row">price </td>
-                                    <td class="qua-col first-row">
-                                        <div class="quantity">
-                                            <div class="pro-qty">
-                                              ordercount 
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="total-price first-row">총금액 </td>
-                                    <td class="close-td first-row"><i class="ti-close"></i></td>
-                                </tr>
+                            <tbody id="cart_tbody">
+                              
                             </tbody>
                         </table>
                     </div>
@@ -86,16 +197,15 @@ function order_basketList(){
                         <div class="col-lg-4">
                             <div class="cart-buttons">
                                 <a href="../shop/shop_list.do" class="primary-btn continue-shop">계속 쇼핑하기</a>
-                                <a href="#" class="primary-btn up-cart">장바구니 수정</a>
                             </div>
                         </div>
                         <div class="col-lg-4 offset-lg-4">
                             <div class="proceed-checkout">
                                 <ul>
                                     <!-- <li class="subtotal">Subtotal <span>$240.00</span></li> -->
-                                    <li class="cart-total">총 금액 <span></span></li>
+                                    <li class="cart-total">총 금액 <span id="sumprice"></span></li>
                                 </ul>
-                                <a href="#" class="proceed-btn">결제하기</a>
+                                <button class="proceed-btn" style="width: 25.7em;">결제하기</button>
                             </div>
                         </div>
                     </div>

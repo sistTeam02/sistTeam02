@@ -31,37 +31,8 @@ public class User_basketDAO extends SqlSessionDaoSupport{
 	{
 		getSqlSession().delete("basketDelete", no);
 	}
-	
-	// 장바구니 비우기
-	public void basketDeleteAll(String id)
-	{
-		getSqlSession().delete("basketDeleteAll", id);
+	/*장바구니 결제테이블 삽입*/
+	public void orderbasketInsert(User_order_basketVO vo){
+		getSqlSession().insert("orderbasketInsert",vo);
 	}
-	
-	// 장바구니 수정
-	public void basketModify(User_basketVO vo)
-	{
-		getSqlSession().update("basketModify", vo);
-	}
-	
-	// 장바구니 금액 합계
-	public int basketMoney(String id)
-	{
-		getSqlSession().selectOne("basketMoney", id);
-		return getSqlSession().selectOne("basketMoney", id);
-	}
-	// 장바구니 상품 갯수
-	public int basketCount(int no, String id)
-	{
-		Map<String,Object> map=new HashMap<String, Object>();
-		map.put("no", no);
-		map.put("id", id);
-		return getSqlSession().selectOne("basketCount", map);
-	}
-	// 장바구니 수량 변경
-	public void basketUpdate(User_basketVO vo)
-	{
-		getSqlSession().update("basketUpdate", vo);
-	}
-	
 }

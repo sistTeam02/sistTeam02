@@ -72,5 +72,11 @@
     WHERE id=#{id}
       AND pno=#{pno}
   </update>
-  
+  <insert id="orderbasketInsert" parameterType="User_order_basketVO">
+  	<selectKey order="BEFORE" resultType="int" keyProperty="no">
+  		SELECT NVL(MAX(no)+1,1) from user_order_basket
+  	</selectKey>
+  	insert INTO user_order_basket(no,id,pno,title,price,ordercount,cno)
+  	VALUES(#{no},#{id},#{pno},#{title},#{price},#{ordercount},#{cno})
+  </insert>
 </mapper>
