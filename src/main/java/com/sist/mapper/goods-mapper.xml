@@ -22,6 +22,10 @@
   <select id="goodsTotalPage" resultType="int">
     SELECT CEIL(COUNT(*)/9.0) FROM goods_list
   </select>
+  <!-- goods 총 수량 -->
+  <select id="goodsCount" resultType="int">
+  	SELECT COUNT(*) FROM goods_list
+  </select>
   <!-- goods 상세데이터 -->
   <!-- 
 	    NO               NUMBER        
@@ -30,10 +34,130 @@
 		PRICE            NUMBER        
 		DETAIL_POSTER    CLOB          
    -->
+  <!-- 상품 상세보기 -->
   <select id="goodsDetailData" resultType="GoodsDetailVO" parameterType="int">
     SELECT gl.no,gd.title,gd.poster,gd.price,gd.detail_poster 
     FROM goods_detail gd,goods_list gl
     WHERE gd.no=gl.no 
       AND gd.no=#{no}
   </select>
+  
+  <!-- ================ 찜하기 ================== -->
+  <!-- 찜 확인 -->
+  <select id="goodsJjimCheck" resultType="int" parameterType="hashmap" >
+	SELECT COUNT(*) FROM goods_jjim gj,goods_list gl
+	WHERE gj.pno=gl.no
+	  AND pno=#{pno} 
+	  AND id = #{id}
+  </select>
+	
+  <!-- 찜하기 -->
+  <insert id="goodsJjimUpdate" parameterType="hashmap">
+	INSERT INTO goods_jjim VALUES(
+		#{pno}, #{id}
+	)
+  </insert>
+	
+  <!-- 찜 취소 -->
+  <delete id="goodsJjimDelete" parameterType="hashmap">
+	DELETE FROM goods_jjim gj,goods_list gl
+	WHERE gj.pno=gl.no
+	  AND pno = #{pno} 
+	  AND id = #{id}
+  </delete>
+  
+  <!-- 찜 수량 goodsJjimCount -->
+  <select id="goodsJjimCount" parameterType="int" resultType="int">
+	SELECT COUNT(*) FROM goods_jjim gj,goods_list gl
+	WHERE gj.pno=gl.no
+	  AND pno = #{pno}
+  </select>
+  
+  <!-- ================ 리뷰  ================== -->
+  <select id="shopReplyListData" resultType="ShopReplyVO" parameterType="int">
+	SELECT no,pno,id,name,msg,TO_CHAR(regdate,'YYYY-MM-DD HH24:MI:SS') as dbday,group_tab
+	FROM shop_reply 
+	WHERE pno=#{pno}
+	ORDER BY group_id DESC,group_step ASC
+  </select>
+  <!-- 리뷰 추가 -->
+  <insert id="shopReplyInsert" parameterType="ShopReplyVO">
+	<selectKey keyProperty="no" resultType="int" order="BEFORE">
+	  SELECT NVL(MAX(no)+1,1) as no FROM shop_reply
+	</selectKey>
+	INSERT INTO shop_reply(no,pno,id,name,msg,group_id) VALUES(
+	  #{no},
+	  #{pno},
+	  #{id},
+	  #{name},
+	  #{msg},
+	  (SELECT NVL(MAX(group_id)+1,1) FROM shop_reply)
+	)
+  </insert>
+  
+  <!-- 리뷰 수정 -->
+	<update id="shopReplyUpdate" parameterType="ShopReplyVO">
+	  UPDATE shop_reply SET
+	  msg=#{msg}
+	  WHERE no=#{no}
+	</update>
+	<!--  -->
+	<select id="shopReplyParentInfoData" resultType="ShopReplyVO" parameterType="int">
+	  SELECT group_id,group_step,group_tab 
+	  FROM shop_reply
+	  WHERE no=#{no}
+	</select>
+	
+	<update id="shopReplyGroupStepIncrement" parameterType="ShopReplyVO">
+	   UPDATE shop_reply SET
+	   group_step=group_step+1
+	   WHERE group_id=#{group_id} AND group_step>#{group_step}
+	</update>
+	
+	<insert id="shopReplyToReplyInsert" parameterType="ShopReplyVO">
+	    <selectKey keyProperty="no" resultType="int" order="BEFORE">
+	      SELECT NVL(MAX(no)+1,1) as no FROM shop_reply
+	    </selectKey>
+	    INSERT INTO shop_reply VALUES(
+	      #{no},
+	      #{pno},
+	      #{id},
+	      #{name},
+	      #{msg},
+	      SYSDATE,
+	      #{group_id},
+	      #{group_step},
+	      #{group_tab},
+	      #{root},
+	      0
+	    )
+	</insert>
+	
+	<update id="shopReplyDepthIncrement" parameterType="int">
+		UPDATE shop_reply SET
+	    depth=depth+1
+	    WHERE no=#{no}
+	</update>
+	
+	<delete id="shopReplyDelete" parameterType="int">
+		DELETE FROM shop_reply
+    	WHERE no=#{no}
+	</delete>
+	
+	<select id="shopReplyInfoData" resultType="ShopReplyVO" parameterType="int">
+	  SELECT root,depth FROM shop_reply
+	  WHERE no=#{no}
+	</select>
+	
+	<update id="shopReplyMsgUpdate" parameterType="int">
+	   UPDATE shop_reply SET
+	   msg='관리자가 삭제한 댓글입니다'
+	   WHERE no=#{no}
+	</update>
+	
+	<update id="shopDepthDecrement" parameterType="int">
+	  UPDATE shop_reply SET
+	  depth=depth-1
+	  WHERE no=#{no}
+	</update>
 </mapper>

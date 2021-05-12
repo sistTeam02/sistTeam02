@@ -1,9 +1,25 @@
 package com.sist.vo;
 
 public class Goods_JjimVO {
-	private int no;
-	private int cno;
-	private String id;
+	private int no;   // Jjim number
+	private int cno;  // Check Number default 0
+	private String id;  // member ID
+	private int pno;  // 제품 number
+	
+	private GoodsVO gvo;
+	
+	public int getPno() {
+		return pno;
+	}
+	public void setPno(int pno) {
+		this.pno = pno;
+	}
+	public GoodsVO getGvo() {
+		return gvo;
+	}
+	public void setGvo(GoodsVO gvo) {
+		this.gvo = gvo;
+	}
 	public int getNo() {
 		return no;
 	}

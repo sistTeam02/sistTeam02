@@ -26,6 +26,7 @@
     <typeAlias type="com.sist.vo.HometPayVO" alias="HometPayVO"/>
     <typeAlias type="com.sist.vo.HometDetailVO" alias="HometDetailVO"/>
   	<typeAlias type="com.sist.vo.YoutubeVO" alias="YoutubeVO"/>
+  	<typeAlias type="com.sist.vo.ShopReplyVO" alias="ShopReplyVO"/>
   </typeAliases>
   <mappers>
     <mapper resource="com/sist/mapper/member-mapper.xml"/>
