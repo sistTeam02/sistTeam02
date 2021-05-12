@@ -9,9 +9,13 @@
  FROM homet_board))
  WHERE num BETWEEN #{start} AND #{end}
 </select>
+
+
 <select id="homet_boardTotalPage" resultType="int">
  SELECT CEIL(COUNT(*)/10.0) FROM homet_board
 </select>
+
+
 <!-- 글쓰기 -->
 <insert id="homet_boardInsert" parameterType="HometBoardVO">
  <selectKey keyProperty="no" resultType="int" order="BEFORE">
@@ -26,6 +30,8 @@
      SYSDATE,
      0
    )
+   
+   
 </insert>
 <!-- 상세보기 조회수 증가 -->
 <update id="homet_boardHitIncrement" parameterType="int">
@@ -33,6 +39,8 @@
   hit=hit+1
   WHERE no=#{no}
 </update>
+
+
 <!-- 상세보기 -->
 <select id="homet_boardDetailData" resultType="HometBoardVO" parameterType="int">
   SELECT no,name,subject,content,regdate,hit
@@ -52,17 +60,21 @@
  name=#{name}, subject=#{subject}, content=#{content}
  WHERE no=#{no}
 </update>
+
+
 <!-- 삭제 -->
 <delete id="homet_boardDelete" parameterType="int">
   DELETE FROM homet_board
   WHERE no=#{no}
 </delete>
+
+
 <delete id="homet_boardReplyDelete" parameterType="int">
   DELETE FROM homet_board
   WHERE bno=#{bno}
 </delete>
 
-
+</mapper>
 
 
 

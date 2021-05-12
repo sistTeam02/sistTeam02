@@ -43,6 +43,7 @@
     <mapper resource="com/sist/mapper/mypage-mapper.xml"/>
     <mapper resource="com/sist/mapper/homet-mapper.xml"/>
     <mapper resource="com/sist/mapper/homet_board-mapper.xml"/>
+    
     <mapper resource="com/sist/mapper/reply-mapper.xml"/>
     <mapper resource="com/sist/mapper/search-mapper.xml"/>
     <mapper resource="com/sist/mapper/youtube-mapper.xml"/>
