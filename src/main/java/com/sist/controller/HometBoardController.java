@@ -53,7 +53,7 @@ public class HometBoardController {
 	   model.addAttribute("BLOCK", BLOCK);
 	   model.addAttribute("startPage", startPage);
 	   model.addAttribute("endPage", endPage);
-	   model.addAttribute("main_jsp", "../board/flist.jsp");
+	   model.addAttribute("main_jsp", "../homet_board/homet_boardList.jsp");
 	   
 	   return "main/main";
    }
