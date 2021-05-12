@@ -29,7 +29,8 @@ h1 {
  <div class="container-fluid">
   <h1>수강후기 게시판</h1>
   <div class="row">
-  <jsp:include page="homet_board_menu.jsp"/>
+  <!-- include 이렇게 하는게 맞나요..?? -->
+  <jsp:include page="../homet_board/homet_board_menu.jsp"/>
   <div class="col-lg-9">
   <table class="table">
   <tr>

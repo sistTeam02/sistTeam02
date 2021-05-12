@@ -22,7 +22,7 @@ public class HometBoardController {
    private HometBoardReplyDAO hrDao;
    
    
-   @GetMapping("homet_board/homet_boardLlist.do")
+   @GetMapping("homet_board/homet_boardList.do")
    public String board_flist(String page,Model model)
    {
 	   if(page==null)
