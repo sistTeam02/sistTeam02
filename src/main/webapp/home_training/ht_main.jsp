@@ -18,33 +18,7 @@ h1 {
   text-align: center;
 }
 </style>
-<!-- 1.jsp화면 구성
-2.ajax호출
-3.restcontroller에서 db데이터연걸
-4.제이슨생성(배열 or object)
-5.받은 제이슨 출력 -->
-<script type="text/javascript" src="https://code.jquery.com/jquery.js"></script>
-<script type="text/javascript">
-/* 1 */
-$(function(){
-	$('#json').click(function(){
-		/* 2 */
-		let no=1107;/* 임의의 데이터 */
-		$.ajax({
-			type:'post',
-			data:{'no':no},
-			url:'../home_training/ht_test.do',
-			success:function(result){
-				alert(result);
-			},error:function(error){
-				alert("에러");
-			}
-		
-		})
-	})
-	
-})
-</script>
+
 </head>
 
 <body>

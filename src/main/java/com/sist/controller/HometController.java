@@ -27,7 +27,7 @@ public class HometController {
 		return "main/main";
 	}
 	
-	@GetMapping("home_training/homet/homet_ht_main.do")
+	@GetMapping(value="home_training/homet/homet_ht_main.do",produces="text/plain;charset=UTF-8")
 	@ResponseBody
 	public String home_training_main(String page, Model model){
 		
@@ -63,7 +63,7 @@ public class HometController {
 		return json;
 	}
 	
-	@GetMapping("home_training/home_main_total.do")
+	@GetMapping(value="home_training/home_main_total.do",produces="text/plain;charset=UTF-8")
 	@ResponseBody
 	public String homet_main_total() {
 		int total = dao.hometTotalPage();
@@ -119,16 +119,56 @@ public class HometController {
 	
 	@GetMapping("home_training/ht_challenge.do")
 	public String home_training_challenge(Model model) {
-		System.out.println("챌린지 페이지 ===============");
 		
-		List<HometMainVO> cList = dao.hometChallengeListData();
-		
-		model.addAttribute("cList", cList);
 		model.addAttribute("main_jsp", "../home_training/ht_challenge.jsp");
 		return "main/main";
 		
 	}
 	
+	
+	@GetMapping(value="home_training/homet/homet_ht_challenge.do",produces="text/plain;charset=UTF-8")
+	@ResponseBody
+	public String home_training_challenge(String page, Model model){
+		 
+		String json = "";
+		try {
+			if (page == null) {
+				page = "1";
+			}
+			int curpage = Integer.parseInt(page);
+			Map map = new HashMap();
+			int rowSize = 10;
+			int start = (rowSize * curpage) - (rowSize - 1);
+			int end = (rowSize * curpage);
+			map.put("start", start);
+			map.put("end", end);
+
+			List<HometMainVO> list = dao.hometChallengeListData(map);
+			JSONArray arr = new JSONArray();
+			for (HometMainVO vo : list) {
+				JSONObject obj = new JSONObject();
+				obj.put("no", vo.getNo());
+				obj.put("title", vo.getTitle());
+				obj.put("title_link", vo.getTitle_link());
+				obj.put("poster", vo.getPoster());
+				obj.put("part", vo.getPart());
+				obj.put("good", vo.getGood());
+				arr.add(obj);
+			}
+			json = arr.toJSONString();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+
+		return json;
+	}
+	
+	@GetMapping(value="home_training/homet_challenge_total.do",produces="text/plain;charset=UTF-8")
+	@ResponseBody
+	public String homet_challenge_total() {
+		int total = dao.hometChallengeTotalPage();
+		return String.valueOf(total);
+	}
     
 	@GetMapping("home_training/ht_challenge_detail.do")
 	public String home_training_challenge_detail(int no, Model model) {

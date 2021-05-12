@@ -29,8 +29,8 @@ public class HometDAO extends SqlSessionDaoSupport{
 	}
 	
 	// 챌린지 목록 출력
-	public List<HometMainVO> hometChallengeListData() {
-		return getSqlSession().selectList("hometChallengeListData");
+	public List<HometMainVO> hometChallengeListData(Map map) {
+		return getSqlSession().selectList("hometChallengeListData", map);
 	}
 	
 	// 총페이지 

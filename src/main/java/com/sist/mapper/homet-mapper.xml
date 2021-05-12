@@ -43,10 +43,19 @@
 	</select>
 	
 	<!-- 챌린지 메인 페이지 리스트 -->
-	<select id="hometChallengeListData" resultType="HometMainVO">
-		SELECT * FROM challenge_main
+	<select id="hometChallengeListData" resultType="HometMainVO" parameterType="hashmap">
+		SELECT no, title, title_link, poster, part, good, num
+		FROM (SELECT no, title, title_link, poster, part, good, rownum as num
+		FROM (SELECT no, title, title_link, poster, part, good
+		FROM challenge_main ORDER BY no DESC))
+		WHERE num BETWEEN #{start} AND #{end}
 	</select>
 	
+	
+	<!-- 챌린지 총 페이지 -->
+	<select id="hometChallengeTotalPage" resultType="int">
+		SELECT CEIL(COUNT(*)/10.0) FROM challenge_main
+	</select>
 	<!-- 챌린지 디테일 페이지 -->
 	<select id="hometChallengeDetail" resultType="HometDetailVO" parameterType="int">
 		SELECT * from challenge_detail
