@@ -25,7 +25,10 @@ public class User_basketDAO extends SqlSessionDaoSupport{
 	{
 		return getSqlSession().selectList("basketListData", id);
 	}
-	
+	public List<User_basketVO> basketHTListData(String id)
+	{
+		return getSqlSession().selectList("basketHTListData", id);
+	}
 	// 장바구니 개별 삭제
 	public void basketDelete(int no)
 	{

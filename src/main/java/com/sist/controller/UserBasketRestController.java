@@ -1,6 +1,7 @@
 package com.sist.controller;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -23,11 +24,15 @@ public class UserBasketRestController {
 	private User_basketDAO dao;
 	
 	@PostMapping("basket/userBasketList.do")
-	public String basket_userBasketList(HttpSession session){
+	public String basket_userBasketList(HttpSession session,int no){
 		String json="";
-		//id,no,pno,title,poster,price,ordercount,cno,orddate
 		String id=(String)session.getAttribute("id");
-		List<User_basketVO> list=dao.basketListData(id);
+		List<User_basketVO> list=new ArrayList<User_basketVO>();
+		if(no==1){
+			list=dao.basketListData(id);
+		}else if(no==2){
+			list=dao.basketHTListData(id);
+		}
 		JSONArray arr=new JSONArray();
 		for(User_basketVO vo:list){
 			JSONObject obj=new JSONObject();
@@ -39,6 +44,8 @@ public class UserBasketRestController {
 			obj.put("price", vo.getPrice());
 			obj.put("ordercount", vo.getOrdercount());
 			obj.put("cno", vo.getCno());
+			if(no==2)
+				obj.put("trainer", vo.getTrainer());
 			String orderDate=new SimpleDateFormat("yyyy.MM.dd").format(vo.getOrddate());
 			obj.put("orddate", orderDate);
 			arr.add(obj);

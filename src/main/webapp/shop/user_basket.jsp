@@ -13,9 +13,15 @@
 <script type="text/javascript">
 $(document).ready(function() {
 	
-	order_basketList();
-	
+	order_basketList(1);
+	change_th(1);
 });
+/* 테이블 상단 메뉴클릭시 */
+$(document).on("click",".basket_memu",function() {
+	let no=$(this).attr('value');
+	order_basketList(no);
+	change_th(no);
+})
 /* 장바구니 수량변경 */
 $(document).on("click",".qtybtn",function() {
 	let price=$(this).parents(".qua-col").prev().text();
@@ -31,16 +37,19 @@ $(document).on("click",".ti-close-clone",function() {
  
  del_order_basket(no);
 });
+/* 결제버튼 */
 $(document).on("click",".proceed-btn",function() {
-insert_purchase()
+insert_purchase();
 });
-function order_basketList(){
+function order_basketList(no){
+	$('tr[id^=table_tr]').remove();
 	$.ajax({
 		type:'post',
 		url:'../basket/userBasketList.do',
+		data:{'no':no},
 		success:function(result){
 			let json=JSON.parse(result);
-			make_tr(json);
+			make_tr(json,no);
 			make_icon();
 			totalprice();
 		},error:function(error){
@@ -50,26 +59,46 @@ function order_basketList(){
 		
 	})
 }
-function make_tr(json){
-	for(i=0;i<json.length;i++){
-		$('#cart_tbody').append(
-		  "  <tr id=table_tr"+i+">"+
-                  "<td class='cart-pic'><img src="+json[i].poster+"></td>"+
-                       "<td class='cart-title'>"+
-                         "<h5 class=title pno="+json[i].pno+" cno="+json[i].cno+">"+json[i].title+"</h5>"+
-                          "</td>"+
-                         "<td class='p-price'>"+showPrice(json[i].price)+"</td>"+
-                       "<td class='qua-col'>"+
-                           "<div class='quantity'>"+
-                              "<div class='pro-qty'>"+
-                                      "<input type='text' class='order_input' id=order_input"+i+" value="+json[i].ordercount+">"+
-                               "</div>"+
-                            "</div>"+
-                       "</td>"+
-                "<td class='total-price' id=total"+i+">"+cal_price(json[i].price,json[i].ordercount)+"</td>"+
-                "<td class='close-td'><i class='ti-close ti-close-clone' no="+json[i].no+"></i></td>"+
-                   "</tr>"
-		)
+function make_tr(json,no){
+	if(no==1){
+		for(i=0;i<json.length;i++){
+			$('#cart_tbody').append(
+			  "  <tr id=table_tr"+i+">"+
+	                  "<td class='cart-pic'><img src="+json[i].poster+"></td>"+
+	                       "<td class='cart-title'>"+
+	                         "<h5 class=title pno="+json[i].pno+" cno="+json[i].cno+">"+json[i].title+"</h5>"+
+	                          "</td>"+
+	                         "<td class='p-price'>"+showPrice(json[i].price)+"</td>"+
+	                       "<td class='qua-col'>"+
+	                           "<div class='quantity'>"+
+	                              "<div class='pro-qty'>"+
+	                                      "<input type='text' class='order_input' id=order_input"+i+" value="+json[i].ordercount+">"+
+	                               "</div>"+
+	                            "</div>"+
+	                       "</td>"+
+	                "<td class='total-price' id=total"+i+">"+cal_price(json[i].price,json[i].ordercount)+"</td>"+
+	                "<td class='close-td'><i class='ti-close ti-close-clone' no="+json[i].no+"></i></td>"+
+	                   "</tr>"
+			)
+		}
+	}else if(no==2){
+		for(i=0;i<json.length;i++){
+			$('#cart_tbody').append(
+			  "  <tr id=table_tr"+i+">"+
+	                  "<td class='cart-pic'><img src="+json[i].poster+"></td>"+
+	                       "<td class='cart-title'>"+
+	                         "<h5 class=title pno="+json[i].pno+" cno="+json[i].cno+">"+json[i].title+"</h5>"+
+	                          "</td>"+
+	                         "<td>"+json[i].trainer+"</td>"+
+	                       "<td class='qua-col'>"+
+	                          "3개월"+
+	                       "</td>"+
+	                "<td class='total-price p-price' id=total"+i+">"+showPrice(json[i].price)+"</td>"+
+	                "<td class='close-td'><i class='ti-close ti-close-clone' no="+json[i].no+"></i></td>"+
+	                   "</tr>"
+			)
+		}
+		
 	}
 }
 function make_icon(){ /* main.js 안에있는 함수*/
@@ -152,7 +181,30 @@ function insert_purchase(){
 		}
 	})
 }
+function change_th(no){
+	if(no==1){
+		$('#change_th1').text('가격');
+		$('#change_th2').text('수량');
+		$('#change_th3').text('총금액');
+	}else if(no==2){
+		$('#change_th1').text('트레이너');
+		$('#change_th2').text('기간');
+		$('#change_th3').text('금액');
+	}
+}
 </script>
+<style type="text/css">
+.basket_memu{
+    width: 10em;
+    display: block;
+    height: 2em;
+    float: left;
+    border: 1px solid #ebebeb;
+    text-align: center;
+    cursor: pointer;
+}
+
+</style>
 </head>
 <body>
     <!-- Breadcrumb Section Begin -->
@@ -176,15 +228,18 @@ function insert_purchase(){
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
+                	
                     <div class="cart-table">
+                      	<span class="basket_memu" value="1">쇼핑몰</span>
+                      	<span class="basket_memu" value="2">트레이닝</span>
                         <table>
                             <thead>
                                 <tr>
                                     <th>이미지</th>
                                     <th class="p-name">상품명</th>
-                                    <th>가격</th>
-                                    <th>수량</th>
-                                    <th>총 금액</th>
+                                    <th id="change_th1">가격</th>
+                                    <th id="change_th2">수량</th>
+                                    <th id="change_th3">총 금액</th>
                                     <th><i class="ti-close"></i></th>
                                 </tr>
                             </thead>

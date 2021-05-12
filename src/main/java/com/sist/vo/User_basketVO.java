@@ -26,6 +26,7 @@ public class User_basketVO {
 	private Date orddate;
 	private int state;   // 결제상태(default 0)
 	private String address;
+	private String trainer;
 	private GoodsVO gvo=new GoodsVO();
 	private DietFoodVO dvo=new DietFoodVO();
 	
@@ -106,6 +107,12 @@ public class User_basketVO {
 	}
 	public void setPrice(String price) {
 		this.price = price;
+	}
+	public String getTrainer() {
+		return trainer;
+	}
+	public void setTrainer(String trainer) {
+		this.trainer = trainer;
 	}
 	
 }

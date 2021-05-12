@@ -42,7 +42,11 @@
   	from user_basket
   	WHERE id=#{id} and (cno=1 or cno=2) 
   </select>
-  
+  <select id="basketHTListData" resultType="User_basketVO" parameterType="String">
+  	SELECT id,no,pno,title,poster,price,ordercount,cno,orddate,trainer
+  	from user_basket
+  	WHERE id=#{id} and cno=3
+  </select>
   <!-- 장바구니 상품 수량 수정 -->
   <select id="basketModify" parameterType="User_basketVO">
     UPDATE user_basket
