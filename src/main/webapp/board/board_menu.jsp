@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<div class="col-lg-3">
+<div class="col-md-3">
   <div style="height:68px;"></div>
    <table class="table">
     <tr class="info">

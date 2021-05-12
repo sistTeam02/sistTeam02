@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -19,6 +20,38 @@ h1 {
 <script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="https://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
+<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+<script type="text/javascript">
+let i=0;
+$(function(){
+	$('#delSpan').click(function(){
+		if(i==0)
+	    {
+			$('#del').show();
+			$('#delSpan').text("취소");
+			i=1;
+	    }
+		else
+		{
+			$('#del').hide();
+			$('#delSpan').text("삭제");
+			i=0;
+		}
+	});
+	//삭제 버튼
+	$('delBtn').click(function(){
+		let pwd=$('input[name=pwd]').val();
+		if(pwd.trim()=="")
+		{
+			$('input[name=pwd]').focus();
+			return;
+		}
+		// 데이터를 전송 (게시물번호, 비밀번호, 페이지번호)
+		$('#frm').submit();
+		
+	});
+});
+
 $(function(){
 	let bno=${vo.no};
 	$.ajax({
@@ -62,11 +95,23 @@ $(function(){
        </tr>
        <tr>
          <td colspan="4" class="text-right">
+         <c:if test="${sessionScope.name==vo.name }">
            <a href="../board/fupdate.do?no=${vo.no }&page=${page}" class="btn btn-xs btn-success">수정</a>
-           <a href="../board/fdelete.do?no=${vo.no }&page=${page}" class="btn btn-xs btn-warning">삭제</a>
+           <span class="btn btn-sm btn-warning" style="height:25px;" id="delSpan">삭제</span>
+          </c:if>
            <a href="../board/flist.do?page=${page }" class="btn btn-xs btn-info">목록</a>
          </td>
        </tr>
+       <tr id="del" style="display:none">
+       <td colspan="4" class="text-right">
+        <form method=post action="delete_ok.jsp" id="frm">
+           비밀번호:<input type=password name=pwd size=10 class="input-sm">
+                 <input type=hidden name=no value="${vo.no }">
+                 <input type=hidden name=page value="${page }">
+                 <a href="../board/fdelete.do?no=${vo.no }&page=${page}"><input type=button value="삭제" class="btn btn-sm btn-primary" id="delBtn"></a>
+        </form>
+       </td>
+      </tr>
      </table>
     </div>
     <div style="height: 30px"></div>

@@ -22,7 +22,7 @@ $(function(){
 	$('#addBtn').click(function(){
 		$('#user-table').append(
 		   '<tr id="m'+fileIndex+'">'
-		  +'<td>파일 '+(fileIndex+1)+':<input type=file name=files['+fileIndex+'] size=20>'
+		  +'<td>파일 '+(fileIndex+1)+':<input type=file name=file['+fileIndex+'] size=20>'
 		  +'</td></tr>'
 		)
 		fileIndex++;
@@ -47,7 +47,7 @@ $(function(){
      <tr>
        <td width=15% class="text-right info">작성자</td>
        <td width=85%>
-        <input type=text name=name size=15 class="input-sm">
+        <input type=text name=name size=15 class="input-sm" value="${name}" readonly style="border: none;">
        </td>
      </tr>
      <tr>

@@ -9,15 +9,18 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.multipart.MultipartFile;
+
 
 import com.sist.dao.NoticeBoardDAO;
 import com.sist.dao.ReplyDAO;
@@ -73,51 +76,62 @@ public class NoticeBoardController {
 		   return "main/main";
 	   }
 	   @PostMapping("board/ninsert_ok.do")
-	   public String board_ninsert_ok(NoticeBoardVO vo)
+	   public String board_ninsert_ok(NoticeBoardVO vo, Model model)
 	   {
-		   try
-		   {
-		   List<MultipartFile> list=vo.getFiles();
-		   if(list==null) // 업로드가 안된 상태
-		   {
-			   vo.setFilename("");
-			   vo.setFilesize("");
-			   vo.setFilecount(0);
-		   }
-		   else // 업로드가 된 상태 
-		   {
-			   String tempFile="";
-			   String tempSize="";		   
-			   for(MultipartFile mf:list)
+		   /*String fileName=null;
+			List<MultipartFile> uploadFile = vo.getFiles();
+			if (!uploadFile.isEmpty()) {
+				for(MultipartFile mf:uploadFile)
+				{
+					String originalFileName = uploadFile.getOriginalFilename();
+					String ext = FilenameUtils.getExtension(originalFileName);	//확장자 구하기
+					UUID uuid = UUID.randomUUID();	//UUID 구하기
+					fileName=uuid+"."+ext;
+					uploadFile.transferTo(new File("D:\\upload\\" + fileName));
+			    }
+			}
+			vo.setFilename(fileName);
+			nDao.noticeboardInsert(vo);
+			return "redirect:nlist.do";*/
+			try
 			   {
-				   try
-				   {
-					  String strFile=mf.getOriginalFilename(); 
-					  File file=new File("c:\\spring-upload\\"+strFile);
-					  mf.transferTo(file);// 서버에 업로드(서버 폴더에 파일 저장)
-					  // 오라클에 파일명을 묶어서 저장  a.jpg,b.png,c.jpg
-				      tempFile+=strFile+",";
-				      tempSize+=file.length()+",";
-				   }catch(Exception ex)
-				   {
-					   ex.printStackTrace();
-				   }
-				   
+			   String fileName=null;
+			   List<MultipartFile> list=vo.getFiles();
+			   if(list==null) // 업로드가 안된 상태
+			   {
+				   vo.setFilename("");
+				   vo.setFilesize("");
+				   vo.setFilecount(0);
 			   }
-			   tempFile=tempFile.substring(0,tempFile.lastIndexOf(","));
-			   tempSize=tempSize.substring(0,tempSize.lastIndexOf(","));
-			   vo.setFilename(tempFile);
-			   vo.setFilesize(tempSize);
-			   vo.setFilecount(list.size());
+			   else // 업로드가 된 상태 
+			   {	   
+				   for(MultipartFile mf:list)
+				   {
+					   try
+					   {
+						  String strFile=mf.getOriginalFilename();
+						  String ext = FilenameUtils.getExtension(strFile);	//확장자 구하기
+						  UUID uuid = UUID.randomUUID();	//UUID 구하기
+						  fileName=uuid+"."+ext;
+						  mf.transferTo(new File("C:\\spring-upload\\" + fileName));// 서버에 업로드(서버 폴더에 파일 저장)
+						  // 오라클에 파일명을 묶어서 저장  a.jpg,b.png,c.jpg
+					   }catch(Exception ex)
+					   {
+						   ex.printStackTrace();
+					   }
+					   
+				   }
+				   model.addAttribute("fileName", fileName);
+			   }
+			   }catch(Exception ex)
+			   {
+				   ex.printStackTrace();
+			   }
+			   //DAO연결 
+			   nDao.noticeboardInsert(vo);
+			   return "redirect:nlist.do";
 		   }
-		   }catch(Exception ex)
-		   {
-			   ex.printStackTrace();
-		   }
-		   //DAO연결 
-		   nDao.noticeboardInsert(vo);
-		   return "redirect:nlist.do";
-	   }
+	   
 	   @GetMapping("board/ndetail.do")
 	   public String board_ndetail(int no,int page,Model model)
 	   {

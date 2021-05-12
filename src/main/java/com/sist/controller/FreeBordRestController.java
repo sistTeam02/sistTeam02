@@ -26,7 +26,7 @@ public class FreeBordRestController {
 	
 	// 찾기
 	   @PostMapping("board/ffind.do")
-	   public String board_ffind(String fs,String ss,Model model)
+	   public String board_ffind(String fs,String ss)
 	   {
 		   String json="";
 		   try

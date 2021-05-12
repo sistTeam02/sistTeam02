@@ -28,7 +28,9 @@ h1 {
   <table class="table">
   <tr>
    <td class="text-right">
+   <c:if test="${sessionScope.id!=null }">
     <a href="../board/qinsert.do" class="btn btn-sm btn-warning">문의하기</a> 
+    </c:if>
    </td>
   </tr>
   </table>
@@ -36,7 +38,7 @@ h1 {
     <tr class="info">
      <th width=10% class="text-center">번호</th>
      <th width=45% class="text-center">제목</th>
-     <th width=15% class="text-center">이름</th>
+     <th width=15% class="text-center">작성자</th>
      <th width=20% class="text-center">작성일</th>
      <th width=10% class="text-center">조회수</th>
      <th width=10% class="text-center">답변</th>
