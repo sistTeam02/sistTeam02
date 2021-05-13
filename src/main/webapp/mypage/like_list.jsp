@@ -30,7 +30,7 @@
                		<div style="height:50px"></div>
                        <div class="container">
                        <h2>찜한 클래스</h2>
- 						<p>찜한 운동 프로그램 목록을 보여줍니다(youtube)</p>            
+ 						<p>찜한 운동 프로그램 목록을 보여줍니다</p>            
 							  <table class="table table-hover">
 							    <thead>
 							      <tr>
@@ -59,13 +59,13 @@
 							  </table>
 							</div>
 							<div class="container" align="right">
-							  <button type="button" class="btn btn-lg btn-default" onclick="location.href='#'">다른 운동 보러 가기</button>
+							  <button type="button" class="btn btn-lg btn-default" onclick="location.href='../youtube/you_list.do'">다른 운동 보러 가기</button>
 							</div>
 							
 					<div style="height:50px"></div>
                        <div class="container">
                        <h2>찜한 홈트레이닝</h2>
- 						<p>찜한 홈트레이닝 목록을 보여줍니다(hometraining_detail)</p>            
+ 						<p>찜한 홈트레이닝 목록을 보여줍니다</p>            
 							  <table class="table table-hover">
 							    <thead>
 							      <tr>
@@ -98,7 +98,7 @@
 							  </table>
 							</div>
 							<div class="container" align="right">
-							  <button type="button" class="btn btn-lg btn-default" onclick="location.href='#'">다른 운동 하러 가기</button>
+							  <button type="button" class="btn btn-lg btn-default" onclick="location.href='../home_training/ht_pay.do'">다른 운동 하러 가기</button>
 							</div>
 							
 					<div style="height:50px"></div>
@@ -135,7 +135,7 @@
 							  </table>
 							</div>
 							<div class="container" align="right">
-							  <button type="button" class="btn btn-lg btn-default" onclick="location.href='#'">지금 제품 구매하러 가기</button>
+							  <button type="button" class="btn btn-lg btn-default" onclick="location.href='../shop/shop_list.do'">다른 제품 구경하러 가기</button>
 							</div>
 							
 					<div style="height:50px"></div>
@@ -170,7 +170,7 @@
 							  </table>
 							</div>
 							<div class="container" align="right">
-							  <button type="button" class="btn btn-lg btn-default" onclick="location.href='#'">지금 제품 구매하러 가기</button>
+							  <button type="button" class="btn btn-lg btn-default" onclick="location.href='../shop/dfood_list.do'">다른 제품 구경하러 가기</button>
 							</div>
 						</div>
 					</div>
