@@ -114,7 +114,7 @@
 							      </tr>
 							    </thead>
 							    <tbody>
-							      <c:forEach var="gvo" items="${gList }">
+							      <%-- <c:forEach var="gvo" items="${list }">
 							      <tr onclick="location.href='http://localhost/web/shop/shop_detail.do?no=${gvo.no}'" style="cursor:pointer;">
 							        <td>
 							        	<img src="${gvo.poster}" width="100px" height="100">
@@ -122,11 +122,26 @@
 							        <td>${gvo.title }</td>
 							        <td><fmt:formatNumber value="${gvo.price }"/>&nbsp;원</td>
 							      </tr>
-							      </c:forEach>
+							      </c:forEach> --%>
+							      <tr>
+							        <td class="si-pic"><img src="../img/shop_001.jpg" width=80px height=80px></td>
+							        <td>홈트레이닝 룰루레몬 요가매트 필라테스 5mm 경량메트</td>
+							        <td>80,600원</td>
+							      </tr>
+							      <tr>
+							        <td class="si-pic"><img src="../img/shop_067.jpg" width=80px height=80px></td>
+							        <td>스타스포츠 이지 중량밴드 2KG (EU312) (1kg 2개) 밴드 모래주머니 홈트...</td>
+							        <td>21,760원</td>
+							      </tr>
+							      <tr>
+							        <td class="si-pic"><img src="../img/shop_085.jpg" width=80px height=80px></td>
+							        <td>다기능 스트레칭 요가 로프 요가봉 탄 필라테스기구 헬스 소품 용품 홈트...</td>
+							        <td>10,170 원</td>
+							      </tr>
 							    </tbody>
 							  </table>
 							</div>
-							<table class="table">
+							<%-- <table class="table">
 							  	<tr>
 							  		<td class="text-center">
 							  			<ul class="pagination">
@@ -138,7 +153,7 @@
 							  			</ul>
 							  		</td>
 							  	</tr>
-							  </table>
+							  </table> --%>
 							<div class="container" align="right">
 							  <button type="button" class="btn btn-lg btn-default" onclick="location.href='../shop/shop_list.do'">다른 제품 구경하러 가기</button>
 							</div>
@@ -157,17 +172,17 @@
 							    </thead>
 							    <tbody>
 							      <tr>
-							        <td>${vo.poster}</td>
+							        <td class="si-pic"><img src="../img/dfood_001.jpeg" width=80px height=80px></td>
 							        <td>2개사면 +2개더/이지퀵다이어트식품/뱃살감량/S라인</td>
 							        <td>41,900원</td>
 							      </tr>
 							      <tr>
-							        <td>${vo.poster}</td>
+							        <td class="si-pic"><img src="../img/dfood_110.jpeg" width=80px height=80px></td>
 							        <td>한성 실곤약 200g 30개 국수면 두부 고구마말랭이</td>
 							        <td>21,450원</td>
 							      </tr>
 							      <tr>
-							        <td>${vo.poster}</td>
+							        <td class="si-pic"><img src="../img/dfood_160.jpeg" width=80px height=80px></td>
 							        <td>깔라만씨 원액100% (1L) 1+1+1</td>
 							        <td>10,900원</td>
 							      </tr>
