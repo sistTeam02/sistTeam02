@@ -188,7 +188,7 @@ public class HometBoardController {
 	   // 삭제 처리 ==> DAO(service)
 	   hrDao.homet_replyDelete(no);
 	   ra.addAttribute("bno", bno);
-	   return "redirect:reply_list.do";
+	   return "redirect:homet_reply_list.do";
    }
    
    @GetMapping("homet_board/homet_reply_list.do")
