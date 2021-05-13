@@ -20,24 +20,24 @@ public class HometBoardReplyDAO extends SqlSessionDaoSupport{
 		// TODO Auto-generated method stub
 		super.setSqlSessionFactory(sqlSessionFactory);
 	}
-	public List<HometBoardReplyVO> replyListData(int bno)
+	public List<HometBoardReplyVO> homet_replyListData(int bno)
 	{
 		return getSqlSession().selectList("homet_replyListData", bno);
 	}
 	// 등록
-	public void replyInsert(HometBoardReplyVO vo)
+	public void homet_replyInsert(HometBoardReplyVO vo)
 	{
 		getSqlSession().insert("homet_replyInsert", vo);
 	}
 	
 	// 수정
-	public void replyUpdate(HometBoardReplyVO vo)
+	public void homet_replyUpdate(HometBoardReplyVO vo)
 	{
 		getSqlSession().update("homet_replyUpdate", vo);
 	}
 	
 	@Transactional(propagation=Propagation.REQUIRED, rollbackFor=Exception.class)
-	public void replyToReplyInsert(int root,HometBoardReplyVO vo)
+	public void homet_replyToReplyInsert(int root,HometBoardReplyVO vo)
 	{
 		// 1. 상위정보
 		HometBoardReplyVO pvo=getSqlSession().selectOne("homet_replyParentInfoData", root);
@@ -53,7 +53,7 @@ public class HometBoardReplyDAO extends SqlSessionDaoSupport{
 	}
 	// 삭제
 	@Transactional(propagation=Propagation.REQUIRED, rollbackFor=Exception.class)
-	public void replyDelete(int no)
+	public void homet_replyDelete(int no)
 	{
 		HometBoardReplyVO vo=getSqlSession().selectOne("homet_replyInfoData", no);
 		if(vo.getDepth()==0) // 댓글이 없는 경우

@@ -31,33 +31,33 @@ public class HometBoardDAO extends SqlSessionDaoSupport{
 		 SELECT CEIL(COUNT(*)/10.0) FROM freeboard
 		</select>
 	 */
-	public List<HometBoardVO> freeboardListData(Map map)
+	public List<HometBoardVO> homet_freeboardListData(Map map)
 	{
 		return getSqlSession().selectList("homet_boardListData", map);
 	}
-	public int freeboardTotalPage()
+	public int homet_freeboardTotalPage()
 	{
 		return getSqlSession().selectOne("homet_boardTotalPage");
 	}
 	// 글쓰기
-	public void freeboardInsert(HometBoardVO vo)
+	public void homet_freeboardInsert(HometBoardVO vo)
 	{
 		getSqlSession().insert("homet_boardInsert", vo);
 	}
 	// 상세보기
-		public HometBoardVO freeboardDetailData(int no)
+		public HometBoardVO homet_freeboardDetailData(int no)
 		{
 			getSqlSession().update("homet_boardHitIncrement", no);
 			return getSqlSession().selectOne("homet_boardDetailData", no);
 		}
-		public HometBoardVO freeboardUpdateData(int no)
+		public HometBoardVO homet_freeboardUpdateData(int no)
 		{
 			return getSqlSession().selectOne("homet_boardDetailData", no);
 		}
 		
 		
 		// 수정
-		public boolean freeboardUpdate(HometBoardVO vo)
+		public boolean homet_freeboardUpdate(HometBoardVO vo)
 		{
 			boolean bCheck=false;
 			// 비밀번호를 가지고 온다
@@ -75,7 +75,7 @@ public class HometBoardDAO extends SqlSessionDaoSupport{
 		}
 
 		@Transactional(propagation=Propagation.REQUIRED,rollbackFor=Exception.class)
-	     public boolean freeboardDelete(int no,String pwd)
+	     public boolean homet_freeboardDelete(int no,String pwd)
 	     {
 	    	 boolean bCheck=false;
 	    	 // 비밀번호 읽기
