@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 
 <script type="text/javascript">
+let i=0;
 $(document).ready(function(){
 	$('#qna_allData').text('월매출');
 	$('#qna_allData').attr('id','month');
@@ -17,7 +18,17 @@ $(document).ready(function(){
 	$('#temp').text('테스트4');
 	$('#temp').attr('id','test4');
 });
-$(document).on('click','#month',function(){
+$(document).on('click','#changeBtn',function(){
+	if(i==0){
+		$('.td_year').show();
+		$('.td_month').hide();
+		i++;
+	}else if(i==1){
+		$('.td_year').hide();
+		$('.td_month').show();
+		i--;
+	}
+	
 	
 });
 </script>
@@ -26,7 +37,7 @@ $(document).on('click','#month',function(){
 	border: 2px solid black;
     width: 70em;
     height: 40em;
-    margin: 10em 0em 0em 6em; 
+    margin: 4em 0em 0em 6em; 
     position: relative;
 }
 .box_span{
@@ -34,6 +45,8 @@ $(document).on('click','#month',function(){
     display: block;
     height: 4em;
     border-top: 0.1px dashed #00000052;
+    color: #4b6b7d;
+    font-weight: 300;
 }
 .bar1,.fbar1,.gbar1{
     height: 14em;
@@ -88,9 +101,36 @@ $(document).on('click','#month',function(){
 #box_ul li span{
 	bottom: 0px;
 }
+.td_year{
+	display: none;
+}
+#changeBtn{
+	position: relative;
+    top: 27px;
+}
+#ystate{
+position: absolute;
+    bottom: 33.5em;
+    left: 28em;
+    color: #4b6b7d;
+}
+.ibar{
+	position: relative;
+    width: 8em;
+    height: 1.5em;
+    list-style: none;
+    margin-top: 10px;
+    top: 35px;
+    color: white;
+}
+#redbar{background-color: #ff00009c;}
+#bluebar{background-color: #3d53c1;}
+#greenbar{background-color: #20d600c2;}
+
 </style>
 </head>
 <body>
+<span id="ystate">(%)</span>
 	<div class="statistics_box" id="box">
 	<ul style="list-style-type: none;position: relative;" id="box_ul">
 		<li><span class="col-sm-2 bar1":style="updateBar(0)"></span></li>  <!-- 음식 -->
@@ -108,16 +148,27 @@ $(document).on('click','#month',function(){
 		<li><span class="col-sm-2 gbar3":style="updategBar(2)"></span></li>
 		<li><span class="col-sm-2 gbar4":style="updategBar(3)"></span></li>
 		<li><span class="col-sm-2 gbar5":style="updategBar(4)"></span></li>
-		<span v-for="r in row" class="box_span"></span>
+		<span v-for="r in row" class="box_span">{{110-row*r}}</span>
+		<button @click="getdata(url)" id="changeBtn">연간 / 월간</button>
+	</ul>
+	<ul>
+		<li class="ibar" id="redbar">건강식품류</li>
+		<li class="ibar" id="bluebar">운동기구&용품</li>
+		<li class="ibar" id="greenbar">홈트레이닝</li>
 	</ul>
 	</div>
 	<table id="barText"style="width: 70em;margin-left: 6em;text-align: center;">
 		<tr>
-			<td>{{makeMonth(4)}}월</td>
-			<td>{{makeMonth(3)}}월</td>
-			<td>{{makeMonth(2)}}월</td>
-			<td>{{makeMonth(1)}}월</td>
-			<td>{{month}}월</td>
+			<td class="td_month">{{makeMonth(4)}}월</td>
+			<td class="td_month">{{makeMonth(3)}}월</td>
+			<td class="td_month">{{makeMonth(2)}}월</td>
+			<td class="td_month">{{makeMonth(1)}}월</td>
+			<td class="td_month">{{month}}월</td>
+			<td class="td_year">{{makeyear(4)}}월</td>
+			<td class="td_year">{{makeyear(3)}}월</td>
+			<td class="td_year">{{makeyear(2)}}월</td>
+			<td class="td_year">{{makeyear(1)}}월</td>
+			<td class="td_year">{{year}}월</td>
 		<tr>
 	</table>
 	<template id="drowbar">
@@ -135,9 +186,11 @@ $(document).on('click','#month',function(){
 		  data:{
 			row: 10,
 			month:5,
-			arrheight:[{height:'',no:''}],
-			arrheight2:[{height:'',no:''}],
-			arrheight3:[{height:'',no:''}]
+			arrheight: [{height:'',no:''}],
+			arrheight2: [{height:'',no:''}],
+			arrheight3: [{height:'',no:''}],
+			url:'http://localhost/web/admin/redbar.do',
+			index:1
 			
 		  } 
 		  ,mounted:function(){
@@ -145,7 +198,8 @@ $(document).on('click','#month',function(){
 				 axios.get("http://localhost/web/admin/redbar.do",{
 	    				params:{
 	    					month:this.month,
-	    					cno:1
+	    					cno:1,
+	    					year:2021
 	    				}
 	    			}).then(function(response){			
 	    				_this.arrheight=response.data
@@ -153,7 +207,8 @@ $(document).on('click','#month',function(){
 			  axios.get("http://localhost/web/admin/redbar.do",{
   				params:{
   					month:this.month,
-  					cno:2
+  					cno:2,
+  					year:2021
   				}
   			}).then(function(response){			
   				_this.arrheight2=response.data
@@ -161,18 +216,20 @@ $(document).on('click','#month',function(){
 			  axios.get("http://localhost/web/admin/redbar.do",{
 	  				params:{
 	  					month:this.month,
-	  					cno:3
+	  					cno:3,year:2021 
 	  				}
 	  			}).then(function(response){			
 	  				_this.arrheight3=response.data
 	  			});
+		  },
+		  computed:function(){
+			  this.getmethod();
 		  }
 		  ,
 		  methods:{
 			 updateBar:function(i){//1~5  
 				let a=this.arrheight[i].height;
 				// let a="heght:"+(35+(i.no-1)*13)+"em";
-				console.log(a);
 				  return  "height:"+a+"px";  
 				},
 			  updatefBar: function(i){
@@ -182,14 +239,63 @@ $(document).on('click','#month',function(){
 			  updategBar: function(i){
 				  let a=this.arrheight3[i].height;
 				  return  "height:"+a+"px";  
+			  },
+			  getdata: function(url){
+				  if(this.index===1){
+						this.url="http://localhost/web/admin/yearbar.do"
+						url="http://localhost/web/admin/yearbar.do"
+						this.index=2;
+					}else{
+						this.url="http://localhost/web/admin/redbar.do"
+						url="http://localhost/web/admin/redbar.do"
+						this.index=1;
+					}
+				  _this=this
+					 axios.get(url,{
+		    				params:{
+		    					month:this.month,
+		    					cno:1,
+		    					year:2021
+		    				}
+		    			}).then(function(response){			
+		    				_this.arrheight=response.data
+		    			});
+				  _this=this
+					 axios.get(url,{
+		    				params:{
+		    					month:this.month,
+		    					cno:2,
+		    					year:2021
+		    				}
+		    			}).then(function(response){			
+		    				_this.arrheight2=response.data
+		    			});
+				  _this=this
+					 axios.get(url,{
+		    				params:{
+		    					month:this.month,
+		    					cno:3,
+		    					year:2021
+		    				}
+		    			}).then(function(response){			
+		    				_this.arrheight3=response.data
+		    			});
+				 
 			  }
+		  },
+		  getmethod:function(){
+			  for(let i=1;i<=5;i++){
+				  	updateBar()
+				  	updatejBar()
+				  	updategBar()
+				  }
 		  }
-		  
 	  })
-	 new Vue({
+	let datevue= new Vue({
 		el:'#barText',
 		data:{
-			month:5
+			month:5,
+			year:2021
 		},methods:{
 			makeMonth: function(i){		
 				let m=this.month;
@@ -197,7 +303,11 @@ $(document).on('click','#month',function(){
 					m=m+12;
 				}
 				return (m-i)
+			},makeyear:function(i){
+				return this.year-i
 			}
+			
+		
 		}
 	}) 
 	</script>

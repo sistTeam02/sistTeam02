@@ -102,4 +102,7 @@ public class AdminDAO extends SqlSessionDaoSupport{
 	public User_order_basketVO  totalFoodSales(Map map){
 		return getSqlSession().selectOne("totalFoodSales",map);
 	}
+	public User_order_basketVO  totalyearSales(Map map){
+		return getSqlSession().selectOne("totalyearSales",map);
+	}
 }

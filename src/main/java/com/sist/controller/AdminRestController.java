@@ -393,7 +393,8 @@ public class AdminRestController {
 		return result;
 	}
 	@GetMapping("admin/redbar.do")
-	public String admin_redbar(int month,int cno){
+	public String admin_redbar(int month,int cno,int year){
+		System.out.println(1);
 		String json="";
 		String result="";
 		String strmonth="";
@@ -423,6 +424,36 @@ public class AdminRestController {
 				obj.put("height", result);
 				jArr.add(obj);
 				k++;
+			}
+		json=jArr.toJSONString();
+		return json;
+	}
+	@GetMapping("admin/yearbar.do")
+	public String admin_yearbar(int month,int cno,int year){
+		System.out.println(2);
+		String json="";
+		String result="";
+		int k=4;
+		JSONArray jArr=new JSONArray(); 
+		Map map=new HashMap();
+			for(int i=0; i<5;i++){
+				int thisYear=year-k;	
+				String strYear=String.valueOf(thisYear);
+				map.put("cno", cno);
+				map.put("stryear", strYear);
+				User_order_basketVO vo=dao.totalyearSales(map);
+				double total=vo.getTotal();
+				double sales=vo.getSales();
+				double num=(sales/total)*1000;
+				num=(double)Math.round(num)/10;
+				num=(num/100)*640*100;
+				num=(double)Math.round(num)/100;
+				result=String.valueOf(num);
+				JSONObject obj=new JSONObject();
+				obj.put("no",k);
+				obj.put("height", result);
+				jArr.add(obj);
+				k--;
 			}
 		json=jArr.toJSONString();
 		return json;
