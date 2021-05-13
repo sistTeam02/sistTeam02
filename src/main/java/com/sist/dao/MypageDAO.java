@@ -46,27 +46,12 @@ public class MypageDAO extends SqlSessionDaoSupport{
 	public List<String> chat_dbDay(String id){
 		return getSqlSession().selectList("chat_dbDay",id);
 	}
-	/*
-	<select id="goodsJjimList" resultType="GoodsVO" parameterType="hashmap">
-		SELECT gl.no,title,poster,price,id 
-        FROM goods_jjim gj,goods_list gl
-        WHERE gj.pno=gl.no
-        AND pno=#{pno} 
-        AND id =#{id};
-	  	
-  </select>
-   <!-- 찜 수량 goodsJjimCount -->
-  <select id="goodsJjimCount" resultType="string" parameterType="int">
-		SELECT COUNT(*) FROM goods_jjim gj,goods_list gl
-		WHERE gj.pno=gl.no
-	    AND pno = #{pno}
-	    AND id=#{id}
-  </select>
-	 */
-	public List<GoodsVO> goodsJjimList(Map map){
-		return getSqlSession().selectList("goodsJjimList",map);
+	//<select id="mypageGoodsJjimList" resultType="GoodsVO" parameterType="hashmap">
+	public List<GoodsVO> mypageGoodsJjimList(Map map){
+		return getSqlSession().selectList("mypageGoodsJjimList",map);
 	}
-	public String goodsJjimCount(String id){
-		return getSqlSession().selectOne("goodsJjimCount",id);
+	// <select id="mypageGoodsJjimCount" resultType="string" parameterType="int">
+	public int mypageGoodsJjimCount(String id){
+		return getSqlSession().selectOne("mypageGoodsJjimCount",id);
 	}
 }

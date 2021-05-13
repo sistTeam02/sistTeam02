@@ -64,20 +64,22 @@
 	where id=#{id}
 	order by fooddate
 	</select>
-	<!-- 찜목록 데이터 가져오기=운동기구 -->
-	<select id="goodsJjimList" resultType="GoodsVO" parameterType="hashmap">
-		SELECT gl.no,title,poster,price,id 
-        FROM goods_jjim gj,goods_list gl
-        WHERE gj.pno=gl.no
-        AND pno=#{pno} 
-        AND id =#{id};
+	<!--운동기구 찜목록 데이터 가져오기 -->
+	<select id="mypageGoodsJjimList" resultType="GoodsVO" parameterType="hashmap">
+		 select no,title,poster,price,id,num 
+          from (
+                    SELECT gl.no, title, poster, price, id, rownum as num
+                      FROM goods_jjim gj,goods_list gl
+                     WHERE gj.pno=gl.no
+                       AND id =#{id}
+                ) 
+        WHERE num BETWEEN #{start} AND #{end}
 	  	
   </select>
-   <!-- 찜 수량 goodsJjimCount -->
-  <select id="goodsJjimCount" resultType="string" parameterType="int">
-		SELECT COUNT(*) FROM goods_jjim gj,goods_list gl
+   <!--운동기구 찜 수량 데이터 가져오기-->
+  <select id="mypageGoodsJjimCount" resultType="int" parameterType="string">
+		SELECT CEIL(COUNT(*)/10.0) FROM goods_jjim gj,goods_list gl
 		WHERE gj.pno=gl.no
-	    AND pno = #{pno}
 	    AND id=#{id}
   </select>
 </mapper>

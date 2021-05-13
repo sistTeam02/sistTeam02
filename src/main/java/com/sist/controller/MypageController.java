@@ -23,11 +23,46 @@ public class MypageController {
 	@Autowired
 	private MemberDAO mdao;
 	
+	
 	//메인으로 전송
-	//관심목록(찜&장바구니)
+	//관심목록(찜목록 불러오기)
 	@GetMapping("mypage/like_list.do")
-	public String mypage_like_list(Model model){
+	public String mypage_like_list(String page,HttpSession session,Model model){
+		//세션에 저장된 정보 가져오기
+		String id=(String)session.getAttribute("id");
+		System.out.println(id);
 		
+		
+		//운동용품 찜목록
+		if(page==null)
+			page="1";
+		int curpage=Integer.parseInt(page);
+		int rowSize=10;
+		int start=(curpage*rowSize)-(rowSize-1);
+		int end=(rowSize*curpage);
+		Map map=new HashMap();
+		map.put("start", start);
+		map.put("end", end);
+		map.put("id", id);
+		
+		List<GoodsVO> gList=fdao.mypageGoodsJjimList(map);
+		int totalpage=fdao.mypageGoodsJjimCount(id);
+		
+		final int BLOCK=10;
+		int startPage=((curpage-1)/BLOCK*BLOCK)+1;
+		int endPage=((curpage-1)/BLOCK*BLOCK)+BLOCK;
+		int allpage=totalpage;
+		if(endPage>allpage){
+			endPage=totalpage;
+		}
+		
+		
+		model.addAttribute("id",id);
+		model.addAttribute("gList",gList);
+		model.addAttribute("startPage",startPage);
+		model.addAttribute("endPage",endPage);
+		model.addAttribute("BLOCK",BLOCK);
+		model.addAttribute("allpage",allpage);
 		model.addAttribute("bread_jsp","../mypage/bread1.jsp");
 		model.addAttribute("mypage_jsp","../mypage/like_list.jsp");
 		model.addAttribute("main_jsp","../mypage/mypage_main.jsp");
@@ -67,12 +102,7 @@ public class MypageController {
 				map.put("id", id);
 				List<Chat_foodVO> fList=fdao.mypageChatFoodListData(map);
 				int totalpage=fdao.mypageChatFoodDataTotalPage(id);
-			/*	for(Chat_foodVO vo:fList){
-					session.setAttribute("id",vo.getId() );
-				}
-				map.put("id",id);*/
-						
-						
+				
 				final int BLOCK=10;
 				int startPage=((curpage-1)/BLOCK*BLOCK)+1;
 				int endPage=((curpage-1)/BLOCK*BLOCK)+BLOCK;

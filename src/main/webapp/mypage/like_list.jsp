@@ -114,26 +114,31 @@
 							      </tr>
 							    </thead>
 							    <tbody>
-							      <c:forEach var="gvo" items="${list }">
+							      <c:forEach var="gvo" items="${gList }">
 							      <tr>
-							        <td>${gvo.poster}</td>
+							        <td>
+							        	<img src="${gvo.poster}" width="100px" height="100">
+							        </td>
 							        <td>${gvo.title }</td>
 							        <td><fmt:formatNumber value="${gvo.price }"/>&nbsp;원</td>
 							      </tr>
-<%-- 							      <tr>
-							        <td>${vo.poster}</td>
-							        <td>ab슬라이드 4휠 복근 탄력 운동기구 홈트레이닝</td>
-							        <td>16500원</td>
-							      </tr>
-							      <tr>
-							        <td>${vo.poster}</td>
-							        <td>다이어트짐볼 55cm 블루 스트레칭도구 홈트레이닝 볼</td>
-							        <td>16650원</td>
-							      </tr> --%>
 							      </c:forEach>
 							    </tbody>
 							  </table>
 							</div>
+							<table class="table">
+							  	<tr>
+							  		<td class="text-center">
+							  			<ul class="pagination">
+							  				<li><a href="#">&lt;</a></li>
+							  				<c:forEach var="i" begin="${startPage }" end="${endPage }">
+							  					<li><a href="../mypage/like_list.do?page=${i }">${i }</a></li>
+							  				</c:forEach>
+							  					<li><a href="#">&gt;</a>
+							  			</ul>
+							  		</td>
+							  	</tr>
+							  </table>
 							<div class="container" align="right">
 							  <button type="button" class="btn btn-lg btn-default" onclick="location.href='../shop/shop_list.do'">다른 제품 구경하러 가기</button>
 							</div>
