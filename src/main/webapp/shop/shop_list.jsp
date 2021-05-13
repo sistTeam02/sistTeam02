@@ -26,7 +26,7 @@
 
 <script type="text/javascript">
 $(function(){
-	// 추천버튼 클릭시(추천 추가 또는 추천 제거)
+	// 찜버튼 클릭시(추천 추가 또는 추천 제거)
 	$("#goodsJjimUpdate").click(function(){
 		$.ajax({
 			url: "mypage/like_list_insert.do",
@@ -40,7 +40,7 @@ $(function(){
             }
 		})
 	});
-	// 게시글 추천수
+	// 찜
     function recCount() {
 		$.ajax({
 			url: "mypage/like_list_gcount.do",
@@ -65,11 +65,11 @@ $(function(){
     		values: [ 0, 580 ],
     		slide: function( event, ui )
     		{
-    			$( "#amount" ).val( "//" + ui.values[ 0 ] + " - //" + ui.values[ 1 ] );
+    			$( "#amount" ).val( "￦" + ui.values[ 0 ] + " - ￦" + ui.values[ 1 ] );
     		}
     	});
     		
-    	$( "#amount" ).val( "//" + $( "#slider-range" ).slider( "values", 0 ) + " - //" + $( "#slider-range" ).slider( "values", 1 ) );
+    	$( "#amount" ).val( "￦" + $( "#slider-range" ).slider( "values", 0 ) + " - ￦" + $( "#slider-range" ).slider( "values", 1 ) );
     }
 });
 
@@ -114,7 +114,7 @@ $(function(){
                         </ul>
                     </div>
                     <div class="filter-widget">
-                        <h4 class="fw-title" id="price">가격대</h4>
+                        <h4 class="fw-title" id="price">가격대별</h4>
                         <div class="filter-range-wrap">
                             <div class="range-slider">
                                 <div class="price-input">
@@ -129,7 +129,7 @@ $(function(){
                                 <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span>
                             </div>
                         </div>
-                        <a href="#" class="filter-btn">Filter</a>
+                        <a href="#" class="filter-btn">찾기</a>
                     </div>
                     <div class="filter-widget">
                         <h4 class="fw-title">최근 본 상품</h4>
@@ -147,7 +147,7 @@ $(function(){
                     <div class="product-show-option">
                         <div class="row">
                             <div class="col-lg-7 col-md-7">
-                                <div class="select-option" style="weight:25px">
+                                <div class="select-option" style="weight:30px">
                                     <select class="sorting">
                                         <option value="">최신순</option>
                                         <option value="">가격순</option>

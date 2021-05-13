@@ -163,50 +163,13 @@ public class QnABoardController {
 		   return "board/qdelete_ok";
 	   }
 	   
-	   @PostMapping("board/qreply_insert.do")
-	   public String board_qreply_insert(int mno,String msg,RedirectAttributes ra,HttpSession session)
-	   {
-		   QnABoard_ReplyVO vo=new QnABoard_ReplyVO();
-		   vo.setMno(mno);
-		   vo.setMsg(msg);
-		   String id=(String)session.getAttribute("id");
-		   vo.setId(id);
-		   
-		   // ReplyDAO로 전송 
-		   qDao.qnareplyInsert(vo);
-		   // .do?bno=10&page=1
-		   ra.addAttribute("mno", mno);
-		   return "redirect:qreply_list.do"; // detail.do?no=1&page=1
-	   }
-	   
-	   @PostMapping("board/qreply_update.do")
-	   public String board_qreply_update(int no,int mno,String msg,RedirectAttributes ra)
-	   {
-		   // 수정 => DAO
-		   QnABoard_ReplyVO vo=new QnABoard_ReplyVO();
-		   vo.setNo(no);
-		   vo.setMsg(msg);
-		   qDao.qnareplyUpdate(vo);
-		   // 수정 후에 데이터를 보내준다 
-		   ra.addAttribute("mno",mno);
-		   return "redirect:qreply_list.do";
-	   }
-	   
-	   @GetMapping("board/qreply_delete.do")
-	   public String board_qreply_delete(int no,int mno,RedirectAttributes ra)
-	   {
-		   // 삭제 처리 ==> DAO(service)
-		   qDao.qnareplyDelete(no);
-		   ra.addAttribute("mno", mno);
-		   return "redirect:qreply_list.do";
-	   }
-	   
+	   /////////////////// 답변 ////////////////////////////////////////
 	   @GetMapping("board/qreply_list.do")
-	   public String board_qreply_list(int mno, Model model)
+	   public String board_qreply(int mno,Model model)
 	   {
-		   List<QnABoard_ReplyVO> qList=qDao.qnareplyListData(mno);
-		   model.addAttribute("qList", qList);
-		   model.addAttribute("no", mno);
+		   // 데이터 읽기 => DAO연결 
+		   QnABoard_ReplyVO vo=qDao.qnaboardReplyData(mno);
+		   model.addAttribute("vo", vo);
 		   return "board/qreply_list";
 	   }
 	   

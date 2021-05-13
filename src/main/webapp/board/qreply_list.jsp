@@ -9,19 +9,18 @@
 </head>
 <body>
  <table class="table">
-   <c:if test="${sessionScope.msg!=null}">
+     <c:if test="${vo.msg!=null }">
        <tr>
-        <th width=20% class="info text-center">관리자</th>
-        <td width=30% class="text-center">${id }</td>
-        <th width=20% class="info text-center">작성일</th>
-        <td width=30% class="text-center"><fmt:formatDate value="${regdate }" pattern="yyyy-MM-dd"/></td>
+        <th width=20% class="warning text-center">관리자</th>
+        <td width=30% class="text-center">${vo.id }</td>
+        <th width=20% class="warning text-center">작성일</th>
+        <td width=30% class="text-center">${vo.regdate }</td>
        </tr>
        <tr>
-         <td colspan="4" height="200" valign="top" class="text-left">
-          <pre style="white-space: pre-wrap;border:none;background-color:white">${msg }</pre>
-         </td>
+         <th width=20% class="warning text-center">답변</th>
+         <td colspan="3" height="100" valign="top" class="text-left">${vo.msg }</td>
        </tr>
-    </c:if>
+      </c:if>
      </table>
 </body>
 </html>
