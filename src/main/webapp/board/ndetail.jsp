@@ -41,7 +41,6 @@ h1 {
          <td colspan="3">${vo.subject}</td>
        </tr>
        <tr>
-       <c:if test="${vo.filecount!=0 }">
          <tr>
            <th width=20% class="info text-center">첨부파일</th>
            <td colspan="3">
@@ -52,15 +51,16 @@ h1 {
              </ul>
            </td>
          </tr>
-       </c:if>
          <td colspan="4" height="200" valign="top" class="text-left">
           <pre style="white-space: pre-wrap;border:none;background-color:white">${vo.content }</pre>
          </td>
        </tr>
        <tr>
          <td colspan="4" class="text-right">
+          <c:if test="${sessionScope.name=='홍길동' }">
            <a href="../board/nupdate.do?no=${vo.no }&page=${page}" class="btn btn-xs btn-success">수정</a>
            <a href="../board/ndelete.do?no=${vo.no }&page=${page}" class="btn btn-xs btn-warning">삭제</a>
+          </c:if>
            <a href="../board/nlist.do?page=${page }" class="btn btn-xs btn-info">목록</a>
          </td>
        </tr>

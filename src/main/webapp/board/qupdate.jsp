@@ -26,7 +26,7 @@ h1 {
      <tr>
        <td width=15% class="text-right info">아이디</td>
        <td width=85%>
-        <input type=text name=name size=15 class="input-sm" value="${vo.id }">
+        <input type=text name=id size=15 class="input-sm" value="${vo.id }">
         <input type=hidden name=no value="${vo.no }">
         <input type=hidden name=page value="${page }">
        </td>

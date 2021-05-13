@@ -63,8 +63,10 @@ $(function(){
        </tr>
        <tr>
          <td colspan="4" class="text-right">
+         <c:if test="${sessionScope.id==vo.id }">
            <a href="../board/qupdate.do?no=${vo.no }&page=${page}" class="btn btn-xs btn-success">수정</a>
            <a href="../board/qdelete.do?no=${vo.no }&page=${page}" class="btn btn-xs btn-warning">삭제</a>
+          </c:if>
            <a href="../board/qlist.do?page=${page }" class="btn btn-xs btn-info">목록</a>
          </td>
        </tr>

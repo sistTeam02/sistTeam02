@@ -224,7 +224,7 @@ public class NoticeBoardController {
 		   return "board/ndelete";
 	   }
 	   
-	   /*@PostMapping("board/ndelete_ok.do")
+	   @PostMapping("board/ndelete_ok.do")
 	   public String board_ndelete_ok(int no,int page,String pwd,Model model)
 	   {
 		   // 결과값 읽기 
@@ -235,7 +235,7 @@ public class NoticeBoardController {
 		   model.addAttribute("bCheck", bCheck);
 		   model.addAttribute("page", page); // list.jsp => no(X) , page(O)
 		   return "board/ndelete_ok";
-	   }*/
+	   }
 	   // 다운로드 : void
 	   @GetMapping("board/download.do")
 	   public void board_download(String fn,HttpServletResponse response)

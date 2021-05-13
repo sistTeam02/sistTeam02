@@ -17,13 +17,29 @@ h1 {
 </style>
 </head>
 <body>
-    <td colspan="4" class="text-right">
-        <form method=post action="fdelete_ok.do" id="frm">
-           비밀번호:<input type=password name=pwd size=10 class="input-sm">
-                 <input type=hidden name=no value="${no }">
-                 <input type=hidden name=page value="${page }">
-                 <a href="../board/fdelete.do?no=${vo.no }&page=${page}"><input type=button value="삭제" class="btn btn-sm btn-primary" id="delBtn"></a>
-        </form>
-    </td>
+ <div style="height:50px"></div>
+ <div class="container">
+  <h1>삭제하기</h1>
+  <div class="row">
+  <form method="post" action="fdelete_ok.do">
+   <table class="table">
+    <tr>
+     <td class="text-center">
+      비밀번호:<input type="password" name=pwd size=15 class="input-sm">
+      <input type=hidden name=no value="${no}">
+      <input type=hidden name=page value="${page }">
+     </td>
+    </tr>
+    <tr>
+     <td class="text-center">
+      <button>삭제</button>
+      <input type=button value="취소" class="btn btn-sm btn-success"
+         onclick="javascript:history.back()">
+     </td>
+    </tr>
+   </table>
+   </form>
+  </div>
+ </div>
 </body>
 </html>

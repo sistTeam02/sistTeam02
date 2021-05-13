@@ -70,7 +70,7 @@ public class FreeBordRestController {
 	   }*/
 	   
 	   ////////////////////////  공지사항  ////////////////////////////////////
-	   @RequestMapping(value="board/ndelete_ok.do")
+	  /* @RequestMapping(value="board/ndelete_ok.do")
 	   public String board_ndelete_ok(int no,String pwd)
 	   {
 		   String msg="";
@@ -105,6 +105,6 @@ public class FreeBordRestController {
 	       }
 		   return msg;
 	   }
-	
+	*/
 
 }

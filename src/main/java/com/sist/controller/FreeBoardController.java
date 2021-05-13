@@ -73,7 +73,7 @@ public class FreeBoardController {
 	   return "redirect:flist.do";
    }
    @GetMapping("board/fdetail.do")
-   public String board_fdetail(int no,String page,Model model)
+   public String board_fdetail(int no,int page,Model model)
    {
 	   // 데이터 읽기 => DAO연결 
 	   FreeBoardVO vo=fDao.freeboardDetailData(no);
@@ -95,44 +95,46 @@ public class FreeBoardController {
     */
    // Error 405(get/post)
    @GetMapping("board/fupdate.do")
-   public String board_fupdate(int no,Model model)
+   public String board_fupdate(int no,int page,Model model)
    {
 	   // 결과값 
 	   FreeBoardVO vo=fDao.freeboardUpdateData(no);
 	   // 데이터연동 (DAO)
 	   // 데이터를 JSP로 전송
 	   model.addAttribute("vo", vo);
+	   model.addAttribute("page", page);
 	   model.addAttribute("main_jsp", "../board/fupdate.jsp");
 	   return "main/main";
    }
    @PostMapping("board/fupdate_ok.do")
-   public String board_fupdate_ok(FreeBoardVO vo,Model model)
+   public String board_fupdate_ok(FreeBoardVO vo,int page,Model model)
    {
 	   //데이터베이스 연동 
 	   boolean bCheck=fDao.freeboardUpdate(vo);
 	   // update_ok.jsp => 결과값을 보내서 사용자가 볼 수 있게 만든다 
 	   model.addAttribute("bCheck",bCheck);
+	   model.addAttribute("page", page);
 	   model.addAttribute("no", vo.getNo());
 	   return "board/fupdate_ok";
    }
    
    @GetMapping("board/fdelete.do")
-   public String board_fdelete(int no,String pwd,String page,Model model)
+   public String board_fdelete(int no,int page,Model model)
    {
 	   model.addAttribute("no", no);
-	   model.addAttribute("pwd", pwd);
 	   model.addAttribute("page", page);
 	   return "board/fdelete";
    }
    
    @PostMapping("board/fdelete_ok.do")
-   public String board_fdelete_ok(int no,String pwd,Model model)
+   public String board_fdelete_ok(int no,String pwd,int page,Model model)
    {
 	   // 결과값 읽기 
 	   System.out.println("pwd="+pwd+",no="+no);
 	   boolean bCheck=fDao.freeboardDelete(no, pwd);
 	   System.out.println("bCheck="+bCheck);
-	   // delete_ok.jsp로 결과값을 전송 => 사용자가 볼 수 있게 처리 
+	   // delete_ok.jsp로 결과값을 전송 => 사용자가 볼 수 있게 처리
+	   model.addAttribute("page", page);
 	   model.addAttribute("bCheck", bCheck);
 	   return "board/fdelete_ok";
    }

@@ -173,8 +173,8 @@ $(function(){
 	           <input type="hidden" name=no value="${rvo.no }" id="update_no${rvo.no }">
 	           <input type="hidden" name=bno value="${no }" id="update_bno${rvo.no }">
 	           
-	           <textarea rows="3" cols="120" name="msg" style="float: left" id="update_msg${rvo.no }">${rvo.msg }</textarea>
-	           <button class="btn2 btn-sm btn-primary uBtn" style="height: 80px;float:left"
+	           <textarea rows="3" cols="120" name="msg" style="float: left; width:710px;" id="update_msg${rvo.no }">${rvo.msg }</textarea>
+	           <button class="btn2 btn-sm btn-primary uBtn" style="height: 60px;float:right;"
 	            data-no="${rvo.no }"
 	           >댓글수정</button>
 	         </td>
@@ -186,8 +186,8 @@ $(function(){
 	           <input type="hidden" name=pno value="${rvo.no }" id="rr_insert_pno${rvo.no }">
 	           <input type="hidden" name=bno value="${no }" id="rr_insert_bno${rvo.no }">
 	           
-	           <textarea rows="3" cols="120" name="msg" style="float: left" id="rr_insert_msg${rvo.no }"></textarea>
-	           <input type=button class="btn1 btn-sm btn-primary rrBtn" style="width:500px;height: 80px;float:left"
+	           <textarea rows="3" cols="120" name="msg" style="float: left; width:710px;" id="rr_insert_msg${rvo.no }"></textarea>
+	           <input type=button class="btn1 btn-sm btn-primary rrBtn" style="width:67px;height: 60px;float:right;"
 	             value=댓글 data-no="${rvo.no }">
 	          <!-- </form> -->
 	         </td>
@@ -200,8 +200,8 @@ $(function(){
 	         <td class="text-center">
 	           <input type="hidden" name=bno value="${no }" id="insert_bno">
 	          
-	           <textarea rows="3" cols="120" name="msg" style="float: left" id="insert_msg"></textarea>
-	           <input type=button class="btn2 btn-sm btn-primary" style="height: 80px;float:left" id="replyBtn"
+	           <textarea rows="3" cols="120" name="msg" style="float: left; width:710px;" id="insert_msg"></textarea>
+	           <input type=button class="btn2 btn-sm btn-primary" style="height: 60px;float:right;" id="replyBtn"
 	           value="댓글쓰기">
 	         </td>
 	        </tr>

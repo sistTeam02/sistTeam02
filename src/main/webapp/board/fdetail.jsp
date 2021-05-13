@@ -97,21 +97,11 @@ $(function(){
          <td colspan="4" class="text-right">
          <c:if test="${sessionScope.name==vo.name }">
            <a href="../board/fupdate.do?no=${vo.no }&page=${page}" class="btn btn-xs btn-success">수정</a>
-           <span class="btn btn-sm btn-warning" style="height:25px;" id="delSpan">삭제</span>
+           <a href="../board/fdelete.do?no=${vo.no }&page=${page}" class="btn btn-xs btn-warning">삭제</a>
           </c:if>
            <a href="../board/flist.do?page=${page }" class="btn btn-xs btn-info">목록</a>
          </td>
        </tr>
-       <tr id="del" style="display:none">
-       <td colspan="4" class="text-right">
-        <form method=post action="fdelete.jsp" id="frm">
-           비밀번호:<input type=password name=pwd size=10 class="input-sm">
-                 <input type=hidden name=no value="${vo.no }">
-                 <input type=hidden name=page value="${page }">
-                 <a href="../board/fdelete_.do?no=${vo.no }&page=${page}"><input type=button value="삭제" class="btn btn-sm btn-primary" id="delBtn"></a>
-        </form>
-       </td>
-      </tr>
      </table>
     </div>
     <div style="height: 30px"></div>

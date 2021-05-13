@@ -151,15 +151,15 @@ public class QnABoardController {
 	   }
 	   
 	   @PostMapping("board/qdelete_ok.do")
-	   public String board_qdelete_ok(int no,int page,String pwd,Model model)
+	   public String board_qdelete_ok(int no,String pwd,int page,Model model)
 	   {
 		   // 결과값 읽기 
 		   System.out.println("pwd="+pwd+",no="+no);
 		   boolean bCheck=qDao.qnaboardDelete(no, pwd);
 		   System.out.println("bCheck="+bCheck);
-		   // delete_ok.jsp로 결과값을 전송 => 사용자가 볼 수 있게 처리 
+		   // delete_ok.jsp로 결과값을 전송 => 사용자가 볼 수 있게 처리
+		   model.addAttribute("page", page);
 		   model.addAttribute("bCheck", bCheck);
-		   model.addAttribute("page", page); // list.jsp => no(X) , page(O)
 		   return "board/qdelete_ok";
 	   }
 	   

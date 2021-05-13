@@ -86,10 +86,6 @@
   DELETE FROM freeboard
   WHERE no=#{no}
 </delete>
-<delete id="freeboardReplyDelete" parameterType="int">
-  DELETE FROM freeboard
-  WHERE bno=#{bno}
-</delete>
 
 <!-- ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
 
@@ -166,9 +162,7 @@
 <!-- 수정 -->
 <select id="qnaboardGetPassword" resultType="string" parameterType="int">
  SELECT pwd FROM qnaboard
-  <trim prefix="WHERE">
-     no=#{no}
-   </trim>
+ WHERE no=#{no}		
 </select>
 <update id="qnaboardUpdate" parameterType="QnABoardVO">
  UPDATE qnaboard SET

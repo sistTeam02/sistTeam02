@@ -17,11 +17,11 @@ h1 {
 </style>
 </head>
 <body>
-<div style="height:50px"></div>
+ <div style="height:50px"></div>
  <div class="container">
   <h1>삭제하기</h1>
   <div class="row">
-  <form method="post" action="../board/fdelete_ok.do">
+  <form method="post" action="fdelete_ok.do">
    <table class="table">
     <tr>
      <td class="text-center">

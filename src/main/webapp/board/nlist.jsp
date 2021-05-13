@@ -28,7 +28,7 @@ h1 {
   <table class="table">
   <tr>
    <td class="text-right">
-   <c:if test="${sessionScope.id!=null }">
+   <c:if test="${sessionScope.name=='홍길동' }">
     <a href="../board/ninsert.do" class="btn btn-sm btn-warning">등록</a> 
    </c:if>
    </td>
