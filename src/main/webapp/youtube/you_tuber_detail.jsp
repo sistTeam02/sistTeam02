@@ -85,15 +85,19 @@
                                     </select>
                                 </div>
                             </div>
+                            <form method="post" action="../youtube/input.do">
                             <div class="col-lg-5 col-md-5 text-right">
                                 
 								  <a href="../youtube/you_tuber_detail.do?cno=${youtuberName.cno }">
 								<h3>${youtuberName.channeltitle } </h3>
 								</a>
 								  <div class="filter-widget">
-								<a href="../youtube/you_tuber_detail.do?cno=${youtuberName.cno }" class="filter-btn">수강하기</a>
+								
+								<input type=hidden name="cno" value="${youtuberName.cno }">
+								<input type="submit"  value="수강하기" class="filter-btn">
 								</div>
                             </div>
+                            </form>
                         </div>
                     </div>
                     <div class="product-list">

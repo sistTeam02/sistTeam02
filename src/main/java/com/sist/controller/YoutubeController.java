@@ -11,6 +11,7 @@ import java.util.*;
 import javax.servlet.http.HttpSession;
 
 import com.sist.dao.*;
+import com.sist.vo.Homet_pay_inputVO;
 import com.sist.vo.YoutubeVO;
 
 @Controller
@@ -145,14 +146,21 @@ public class YoutubeController {
 		return "main/main";
 	}
 	
-/*	//수강신청
-	@PostMapping("youtuber/input.do")
+	//수강신청
+	@PostMapping("youtube/input.do")
 	public String youtube_input(int cno,HttpSession session,Model model)
 	{	
+		
 		String id=(String)session.getAttribute("id");
+		
+		Homet_pay_inputVO vo = new Homet_pay_inputVO();
+		vo.setCno(cno);
+		vo.setId(id);
+		
+		yDao.hometPayInputInsert(vo);
 	
-		return "redirect:../youtube/you_tuber_detail.jsp";
-	}*/
+		return "redirect:../youtube/you_tuber_detail.do?cno="+cno;
+	}
 	
 	
 	

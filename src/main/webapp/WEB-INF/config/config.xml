@@ -30,6 +30,7 @@
     <typeAlias type="com.sist.vo.Chat_recipeDetailVO" alias="Chat_recipeDetailVO"/>
   	<typeAlias type="com.sist.vo.YoutubeVO" alias="YoutubeVO"/>
   	<typeAlias type="com.sist.vo.ShopReplyVO" alias="ShopReplyVO"/>
+  	<typeAlias type="com.sist.vo.Homet_pay_inputVO" alias="Homet_pay_inputVO"/>
   </typeAliases>
   <mappers>
     <mapper resource="com/sist/mapper/member-mapper.xml"/>

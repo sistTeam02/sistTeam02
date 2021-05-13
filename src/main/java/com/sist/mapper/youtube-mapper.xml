@@ -65,4 +65,46 @@
 		FROM youtube_data_v2
 		WHERE cno=#{cno}
 	</select>
+	
+	<!-- 
+		유료부분 찜하기 => 테이블명 : hometraining_input(no,id,cno,state)
+						VO : Homet_pay_inputVO
+	-->
+	<insert id="hometPayInputInsert" parameterType="Homet_pay_inputVO">
+		<selectKey keyProperty="no" resultType="int" order="BEFORE">
+			SELECT NVL(MAX(no)+1,1) as no FROM hometraining_input
+		</selectKey>
+			INSERT INTO hometraining_input(no,id,cno,state) VALUES(
+			#{no},
+			#{id},
+			#{cno},
+			'n'			)
+	</insert>
+	<!-- RESULTMAP -->
+	<resultMap type="Homet_pay_inputVO" id="Homet_pay_inputMap">
+		<result property="no" column="no"/>
+		<result property="id" column="id"/>
+		<result property="cno" column="cno"/>
+		<result property="state" column="state"/>
+		<result property="yvo.channeltitle" column="channeltitle"/>	
+	</resultMap>
+	<!-- 마이페이지에서 불러오기 -->
+	<select id="mypageHometpayList" resultMap="Homet_pay_inputMap" parameterType="string">
+		SELECT hi.no,hi.cno,yc.channeltitle,hi.id,hi.state
+		FROM hometraining_input hi,youtube_cno yc
+		WHERE hi.cno=yc.cno AND id=#{id}
+	</select>
+	
+	<!-- 어드민 페이지에서 불러오기 -->
+	<select id="adminPageHometpayList" resultMap="Homet_pay_inputMap">
+		SELECT hi.no,hi.cno,yc.channeltitle,hi.id,hi.state
+		FROM hometraining_input hi,youtube_cno yc
+		WHERE hi.cno=yc.cno
+	</select>
+	
+	<!-- 관리자 승인 -->
+	<update id="adminHtPayOKUpdate" parameterType="int">
+		UPDATE hometraining_input SET state='y'
+		WHERE no=#{no}
+	</update>
 </mapper>
