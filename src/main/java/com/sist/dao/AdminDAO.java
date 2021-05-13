@@ -99,7 +99,7 @@ public class AdminDAO extends SqlSessionDaoSupport{
 		getSqlSession().insert("shop_deleteListData",map);
 		getSqlSession().insert("shop_deleteDetailData",map);
 	}
-	public User_order_basketVO  totalFoodSales(String month){
-		return getSqlSession().selectOne("totalFoodSales",month);
+	public User_order_basketVO  totalFoodSales(Map map){
+		return getSqlSession().selectOne("totalFoodSales",map);
 	}
 }
