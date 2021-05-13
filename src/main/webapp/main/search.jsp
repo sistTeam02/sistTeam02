@@ -115,12 +115,14 @@ a:hover{
                         	<c:forEach var="hvo" items="${hlist }">
 	                            <div class="col-lg-4 col-sm-6">
 	                                <div class="product-item">
+	                                 <a href="../home_training/ht_detail_free.do?no=${hvo.no}">
 	                                    <div class="pi-pic">
 	                                        <img src="${hvo.poster }" alt="">
 	                                    </div>
+	                                    </a>
 	                                    <div class="pi-text">
 	                                        <div class="catagory-name">무료</div>
-	                                        <a href="#">
+	                                        <a href="../home_training/ht_detail_free.do?no=${hvo.no}">
 	                                            <h5>${hvo.title }</h5>
 	                                        </a>
 	                                    </div>
@@ -280,7 +282,7 @@ a:hover{
     			isBuy:false
     		},
     		mounted:function(){
-    			axios.get("http://localhost/controller/main/rank.do",{
+    			axios.get("http://localhost/web/main/rank.do",{
     				params:{
     					value:this.curvalue
     				}
@@ -291,7 +293,7 @@ a:hover{
     		methods:{
     			showSearchRank(){
     				this.curvalue=1;
-    				axios.get("http://localhost/controller/main/rank.do",{
+    				axios.get("http://localhost/web/main/rank.do",{
         				params:{
         					value:this.curvalue
         				}
@@ -303,7 +305,7 @@ a:hover{
     			},
     			showBuyRank(){
     				this.curvalue=2;
-    				axios.get("http://localhost/controller/main/rank.do",{
+    				axios.get("http://localhost/web/main/rank.do",{
         				params:{
         					value:this.curvalue
         				}
