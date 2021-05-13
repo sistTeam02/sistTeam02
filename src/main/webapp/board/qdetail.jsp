@@ -21,7 +21,7 @@ h1 {
 <script src="https://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
 $(function(){
-	let mno=${vo.no};
+	let mno=${vo.no}
 	$.ajax({
 		type:'GET',
 		url:'qreply_list.do',

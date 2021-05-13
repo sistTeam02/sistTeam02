@@ -113,28 +113,10 @@ public class QnABoardDAO extends SqlSessionDaoSupport{
 	     }
 		
 		//////////////////////////////// 답변 /////////////////////////////////////////////
-		public List<QnABoard_ReplyVO> qnareplyListData(int mno)
+		public QnABoard_ReplyVO qnaboardReplyData(int mno)
 		{
-			return getSqlSession().selectList("qnareplyListData", mno);
-		}
-		// 등록
-		public void qnareplyInsert(QnABoard_ReplyVO vo)
-		{
-			getSqlSession().insert("qnareplyInsert", vo);
+			return getSqlSession().selectOne("qnaboardReplyData", mno);
 		}
 		
-		// 수정
-		public void qnareplyUpdate(QnABoard_ReplyVO vo)
-		{
-			getSqlSession().update("qnareplyUpdate", vo);
-		}
-		
-
-		// 삭제
-		@Transactional(propagation=Propagation.REQUIRED, rollbackFor=Exception.class)
-		public void qnareplyDelete(int no)
-		{
-				getSqlSession().delete("qnareplyDelete", no);
-		}
 
 }

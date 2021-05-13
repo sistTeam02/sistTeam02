@@ -174,32 +174,12 @@
   DELETE FROM qnaboard
   WHERE no=#{no}
 </delete>
-<delete id="qnaboardReplyDelete" parameterType="int">
-  DELETE FROM qnaboard
+<!-- 답변 보여주기 -->
+<select id="qnaboardReplyData" resultType="QnABoard_ReplyVO" parameterType="int">
+  SELECT mno,id,msg,regdate
+  FROM qnaboard_reply
   WHERE mno=#{mno}
-</delete>
-<select id="qnareplyListData" resultType="ReplyVO" parameterType="int">
- SELECT no,mno,id,msg,TO_CHAR(regdate,'YYYY-MM-DD HH24:MI:SS') as dbday
- FROM qnaboard_reply
- WHERE mno=#{mno}
 </select>
-<insert id="qnareplyInsert" parameterType="ReplyVO">
- INSERT INTO qnaboard_reply(no,mno,id,msg) VALUES(
-   #{no},
-   #{mno},
-   #{id},
-   #{msg}
- )
-</insert>
-<update id="qnareplyUpdate" parameterType="ReplyVO">
- UPDATE qnaboard_reply SET
- msg=#{msg}
- WHERE no=#{no}
-</update>
-<delete id="qnareplyDelete" parameterType="int">
-  DELETE FROM qnaboard_reply
-  WHERE no=#{no}
-</delete>
 
 <!-- ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
 <select id="noticeboardListData" resultType="NoticeBoardVO" parameterType="hashmap">
