@@ -6,13 +6,13 @@
 	<c:when test="${result=='NOID' }">
 	  <script>
 	  	alert("ID가 존재하지 않습니다");
-	  	hostory.back();
+	  	history.back();
 	  </script>
 	</c:when>
 	<c:when test="${result=='NOPWD' }">
 	  <script>
 	  	alert("비밀번호가 틀립니다");
-	  	hostory.back();
+	  	history.back();
 	  </script>
 	</c:when>
 	<c:otherwise>

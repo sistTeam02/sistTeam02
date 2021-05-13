@@ -306,6 +306,7 @@ function makeText_soldoutBtn() {
 			$('#isStock'+i).css('color','red');
 			$('#isStock'+i).next().children().text("품절취소");
 		}else{
+			$('#isStock'+i).css('color','black');
 			$('#isStock'+i).next().children().text("품절처리");
 		}
 	}

@@ -4,10 +4,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js"></script>
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <title>Insert title here</title>
 <style type="text/css">
 .admin_row{
-    width: 90em;
+    width: 94em;
     height: 70em;
     border: 1px solid black;
     margin: 0px 11em;
@@ -16,7 +18,7 @@
 	border: 1px solid black;
     background: #5e5e6b;
     color: white;
-    width: 11em;
+    width: 8.2em;
 	float: left;
 	height: 100%;
 }
@@ -59,7 +61,7 @@ float: left;
 <body>
 	<table class="admin_button_table">
 	<tr>
-		<td><button class="admin_button" id="qna_allData">전체보기</button>
+		<td><button class="admin_button" id="qna_allData" @click="monthBtn()">전체보기</button>
 			<button class="admin_button" id="qna_UpdateData">답변수정</button>
 			<button class="admin_button" id="qna_search">QnA검색</button>
 			<button class="admin_button" id="temp">미정</button></td>
@@ -72,7 +74,7 @@ float: left;
 	            	<ul class="admin_tab">
 	            		<li><a href="../main/admin_main.do?no=0">QnA관리</a></li>
 	            		<li><a href="../main/admin_main.do?no=1">쇼핑몰관리</a></li>
-	            		<li>통계</li>
+	            		<li><a href="../main/admin_main.do?no=2">통계</a></li>
 	            	</ul>
 	            </div>
 	            <div class="admin_view_div">

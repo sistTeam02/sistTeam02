@@ -40,7 +40,8 @@ public class AdminController {
 		int page=Integer.parseInt(no);
 		String[] arr={
 				"../admin/qna.jsp",
-				"../admin/shop_manage.jsp"
+				"../admin/shop_manage.jsp",
+				"../admin/statistics.jsp"
 		};
 		
 		model.addAttribute("admin_jsp", arr[page]);
