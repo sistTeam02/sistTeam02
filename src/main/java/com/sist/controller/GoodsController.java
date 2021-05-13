@@ -23,6 +23,8 @@ public class GoodsController {
 	// GoodsDAO 저장
 	@Autowired
 	private GoodsDAO gDao;
+	@Autowired
+	private ShopReplyDAO sDao;
 	
 	@GetMapping("shop/shop_list.do")
 	public String shop_list(String page,Model model,HttpServletRequest request)
@@ -143,12 +145,11 @@ public class GoodsController {
 		return null;
 	}
 	
-	// 댓글
+	// 리뷰 조회
 	@GetMapping("shop/shop_reply.do")
-	public String shop_reply(int pno, Model model){
-
-	
-		List<ShopReplyVO> rList=gDao.shopReplyListData(pno);
+	public String shop_reply(int pno, Model model) throws Exception
+	{
+		List<ShopReplyVO> rList=sDao.shopReplyListData(pno);
 		model.addAttribute("rList", rList);
 		model.addAttribute("no", pno);
 
@@ -156,57 +157,43 @@ public class GoodsController {
 	}
 	
 	@GetMapping("shop/shop_reply_delete.do")
-	public String shop_reply_delete(int no,int pno,RedirectAttributes ra)
+	public String shopReplyDelete(ShopReplyVO svo,int pno,RedirectAttributes ra) throws Exception
 	{
-		gDao.shopReplyDelete(no);
+		sDao.shopReplyDelete(svo);
 		ra.addAttribute("pno", pno);
 		 
 		return "redirect:shop_reply.do";
 	}
 	
-	@PostMapping("shop/shop_reply_to_reply_insert.do")
-	public String shop_reply_to_reply(int pno,String msg,RedirectAttributes ra,HttpSession session)
-	{
-		// 댓글 추가 작업 ==> DAO
-		ShopReplyVO vo=new ShopReplyVO();
-		String name=(String)session.getAttribute("name");
-		String id=(String)session.getAttribute("id");
-		vo.setName(name);
-		vo.setId(id);
-		vo.setPno(pno);
-		vo.setMsg(msg);
-//		gDao.shopReplyToReplyInsert(pno, vo);
-		ra.addAttribute("pno", vo.getPno());
-		 
-		return "redirect:shop_reply.do";
-	}
 	 
 	@PostMapping("shop/shop_reply_update.do")
-	public String shop_reply_update(int no,int pno,String msg,RedirectAttributes ra)
+	public String shop_reply_update(int no,int pno,String msg,RedirectAttributes ra) throws Exception
 	{
 		 ShopReplyVO vo=new ShopReplyVO();
 		 vo.setNo(no);
 		 vo.setMsg(msg);
-		 gDao.shopReplyUpdate(vo);
+		 sDao.shopReplyUpdate(vo);
 		 ra.addAttribute("pno",pno);
 		 
 		 return "redirect:shop_reply.do";
 	}
 	 
-	@PostMapping("shop/shop_reply_insert.do")
-	public String board_reply_insert(int pno,String msg,RedirectAttributes ra,HttpSession session)
+	// 댓글 작성
+	@PostMapping("shop/shop_detail_ok.do")
+	public String shopReplyInsert(ShopReplyVO svo,int pno,RedirectAttributes ra,HttpSession session,Model model) throws Exception
 	{
-		 ShopReplyVO vo=new ShopReplyVO();
-		 vo.setPno(pno);
-		 vo.setMsg(msg);
-		 String name=(String)session.getAttribute("name");
-		 String id=(String)session.getAttribute("id");
-		 vo.setName(name);
-		 vo.setId(id);
-
-		 gDao.shopReplyInsert(vo);
-	     ra.addAttribute("pno", pno);
-		 return "redirect:shop_reply.do";
+		 /*String name=(String)session.getAttribute("name");
+		 String msg=(String)session.getAttribute("msg");
+		 svo.setPno(pno);
+		 svo.setMsg(msg);
+		 svo.setName(name);*/
+		 
+		 sDao.shopReplyInsert(svo);
+		 System.out.println("확인중controller1...");
+	     ra.addAttribute("pno", svo.getPno());
+	     System.out.println("확인중controller2...");
+	     model.addAttribute("main_jsp", "../shop/shop_detail.jsp");
+		 return "redirect:shop/shop_list.do?no="+svo.getPno();
 	}
 
 }
