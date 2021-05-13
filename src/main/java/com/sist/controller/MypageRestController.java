@@ -3,6 +3,7 @@ package com.sist.controller;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -136,6 +137,50 @@ public class MypageRestController {
 		System.out.println(json);
 		return json;
 	}
+	
+	//찜목록 사이트 (ReactJSㅇ로 변경중)
+	/*@GetMapping("mypage/like_list_plan.do")
+	public String mypage_like_list(String page,HttpSession session,Model model){
+		//세션에 저장된 정보 가져오기
+		String id=(String)session.getAttribute("id");
+		System.out.println(id);
+		
+		
+		//운동용품 찜목록
+		if(page==null)
+			page="1";
+		int curpage=Integer.parseInt(page);
+		int rowSize=10;
+		int start=(curpage*rowSize)-(rowSize-1);
+		int end=(rowSize*curpage);
+		Map map=new HashMap();
+		map.put("start", start);
+		map.put("end", end);
+		map.put("id", id);
+		
+		List<GoodsVO> gList=mdao.mypageGoodsJjimList(map);
+		int totalpage=mdao.mypageGoodsJjimCount(id);
+		
+		final int BLOCK=10;
+		int startPage=((curpage-1)/BLOCK*BLOCK)+1;
+		int endPage=((curpage-1)/BLOCK*BLOCK)+BLOCK;
+		int allpage=totalpage;
+		if(endPage>allpage){
+			endPage=totalpage;
+		}
+		
+		
+		model.addAttribute("id",id);
+		model.addAttribute("gList",gList);
+		model.addAttribute("startPage",startPage);
+		model.addAttribute("endPage",endPage);
+		model.addAttribute("BLOCK",BLOCK);
+		model.addAttribute("allpage",allpage);
+		model.addAttribute("bread_jsp","../mypage/bread1.jsp");
+		model.addAttribute("mypage_jsp","../mypage/like_list.jsp");
+		model.addAttribute("main_jsp","../mypage/mypage_main.jsp");
+		return "main/main";
+	}*/
 	
 	
 }
