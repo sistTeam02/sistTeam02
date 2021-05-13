@@ -52,12 +52,7 @@ h1 {
       <td width=15% class="text-center">${vo.id }</td>
       <td width=20% class="text-center"><fmt:formatDate value="${vo.regdate }" pattern="yyyy-MM-dd"/> </td>
       <td width=10% class="text-center">${vo.hit }</td>
-      <c:if test="${vo.msg!=null }">
       <td width=10% class="text-center">${vo.answer }</td>
-      </c:if>
-      <c:if test="${vo.msg==null }">
-      <td width=10% class="text-center">Y</td>
-      </c:if>
      </tr>
     </c:forEach>
    </table>
