@@ -6,7 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Fashi | Template</title>
-<style type="text/css">
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script><style type="text/css">
 .table-hover{
     font-size:large;
     width:900px;
@@ -28,6 +28,7 @@
 	text-align:center;
 	font-weight: bold;
 }
+
 </style>
 <script type="text/javascript" src="https://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
@@ -108,7 +109,11 @@ function make_cal(year,month){
 						+", 식사시간:"+json[i].whenfood
 						+", 먹은음식:"+json[i].foodname
 						+", 음식 칼로리(kcal)/용량(g):"+json[i].foodkcal+"(kcal)/"+json[i].foodgram+"(g)  "+"\n"
-						alert(foodData);
+						//alert(foodData);
+						swal({
+							  text: "음식리스트\n"+foodData,
+							});
+						swal.close();
 			}
 			
 			
@@ -121,9 +126,12 @@ function make_cal(year,month){
 					planData+="등록일:"+json[i].plandate
 							+", 운동시간:"+json[i].time
 							+", 실천운동:"+json[i].sport.replace("^","세트")+" "+"\n"
-					alert(planData);
+							swal({
+								  text: "운동리스트\n"+planData,
+								});
+					swal.close();
 				}
-				alert(planData);
+				
 				
 		 } 
 			//alert(result)
@@ -158,7 +166,8 @@ $(document).ready(function(){
                		<div style="height:50px"></div>
                        <div class="container">
                       	<h2>채팅 기록 모아보기</h2>
-                      
+                      	<div style="height:20px"></div>
+                      <p>음식 리스트(첫번쨰클릭)와 운동 리스트(두번째클릭)가 출력됩니다</p>
                         <!-- 달력 -->
 			<table class="table2" style="height: 1em; width: 79em;">
                <tr id="calender_tr">
