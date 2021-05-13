@@ -86,7 +86,13 @@
                                 </div>
                             </div>
                             <div class="col-lg-5 col-md-5 text-right">
-                                <p>Show 01- 09 Of 36 Product</p>
+                                
+								  <a href="../youtube/you_tuber_detail.do?cno=${youtuberName.cno }">
+								<h3>${youtuberName.channeltitle } </h3>
+								</a>
+								  <div class="filter-widget">
+								<a href="../youtube/you_tuber_detail.do?cno=${youtuberName.cno }" class="filter-btn">수강하기</a>
+								</div>
                             </div>
                         </div>
                     </div>

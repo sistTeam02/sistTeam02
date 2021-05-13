@@ -190,11 +190,12 @@
                            <c:forEach var="gvo" items="${goodslist }">
                         <div class="product-list">
                             <div class="pi-pic">
+                             <a href="../shop/shop_detail.do?no=${gvo.no }">
                                 <img src="${gvo.poster }" alt="">
-                                <div class="sale">Sale</div>
+                                </a>
                             </div>
                             <div class="pi-text">
-                                <div class="catagory-name">Coat</div>
+                               
                                 <a href="../shop/shop_detail.do?no=${gvo.no }">
                                     <h5>${gvo.title }</h5>
                                 </a>

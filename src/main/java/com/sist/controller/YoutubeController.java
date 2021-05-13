@@ -4,8 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.*;
+
+import javax.servlet.http.HttpSession;
+
 import com.sist.dao.*;
 import com.sist.vo.YoutubeVO;
 
@@ -113,6 +117,7 @@ public class YoutubeController {
 		map.put("end", end);
 		
 		map.put("cno", cno);
+		YoutubeVO youtuberName=yDao.youtuberName(cno);
 		
 		List<YoutubeVO> ylist=yDao.listByYoutuber(map);
 		// 총 페이지
@@ -126,7 +131,7 @@ public class YoutubeController {
 			endPage=allPage;
 		
 		
-		
+		model.addAttribute("youtuberName",youtuberName);
 		model.addAttribute("cno",cno);
 		model.addAttribute("ylist",ylist);
 		model.addAttribute("BLOCK", BLOCK);
@@ -139,6 +144,15 @@ public class YoutubeController {
 		
 		return "main/main";
 	}
+	
+/*	//수강신청
+	@PostMapping("youtuber/input.do")
+	public String youtube_input(int cno,HttpSession session,Model model)
+	{	
+		String id=(String)session.getAttribute("id");
+	
+		return "redirect:../youtube/you_tuber_detail.jsp";
+	}*/
 	
 	
 	

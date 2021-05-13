@@ -59,5 +59,10 @@
 	 	 FROM ( SELECT no,channeltitle
 	 	 FROM youtube_data_v2 WHERE cno=#{cno}))
 	</select>
-	
+	<!-- 유튜버 이름및 cno 출력 -->
+	<select id="youtuberName" resultType="YoutubeVO" parameterType="int">
+		SELECT DISTINCT channeltitle,cno 
+		FROM youtube_data_v2
+		WHERE cno=#{cno}
+	</select>
 </mapper>

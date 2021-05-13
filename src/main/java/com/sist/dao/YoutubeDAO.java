@@ -54,6 +54,11 @@ public class YoutubeDAO extends SqlSessionDaoSupport{
 	{
 		return getSqlSession().selectOne("totalpageByYoutuber", cno);
 	}
+	//유튜버 이름 할당
+	public YoutubeVO youtuberName(int cno)
+	{
+		return getSqlSession().selectOne("youtuberName",cno);
+	}
 	
 	
 	
