@@ -38,7 +38,7 @@ public class HometController {
 			}
 			int curpage = Integer.parseInt(page);
 			Map map = new HashMap();
-			int rowSize = 10;
+			int rowSize = 12;
 			int start = (rowSize * curpage) - (rowSize - 1);
 			int end = (rowSize * curpage);
 			map.put("start", start);

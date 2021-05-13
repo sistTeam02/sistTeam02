@@ -51,25 +51,6 @@
                         <div class="blog-quote">
                             <p>“ ${vo.embed_txt }” <span>- 작성자</span></p>
                         </div>
-                        <div class="blog-more">
-                            <div class="row">
-                                <div class="col-sm-4">
-                                    <img src="../img/blog/blog-detail-1.jpg" alt="">
-                                </div>
-                                <div class="col-sm-4">
-                                    <img src="../img/blog/blog-detail-2.jpg" alt="">
-                                </div>
-                                <div class="col-sm-4">
-                                    <img src="../img/blog/blog-detail-3.jpg" alt="">
-                                </div>
-                            </div>
-                        </div>
-                        <p>Sum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
-                            et dolore magna aliqua.Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                            nisi ut aliquip ex ea commodo consequat. Duis aute irure Lorem ipsum dolor sit amet,
-                            consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-                            aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                            ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate.</p>
                         <div class="tag-share">
                             <div class="details-tag">
                                 <ul>

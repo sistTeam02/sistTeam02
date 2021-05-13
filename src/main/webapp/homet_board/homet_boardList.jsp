@@ -106,7 +106,7 @@
      </td>
      </tr>
      </table> -->
-       		<div style="height:30px"></div>
+       	<div style="height:30px"></div>
 		<ul class="pagination" >
 			<c:if test="${startPage>1 }">
 			  <a href="../homet_board/homet_boardList.do?page=${startPage-1}"><li class="page">&lt;</li></a>

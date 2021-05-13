@@ -22,7 +22,7 @@
 	</select>
 	
 	<select id="hometTotalPage" resultType="int">
-		SELECT CEIL(COUNT(*)/10.0) FROM hometraining_main
+		SELECT CEIL(COUNT(*)/12.0) FROM hometraining_main
 	</select>
 	
 	<select id="hometDetailFree" resultType="com.sist.vo.HometDetailVO" parameterType="int">
@@ -54,7 +54,7 @@
 	
 	<!-- 챌린지 총 페이지 -->
 	<select id="hometChallengeTotalPage" resultType="int">
-		SELECT CEIL(COUNT(*)/10.0) FROM challenge_main
+		SELECT CEIL(COUNT(*)/12.0) FROM challenge_main
 	</select>
 	<!-- 챌린지 디테일 페이지 -->
 	<select id="hometChallengeDetail" resultType="HometDetailVO" parameterType="int">
