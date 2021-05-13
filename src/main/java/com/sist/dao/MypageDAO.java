@@ -28,19 +28,6 @@ public class MypageDAO extends SqlSessionDaoSupport{
 	public int mypageChatPlanDataTotalPage(String id){
 		return getSqlSession().selectOne("mypageChatPlanDataTotalPage",id);
 	}
-	/*
-	 * <!-- 마이페이지 전체 데이터 불러오기 -->
-	<select id="mypageUpdateAllData" resultType="MemberVO" parameterType="int">
-	 SELECT id,pwd,name,birth,tel,phone,email,post,nickname,add1,add2
-	 FROM member WHERE id=#{id}
-	</select>
-	<!-- 마이페이지 수정 -->
-	<update id="mypageUpdate" parameterType="MemberVO">
-		UPDATE member SET pwd=#{pwd},name=#{name},tel=#{tel},phone=#{phone},email=#{email},post=#{post},
-							nickname=#{nickname},add1=#{addr1},addr2=#{addr2}
-		WHERE id=#{id}
-	</update>
-	 */
 	public MemberVO mypageUpdateAllData(String id){
 		return getSqlSession().selectOne("mypageUpdateAllData",id);
 	}
@@ -58,5 +45,28 @@ public class MypageDAO extends SqlSessionDaoSupport{
 	//	<select id="chat_dbDay" resultType="String" parameterType="String">
 	public List<String> chat_dbDay(String id){
 		return getSqlSession().selectList("chat_dbDay",id);
+	}
+	/*
+	<select id="goodsJjimList" resultType="GoodsVO" parameterType="hashmap">
+		SELECT gl.no,title,poster,price,id 
+        FROM goods_jjim gj,goods_list gl
+        WHERE gj.pno=gl.no
+        AND pno=#{pno} 
+        AND id =#{id};
+	  	
+  </select>
+   <!-- 찜 수량 goodsJjimCount -->
+  <select id="goodsJjimCount" resultType="string" parameterType="int">
+		SELECT COUNT(*) FROM goods_jjim gj,goods_list gl
+		WHERE gj.pno=gl.no
+	    AND pno = #{pno}
+	    AND id=#{id}
+  </select>
+	 */
+	public List<GoodsVO> goodsJjimList(Map map){
+		return getSqlSession().selectList("goodsJjimList",map);
+	}
+	public String goodsJjimCount(String id){
+		return getSqlSession().selectOne("goodsJjimCount",id);
 	}
 }
