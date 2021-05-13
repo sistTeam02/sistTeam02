@@ -26,7 +26,7 @@
     <link href="https://fonts.googleapis.com/css?family=Muli:300,400,500,600,700,800,900&display=swap" rel="stylesheet">
 
     <!-- Css Styles -->
-    <!-- <link rel="stylesheet" href="../css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="../css/bootstrap.min.css" type="text/css">
     <link rel="stylesheet" href="../css/font-awesome.min.css" type="text/css">
     <link rel="stylesheet" href="../css/themify-icons.css" type="text/css">
     <link rel="stylesheet" href="../css/elegant-icons.css" type="text/css">
@@ -34,132 +34,22 @@
     <link rel="stylesheet" href="../css/nice-select.css" type="text/css">
     <link rel="stylesheet" href="../css/jquery-ui.min.css" type="text/css">
     <link rel="stylesheet" href="../css/slicknav.min.css" type="text/css">
-    <link rel="stylesheet" href="../css/style.css" type="text/css"> -->
+    <link rel="stylesheet" href="../css/style.css" type="text/css">
 <script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
-let u=0;
-let i=0;
 $(function(){
-	$('.btn1').css("cursor","pointer");
-	$('.updateBtn').click(function(){
-		$('.updates').hide();
-		$('.inserts').hide();
-		let no=$(this).attr("data-no");
-		if(u==0)
+	let pno=${gvo.no};
+	$.ajax({
+		type:'POST',
+		url:'shop_detail_ok.do',
+		data:{'pno':pno},
+		success:function(result)
 		{
-			$('#m'+no).show();
-			$(this).text("취소");
-			u=1;
-		}
-		else
-		{
-			$('#m'+no).hide();
-			$(this).text("수정");
-			u=0;
-		}
-	})
-	$('.insertBtn').click(function(){
-		$('.updates').hide();
-		$('.inserts').hide();
-		let no=$(this).attr("data-no");
-		if(i==0)
-		{
-			$(this).text("취소");
-			$('#in'+no).show();
-			i=1;
-		}
-		else
-		{
-			$(this).text("댓글");
-			$('#in'+no).hide();
-			i=0;
+			$('#reply_data').html(result);
 		}
 	});
-	
-	// 댓글 작성
-	$('#replyBtn').click(function(){
-		let bno=$('#insert_pno').val();
-		
-		let msg=$('#insert_msg').val();
-		// val() => <input> , <select> , <textarea>
-		if(msg.trim()=="")
-		{
-			$('#insert_msg').focus();
-			return;
-		}
-		$.ajax({
-			type:'POST',
-			url:'shop_reply_insert.do',
-			data:{"pno":pno,"msg":msg},
-			success:function(result)
-			{
-				$('#reply_data').html(result);
-			}
-		})
-	});
-	// 댓글 수정 
-	$('.uBtn').click(function(){
-		let data_no=$(this).attr("data-no");
-		let no=$('#update_no'+data_no).val();
-		let bno=$('#update_bno'+data_no).val();
-	
-		let msg=$('#update_msg'+data_no).val();
-		if(msg.trim()=="")
-		{
-			$('#update_msg'+data_no).focus();
-			return;
-		}
-		$.ajax({
-			type:'post',
-			url:'shop_reply_update.do',
-			data:{"no":no,"pno":pno,"msg":msg},
-			success:function(result)
-			{
-				$('#reply_data').html(result);
-			}
-		})
-	})
-	/* // 대댓글 올리기 
-	$('.rrBtn').click(function(){
-		let data_no=$(this).attr("data-no");
-		let pno=$('#rr_insert_pno'+data_no).val();
-		let bno=$('#rr_insert_bno'+data_no).val();
-		
-		let msg=$('#rr_insert_msg'+data_no).val();
-		if(msg.trim()=="")
-		{
-			$('#rr_insert_msg'+data_no).focus();
-			return;
-		}
-		$.ajax({
-			type:'post',
-			url:'shop_reply_to_reply_insert.do',
-			data:{"pno":pno,"bno":bno,"msg":msg},
-			success:function(result)
-			{
-				$('#reply_data').html(result);
-			}
-		})
-	}) */
-	// 삭제하기
-	$('.delBtn').click(function(){
-		
-		let no=$(this).attr("data-no");
-		let bno=$(this).attr("data-bno");
-		let page=$(this).attr("data-page");
-		$.ajax({
-			type:'get',
-			url:'shop_reply_delete.do',
-			data:{"no":no,"pno":pno},
-			success:function(result)
-			{
-				$('#reply_data').html(result);
-			}
-		})
-	})
-	
-})
+});
 </script>
 </head>
 <body>
@@ -324,22 +214,8 @@ $(function(){
 						</div>
 					</div>
 
-					<!-- Tab Additional Info -->
-
- 					<!-- <div id="tab_2" class="tab_container">
-						<div class="row">
-							<div class="col additional_info_col">
-								<div class="tab_title additional_info_title">
-									<h4>Additional Information</h4>
-								</div>
-								<p>COLOR:<span>Gold, Red</span></p>
-								<p>SIZE:<span>L,M,XL</span></p>
-							</div>
-						</div>
-					</div> -->
-
 					<!-- Tab Reviews -->
-
+					
 					<div id="tab_3" class="tab_container">
 						<div class="row">
 
@@ -351,12 +227,11 @@ $(function(){
 								</div>
 
 								<!-- User Review -->
-								<!-- 반복 구간 시작-->
-								<c:forEach var="svo" items="${rList }">
-								<div class="user_review_container d-flex flex-column flex-sm-row">
+								<!-- 반복 구간 s -->
+								<%-- <div class="user_review_container d-flex flex-column flex-sm-row">
 									<div class="user">
 										<div class="user_pic"></div>
-										<!-- <div class="user_rating">
+										<div class="user_rating">
 											<ul class="star_rating">
 												<li><i class="fa fa-star" aria-hidden="true"></i></li>
 												<li><i class="fa fa-star" aria-hidden="true"></i></li>
@@ -364,16 +239,60 @@ $(function(){
 												<li><i class="fa fa-star" aria-hidden="true"></i></li>
 												<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
 											</ul>
-										</div> -->
+										</div>
+									</div>
+									<c:forEach var="svo" items="${rList }">
+										<li>
+											<div class="review">
+												<div class="review_date">${svo.dbday }</div>
+												<div class="user_name">${svo.name }</div>
+												<p>${svo.msg }</p>
+											</div>
+										</li>
+									</c:forEach>
+								</div> --%>
+								<!-- 반복 구간 e -->
+								<!-- User Review -->
+								<div class="user_review_container d-flex flex-column flex-sm-row">
+									<div class="user">
+										<div class="user_pic"></div>
+										<div class="user_rating">
+											<ul class="star_rating">
+												<li><i class="fa fa-star" aria-hidden="true"></i></li>
+												<li><i class="fa fa-star" aria-hidden="true"></i></li>
+												<li><i class="fa fa-star" aria-hidden="true"></i></li>
+												<li><i class="fa fa-star" aria-hidden="true"></i></li>
+												<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
+											</ul>
+										</div>
 									</div>
 									<div class="review">
 										<div class="review_date">2021-05-13</div>
-										<div class="user_name">James</div>
-										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+										<div class="user_name">춘향이</div>
+										<p>집에서 사용하기 좋아요!</p>
 									</div>
 								</div>
-								</c:forEach>
-								<!-- 반복 구간 끝 -->
+								
+								<!-- User Review -->
+								<div class="user_review_container d-flex flex-column flex-sm-row">
+									<div class="user">
+										<div class="user_pic"></div>
+										<div class="user_rating">
+											<ul class="star_rating">
+												<li><i class="fa fa-star" aria-hidden="true"></i></li>
+												<li><i class="fa fa-star" aria-hidden="true"></i></li>
+												<li><i class="fa fa-star" aria-hidden="true"></i></li>
+												<li><i class="fa fa-star" aria-hidden="true"></i></li>
+												<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
+											</ul>
+										</div>
+									</div>
+									<div class="review">
+										<div class="review_date">2021-05-14</div>
+										<div class="user_name">이순신</div>
+										<p>잘 쓸게요</p>
+									</div>
+								</div>
 							</div>
 
 
@@ -382,25 +301,26 @@ $(function(){
 							<div class="col-lg-6 add_review_col">
 
 								<div class="add_review">
-									<form id="review_form" action="post">
-										<div class="inserts" style="display:none">
-											<h1>구매 후기 남기기</h1>
-											<input id="review_name" class="form_input input_name" type="text" name="name" placeholder="Name*" required="required" data-error="Name is required.">
-											<input id="review_email" class="form_input input_email" type="email" name="email" placeholder="Email*" required="required" data-error="Valid email is required.">
+									<form id="review_form" action="../shop/shop_reply_ok.do" method="post">
+										<div>
+											<h1>리뷰 작성하기</h1>
+											<input id="review_name" class="form_input input_name" type="text" name="name" placeholder="이름*" required="required" data-error="이름을 작성해 주세요.">
+											<input id="review_email" class="form_input input_email" type="email" name="email" placeholder="이메일*" required="required" data-error="이메일을 작성해 주세요.">
 										</div>
 										<div>
-											<!-- <h1>평점:</h1>
+											<h1>평점:</h1>
 											<ul class="user_star_rating">
 												<li><i class="fa fa-star" aria-hidden="true"></i></li>
 												<li><i class="fa fa-star" aria-hidden="true"></i></li>
 												<li><i class="fa fa-star" aria-hidden="true"></i></li>
 												<li><i class="fa fa-star" aria-hidden="true"></i></li>
 												<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
-											</ul> -->
-											<textarea id="review_message" class="input_review" name="message"  placeholder="구매 후기" rows="4" required data-error="구매 후기를 남겨주세요."></textarea>
+											</ul>
+											<textarea id="review_message" class="input_review" name="message" placeholder="리뷰 내용" rows="4" required data-error="리뷰를 작성해 주세요."></textarea>
 										</div>
 										<div class="text-left text-sm-right">
-											<button id="review_submit" type="submit" class="btn1 red_button review_submit_btn trans_300" value="Submit">제출하기</button>
+											<input type="hidden" name="pno" value="${gvo.no }">
+											<button id="review_submit" type="submit" class="red_button review_submit_btn trans_300" value="Submit">작성하기</button>
 										</div>
 									</form>
 								</div>

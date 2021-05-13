@@ -74,90 +74,40 @@
   </select>
   
   <!-- ================ 리뷰  ================== -->
+  <!-- 리뷰 조회  -->
   <select id="shopReplyListData" resultType="ShopReplyVO" parameterType="int">
-	SELECT no,pno,id,name,msg,TO_CHAR(regdate,'YYYY-MM-DD HH24:MI:SS') as dbday,group_tab
-	FROM shop_reply 
-	WHERE pno=#{pno}
-	ORDER BY group_id DESC,group_step ASC
+	SELECT no,pno,name,msg,
+		   TO_CHAR(regdate,'YYYY-MM-DD HH24:MI:SS') as dbday
+	FROM shop_reply
+	WHERE pno=#{pno} ORDER BY dbday DESC
   </select>
+  
   <!-- 리뷰 추가 -->
   <insert id="shopReplyInsert" parameterType="ShopReplyVO">
 	<selectKey keyProperty="no" resultType="int" order="BEFORE">
 	  SELECT NVL(MAX(no)+1,1) as no FROM shop_reply
 	</selectKey>
-	INSERT INTO shop_reply(no,pno,id,name,msg,group_id) VALUES(
+	INSERT INTO shop_reply(no,pno,name,msg) 
+	VALUES(
 	  #{no},
 	  #{pno},
-	  #{id},
 	  #{name},
-	  #{msg},
-	  (SELECT NVL(MAX(group_id)+1,1) FROM shop_reply)
+	  #{msg}
 	)
   </insert>
   
   <!-- 리뷰 수정 -->
-	<update id="shopReplyUpdate" parameterType="ShopReplyVO">
-	  UPDATE shop_reply SET
-	  msg=#{msg}
-	  WHERE no=#{no}
-	</update>
-	<!--  -->
-	<select id="shopReplyParentInfoData" resultType="ShopReplyVO" parameterType="int">
-	  SELECT group_id,group_step,group_tab 
-	  FROM shop_reply
-	  WHERE no=#{no}
-	</select>
-	
-	<update id="shopReplyGroupStepIncrement" parameterType="ShopReplyVO">
-	   UPDATE shop_reply SET
-	   group_step=group_step+1
-	   WHERE group_id=#{group_id} AND group_step>#{group_step}
-	</update>
-	
-	<insert id="shopReplyToReplyInsert" parameterType="ShopReplyVO">
-	    <selectKey keyProperty="no" resultType="int" order="BEFORE">
-	      SELECT NVL(MAX(no)+1,1) as no FROM shop_reply
-	    </selectKey>
-	    INSERT INTO shop_reply VALUES(
-	      #{no},
-	      #{pno},
-	      #{id},
-	      #{name},
-	      #{msg},
-	      SYSDATE,
-	      #{group_id},
-	      #{group_step},
-	      #{group_tab},
-	      #{root},
-	      0
-	    )
-	</insert>
-	
-	<update id="shopReplyDepthIncrement" parameterType="int">
-		UPDATE shop_reply SET
-	    depth=depth+1
-	    WHERE no=#{no}
-	</update>
-	
-	<delete id="shopReplyDelete" parameterType="int">
-		DELETE FROM shop_reply
-    	WHERE no=#{no}
-	</delete>
-	
-	<select id="shopReplyInfoData" resultType="ShopReplyVO" parameterType="int">
-	  SELECT root,depth FROM shop_reply
-	  WHERE no=#{no}
-	</select>
-	
-	<update id="shopReplyMsgUpdate" parameterType="int">
-	   UPDATE shop_reply SET
-	   msg='관리자가 삭제한 댓글입니다'
-	   WHERE no=#{no}
-	</update>
-	
-	<update id="shopDepthDecrement" parameterType="int">
-	  UPDATE shop_reply SET
-	  depth=depth-1
-	  WHERE no=#{no}
-	</update>
+  <update id="shopReplyUpdate" parameterType="ShopReplyVO">
+	UPDATE shop_reply SET
+		msg=#{msg}
+	WHERE no=#{no}
+	  AND pno=#{pno}
+  </update>
+  
+  <!-- 리뷰 삭제 -->
+  <delete id="shopReplyDelete" parameterType="ShopReplyVO">
+	DELETE FROM shop_reply
+    WHERE no=#{no}
+      AND pno=#{pno}
+  </delete>
 </mapper>
