@@ -22,49 +22,49 @@ public class HometBoardReplyDAO extends SqlSessionDaoSupport{
 	}
 	public List<HometBoardReplyVO> replyListData(int bno)
 	{
-		return getSqlSession().selectList("replyListData", bno);
+		return getSqlSession().selectList("homet_replyListData", bno);
 	}
 	// 등록
 	public void replyInsert(HometBoardReplyVO vo)
 	{
-		getSqlSession().insert("replyInsert", vo);
+		getSqlSession().insert("homet_replyInsert", vo);
 	}
 	
 	// 수정
 	public void replyUpdate(HometBoardReplyVO vo)
 	{
-		getSqlSession().update("replyUpdate", vo);
+		getSqlSession().update("homet_replyUpdate", vo);
 	}
 	
 	@Transactional(propagation=Propagation.REQUIRED, rollbackFor=Exception.class)
 	public void replyToReplyInsert(int root,HometBoardReplyVO vo)
 	{
 		// 1. 상위정보
-		HometBoardReplyVO pvo=getSqlSession().selectOne("replyParentInfoData", root);
-		getSqlSession().update("replyGroupStepIncrement", pvo);
+		HometBoardReplyVO pvo=getSqlSession().selectOne("homet_replyParentInfoData", root);
+		getSqlSession().update("homet_replyGroupStepIncrement", pvo);
 		// 실제 추가
 		vo.setGroup_id(pvo.getGroup_id());
 		vo.setGroup_step(pvo.getGroup_step()+1);
 		vo.setGroup_tab(pvo.getGroup_tab()+1);
 		vo.setRoot(root);
-		getSqlSession().insert("replyToReplyInsert", vo);
+		getSqlSession().insert("homet_replyToReplyInsert", vo);
 		// depth 증가
-		getSqlSession().update("replyDepthIncrement", root);
+		getSqlSession().update("homet_replyDepthIncrement", root);
 	}
 	// 삭제
 	@Transactional(propagation=Propagation.REQUIRED, rollbackFor=Exception.class)
 	public void replyDelete(int no)
 	{
-		HometBoardReplyVO vo=getSqlSession().selectOne("replyInfoData", no);
+		HometBoardReplyVO vo=getSqlSession().selectOne("homet_replyInfoData", no);
 		if(vo.getDepth()==0) // 댓글이 없는 경우
 		{
-			getSqlSession().delete("replyDelete", no);
+			getSqlSession().delete("homet_replyDelete", no);
 		}
 		else // 댓글이 있는 경우
 		{
-			getSqlSession().update("replyMsgUpdate", no);
+			getSqlSession().update("homet_replyMsgUpdate", no);
 		}
-		getSqlSession().update("depthDecrement", vo.getRoot());
+		getSqlSession().update("homet_depthDecrement", vo.getRoot());
 	}
 	
 	

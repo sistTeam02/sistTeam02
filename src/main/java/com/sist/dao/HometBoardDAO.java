@@ -33,26 +33,26 @@ public class HometBoardDAO extends SqlSessionDaoSupport{
 	 */
 	public List<HometBoardVO> freeboardListData(Map map)
 	{
-		return getSqlSession().selectList("freeboardListData", map);
+		return getSqlSession().selectList("homet_boardListData", map);
 	}
 	public int freeboardTotalPage()
 	{
-		return getSqlSession().selectOne("freeboardTotalPage");
+		return getSqlSession().selectOne("homet_boardTotalPage");
 	}
 	// 글쓰기
 	public void freeboardInsert(HometBoardVO vo)
 	{
-		getSqlSession().insert("freeboardInsert", vo);
+		getSqlSession().insert("homet_boardInsert", vo);
 	}
 	// 상세보기
 		public HometBoardVO freeboardDetailData(int no)
 		{
-			getSqlSession().update("freeboardHitIncrement", no);
-			return getSqlSession().selectOne("freeboardDetailData", no);
+			getSqlSession().update("homet_boardHitIncrement", no);
+			return getSqlSession().selectOne("homet_boardDetailData", no);
 		}
 		public HometBoardVO freeboardUpdateData(int no)
 		{
-			return getSqlSession().selectOne("freeboardDetailData", no);
+			return getSqlSession().selectOne("homet_boardDetailData", no);
 		}
 		
 		
@@ -61,11 +61,11 @@ public class HometBoardDAO extends SqlSessionDaoSupport{
 		{
 			boolean bCheck=false;
 			// 비밀번호를 가지고 온다
-			String db_pwd=getSqlSession().selectOne("freeboardGetPassword", vo.getNo());
+			String db_pwd=getSqlSession().selectOne("homet_boardGetPassword", vo.getNo());
 			if(db_pwd.equals(vo.getPwd()))
 			{
 				bCheck=true;
-				getSqlSession().update("freeboardUpdate", vo);
+				getSqlSession().update("homet_boardUpdate", vo);
 			}
 			else
 			{
@@ -79,7 +79,7 @@ public class HometBoardDAO extends SqlSessionDaoSupport{
 	     {
 	    	 boolean bCheck=false;
 	    	 // 비밀번호 읽기
-	    	 String db_pwd=getSqlSession().selectOne("freeboardGetPassword",no);
+	    	 String db_pwd=getSqlSession().selectOne("homet_boardGetPassword",no);
 	    	 System.out.println("db_pwd="+db_pwd+",pwd="+pwd);
 	    	 if(pwd.equals(db_pwd))
 	    	 {
@@ -87,8 +87,8 @@ public class HometBoardDAO extends SqlSessionDaoSupport{
 	    		 /*
 	    		  *   conn.setAutoCommit(false)
 	    		  */
-	    		 getSqlSession().delete("freeboardReplyDelete",no);
-	    		 getSqlSession().delete("freeboardDelete",no);
+	    		 getSqlSession().delete("homet_replyDelete",no);
+	    		 getSqlSession().delete("homet_boardDelete",no);
 	    		 /*
 	    		  *  conn.commit()  => @Around
 	    		  *  => 오류 발생 => conn.rollback() => @AfterThrowing

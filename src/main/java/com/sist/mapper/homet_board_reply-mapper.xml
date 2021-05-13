@@ -7,7 +7,7 @@
  WHERE bno=#{bno}
  ORDER BY group_id DESC,group_step ASC
 </select>
-<insert id="replyInsert" parameterType="HometBoardReplyVO">
+<insert id="homet_replyInsert" parameterType="HometBoardReplyVO">
  <!-- mybatis 자동 증가 번호 -->
  <selectKey keyProperty="no" resultType="int" order="BEFORE">
    SELECT NVL(MAX(no)+1,1) as no FROM homet_board_reply
@@ -21,24 +21,24 @@
    (SELECT NVL(MAX(group_id)+1,1)FROM homet_board_reply)
  )
 </insert>
-<update id="replyUpdate" parameterType="HometBoardReplyVO">
+<update id="homet_replyUpdate" parameterType="HometBoardReplyVO">
  UPDATE reply SET
  msg=#{msg}
  WHERE no=#{no}
 </update>
 <!-- 댓글 => 댓글 -->
-<select id="replyParentInfoData" resultType="HometBoardReplyVO" parameterType="int">
+<select id="homet_replyParentInfoData" resultType="HometBoardReplyVO" parameterType="int">
   SELECT group_id,group_step,group_tab
   FROM homet_board_reply
   WHERE no=#{no}
 </select>
 <!-- 댓글의 핵심 -->
-<update id="replyGroupStepIncrement" parameterType="HometBoardReplyVO">
+<update id="homet_replyGroupStepIncrement" parameterType="HometBoardReplyVO">
   UPDATE reply SET
   group_step=group_step+1
   WHERE group_id=#{group_id} AND group_step>#{group_step}
 </update>
-<insert id="replyToReplyInsert" parameterType="HometBoardReplyVO">
+<insert id="homet_replyToReplyInsert" parameterType="HometBoardReplyVO">
  <selectKey keyProperty="no" resultType="int" order="BEFORE">
    SELECT NVL(MAX(no)+1,1) as no FROM homet_board_reply
  </selectKey>
@@ -56,26 +56,26 @@
     0
   )
 </insert>
-<update id="replyDepthIncrement" parameterType="int">
+<update id="homet_replyDepthIncrement" parameterType="int">
   UPDATE homet_board_reply SET
   depth=depth+1
   WHERE no=#{no}
 </update>
 <!--  댓글 삭제 -->
-<select id="replyInfoData" resultType="HometBoardReplyVO" parameterType="int">
+<select id="homet_replyInfoData" resultType="HometBoardReplyVO" parameterType="int">
   SELECT root,depth FROM homet_board_reply
   WHERE no=#{no}
 </select>
-<update id="replyMsgUpdate" parameterType="int">
+<update id="homet_replyMsgUpdate" parameterType="int">
   UPDATE homet_board_reply SET
   msg='관리자가 삭제한 댓글입니다'
   WHERE no=#{no}
 </update>
-<delete id="replyDelete" parameterType="int">
+<delete id="homet_replyDelete" parameterType="int">
   DELETE FROM homet_board_reply
   WHERE no=#{no}
 </delete>
-<update id="depthDecrement" parameterType="int">
+<update id="homet_depthDecrement" parameterType="int">
   UPDATE homet_board_reply SET
   depth=depth-1
   WHERE no=#{no}

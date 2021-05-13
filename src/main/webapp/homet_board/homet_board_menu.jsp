@@ -14,7 +14,7 @@
      <th>커뮤니티</th>
     </tr>
     <tr>
-     <th><a href="../homet_board/homet_boardlist.do" style="text-align:center">수강후기 게시판</a></th>
+     <th><a href="../homet_board/homet_boardList.do" style="text-align:center">수강후기 게시판</a></th>
     </tr>
     <tr>
      <th><a href="../board/qlist.do">문의게시판</a></th>
