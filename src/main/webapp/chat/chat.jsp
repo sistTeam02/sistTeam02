@@ -215,6 +215,34 @@ input[type="number"] {
  .category_user tr th:hover{
  color: #444963bf;
  }
+.recipe_detail{
+display: none;
+}
+#detail_img{
+    width: 39em;
+    height: 28em;
+    margin: 30px 10em;
+}
+.detail_ingre_li{
+	list-style: none;
+    display: inline-block;
+    margin: 2em 3em;
+    font-size: 15pt;
+    border-bottom: 2px double #00000096;
+}
+.detail_content_img{
+        width: 18em;
+    margin-left: 2em;
+    border-radius: 11px;
+}
+.detail_content_text{
+display: block;
+    text-align: left;
+    width: 28em;
+    margin-left: 41px;
+    padding-top: 20px;
+}
+}
 </style>
 <script type="text/javascript" src="https://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
@@ -398,6 +426,7 @@ $(document).on('click', '#rightBtn' , function(){
 });
 /* 레시피상세다이얼로그 */
 $(document).on('click', 'td[id^=table3_td] > img' , function(){
+	let no=$(this).attr('no');
 	$('.recipe_detail').dialog({
 		autoOpen:true,
 		width:1000,
@@ -405,6 +434,7 @@ $(document).on('click', 'td[id^=table3_td] > img' , function(){
 		modal:true
 		
 	})
+	 getDetail(no);
 	$('.ui-button-icon-only').append("<i class='ti-close'></i>");
 });
 /* 칼로리 검색결과 클릭 */
@@ -975,15 +1005,46 @@ function image_show(){
 function getDetail(no){
 	$.ajax({
 		type:'post',
-		data:{'no',no},
+		data:{'no':no},
 		url:'../chat/chat_recipeDetail.do',
 		success:function(result){
+			let json=JSON.parse(result);
+			$('#detail_title').text(json.title);
+			$('#detail_img').attr('src',json.poster);
+			makeingre(json.ingre);
+			makecontent(json.content,json.content_poster);
 			
 		}
 	
 	})
 }
+function makeingre(ingre){
+	let arr=ingre.split(" ");
+	let ingreArr={};
+	for(i=0;i<(arr.length);i++){
+		ingreArr[i]=arr[(2*i)]
+		
+		if(i>4)
+			break;
+	}
+	for(i=0; i<5;i++){
+	  $('#detail_ingre').append(
+		"<li class='detail_ingre_li'>"+ingreArr[i]+"</li>"
 
+	  )
+	}
+}
+function makecontent(content,poster){
+	pArr=poster.split(",",);
+	cArr=content.split("[]");
+	for(i=0;i<pArr.length;i++){
+		$('.detail_content').append(
+		  	"<tr><td><img src="+pArr[i]+" class='detail_content_img'><td>"+
+		  	"<td class='detail_content_text'>"+cArr[i]+"<td></tr>"
+		)
+		
+	}
+}
 </script>
 </head>
 <body>
@@ -1185,6 +1246,14 @@ function getDetail(no){
 			  </div>
 			  <div class="recipe_detail">
 			  	<!-- dialog -->
+			  		<h4 id="detail_title" style="text-align: center">타이틀</h4>
+			  	<img src="../img/logo.png" id="detail_img">
+			  	<ul id="detail_ingre">
+			  				
+			  	</ul>
+			  	<table class="detail_content">
+			  		
+			  	</table>
 			  </div>
 			</div>
 		</div>

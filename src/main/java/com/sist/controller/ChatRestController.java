@@ -34,6 +34,7 @@ import com.sist.dao.Chat_planDAO;
 import com.sist.dao.KcalDAO;
 import com.sist.vo.Chat_foodVO;
 import com.sist.vo.Chat_planVO;
+import com.sist.vo.Chat_recipeDetailVO;
 import com.sist.vo.Chat_recipeVO;
 import com.sist.vo.KcalVO;
 
@@ -239,7 +240,15 @@ public class ChatRestController {
 	@PostMapping("chat/chat_recipeDetail.do")
 	public String chat_recipeDetail(int no){
 		String json="";
-		
+		Chat_recipeDetailVO vo=pdao.recipeDetailData(no);
+		JSONObject obj=new JSONObject();
+		obj.put("title", vo.getTitle());
+		obj.put("poster", vo.getPoster());
+		obj.put("info", vo.getInfo());
+		obj.put("ingre", vo.getIngre());
+		obj.put("content", vo.getContent());
+		obj.put("content_poster", vo.getContent_poster());
+		json=obj.toJSONString();
 		
 		return json;
 	}

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.sist.vo.Chat_planVO;
+import com.sist.vo.Chat_recipeDetailVO;
 
 @Repository
 public class Chat_planDAO extends SqlSessionDaoSupport{
@@ -24,5 +25,8 @@ public class Chat_planDAO extends SqlSessionDaoSupport{
 	}
 	public List<String> chat_dbDay(String id){
 		return getSqlSession().selectList("chat_dbDayData",id);
+	}
+	public Chat_recipeDetailVO recipeDetailData(int no){
+		return getSqlSession().selectOne("recipeDetailData",no);
 	}
 }

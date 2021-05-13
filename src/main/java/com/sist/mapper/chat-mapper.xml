@@ -46,5 +46,11 @@
 	<select id="totalFileName" resultType="int" parameterType="Chat_foodVO">
 		SELECT count(*) from(
 		SELECT filename from chat_food  WHERE fooddate=#{fooddate} and id=#{id} and filename is not null)
+	</select>
+	<!-- 레시피 디테일 -->
+	<select id="recipeDetailData" resultType="Chat_recipeDetailVO" parameterType="int">
+	SELECT title,poster,info,ingre,content_poster,content
+	FROM chat_recipe_detail
+	where no=#{no}
 	</select> 
 </mapper>
