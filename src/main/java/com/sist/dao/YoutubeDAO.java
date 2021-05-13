@@ -54,7 +54,6 @@ public class YoutubeDAO extends SqlSessionDaoSupport{
 	{
 		return getSqlSession().selectOne("totalpageByYoutuber", cno);
 	}
-
 	
 	
 	

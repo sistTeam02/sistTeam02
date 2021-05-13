@@ -115,18 +115,19 @@ public class YoutubeController {
 		map.put("cno", cno);
 		
 		List<YoutubeVO> ylist=yDao.listByYoutuber(map);
-		
 		// 총 페이지
 		int totalpage=yDao.totalpageByYoutuber(cno);
 		
 		final int BLOCK=10;
 		int startPage=((curpage-1)/BLOCK*BLOCK)+1;
 		int endPage=((curpage-1)/BLOCK*BLOCK)+BLOCK;
-		
 		int allPage=totalpage;
 		if(endPage>allPage)
 			endPage=allPage;
-
+		
+		
+		
+		model.addAttribute("cno",cno);
 		model.addAttribute("ylist",ylist);
 		model.addAttribute("BLOCK", BLOCK);
 		model.addAttribute("startPage",startPage);

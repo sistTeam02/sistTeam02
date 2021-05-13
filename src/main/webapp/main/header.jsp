@@ -192,14 +192,14 @@ $(function(){
                         <i class="ti-menu"></i>
                         <span>쇼핑몰</span>
                         <ul class="depart-hover">
-                            <li class="active"><a href="../shop/shop_list.do">운동기구&용품</a></li>
+                            <li><a href="../shop/shop_list.do">운동기구&용품</a></li>
                             <li><a href="../shop/dfood_list.do">건강 식품</a></li>
                         </ul>
                     </div>
                 </div>
                 <nav class="nav-menu mobile-menu">
                     <ul>
-						<li class="active"><a href="../main/main.do">Home</a></li>
+						<li><a href="../main/main.do">Home</a></li>
 						<li><a href="../home_training/ht_main.do">홈트레이닝</a>
                             <ul class="dropdown">
                                 <li><a href="../home_training/ht_main.do">홈트레이닝 목록</a></li>

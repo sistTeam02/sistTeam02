@@ -109,13 +109,13 @@
              </div>
          </div>
          		<div style="height:30px"></div>
-         <c:forEach var="vo" items="${ylist }">
+        <%--  <c:forEach var="vo" items="${ylist }"> --%>
 		<ul class="pagination" >
 		<c:if test="${startPage>1 }">
-		  <a href="../youtube/you_tuber_detail.do?cno=${vo.cno }&page=${startPage-1}"><li class="page">&lt;</li></a>
+		  <a href="../youtube/you_tuber_detail.do?cno=${cno }&page=${startPage-1}"><li class="page">&lt;</li></a>
 		 </c:if>
 		<c:forEach var="i" step="1" begin="${startPage }" end="${endPage }">
-			<a href="../youtube/you_tuber_detail.do?cno=${vo.cno }&page=${i}">
+			<a href="../youtube/you_tuber_detail.do?cno=${cno }&page=${i}">
 			<c:if test="${curpage==i}">
 		  		<li class="page_active">
 		  	</c:if>
@@ -125,10 +125,10 @@
 		  ${i }</li></a>
 		</c:forEach>
 		<c:if test="${endPage<allPage }">
-		  <a href="../youtube/you_tuber_detail.do?cno=?${vo.cno }&page=${endPage+1}"><li class="page">&gt;</li></a>
+		  <a href="../youtube/you_tuber_detail.do?cno=?${cno }&page=${endPage+1}"><li class="page">&gt;</li></a>
 		 </c:if>
 		</ul>
- 		</c:forEach>
+ 	<%-- 	</c:forEach> --%>
       </div>
     </section>
     <!-- Product Shop Section End -->
