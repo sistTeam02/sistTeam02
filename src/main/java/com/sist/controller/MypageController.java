@@ -153,10 +153,22 @@ public class MypageController {
 		
 		fdao.mypageUpdate(vo);
 		
+		model.addAttribute("id",vo.getId());
+		model.addAttribute("pwd",vo.getPwd());
+		model.addAttribute("name",vo.getName());
+		model.addAttribute("birth",vo.getBirth());
+		model.addAttribute("tel",vo.getTel());
+		model.addAttribute("phone",vo.getPhone());
+		model.addAttribute("email",vo.getEmail());
+		model.addAttribute("post",vo.getPost());
+		model.addAttribute("nickname",vo.getNickname());
+		model.addAttribute("addr1",vo.getAddr1());
+		model.addAttribute("addr2",vo.getAddr2());
+		
 		model.addAttribute("bread_jsp","../mypage/bread4.jsp");
-		model.addAttribute("mypage_jsp","../mypage/mypage_update.jsp");
+		model.addAttribute("mypage_jsp","../mypage/mypage_update_ok.jsp");
 		model.addAttribute("main_jsp","../mypage/mypage_main.jsp");
-		return "main/main";
+		return "redirect:../mypage/mypage_update.do";
 	}
 	
 	

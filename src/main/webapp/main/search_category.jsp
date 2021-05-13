@@ -105,7 +105,7 @@
                                   <a href="../shop/shop_detail_before.do?no=${vo.no }">
                                </c:if>
                                <c:if test="${no==1 }">
-                                  <a href="#">
+                                  <a href="../home_training/ht_detail_free.do?no=${vo.no}">
                                </c:if>
                                 <c:if test="${no==4 }">
                                   <a href="../youtube/you_detail.do?no=${vo.no }">

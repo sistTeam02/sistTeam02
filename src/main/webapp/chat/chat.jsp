@@ -379,11 +379,6 @@ $(function () {
 			recipe_list(page);
 		});
 	});
-	/* 테스트용버튼 */
-	$('#pBtn5').click(function() {
-		
-	});
-
 
 });
 /*레시피 페이지클릭 */
@@ -616,7 +611,7 @@ $(function(){
 		  		  strday=result;
 		  		
 		  	  },error:function(error){
-		  		  alert("달력에러");
+		  		 
 		  	  }
 		  });
 		  let arr=strday.split("^");
@@ -664,7 +659,7 @@ $(function(){
 			  		  strday=result;
 			  		
 			  	  },error:function(error){
-			  		  alert("달력에러");
+			  		 
 			  	  }
 			  });
 			  let arr=strday.split("^");
@@ -703,7 +698,7 @@ $(function(){
 	  		  strday=result;
 	  		
 	  	  },error:function(error){
-	  		  alert("달력에러");
+	  		
 	  	  }
 	  });
 	  let arr=strday.split("^");
@@ -1040,8 +1035,6 @@ function image_show(){
 						</li>
 						<li><button type="button" class="pBtn" id="pBtn3">안녕</button>
 							<button type="button" class="pBtn" id="pBtn4">뭐 먹지</button>
-						</li>
-						<li><button type="button" class="pBtn" id="pBtn5">테스트용 </button>
 						</li>
 					</ul>
 				</div>

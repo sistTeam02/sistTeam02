@@ -41,6 +41,7 @@ public class QnABoardController {
 		   map.put("start", start);
 		   map.put("end", end);
 		   List<QnABoardVO> list=qDao.qnaboardListData(map);
+		   QnABoard_ReplyVO qvo=new QnABoard_ReplyVO();
 		   int totalpage=qDao.qnaboardTotalPage();
 		   
 		   final int BLOCK=5;
@@ -53,6 +54,7 @@ public class QnABoardController {
 		   }
 		   
 		   // JSP 전송 
+		   model.addAttribute("qvo",qvo);
 		   model.addAttribute("list", list);
 		   model.addAttribute("curpage", curpage);
 		   model.addAttribute("allPage", allPage);

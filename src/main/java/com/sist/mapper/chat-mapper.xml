@@ -16,7 +16,7 @@
 		SELECT * from chat_plan 
 		WHERE plandate=#{plandate} and id=#{id}
 	</select>
-	<select id="chat_dbDay" resultType="String" parameterType="String">
+	<select id="chat_dbDayData" resultType="String" parameterType="String">
 	SELECT fooddate from chat_food 
 	where id=#{id}
 	UNION 
@@ -40,10 +40,11 @@
 	</select>
 	<select id="filenameData" resultType="String" parameterType="Chat_foodVO">
 		SELECT filename from chat_food  WHERE fooddate=#{fooddate} and id=#{id}
+		and filename is not null
 		order by filename asc
 	</select>
 	<select id="totalFileName" resultType="int" parameterType="Chat_foodVO">
 		SELECT count(*) from(
-		SELECT filename from chat_food  WHERE fooddate=#{fooddate} and id=#{id})
-	</select>
+		SELECT filename from chat_food  WHERE fooddate=#{fooddate} and id=#{id} and filename is not null)
+	</select> 
 </mapper>

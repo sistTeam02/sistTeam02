@@ -76,7 +76,7 @@
 							  </table>
 							</div>
 							<div class="container" align="right">
-							  <button type="button" class="btn btn-lg btn-default" onclick="location.href='#'">다른 프로그램 신청하러 가기</button>
+							  <button type="button" class="btn btn-lg btn-default" onclick="location.href='../home_training/ht_pay.do'">다른 프로그램 신청하러 가기</button>
 							</div>
 							
 					<div style="height:50px"></div>

@@ -15,8 +15,8 @@ public class User_order_basketVO {
 	private int pno,cno;//상품종류
 	private int ordercount,price,state;//수량
 	private String title;
-	
-	
+	private double total;
+	private double sales;
 	
 	public int getCno() {
 		return cno;
@@ -66,5 +66,18 @@ public class User_order_basketVO {
 	public void setOrdercount(int ordercount) {
 		this.ordercount = ordercount;
 	}
+	public double getTotal() {
+		return total;
+	}
+	public void setTotal(double total) {
+		this.total = total;
+	}
+	public double getSales() {
+		return sales;
+	}
+	public void setSales(double sales) {
+		this.sales = sales;
+	}
+
 	
 }

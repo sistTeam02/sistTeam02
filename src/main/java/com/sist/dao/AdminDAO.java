@@ -1,5 +1,6 @@
 package com.sist.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -97,5 +98,8 @@ public class AdminDAO extends SqlSessionDaoSupport{
 	public void deleteShopList_detail(Map map){
 		getSqlSession().insert("shop_deleteListData",map);
 		getSqlSession().insert("shop_deleteDetailData",map);
+	}
+	public User_order_basketVO  totalFoodSales(String month){
+		return getSqlSession().selectOne("totalFoodSales",month);
 	}
 }
