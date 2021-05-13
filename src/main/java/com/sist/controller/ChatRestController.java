@@ -236,6 +236,13 @@ public class ChatRestController {
 		
 		return json;
 	}
+	@PostMapping("chat/chat_recipeDetail.do")
+	public String chat_recipeDetail(int no){
+		String json="";
+		
+		
+		return json;
+	}
 	@PostMapping("chat/chat_kcal.do")
 	public String chat_kcaldata(String keyword){
 		String json="";

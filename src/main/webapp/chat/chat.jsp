@@ -736,7 +736,7 @@ function recipe_list(page){
 					}
 					$('#table3_td'+i).text(json[i].title);
 					$('#table3_td'+i).append(
-						"<img src="+json[i].poster+">"
+						"<img no="+json[i].no+" src="+json[i].poster+">"
 					);
 				totalpage=json[i].totalpage;
 				page=json[i].page;
@@ -972,6 +972,18 @@ function image_show(){
 			);
    }
  }
+function getDetail(no){
+	$.ajax({
+		type:'post',
+		data:{'no',no},
+		url:'../chat/chat_recipeDetail.do',
+		success:function(result){
+			
+		}
+	
+	})
+}
+
 </script>
 </head>
 <body>

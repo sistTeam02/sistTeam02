@@ -27,7 +27,7 @@
     <typeAlias type="com.sist.vo.HometDetailVO" alias="HometDetailVO"/>
     <typeAlias type="com.sist.vo.HometBoardVO" alias="HometBoardVO"/>
     <typeAlias type="com.sist.vo.HometBoardReplyVO" alias="HometBoardReplyVO"/>
-    
+    <typeAlias type="com.sist.vo.Chat_recipeDetailVO" alias="Chat_recipeDetailVO"/>
   	<typeAlias type="com.sist.vo.YoutubeVO" alias="YoutubeVO"/>
   	<typeAlias type="com.sist.vo.ShopReplyVO" alias="ShopReplyVO"/>
   </typeAliases>
