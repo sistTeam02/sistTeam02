@@ -126,9 +126,9 @@ $(function(){
                     <div class="col-lg-3 text-right col-md-3">
                         <ul class="nav-right">
                             <li class="heart-icon">
-                                <a href="#">찜 리스트
+                                <a href="../mypage/like_list.do"><!-- 찜 리스트 -->
                                     <i class="icon_heart_alt"></i>
-                                    <span>1</span>
+                                    <span>3</span>
                                 </a>
                             </li>
                             <li class="cart-icon">
