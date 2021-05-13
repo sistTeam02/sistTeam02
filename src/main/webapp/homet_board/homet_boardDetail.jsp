@@ -64,7 +64,7 @@ $(function(){
          <td colspan="4" class="text-right">
            <a href="../homet_board/homet_boardUpdate.do?no=${vo.no }&page=${page}" class="btn btn-xs btn-success">수정</a>
            <a href="../homet_board/homet_boardDelete.do?no=${vo.no }&page=${page}" class="btn btn-xs btn-warning">삭제</a>
-           <a href="../homet_board/homet_boardlist.do?page=${page }" class="btn btn-xs btn-info">목록</a>
+           <a href="../homet_board/homet_boardList.do?page=${page }" class="btn btn-xs btn-info">목록</a>
          </td>
        </tr>
      </table>
