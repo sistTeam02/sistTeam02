@@ -23,6 +23,6 @@ public class Chat_planDAO extends SqlSessionDaoSupport{
 		return getSqlSession().selectList("chat_planData",vo);
 	}
 	public List<String> chat_dbDay(String id){
-		return getSqlSession().selectList("chat_dbDay",id);
+		return getSqlSession().selectList("chat_dbDayData",id);
 	}
 }

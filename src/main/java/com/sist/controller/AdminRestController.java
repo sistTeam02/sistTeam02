@@ -392,4 +392,36 @@ public class AdminRestController {
 		dao.deleteShopList_detail(map);
 		return result;
 	}
+	@GetMapping("admin/redbar.do")
+	public String admin_redbar(int month){
+		String json="";
+		String result="";
+		String strmonth="";
+		int[] arr={1,2,3,4,5};
+		JSONArray jArr=new JSONArray();
+		for(int i=0; i<5;i++){
+			int sortMonth=(month-5+arr[i]);//no=1이면 m-4
+			if(month>=10){
+				strmonth=String.valueOf(sortMonth);
+			}else{
+				strmonth="0"+String.valueOf(sortMonth);
+			}
+			System.out.println(strmonth);
+				User_order_basketVO vo=dao.totalFoodSales(strmonth);
+			
+				double total=vo.getTotal();
+				double sales=vo.getSales();
+				double num=(sales/total)*1000;
+				num=(double)Math.round(num)/10;
+				num=(num/100)*640*100;
+				num=(double)Math.round(num)/100;
+				result=String.valueOf(num);
+				JSONObject obj=new JSONObject();
+				obj.put("no",arr[i]);
+				obj.put("height", result);
+				jArr.add(obj);
+			}
+		json=jArr.toJSONString();
+		return json;
+	}
 }

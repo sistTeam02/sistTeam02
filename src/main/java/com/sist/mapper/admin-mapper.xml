@@ -180,4 +180,14 @@
 		Delete from ${table}
 		WHERE no=#{no}
 	</delete>
+	<!-- 식품월별매출계산 -->
+	<select id="totalFoodSales" parameterType="String" resultType="User_order_basketVO">
+	select (SELECT sum(price) 
+	from user_order_basket
+	WHERE state=1) total,sum(price) sales
+	from user_order_basket 
+	where state=1 and cno=1
+	GROUP by TO_char(paydate,'yyyy-mm')
+	HAVING TO_char(paydate,'yyyy-mm')='2021-'||#{month}
+	</select>
 </mapper>
