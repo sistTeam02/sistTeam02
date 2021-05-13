@@ -95,6 +95,7 @@ public class QnABoardDAO extends SqlSessionDaoSupport{
 	    	 boolean bCheck=false;
 	    	 // 비밀번호 읽기
 	    	 String db_pwd=getSqlSession().selectOne("qnaboardGetPassword",no);
+	    	 System.out.println(db_pwd);
 	    	 System.out.println("db_pwd="+db_pwd+",pwd="+pwd);
 	    	 if(pwd.equals(db_pwd))
 	    	 {
