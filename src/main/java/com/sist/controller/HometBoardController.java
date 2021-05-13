@@ -21,7 +21,6 @@ public class HometBoardController {
    @Autowired
    private HometBoardReplyDAO hrDao;
    
-   
    @GetMapping("homet_board/homet_boardList.do")
    public String board_flist(String page,Model model)
    {
@@ -59,20 +58,20 @@ public class HometBoardController {
    }
    // 글쓰기
    @GetMapping("homet_board/homet_boardInsert.do")
-   public String board_insert(Model model)
+   public String homet_board_insert(Model model)
    {
 	   model.addAttribute("main_jsp", "../homet_board/homet_boardInsert.jsp");
 	   return "main/main";
    }
    @PostMapping("homet_board/homet_boardInsert_ok.do")
-   public String board_finsert_ok(HometBoardVO vo)
+   public String homet_board_finsert_ok(HometBoardVO vo)
    {
 	   //DAO연결 
 	   hDao.homet_freeboardInsert(vo);
-	   return "redirect:homet_boardLlist.do";
+	   return "redirect:homet_boardList.do";
    }
    @GetMapping("homet_board/homet_boardDetail.do")
-   public String board_fdetail(int no,String page,Model model)
+   public String homet_board_fdetail(int no,String page,Model model)
    {
 	   // 데이터 읽기 => DAO연결 
 	   HometBoardVO vo=hDao.homet_freeboardDetailData(no);
@@ -94,7 +93,7 @@ public class HometBoardController {
     */
    // Error 405(get/post)
    @GetMapping("homet_board/homet_boardUpdate.do")
-   public String board_fupdate(int no,Model model)
+   public String homet_board_fupdate(int no,Model model)
    {
 	   // 결과값 
 	   HometBoardVO vo=hDao.homet_freeboardUpdateData(no);
@@ -105,7 +104,7 @@ public class HometBoardController {
 	   return "main/main";
    }
    @PostMapping("homet_board/homet_boardUpdate_ok.do")
-   public String board_fupdate_ok(HometBoardVO vo,Model model)
+   public String homet_board_fupdate_ok(HometBoardVO vo,Model model)
    {
 	   //데이터베이스 연동 
 	   boolean bCheck=hDao.homet_freeboardUpdate(vo);
@@ -116,14 +115,16 @@ public class HometBoardController {
    }
    
    @GetMapping("homet_board/homet_boardDelete.do")
-   public String board_fdelete(int no,Model model)
+   public String homet_board_fdelete(int no,String pwd, String page,Model model)
    {
 	   model.addAttribute("no", no);
+	   model.addAttribute("pwd",pwd);
+	   model.addAttribute("page",page);
 	   return "homet_board/homet_boardDelete";
    }
    
    @PostMapping("homet_board/homet_boardDelete_ok.do")
-   public String board_fdelete_ok(int no,String pwd,Model model)
+   public String homet_board_fdelete_ok(int no,String pwd,String page,Model model)
    {
 	   // 결과값 읽기 
 	   System.out.println("pwd="+pwd+",no="+no);
@@ -131,12 +132,13 @@ public class HometBoardController {
 	   System.out.println("bCheck="+bCheck);
 	   // delete_ok.jsp로 결과값을 전송 => 사용자가 볼 수 있게 처리 
 	   model.addAttribute("bCheck", bCheck);
+	   model.addAttribute("page", page);
 	   return "homet_board/homet_boardDelete_ok";
    }
    
    
    @PostMapping("homet_board/homet_reply_insert.do")
-   public String board_reply_insert(int bno,String msg,RedirectAttributes ra,HttpSession session)
+   public String homet_board_reply_insert(int bno,String msg,RedirectAttributes ra,HttpSession session)
    {
 	   HometBoardReplyVO vo = new HometBoardReplyVO();
 	   vo.setBno(bno);

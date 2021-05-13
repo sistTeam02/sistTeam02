@@ -9,12 +9,43 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <style type="text/css">
-.row{
-  width:900px;
-  margin: 0px auto;
+.page {
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0px;
+  font-family: Arial;
+  color: #000000;
+  font-size: 15px;
+  background: #ffffff;
+  padding: 10px 15px 10px 15px;
+  border: solid #d6d6d6 2px;
+  text-decoration: none;
 }
-h1 {
-  text-align: center;
+
+.page:hover {
+  background: #e0e0e0;
+  text-decoration: none;
+}
+.page_active {
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0px;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 15px;
+  background: #648bff;
+  padding: 10px 15px 10px 15px;
+  text-decoration: none;
+  border: solid #648bff 2px;
+}
+
+.page_active:hover {
+  text-decoration: none;
+}
+
+.pagination{
+	 display:flex;
+	 justify-content: center; 
 }
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -29,13 +60,12 @@ h1 {
  <div class="container-fluid">
   <h1>수강후기 게시판</h1>
   <div class="row">
-  <!-- include 이렇게 하는게 맞나요..?? -->
   <jsp:include page="../homet_board/homet_board_menu.jsp"/>
   <div class="col-lg-9">
   <table class="table">
   <tr>
    <td class="text-right">
-    <a href=../homet_board/homet_boardInsert_ok.do class="btn btn-sm btn-warning">글쓰기</a> 
+    <a href=../homet_board/homet_boardInsert.do class="btn btn-sm btn-warning">글쓰기</a> 
    </td>
   </tr>
   </table>
@@ -59,7 +89,7 @@ h1 {
      </tr>
     </c:forEach>
    </table>
-   <table class="find_searchbar">
+   <!-- <table class="find_searchbar">
     <tr>
      <td class="text-left">
       Search:<select name="fs" class="input-sm">
@@ -75,20 +105,26 @@ h1 {
       <button class="btn btn-sm btn0-primary">검색</button>
      </td>
      </tr>
-     </table>
-     <table class="table">
-     <tr>
-       <td class="text-center">
-         <ul class="pagination">
-             <li><a href="#">&lt;</a></li>
-	         <c:forEach var="i" begin="${startPage }" end="${endPage }">
-	           <li><a href="../homet_board/homet_boardlist.do?page=${i }">${i }</a></li>
-	         </c:forEach>
-	         <li><a href="#">&gt;</a></li>
-	     </ul>
-       </td>
-     </tr>
-   </table>
+     </table> -->
+       		<div style="height:30px"></div>
+		<ul class="pagination" >
+			<c:if test="${startPage>1 }">
+			  <a href="../homet_board/homet_boardList.do?page=${startPage-1}"><li class="page">&lt;</li></a>
+			 </c:if>
+			<c:forEach var="i" step="1" begin="${startPage }" end="${endPage }">
+				<a href="../homet_board/homet_boardList.do?page=${i}">
+				<c:if test="${curpage==i}">
+			  		<li class="page_active">
+			  	</c:if>
+			  	<c:if test="${curpage!=i }">
+			  		<li class="page">
+			  	</c:if>
+			  ${i }</li></a>
+			</c:forEach>
+			<c:if test="${endPage<allPage }">
+			  <a href="../homet_board/homet_boardList.do?page=${endPage+1}"><li class="page">&gt;</li></a>
+			 </c:if>
+		</ul>
   </div>
  </div>
  </div>
