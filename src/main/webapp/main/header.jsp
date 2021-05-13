@@ -126,7 +126,7 @@ $(function(){
                     <div class="col-lg-3 text-right col-md-3">
                         <ul class="nav-right">
                             <li class="heart-icon">
-                                <a href="#"><!-- 찜 리스트 -->
+                                <a href="#">찜 리스트
                                     <i class="icon_heart_alt"></i>
                                     <span>1</span>
                                 </a>
@@ -134,18 +134,18 @@ $(function(){
                             <li class="cart-icon">
                                 <a href="#"><!-- 장바구니 -->
                                     <i class="icon_bag_alt"></i>
-                                    <span>3</span>
+                                    <span>2</span>
                                 </a>
                                 <div class="cart-hover">
                                     <div class="select-items">
                                         <table>
                                             <tbody>
                                                 <tr>
-                                                    <td class="si-pic"><img src="../img/select-product-1.jpg" alt=""></td>
+                                                    <td class="si-pic"><img src="../img/shop_001.jpg" width=70px height=70px></td>
                                                     <td class="si-text">
                                                         <div class="product-selected">
-                                                            <p>$60.00 x 1</p>
-                                                            <h6>Kabino Bedside Table</h6>
+                                                            <p>￦80,600 x 1</p>
+                                                            <h6>홈트레이닝 룰루레몬 요가...</h6>
                                                         </div>
                                                     </td>
                                                     <td class="si-close">
@@ -153,11 +153,11 @@ $(function(){
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="si-pic"><img src="../img/select-product-2.jpg" alt=""></td>
+                                                    <td class="si-pic"><img src="../img/shop_067.jpg" width=70px height=70px></td>
                                                     <td class="si-text">
                                                         <div class="product-selected">
-                                                            <p>$60.00 x 1</p>
-                                                            <h6>Kabino Bedside Table</h6>
+                                                            <p>￦21,760 x 1</p>
+                                                            <h6>스타스포츠 이지 중량밴드...</h6>
                                                         </div>
                                                     </td>
                                                     <td class="si-close">
@@ -168,12 +168,12 @@ $(function(){
                                         </table>
                                     </div>
                                     <div class="select-total">
-                                        <span>total:</span>
-                                        <h5>$120.00</h5>
+                                        <span>총 금액:</span>
+                                        <h5>￦102,360</h5>
                                     </div>
                                     <div class="select-button">
-                                        <a href="../shop/user_basket.do" class="primary-btn view-card">VIEW CARD</a>
-                                        <a href="#" class="primary-btn checkout-btn">CHECK OUT</a>
+                                        <a href="../shop/user_basket.do" class="primary-btn view-card">장바구니</a>
+                                        <a href="#" class="primary-btn checkout-btn">결제하기</a>
                                     </div>
                                 </div>
                             </li>

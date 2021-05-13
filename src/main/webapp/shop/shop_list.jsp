@@ -7,8 +7,23 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js"></script>
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	<!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=Muli:300,400,500,600,700,800,900&display=swap" rel="stylesheet">
+
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="../css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="../css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="../css/themify-icons.css" type="text/css">
+    <link rel="stylesheet" href="../css/elegant-icons.css" type="text/css">
+    <link rel="stylesheet" href="../css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="../css/nice-select.css" type="text/css">
+    <link rel="stylesheet" href="../css/jquery-ui.min.css" type="text/css">
+    <link rel="stylesheet" href="../css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="../css/style.css" type="text/css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
 <script type="text/javascript">
 $(function(){
 	// 추천버튼 클릭시(추천 추가 또는 추천 제거)
@@ -28,7 +43,7 @@ $(function(){
 	// 게시글 추천수
     function recCount() {
 		$.ajax({
-			url: "mypage/like_list_count.do",
+			url: "mypage/like_list_gcount.do",
             type: "POST",
             data: {
                 no: ${pno}
@@ -39,7 +54,25 @@ $(function(){
 		})
     };
     recCount(); // 처음 시작했을 때 실행되도록 해당 함수 호출
+    
+    function initPriceSlider()
+    {
+    	$( "#slider-range" ).slider(
+    	{
+    		range: true,
+    		min: 0,
+    		max: 1000,
+    		values: [ 0, 580 ],
+    		slide: function( event, ui )
+    		{
+    			$( "#amount" ).val( "//" + ui.values[ 0 ] + " - //" + ui.values[ 1 ] );
+    		}
+    	});
+    		
+    	$( "#amount" ).val( "//" + $( "#slider-range" ).slider( "values", 0 ) + " - //" + $( "#slider-range" ).slider( "values", 1 ) );
+    }
 });
+
 </script>
 <style type="text/css">
 .checkBtn{
@@ -81,7 +114,7 @@ $(function(){
                         </ul>
                     </div>
                     <div class="filter-widget">
-                        <h4 class="fw-title" id="price">가격</h4>
+                        <h4 class="fw-title" id="price">가격대</h4>
                         <div class="filter-range-wrap">
                             <div class="range-slider">
                                 <div class="price-input">
@@ -90,7 +123,7 @@ $(function(){
                                 </div>
                             </div>
                             <div class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"
-                                data-min="33" data-max="98">
+                                data-min="0" data-max="300">
                                 <div class="ui-slider-range ui-corner-all ui-widget-header"></div>
                                 <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span>
                                 <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span>
@@ -114,18 +147,19 @@ $(function(){
                     <div class="product-show-option">
                         <div class="row">
                             <div class="col-lg-7 col-md-7">
-                                <div class="select-option">
+                                <div class="select-option" style="weight:25px">
                                     <select class="sorting">
-                                        <option value="">Default Sorting</option>
+                                        <option value="">최신순</option>
+                                        <option value="">가격순</option>
                                     </select>
-                                    <select class="p-show">
+                                    <!-- <select class="p-show">
                                         <option value="">Show:</option>
-                                    </select>
+                                    </select> -->
                                 </div>
                             </div>
                             <div class="col-lg-5 col-md-5 text-right">
                                 <!-- <p>Show 01- 09 Of 36 Product</p> -->
-                                <p>총 <span id="count" style="color:#648cff">${gvo.count }</span>개의 상품</p>
+                                <p>총 <span id="count" style="color:#648cff">572</span>개의 상품</p>
                             </div>
                         </div>
                     </div>
@@ -176,22 +210,43 @@ $(function(){
                      </div>
              </div>
           </div>
-          <div class="loading-more" style="height:30px">
-             <!-- <i class="icon_loading"></i>
-                  <a href="#" id="load">
-                       Loading More
-                  </a> -->
-            <tr>
+
+        </div>
+                <div style="height:30px"></div>
+          <div class="col-lg-3"></div>
+          <div class="col-lg-9 text-center">
+            <%-- <tr>
               <td class="text-right">
 	            <a href="shop_list.do?page=${curpage>1?curpage-1:curpage }" class="btn btn-sm">이전</a>
 	            ${curpage } page / ${totalpage } pages
 	            <a href="shop_list.do?page=${curpage<totalpage?curpage+1:curpage }" class="btn btn-sm">다음</a>
 	          </td>
-            </tr>
+            </tr> --%>
+	          <tr>
+		       <td>
+		         <ul class="pagination">
+		             <li><a href="shop_list.do?page=${curpage>1?curpage-1:curpage }">이전</a></li>
+				         <c:forEach var="i" begin="${startPage }" end="${endPage }">
+				           &nbsp;&nbsp;<li><a href="../shop/shop_list.do?page=${i }">${i }</a></li>&nbsp;&nbsp;
+				         </c:forEach>
+			         <li><a href="shop_list.do?page=${curpage<totalpage?curpage+1:curpage }">다음</a></li>
+			     </ul>
+		       </td>
+		     </tr>
           </div>
-        </div>
+          <div style="height:50px"></div>
       </div>
     </section>
     <!-- Product Shop Section End -->
+    
+<script src="../js/bootstrap.min.js"></script>
+<script src="../js/jquery-ui.min.js"></script>
+<script src="../js/jquery.countdown.min.js"></script>
+<script src="../js/jquery.nice-select.min.js"></script>
+<script src="../js/jquery.zoom.min.js"></script>
+<script src="../js/jquery.dd.min.js"></script>
+<script src="../js/jquery.slicknav.js"></script>
+<script src="../js/owl.carousel.min.js"></script>
+<script src="../js/main.js"></script>
 </body>
 </html>
