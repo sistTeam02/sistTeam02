@@ -112,7 +112,7 @@ public class HometBoardController {
 	   // update_ok.jsp => 결과값을 보내서 사용자가 볼 수 있게 만든다 
 	   model.addAttribute("bCheck",bCheck);
 	   model.addAttribute("no", vo.getNo());
-	   return "homet_board/homet_boardUpdate_ok";
+	   return "board/fupdate_ok";
    }
    
    @GetMapping("homet_board/homet_boardDelete.do")
@@ -154,7 +154,7 @@ public class HometBoardController {
    }
    
    @PostMapping("homet_board/homet_reply_update.do")
-   public String homet_board_reply_update(int no,int bno,String msg,RedirectAttributes ra)
+   public String board_reply_update(int no,int bno,String msg,RedirectAttributes ra)
    {
 	   // 수정 => DAO
 	   HometBoardReplyVO vo=new HometBoardReplyVO();
@@ -163,11 +163,11 @@ public class HometBoardController {
 	   hrDao.homet_replyUpdate(vo);
 	   // 수정 후에 데이터를 보내준다 
 	   ra.addAttribute("bno",bno);
-	   return "redirect:homet_reply_list.do";
+	   return "redirect:reply_list.do";
    }
    
    @PostMapping("homet_board/homet_reply_to_reply_insert.do")
-   public String homet_board_reply_to_reply(int pno,int bno, String msg,RedirectAttributes ra,HttpSession session)
+   public String board_reply_to_reply(int pno,int bno, String msg,RedirectAttributes ra,HttpSession session)
    {
 	   // 댓글 추가 작업 ==> DAO
 	   HometBoardReplyVO vo=new HometBoardReplyVO();
@@ -179,25 +179,25 @@ public class HometBoardController {
 	   vo.setMsg(msg);
 	   hrDao.homet_replyToReplyInsert(pno, vo);
 	   ra.addAttribute("bno", vo.getBno());
-	   return "redirect:homet_reply_list.do";
+	   return "redirect:reply_list.do";
    }
    
    @GetMapping("homet_board/homet_reply_delete.do")
-   public String homet_board_reply_delete(int no,int bno,RedirectAttributes ra)
+   public String board_reply_delete(int no,int bno,RedirectAttributes ra)
    {
 	   // 삭제 처리 ==> DAO(service)
 	   hrDao.homet_replyDelete(no);
 	   ra.addAttribute("bno", bno);
-	   return "redirect:homet_reply_list.do";
+	   return "redirect:reply_list.do";
    }
    
    @GetMapping("homet_board/homet_reply_list.do")
-   public String homet_board_reply_list(int bno, Model model)
+   public String board_reply_list(int bno, Model model)
    {
 	   List<HometBoardReplyVO> rList=hrDao.homet_replyListData(bno);
 	   model.addAttribute("rList", rList);
 	   model.addAttribute("no", bno);
-	   return "homet_board/homet_reply_list";
+	   return "board/reply_list";
    }
    
    
