@@ -139,12 +139,12 @@
     <!-- Women Banner Section End -->
 
     <!-- Deal Of The Week Section Begin-->
-    <section class="deal-of-week set-bg spad" data-setbg="../img/maaa.png">
+    <!-- <section class="deal-of-week set-bg spad" data-setbg="../img/maaa.png">
         <div class="container" >
             <div class="col-lg-6 text-center">
                 <div class="section-title">
                     <h2>수강 기간 할인권</h2>
-                    <!-- <p>홈트계 끝판왕 힙으뜸의 필라테스 트레이닝</p> -->
+                    <p>홈트계 끝판왕 힙으뜸의 필라테스 트레이닝</p>
                     <div class="product-price">
                     	홈트계 끝판왕 힙으뜸의 필라테스 트레이닝
                         <span>바로가기</span>
@@ -171,7 +171,7 @@
                 <a href="#" class="primary-btn">자세히</a>
             </div>
         </div>
-    </section>
+    </section> -->
     <!-- Deal Of The Week Section End -->
 
     <!-- Man Banner Section Begin -->
@@ -186,45 +186,34 @@
                         </ul>
                     </div>
                     <div class="product-slider owl-carousel">
+                        
+                           <c:forEach var="gvo" items="${goodslist }">
                         <div class="product-list">
-                           <c:forEach var="gvo" items="${gvo.list }">
-                               <div class="product-item" style="width:262.5px;height:410.5px">
-                                     <div class="pi-pic" style="width:262.5px;height:262.5px">
-                                        <img src="${gvo.poster }">
-                                        <!-- <div class="sale pp-sale">Sale</div> -->
-                                        <div class="icon">
-                                          <!-- 찜으로 이동 -->
-                                          <a href="#">
-                                            <i class="icon_heart_alt"></i>
-                                          </a>
-                                        </div>
-                                        <ul class="text-left">
-                                          <!-- 장바구니로 이동 -->
-                                            <li class="w-icon active">
-                                              <a href="../shop/user_basket.do"><i class="icon_bag_alt"></i></a>
-                                            </li>
-                                        </ul>
-                                     </div> 
-                                     <a href="shop_detail.do?no=${gvo.no }">
-                                        <div class="pi-text text-center">
-	                                       <p>${gvo.title }</p>
-	                                    </div>
-	                                 </a>
-	                                 <div class="product-price text-center" style="font-size:13pt;font-weight:bold;color:#648cff;height:55px">
-	                                    <span><fmt:formatNumber value="${gvo.price }"/>&nbsp;원</span>
-	                                 </div>
-	                              </div>
-                            </c:forEach>
+                            <div class="pi-pic">
+                                <img src="${gvo.poster }" alt="">
+                                <div class="sale">Sale</div>
+                            </div>
+                            <div class="pi-text">
+                                <div class="catagory-name">Coat</div>
+                                <a href="../shop/shop_detail.do?no=${gvo.no }">
+                                    <h5>${gvo.title }</h5>
+                                </a>
+                                <div class="product-price">
+                                    ${gvo.price }
+                                </div>
+                            </div>
                          </div>
+                            </c:forEach>
 				      </div>
                    </div>
-                </div>
-                <div class="col-lg-3 offset-lg-1">
+                    <div class="col-lg-3 offset-lg-1">
                     <div class="product-large set-bg m-large" data-setbg="../img/shop_poster.jpg">
                         <h2>운동용품</h2>
                         <a href="../shop/shop_list.do">더보기</a>
                     </div>
+               		 </div>
                 </div>
+               
             </div>
         </div>
     </section>
@@ -232,42 +221,14 @@
 
     <!-- Instagram Section Begin -->
     <div class="instagram-photo">
-        <div class="insta-item set-bg" data-setbg="../img/insta-1.jpg">
+    	<c:forEach var="fvo" items="${foodlist }">
+        <div class="insta-item set-bg" data-setbg="${fvo.poster }">
             <div class="inside-text">
-                <i class="ti-instagram"></i>
-                <h5><a href="#">colorlib_Collection</a></h5>
+                <h5><a href="../shop/dfood_detail.do?no=${fvo.no }">${fvo.title }</a></h5>
             </div>
         </div>
-        <div class="insta-item set-bg" data-setbg="../img/insta-2.jpg">
-            <div class="inside-text">
-                <i class="ti-instagram"></i>
-                <h5><a href="#">colorlib_Collection</a></h5>
-            </div>
-        </div>
-        <div class="insta-item set-bg" data-setbg="../img/insta-3.jpg">
-            <div class="inside-text">
-                <i class="ti-instagram"></i>
-                <h5><a href="#">colorlib_Collection</a></h5>
-            </div>
-        </div>
-        <div class="insta-item set-bg" data-setbg="../img/insta-4.jpg">
-            <div class="inside-text">
-                <i class="ti-instagram"></i>
-                <h5><a href="#">colorlib_Collection</a></h5>
-            </div>
-        </div>
-        <div class="insta-item set-bg" data-setbg="../img/insta-5.jpg">
-            <div class="inside-text">
-                <i class="ti-instagram"></i>
-                <h5><a href="#">colorlib_Collection</a></h5>
-            </div>
-        </div>
-        <div class="insta-item set-bg" data-setbg="../img/insta-6.jpg">
-            <div class="inside-text">
-                <i class="ti-instagram"></i>
-                <h5><a href="#">colorlib_Collection</a></h5>
-            </div>
-        </div>
+        </c:forEach>
+ 
     </div>
     <!-- Instagram Section End -->
 
