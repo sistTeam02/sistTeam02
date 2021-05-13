@@ -104,7 +104,7 @@
 					<div style="height:50px"></div>
                        <div class="container">
                        <h2>찜한 제품</h2>
- 						<p>장바구니에 넣은 제품 목록을 보여줍니다(goods_detail)</p>            
+ 						<p>장바구니에 넣은 제품 목록을 보여줍니다</p>            
 							  <table class="table table-hover">
 							    <thead>
 							      <tr>
@@ -141,7 +141,7 @@
 					<div style="height:50px"></div>
                        <div class="container">
                        <h2>찜한 식품</h2>
- 						<p>장바구니에 넣은 식품 목록을 보여줍니다(dietfood_detail)</p>            
+ 						<p>장바구니에 넣은 식품 목록을 보여줍니다</p>            
 							  <table class="table table-hover">
 							    <thead>
 							      <tr>
