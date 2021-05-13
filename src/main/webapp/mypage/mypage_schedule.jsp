@@ -17,6 +17,9 @@
     border-collapse : collapse;
     border-bottom : 1px solid #648CFF;
 }
+.tableColor:hover {
+    background: #D9E5FF;
+}
  h2{
      text-decoration: overline #648CFF;
      }
@@ -159,40 +162,40 @@ $(document).ready(function(){
                         <!-- 달력 -->
 			<table class="table2" style="height: 1em; width: 79em;">
                <tr id="calender_tr">
-                  <td style="height: 3em;text-align: right;"><i class="ti-angle-left"></i></td>
+                  <td style="height: 3em;text-align: right;cursor:pointer;"><i class="ti-angle-left"></i></td>
                   <td style="height: 3em;text-align: center;width: 6em;"id="calender"></td>
-                  <td style="height: 3em;text-align: left;"><i class="ti-angle-right"></i></td>
+                  <td style="height: 3em;text-align: left;cursor:pointer;"><i class="ti-angle-right"></i></td>
                </tr>
             </table>
 				<table class="table2" style="width: 79em;height: 36em;" id="dayBtn">
 					<tr>
 					<c:forEach begin="1" end="7" step="1" varStatus="s">
-						<td id="date${s.index }"></td>
+						<td id="date${s.index }" class="tableColor"></td>
 					</c:forEach>
 					</tr>
 					<tr>
 					<c:forEach begin="8" end="14" step="1" varStatus="s">
-						<td id="date${s.index }"></td>
+						<td id="date${s.index }" class="tableColor"></td>
 					</c:forEach>
 					</tr>
 					<tr>
 					<c:forEach begin="15" end="21" step="1" varStatus="s">
-						<td id="date${s.index }"></td>
+						<td id="date${s.index }" class="tableColor"></td>
 					</c:forEach>
 					</tr>
 					<tr>
 					<c:forEach begin="22" end="28" step="1" varStatus="s">
-						<td id="date${s.index }"></td>
+						<td id="date${s.index }" class="tableColor"></td>
 					</c:forEach>
 					</tr>
 					<tr>
 					<c:forEach begin="29" end="35" step="1" varStatus="s">
-						<td id="date${s.index }"><i></i></td>
+						<td id="date${s.index }" class="tableColor"><i></i></td>
 					</c:forEach>
 					</tr>
 						<tr>
 					<c:forEach begin="36" end="42" step="1" varStatus="s">
-						<td id="date${s.index }"></td>
+						<td id="date${s.index }" class="tableColor"></td>
 					</c:forEach>
 					</tr>
 				</table>  

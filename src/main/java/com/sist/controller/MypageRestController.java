@@ -3,6 +3,7 @@ package com.sist.controller;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -135,5 +136,6 @@ public class MypageRestController {
 		System.out.println(json);
 		return json;
 	}
+	
 	
 }

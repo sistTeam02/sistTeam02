@@ -104,7 +104,7 @@
 					<div style="height:50px"></div>
                        <div class="container">
                        <h2>찜한 제품</h2>
- 						<p>장바구니에 넣은 제품 목록을 보여줍니다</p>            
+ 						<p>찜하기 버튼을 누른 제품 목록을 보여줍니다</p>            
 							  <table class="table table-hover">
 							    <thead>
 							      <tr>
@@ -115,7 +115,7 @@
 							    </thead>
 							    <tbody>
 							      <c:forEach var="gvo" items="${gList }">
-							      <tr>
+							      <tr onclick="location.href='http://localhost/web/shop/shop_detail.do?no=${gvo.no}'" style="cursor:pointer;">
 							        <td>
 							        	<img src="${gvo.poster}" width="100px" height="100">
 							        </td>
