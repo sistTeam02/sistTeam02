@@ -9,6 +9,7 @@ import java.util.*;
 import javax.annotation.Resource;
 
 import com.sist.vo.Homet_pay_inputVO;
+import com.sist.vo.User_basketVO;
 import com.sist.vo.YoutubeVO;;
 
 @Repository
@@ -80,6 +81,12 @@ public class YoutubeDAO extends SqlSessionDaoSupport{
 	{
 		getSqlSession().update("adminHtPayOKUpdate",no);
 	}
+	//바스켓 넣기
+	public void youtubeBasketInsert(User_basketVO vo)
+	{
+		getSqlSession().insert("youtubeBasketInsert",vo);
+	}
+	
 	
 	
 }
