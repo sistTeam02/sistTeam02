@@ -10,7 +10,14 @@ public class YoutubeVO {
 	private String description;
 	private int no;
 	private int cno;
+	private String poster;
 	
+	public String getPoster() {
+		return poster;
+	}
+	public void setPoster(String poster) {
+		this.poster = poster;
+	}
 	public int getCno() {
 		return cno;
 	}

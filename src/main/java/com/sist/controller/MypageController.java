@@ -233,21 +233,3 @@ public class MypageController {
 	
 	
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -93,25 +93,27 @@ public class HometBoardController {
     */
    // Error 405(get/post)
    @GetMapping("homet_board/homet_boardUpdate.do")
-   public String homet_board_fupdate(int no,Model model)
+   public String homet_board_fupdate(int no,String page,Model model)
    {
 	   // 결과값 
 	   HometBoardVO vo=hDao.homet_freeboardUpdateData(no);
 	   // 데이터연동 (DAO)
 	   // 데이터를 JSP로 전송
 	   model.addAttribute("vo", vo);
+	   model.addAttribute("page",page);
 	   model.addAttribute("main_jsp", "../homet_board/homet_boardUpdate.jsp");
 	   return "main/main";
    }
    @PostMapping("homet_board/homet_boardUpdate_ok.do")
-   public String homet_board_fupdate_ok(HometBoardVO vo,Model model)
+   public String homet_board_fupdate_ok(HometBoardVO vo,String page,Model model)
    {
 	   //데이터베이스 연동 
 	   boolean bCheck=hDao.homet_freeboardUpdate(vo);
 	   // update_ok.jsp => 결과값을 보내서 사용자가 볼 수 있게 만든다 
 	   model.addAttribute("bCheck",bCheck);
 	   model.addAttribute("no", vo.getNo());
-	   return "board/fupdate_ok";
+	   model.addAttribute("page", page);
+	   return "homet_board/homet_boardUpdate_ok";
    }
    
    @GetMapping("homet_board/homet_boardDelete.do")

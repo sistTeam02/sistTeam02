@@ -65,7 +65,15 @@
   <table class="table">
   <tr>
    <td class="text-right">
-    <a href=../homet_board/homet_boardInsert.do class="btn btn-sm btn-warning">글쓰기</a> 
+   <c:choose>
+	   <c:when test="${sessionScope.id != null }">
+	    <a href=../homet_board/homet_boardInsert.do class="btn btn-sm btn-warning">글쓰기</a> 
+	   </c:when>
+	   
+	   <c:otherwise>
+	   	<div style="height: 30px"></div>
+	   </c:otherwise>
+   </c:choose>
    </td>
   </tr>
   </table>
