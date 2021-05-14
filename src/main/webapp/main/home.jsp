@@ -65,7 +65,7 @@
                     <div class="single-banner">
                         <img src="../img/training.PNG" style="width: 570px; height: 320px" alt="">
                         <div class="inner-text">
-                            <h4>홈트 영상</h4>
+                              <a href="../youtube/you_list.do"><h4>홈트 영상</h4></a>
                         </div>
                     </div>
                 </div>
