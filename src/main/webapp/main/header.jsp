@@ -113,7 +113,7 @@ $(function(){
                             <select class=category-btn id="category_selected">
                             	<option value="0">카테고리 전체</option>
                             	<option value="1">무료 홈 트레이닝</option>
-                            	<option value="4">유튜브 홈 트레이닝</option>
+                            	<option value="4">유료 홈 트레이닝</option>
                             	<option value="2">건강 식품</option>
                             	<option value="3">운동 기구 & 용품</option>
                             </select>

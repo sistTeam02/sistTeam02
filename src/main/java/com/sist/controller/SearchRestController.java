@@ -56,6 +56,7 @@ public class SearchRestController {
 			JSONObject obj=new JSONObject();
 			obj.put("no", vo.getNo());
 			obj.put("title", vo.getKeyword());
+			obj.put("cno", vo.getCno());
 			arr.add(obj);
 		}
 		json=arr.toJSONString();
