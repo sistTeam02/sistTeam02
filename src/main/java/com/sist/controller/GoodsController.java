@@ -61,7 +61,7 @@ public class GoodsController {
 			model.addAttribute("endPage", endPage);
 			model.addAttribute("count", count);
 			
-			// 쿠키 (SpringRecipeProject)
+			// 쿠키
 			Cookie[] cookies=request.getCookies();
 			List<String> cList=new ArrayList<String>();
 			if(cookies!=null)
@@ -71,8 +71,8 @@ public class GoodsController {
 					cookies[i].setPath("/");
 					if(cookies[i].getName().startsWith("m"))
 					{
-						GoodsDetailVO gvo=gDao.goodsDetailData(Integer.parseInt(cookies[i].getValue()));
-						cList.add(gvo.getPoster());
+						GoodsDetailVO vo=gDao.goodsDetailData(Integer.parseInt(cookies[i].getValue()));
+						cList.add(vo.getPoster());
 					}
 				}
 				model.addAttribute("cList", cList);
