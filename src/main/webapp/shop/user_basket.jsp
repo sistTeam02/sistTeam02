@@ -39,7 +39,8 @@ $(document).on("click",".ti-close-clone",function() {
 });
 /* 결제버튼 */
 $(document).on("click",".proceed-btn",function() {
-insert_purchase();
+	insert_purchase();
+	deleteList();
 });
 function order_basketList(no){
 	$('tr[id^=table_tr]').remove();
@@ -77,7 +78,7 @@ function make_tr(json,no){
 	                            "</div>"+
 	                       "</td>"+
 	                "<td class='total-price' id=total"+i+">"+cal_price(json[i].price,json[i].ordercount)+"</td>"+
-	                "<td class='close-td'><i class='ti-close ti-close-clone' no="+json[i].no+"></i></td>"+
+	                "<td class='close-td'><i class='ti-close ti-close-clone' id=dBtn"+i+" no="+json[i].no+"></i></td>"+
 	                   "</tr>"
 			)
 		}
@@ -94,7 +95,7 @@ function make_tr(json,no){
 	                          "3개월"+
 	                       "</td>"+
 	                "<td class='total-price p-price' id=total"+i+">"+showPrice(json[i].price)+"</td>"+
-	                "<td class='close-td'><i class='ti-close ti-close-clone' no="+json[i].no+"></i></td>"+
+	                "<td class='close-td'><i class='ti-close ti-close-clone' id=dBtn"+i+" no="+json[i].no+"></i></td>"+
 	                   "</tr>"
 			)
 		}
@@ -192,7 +193,21 @@ function change_th(no){
 		$('#change_th3').text('금액');
 	}
 }
-
+/* 결제 클릭시 장바구니 목록보여주기 삭제 */
+function deleteList(){
+	let arr={}
+	let row=$('tr[id^=table_tr]').length;
+	for(i=0;i<row; i++){
+		arr[i]=$('#dBtn'+i).attr('no');
+		console.log(arr[i]);
+	}
+	console.log(arr);
+	for(j=0;j<arr.length;j++){
+		console.log(arr[0]); 
+		del_order_basket(arr[j]);
+	}
+	$('tr[id^=table_tr]').remove();
+}
 </script>
 <style type="text/css">
 .basket_memu{

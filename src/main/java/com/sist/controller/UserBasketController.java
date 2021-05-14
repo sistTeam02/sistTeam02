@@ -51,7 +51,7 @@ public class UserBasketController {
 		int total=Integer.parseInt(sp)*su;
 		
 		User_basketVO vo=new User_basketVO();
-		vo.setAddress(address);
+		//vo.setAddress(address);
 		vo.setId(id);
 		vo.setPno(pno);
 		vo.setOrdercount(su);
