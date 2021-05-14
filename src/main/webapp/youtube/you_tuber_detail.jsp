@@ -61,7 +61,7 @@
             </div>
         </div>
     </div>
-    <!-- Breadcrumb Section Begin -->
+    <!-- Breadcrumb Section ds -->
 
     <!-- Product Shop Section Begin -->
     <section class="product-shop spad">
@@ -89,12 +89,12 @@
 	                            <form method="post" action="../youtube/input.do">
 	                            <div class="select-option">
 	                                
-									  <a style="float: left" href="../youtube/you_tuber_detail.do?cno=${youtuberName.cno }">
+									  <a href="../youtube/you_tuber_detail.do?cno=${youtuberName.cno }">
 									<h3>${youtuberName.channeltitle } </h3>
 									</a>
 									  <div class="filter-widget">
 									<input type=hidden name="cno" value="${youtuberName.cno }">
-									<input type="submit" style="float: left"  value="수강찜" class="filter-btn">
+									<input type="submit"  value="수강찜" class="filter-btn">
 									</div>
 	                            </div>
 	                            </form>
@@ -118,8 +118,14 @@
                      </div>
              </div>
          </div>
-         		<div style="height:30px"></div>
+         <div style="height:30px"></div>
         <%--  <c:forEach var="vo" items="${ylist }"> --%>
+       
+ 	<%-- 	</c:forEach> --%>
+ 	
+      </div>
+      
+       <div class="col-lg-12">
 		<ul class="pagination" >
 		<c:if test="${startPage>1 }">
 		  <a href="../youtube/you_tuber_detail.do?cno=${cno }&page=${startPage-1}"><li class="page">&lt;</li></a>
@@ -138,8 +144,7 @@
 		  <a href="../youtube/you_tuber_detail.do?cno=?${cno }&page=${endPage+1}"><li class="page">&gt;</li></a>
 		 </c:if>
 		</ul>
- 	<%-- 	</c:forEach> --%>
-      </div>
+		</div>
     </section>
     <!-- Product Shop Section End -->
 </body>
