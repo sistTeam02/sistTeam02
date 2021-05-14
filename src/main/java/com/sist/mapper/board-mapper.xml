@@ -86,6 +86,10 @@
   DELETE FROM freeboard
   WHERE no=#{no}
 </delete>
+  <delete id="freeboardReplyDelete" parameterType="int">
+    DELETE FROM reply
+    WHERE bno=#{bno}
+  </delete>
 
 <!-- ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
 

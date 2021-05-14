@@ -101,6 +101,7 @@ public class FreeBoardDAO extends SqlSessionDaoSupport{
 	    		 /*
 	    		  *   conn.setAutoCommit(false)
 	    		  */
+	    		 getSqlSession().selectList("freeboardReplyDelete", no);
 	    		 getSqlSession().delete("freeboardDelete",no);
 	    		 /*
 	    		  *  conn.commit()  => @Around

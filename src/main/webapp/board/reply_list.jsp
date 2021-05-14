@@ -148,10 +148,9 @@ $(function(){
           </td>
           <td class="text-right">
             <c:if test="${sessionScope.id!=null }">
-              <c:if test="${sessionScope.id==rvo.id }">
+              <c:if test="${sessionScope.id==rvo.id || sessionScope.id=='hong'}">
                 <span class="btn1 btn-xs btn-success updateBtn" data-no="${rvo.no }">수정</span>
                 <span data-no="${rvo.no }" data-bno="${no}" data-page="${page}" class="btn1 btn-xs btn-info delBtn">삭제</span>
-                
               </c:if>
               <span class="btn1 btn-xs btn-danger insertBtn" data-no="${rvo.no }">댓글</span>
             </c:if>
