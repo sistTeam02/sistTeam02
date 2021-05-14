@@ -33,8 +33,8 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="breadcrumb-text">
-                        <a href="../main/main.do"><i class="fa fa-home"></i> Home</a>
-                        <span>Shop</span>
+                        <a href="../main/main.do"><i class="fa fa-home"></i> 홈</a>
+                        <span>건강식품</span>
                     </div>
                 </div>
             </div>
@@ -56,30 +56,46 @@
                         </ul>
                     </div>
                     <div class="filter-widget">
-                        <h4 class="fw-title">가격대</h4>
-                        <div class="filter-range-wrap">
-                            <div class="range-slider">
-                                <div class="price-input">
-                                    <input type="text" id="minamount">
-                                    <input type="text" id="maxamount">
-                                </div>
+                        <h4 class="fw-title">가격대별</h4>
+                        <div class="fw-brand-check">
+                            <div class="bc-item">
+                                <ul class="filter-catagories">
+                                	<input type="checkbox" id="min0">
+                                    <span class="checkmark"></span>
+                                    1만원 이하
+                                </ul>
                             </div>
-                            <div class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"
-                                data-min="33" data-max="98">
-                                <div class="ui-slider-range ui-corner-all ui-widget-header"></div>
-                                <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span>
-                                <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span>
+                            <div class="bc-item">
+                                <ul class="filter-catagories">
+                                	<input type="checkbox" id="min1">
+                                    <span class="checkmark"></span>
+                                    1만원-2만원 이하
+                                </ul>
                             </div>
-                        </div>
-                        <a href="#" class="filter-btn">Filter</a>
+                            <div class="bc-item">
+                                <ul class="filter-catagories">
+                                	<input type="checkbox" id="min5">
+                                    <span class="checkmark"></span>
+                                    5만원-10만원 이하
+                                </ul>
+                            </div>
+                            <div class="bc-item">
+                                <ul class="filter-catagories">
+                                	<input type="checkbox" id="min10">
+                                    <span class="checkmark"></span>
+                                    10만원 이상
+                                </ul>
+                            </div>
+                        </div><br>
+                        <a href="#" class="filter-btn">찾기</a>
                     </div>
                     <div class="filter-widget">
                         <h4 class="fw-title">최근 본 상품</h4>
                         <div class="fw-brand-check">
-                            <div class="bc-item"><!--  vo-for="gvo in goods" -->
-                               <%-- <c:forEach var="poster" items="${gvo.list }"> --%>
-                                  <img :src="vo.poster" width=100px height=100px>
-                               <%-- </c:forEach> --%>
+                            <div class="bc-item">
+                               <c:forEach var="poster" items="${cList }">
+                                  <img src="${poster }" width=70px height=70px>&nbsp;&nbsp;&nbsp;
+                               </c:forEach>
                             </div>
                         </div>
                     </div>
@@ -90,10 +106,10 @@
                         <div class="row">
                             <div class="col-lg-7 col-md-7">
                                 <div class="select-option">
-                                    <select class="sorting">
+                                    <!-- <select class="sorting">
                                         <option value="">최신순</option>
                                         <option value="">가격순</option>
-                                    </select>
+                                    </select> -->
                                     <!-- <select class="p-show">
                                         <option value="">Show:</option>
                                     </select> -->
@@ -101,7 +117,7 @@
                             </div>
                             <div class="col-lg-5 col-md-5 text-right">
                                 <!-- <p>Show 01- 09 Of 36 Product</p> -->
-                                <%-- <p>총 <span id="count" style="color:#648cff">${vo.count }</span>개의 상품</p> --%>
+                                <p>총 <span id="count" style="color:#648cff">1006</span>개의 상품</p>
                             </div>
                         </div>
                     </div>
@@ -109,19 +125,49 @@
                         <div class="row">
                            <c:forEach var="vo" items="${list }">
                                <div class="col-lg-4">
-                                  <a href="dfood_detail.do?no=${vo.no }">
-                                     <img src="${vo.poster }">
+                                  <div class="product-item" style="width:262.5px;height:410.5px">
+                                     <div class="pi-pic" style="width:262.5px;height:262.5px">
+                                        <a href="dfood_detail_before.do?no=${vo.no }">
+                                           <img src="${vo.poster }">
+                                        </a>
+                                     <!-- <div class="sale pp-sale">Sale</div> -->
+                                        <div class="icon product_favorite">
+                                          <!-- 찜으로 이동 -->
+                                          <c:choose>
+                                            <c:when test="${id!=null }">
+	                                          <a href="#" id="goodsJjimUpdate"><!-- 로그인시, 활성화 -->
+	                                            <i class="icon_heart_alt"></i> <!-- 활성화는 icon_heart -->
+	                                          </a>
+	                                        </c:when>
+	                                        <c:otherwise><!-- 로그인 필요 -->
+	                                          <a href="../member/login.do">
+	                                            <i class="icon_heart_alt"></i>
+	                                          </a>
+	                                        </c:otherwise>
+                                          </c:choose>
+                                        </div>
+                                        <ul class="text-left">
+                                          <!-- 장바구니로 이동 -->
+                                            <li class="w-icon active">
+                                              <a href="../shop/user_basket.do"><i class="icon_bag_alt"></i></a>
+                                            </li>
+                                            <!-- <li class="quick-view"><a href="#">+ Quick View</a></li> -->
+                                            <!-- <li class="w-icon"><a href="#"><i class="fa fa-random"></i></a></li> -->
+                                        </ul>
+                                      </div>
+                                      <a href="dfood_detail_before.do?no=${vo.no }">
                                         <div class="pi-text text-center">
 	                                       <p>${vo.title }</p>
 	                                    </div>
-	                              </a>
+	                                  </a>
 	                              <div class="product-price text-center" style="font-size:13pt;font-weight:bold;color:#648cff;height:55px">
 	                                  <span>${vo.price }&nbsp;원</span>
 	                              </div>
                                </div>
-                            </c:forEach>    
-                         </div>
-                     </div>
+                           </div>
+                        </c:forEach>    
+                    </div>
+                </div>
              </div>
          </div>
          <!-- <div class="loading-more" style="height:30px">
@@ -144,11 +190,11 @@
 	          <tr>
 		       <td>
 		         <ul class="pagination">
-		             <li><a href="shop_list.do?page=${curpage>1?curpage-1:curpage }">이전</a></li>
+		             <li><a href="dfood_list.do?page=${curpage>1?curpage-1:curpage }">이전</a></li>
 				         <c:forEach var="i" begin="${startPage }" end="${endPage }">
 				           &nbsp;&nbsp;<li><a href="../shop/shop_list.do?page=${i }">${i }</a></li>&nbsp;&nbsp;
 				         </c:forEach>
-			         <li><a href="shop_list.do?page=${curpage<totalpage?curpage+1:curpage }">다음</a></li>
+			         <li><a href="dfood_list.do?page=${curpage<totalpage?curpage+1:curpage }">다음</a></li>
 			     </ul>
 		       </td>
 		     </tr>
@@ -157,5 +203,14 @@
       </div>
     </section>
     <!-- Product Shop Section End -->
+<script src="../js/bootstrap.min.js"></script>
+<script src="../js/jquery-ui.min.js"></script>
+<script src="../js/jquery.countdown.min.js"></script>
+<script src="../js/jquery.nice-select.min.js"></script>
+<script src="../js/jquery.zoom.min.js"></script>
+<script src="../js/jquery.dd.min.js"></script>
+<script src="../js/jquery.slicknav.js"></script>
+<script src="../js/owl.carousel.min.js"></script>
+<script src="../js/main.js"></script>
 </body>
 </html>
