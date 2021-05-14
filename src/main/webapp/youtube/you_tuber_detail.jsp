@@ -94,7 +94,12 @@
 									</a>
 									  <div class="filter-widget">
 									<input type=hidden name="cno" value="${youtuberName.cno }">
+									<c:if test="${sessionScope.id!=null}">
 									<input type="submit"  value="수강찜" class="filter-btn">
+									</c:if>
+									<c:if test="${sessionScope.id==null}">
+									<a href="../member/login.do"><span  class="filter-btn">로그인 이용</span></a>
+									</c:if>
 									</div>
 	                            </div>
 	                            </form>
