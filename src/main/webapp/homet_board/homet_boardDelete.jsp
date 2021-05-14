@@ -22,9 +22,7 @@ h1 {
            비밀번호:<input type=password name=pwd size=10 class="input-sm">
                  <input type=hidden name=no value="${no }">
                  <input type=hidden name=page value="${page }">
-				 <h1>${no }</h1>
-                 <h1>${page }</h1>
-        	<button type=submit  value="삭제" class="btn btn-sm btn-primary" id="delBtn" />
+        	<input type=submit  value="삭제" class="btn btn-sm btn-primary" id="delBtn" />
         </form>
     </td>
 </body>
