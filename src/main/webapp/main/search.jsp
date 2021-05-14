@@ -283,8 +283,7 @@ a:hover{
     			curvalue:1,
     			isSearch:true,
     			isBuy:false,
-    			searchLink:"../main/search.do?no=0&search=",
-    			buyLink:"../shop/dfood_detail.do?no="
+
     		},
     		mounted:function(){
     			axios.get("http://localhost/web/main/rank.do",{
