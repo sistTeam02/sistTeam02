@@ -71,7 +71,7 @@ public class MainSearchController {
 		
 			model.addAttribute("list",hlist);
 			if(hlist.isEmpty()){
-				int num=(int)(Math.random()*500);
+				int num=(int)(Math.random()*500)+1;
 				List<HometMainVO> elist=sdao.searchEmptyHomet(num);
 				model.addAttribute("elist",elist);
 			}
@@ -87,7 +87,7 @@ public class MainSearchController {
 			
 			model.addAttribute("list",dlist);
 			if(dlist.isEmpty()){
-				int num=(int)(Math.random()*500);
+				int num=(int)(Math.random()*500)+1;
 				List<DietFoodVO> elist=sdao.searchEmptyDietfood(num);
 				model.addAttribute("elist",elist);
 			}
@@ -103,7 +103,7 @@ public class MainSearchController {
 	
 			model.addAttribute("list",glist);
 			if(glist.isEmpty()){
-				int num=(int)(Math.random()*500);
+				int num=(int)(Math.random()*500)+1;
 				List<GoodsVO> elist=sdao.searchEmptyGoods(num);
 				model.addAttribute("elist",elist);
 			}
@@ -119,7 +119,7 @@ public class MainSearchController {
 	
 			model.addAttribute("list",ylist);
 			if(ylist.isEmpty()){
-				int num=(int)(Math.random()*500);
+				int num=(int)(Math.random()*500)+1;
 				List<YoutubeVO> elist=sdao.searchEmptyYoutube(num);
 				model.addAttribute("elist",elist);
 			}

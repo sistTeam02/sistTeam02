@@ -277,7 +277,7 @@ public class SearchDAO extends SqlSessionDaoSupport{
 		return getSqlSession().selectList("searchEmptyGoods", num);
 	}
 	public List<DietFoodVO> searchEmptyDietfood(int num){
-		return getSqlSession().selectList("searchEmptyDietFood", num);
+		return getSqlSession().selectList("searchEmptyDietfood", num);
 	}
 	public List<YoutubeVO> searchEmptyYoutube(int num){
 		return getSqlSession().selectList("searchEmptyYoutube", num);
