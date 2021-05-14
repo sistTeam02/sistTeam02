@@ -40,9 +40,6 @@
 <script type="text/javascript">
 $(function(){
 	let pno=${gvo.no};
-	$('#jjim').click(function(){
-		$('#jjim').css('background-color','white')
-	})
 	$.ajax({
 		type:'POST',
 		url:'shop_detail_ok.do',
@@ -64,8 +61,8 @@ $(function(){
                 <div class="col-lg-12">
                     <div class="breadcrumbs d-flex flex-row align-items-center">
                       <ul>
-                        <li><a href="../main/main.do"><i class="fa fa-home"></i> 홈</a></li>
-					    <li><a href="../shop/shop_list.do"><i class="fa fa-angle-right" aria-hidden="true"></i>운동기구&용품</a></li>
+                        <li><a href="../main/main.do"><i class="fa fa-home"></i>Home</a></li>
+					    <li><a href="../shop/shop_list.do"><i class="fa fa-angle-right" aria-hidden="true"></i>상품</a></li>
 					    <li class="active"><i class="fa fa-angle-right" aria-hidden="true"></i>상세페이지</li>
                       </ul>
                     </div>
@@ -109,7 +106,7 @@ $(function(){
 					<div class="free_delivery d-flex flex-row align-items-center justify-content-center" style="width:580px">
 						<span class="ti-truck"></span><span>무료배송</span>
 					</div>
-					<div class="original_price">￦600,000</div>
+					<div class="original_price">$629.99</div>
 					<div class="product_price">
 					  <fmt:formatNumber value="${gvo.price }"/>원
 					</div>
@@ -120,6 +117,14 @@ $(function(){
 						<li><i class="fa fa-star" aria-hidden="true"></i></li>
 						<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
 					</ul>
+					<!-- <div class="product_color">
+						<span>Select Color:</span>
+						<ul>
+							<li style="background: #e54e5d"></li>
+							<li style="background: #252525"></li>
+							<li style="background: #60b3f3"></li>
+						</ul>
+					</div> -->
 					<div class="quantity d-flex flex-column flex-sm-row align-items-sm-center">
 					  <tr>
 						<span>수량:</span>
@@ -150,19 +155,8 @@ $(function(){
 								    <span style="color:white">장바구니에 담기</span>
 								</div> -->
 					  </c:if>
-					  <!-- 찜하기 -->
-						<c:if test="${sessionScope.id!=null }">
-							<c:if test="${count==0} ">
-								<a href="#">
-									<!-- <div class="product_favorite d-flex flex-column align-items-center justify-content-center">찜하기</div> -->
-									<button class="red_button add_to_cart_button" style="color:white;border:none">찜하기</button>
-								</a>
-							</c:if>
-							<c:if test="${count!=0 }">
-									<!-- //<div class="product_favorite d-flex flex-column align-items-center justify-content-center">찜완료</div> -->
-							<button class="red_button add_to_cart_button" style="color:#FE5155;border:none" id="jjim">찜완료</button>
-							</c:if>
-						</c:if>
+						
+						<div class="product_favorite d-flex flex-column align-items-center justify-content-center"></div>
 					  </form>
 					</div>
 				</div>
@@ -182,7 +176,7 @@ $(function(){
 						<ul class="tabs d-flex flex-sm-row flex-column align-items-left align-items-md-center justify-content-center">
 							<li class="tab active" data-active-tab="tab_1"><span>상세 설명</span></li>
 							<!-- <li class="tab" data-active-tab="tab_2"><span>Additional Information</span></li> -->
-							<li class="tab" data-active-tab="tab_3"><span>구매 후기(2)</span></li><!-- 구매 후기 (2) -->
+							<li class="tab" data-active-tab="tab_3"><span>구매 후기</span></li><!-- 구매 후기 (2) -->
 						</ul>
 					</div>
 				</div>

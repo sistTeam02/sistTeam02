@@ -66,15 +66,15 @@
                             </ul>
                         </div>
                         <div class="recent-post">
-                            <h4>쿠키 들어갈 자리?</h4>
+                            <h4>관심항목</h4>
                             <div class="recent-blog">
                                 <a href="#" class="rb-item">
                                     <div class="rb-pic">
-                                        <img src="img/blog/recent-1.jpg" alt="">
+                                        <img src="../img/shop_001.jpg">
                                     </div>
                                     <div class="rb-text">
-                                        <h6>The Personality Trait That Makes...</h6>
-                                        <p>Fashion <span>- May 19, 2019</span></p>
+                                        <h6>홈트레이닝 룰루레몬 요가매트</h6>
+                                        <p>필라테스 <span>80,600원</span></p>
                                     </div>
                                 </a>
                                
@@ -83,13 +83,13 @@
                         <div class="blog-tags">
                             <h4>실시간 구매 상품</h4>
                             <div class="tag-item">
-                                <a href="#">Towel</a>
-                                <a href="#">Shoes</a>
-                                <a href="#">Coat</a>
-                                <a href="#">Dresses</a>
-                                <a href="#">Trousers</a>
-                                <a href="#">Men's hats</a>
-                                <a href="#">Backpack</a>
+                                <a href="#">모래주머니</a>
+                                <a href="#">요가봉</a>
+                                <a href="#">실곤약</a>
+                                <a href="#">이지퀵다이어트식품</a>
+                                <a href="#">깔라만씨 원액100%</a>
+                                <a href="#">중량밴드</a>
+                                <a href="#">필라테스기구</a>
                             </div>
                         </div>
                     </div>
