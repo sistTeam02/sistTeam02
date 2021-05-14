@@ -1361,8 +1361,8 @@ ol {
 
 .instagram-photo .insta-item {
 	float: left;
-	width: 16.66%;
-	height: 320px;
+	width: 16.66%; 
+	/*height: 100%; */
 	text-align: center;
 	position: relative;
 }
@@ -1431,6 +1431,7 @@ ol {
 
 .single-latest-blog {
 	margin-bottom: 25px;
+
 }
 
 .single-latest-blog img {
@@ -1461,6 +1462,12 @@ ol {
 }
 
 .single-latest-blog .latest-text a h4 {
+	color: #252525;
+	font-weight: 700;
+	line-height: 30px;
+	margin-bottom: 16px;
+}
+.single-latest-blog .latest-text a sub {
 	color: #252525;
 	font-weight: 700;
 	line-height: 30px;

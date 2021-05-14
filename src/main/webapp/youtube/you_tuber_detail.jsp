@@ -75,7 +75,7 @@
                 <div class="col-lg-12 order-1 order-lg-2">
                     <div class="product-show-option">
                         <div class="row">
-                            <div class="col-lg-7 col-md-7">
+                            <div class="col-lg-5 col-md-7">
                                 <div class="select-option">
                                     <select class="sorting">
                                         <option value="">Default Sorting</option>
@@ -85,19 +85,20 @@
                                     </select>
                                 </div>
                             </div>
+                            <div class="col-lg-7 col-md-7">
                             <form method="post" action="../youtube/input.do">
-                            <div class="col-lg-5 col-md-5 text-right">
+                            <div class="select-option">
                                 
-								  <a href="../youtube/you_tuber_detail.do?cno=${youtuberName.cno }">
+								  <a style="float: left" href="../youtube/you_tuber_detail.do?cno=${youtuberName.cno }">
 								<h3>${youtuberName.channeltitle } </h3>
 								</a>
 								  <div class="filter-widget">
-								
 								<input type=hidden name="cno" value="${youtuberName.cno }">
-								<input type="submit"  value="수강하기" class="filter-btn">
+								<input type="submit" style="float: left"  value="수강찜" class="filter-btn">
 								</div>
                             </div>
                             </form>
+                            <div class="col-lg-5 col-md-7">
                         </div>
                     </div>
                     <div class="product-list">
