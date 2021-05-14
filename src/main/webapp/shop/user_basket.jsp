@@ -203,7 +203,7 @@ function deleteList(){
 	}
 	console.log(arr);
 	for(j=0;j<arr.length;j++){
-		console.log(arr[0]);
+		console.log(arr[0]); 
 		del_order_basket(arr[j]);
 	}
 	$('tr[id^=table_tr]').remove();
