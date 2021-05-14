@@ -250,4 +250,36 @@ public class SearchDAO extends SqlSessionDaoSupport{
 	public List<KeywordVO> orderList(){
 		return getSqlSession().selectList("orderList");
 	}
+	
+	/*
+	 * <select id="searchEmptyHomet" parameterType="String" resultType="HometMainVO">
+		SELECT no, title, poster, rownum FROM hometraining_main 
+		WHERE title LIKE '%'||#{search}||'%' AND <![CDATA[rownum <= 8]]>
+	</select>
+	<select id="searchEmptyGoods" parameterType="String" resultType="GoodsVO">
+		SELECT no, title, poster, price, rownum FROM goods_list 
+		WHERE title LIKE '%'||#{search}||'%' AND <![CDATA[rownum <= 8]]>
+	</select>
+	<select id="searchEmptyDietfood" parameterType="String" resultType="DietFoodVO">
+		SELECT no, title, poster, price, rownum FROM dietfood_list 
+		WHERE title LIKE '%'||#{search}||'%' AND <![CDATA[rownum <= 8]]>
+	</select>
+	<select id="searchEmptyYoutube" parameterType="String" resultType="YoutubeVO">
+		SELECT no, title, thumbnails, rownum FROM youtube_data_v2 
+		WHERE title LIKE '%'||#{search}||'%' AND <![CDATA[rownum <= 8]]>
+	</select>
+	 */
+	
+	public List<HometMainVO> searchEmptyHomet(int num){
+		return getSqlSession().selectList("searchEmptyHomet", num);
+	}
+	public List<GoodsVO> searchEmptyGoods(int num){
+		return getSqlSession().selectList("searchEmptyGoods", num);
+	}
+	public List<DietFoodVO> searchEmptyDietfood(int num){
+		return getSqlSession().selectList("searchEmptyDietFood", num);
+	}
+	public List<YoutubeVO> searchEmptyYoutube(int num){
+		return getSqlSession().selectList("searchEmptyYoutube", num);
+	}
 }
