@@ -31,7 +31,6 @@ public class NoticeBoardDAO extends SqlSessionDaoSupport{
 		return getSqlSession().selectOne("noticeboardTotalPage");
 	}
 	// 글쓰기
-	@Transactional(propagation=Propagation.REQUIRED,rollbackFor=Exception.class)
 	public void noticeboardInsert(NoticeBoardVO vo)
 	{
 		getSqlSession().insert("noticeboardInsert", vo);

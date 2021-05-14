@@ -6,6 +6,7 @@ import java.io.FileInputStream;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
@@ -20,7 +21,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.multipart.MultipartFile;
-
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.sist.dao.NoticeBoardDAO;
 import com.sist.dao.ReplyDAO;
@@ -76,24 +77,34 @@ public class NoticeBoardController {
 		   return "main/main";
 	   }
 	   @PostMapping("board/ninsert_ok.do")
-	   public String board_ninsert_ok(NoticeBoardVO vo, Model model)
+	   public String board_ninsert_ok(MultipartHttpServletRequest request,NoticeBoardVO vo, Model model)
 	   {
-		   /*String fileName=null;
-			List<MultipartFile> uploadFile = vo.getFiles();
-			if (!uploadFile.isEmpty()) {
-				for(MultipartFile mf:uploadFile)
-				{
-					String originalFileName = uploadFile.getOriginalFilename();
-					String ext = FilenameUtils.getExtension(originalFileName);	//확장자 구하기
-					UUID uuid = UUID.randomUUID();	//UUID 구하기
-					fileName=uuid+"."+ext;
-					uploadFile.transferTo(new File("D:\\upload\\" + fileName));
-			    }
-			}
-			vo.setFilename(fileName);
-			nDao.noticeboardInsert(vo);
-			return "redirect:nlist.do";*/
-			try
+
+			   String tempFile="";
+			   String tempSize="";
+			   Iterator<String> itr=request.getFileNames();
+			  while(itr.hasNext())
+			   {
+				   try
+				   {
+					   MultipartFile mpf=request.getFile(itr.next());//파일명 입력
+					  String strFile=mpf.getOriginalFilename(); 
+					  File file=new File("C:/spring-upload/"+strFile);
+					  mpf.transferTo(file);// 서버에 업로드(서버 폴더에 파일 저장)
+					  // 오라클에 파일명을 묶어서 저장  a.jpg,b.png,c.jpg
+				      tempFile+=strFile+",";
+				      tempSize+=file.length()+",";
+				   }catch(Exception ex){}
+				   
+			   }
+			   tempFile=tempFile.substring(0,tempFile.lastIndexOf(","));
+			   tempSize=tempSize.substring(0,tempSize.lastIndexOf(","));
+			   vo.setFilename(tempFile);
+			   vo.setFilesize(tempSize);
+			   
+		   nDao.noticeboardInsert(vo);
+		   return "redirect:nlist.do";
+			/*try
 			   {
 			   String fileName=null;
 			   List<MultipartFile> list=vo.getFiles();
@@ -129,7 +140,7 @@ public class NoticeBoardController {
 			   }
 			   //DAO연결 
 			   nDao.noticeboardInsert(vo);
-			   return "redirect:nlist.do";
+			   return "redirect:nlist.do";*/
 		   }
 	   
 	   @GetMapping("board/ndetail.do")
@@ -142,7 +153,7 @@ public class NoticeBoardController {
 		   String s1=vo.getFilename();
 		   String s2=vo.getFilesize();
 		  
-		  if(vo.getFilecount()!=0)
+		  if(vo.getFilecount()==0)
 		  {
 			   StringTokenizer st=new StringTokenizer(s1,",");
 			   while(st.hasMoreTokens())
@@ -242,7 +253,7 @@ public class NoticeBoardController {
 	   {
 		   try
 		   {
-			   File file=new File("c:\\spring-upload\\"+fn);
+			   File file=new File("C:/spring-upload/"+fn);
 			   // 파일 정보 얻기 
 			   response.setHeader("Content-Disposition", "attachement;filename="
 					       +URLEncoder.encode(fn, "UTF-8"));

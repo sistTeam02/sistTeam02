@@ -43,13 +43,7 @@ h1 {
        <tr>
          <tr>
            <th width=20% class="info text-center">첨부파일</th>
-           <td colspan="3">
-             <ul style="list-style-type: none">
-               <c:forEach var="f" items="${fn }" varStatus="s">
-                 <li><a href="download.do?fn=${f }">${f }</a>(${fs[s.index]}Bytes)</li>
-               </c:forEach>
-             </ul>
-           </td>
+           <td colspan="3">${vo.filename }</td>
          </tr>
          <td colspan="4" height="200" valign="top" class="text-left">
           <pre style="white-space: pre-wrap;border:none;background-color:white">${vo.content }</pre>

@@ -216,8 +216,7 @@
 </update>
 <!-- 상세보기 -->
 <select id="noticeboardDetailData" resultType="NoticeBoardVO" parameterType="int">
-  SELECT no,name,subject,content,regdate,hit
-  FROM noticeboard
+  SELECT * FROM noticeboard
   WHERE no=#{no}
 </select>
 <!-- 찾기 -->

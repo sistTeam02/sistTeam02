@@ -22,35 +22,6 @@ h1 {
 <script type="text/javascript">
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
-let i=0;
-$(function(){
-	$('#delSpan').click(function(){
-		if(i==0)
-	    {
-			$('#del').show();
-			$('#delSpan').text("취소");
-			i=1;
-	    }
-		else
-		{
-			$('#del').hide();
-			$('#delSpan').text("삭제");
-			i=0;
-		}
-	});
-	//삭제 버튼
-	$('delBtn').click(function(){
-		let pwd=$('input[name=pwd]').val();
-		if(pwd.trim()=="")
-		{
-			$('input[name=pwd]').focus();
-			return;
-		}
-		// 데이터를 전송 (게시물번호, 비밀번호, 페이지번호)
-		$('#frm').submit();
-		
-	});
-});
 
 $(function(){
 	let bno=${vo.no};
