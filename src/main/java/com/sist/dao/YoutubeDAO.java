@@ -8,6 +8,7 @@ import java.util.*;
 
 import javax.annotation.Resource;
 
+import com.sist.vo.Homet_pay_inputVO;
 import com.sist.vo.YoutubeVO;;
 
 @Repository
@@ -59,7 +60,26 @@ public class YoutubeDAO extends SqlSessionDaoSupport{
 	{
 		return getSqlSession().selectOne("youtuberName",cno);
 	}
-	
+	//유료부분 찜하기
+	public void hometPayInputInsert(Homet_pay_inputVO vo)
+	{
+		getSqlSession().insert("hometPayInputInsert",vo);
+	}
+	//마이페이지에서 불러오기
+	public List<Homet_pay_inputVO> mypageHometpayList(String id)
+	{
+		return getSqlSession().selectList("mypageHometpayList",id);
+	}
+	//어드민 페이지에서 불러오기
+	public List<Homet_pay_inputVO> adminPageHometpayList()
+	{
+		return getSqlSession().selectList("adminPageHometpayList");
+	}
+	//관리자 승인
+	public void adminHtPayOKUpdate(int no)
+	{
+		getSqlSession().update("adminHtPayOKUpdate",no);
+	}
 	
 	
 }
