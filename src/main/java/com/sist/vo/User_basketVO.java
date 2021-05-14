@@ -25,17 +25,17 @@ public class User_basketVO {
 	private int cno;     // 카테고리 번호
 	private Date orddate;
 	private int state;   // 결제상태(default 0)
-	private String address;
+	//private String address;
 	private String trainer;
 	private GoodsVO gvo=new GoodsVO();
 	private DietFoodVO dvo=new DietFoodVO();
 	
-	public String getAddress() {
-		return address;
-	}
-	public void setAddress(String address) {
-		this.address = address;
-	}
+//	public String getAddress() {
+//		return address;
+//	}
+//	public void setAddress(String address) {
+//		this.address = address;
+//	}
 	public GoodsVO getGvo() {
 		return gvo;
 	}
