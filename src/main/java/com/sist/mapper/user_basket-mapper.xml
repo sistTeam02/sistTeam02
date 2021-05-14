@@ -28,11 +28,10 @@
 		#{poster},
 		#{price},
 		1,
-		#{cno},
+		0,
 		SYSDATE,
 		0,
-		#{address},
-		#{total_price}
+		'상품'
 	)
   </insert>
   
