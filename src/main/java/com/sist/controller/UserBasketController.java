@@ -43,7 +43,7 @@ public class UserBasketController {
 	
 	// 장바구니 추가
 	@RequestMapping("shop/basket_insert.do")
-	public String insert(int pno,String price,int su,HttpSession session,Model model)
+	public String insert(int pno,String price,String title,String poster,HttpSession session,Model model)
 	{
 		String id=(String)session.getAttribute("id");
 		String address=(String)session.getAttribute("address");
@@ -51,13 +51,16 @@ public class UserBasketController {
 		System.out.println("id:"+id);
 		System.out.println("address:"+address);
 		System.out.println("sp:"+sp);
-		int total=Integer.parseInt(sp)*su;
+//		int total=Integer.parseInt(sp)*su;
 		
 		User_basketVO vo=new User_basketVO();
-		//vo.setAddress(address);
+
 		vo.setId(id);
 		vo.setPno(pno);
-		vo.setOrdercount(su);
+		vo.setPrice(price);
+		vo.setTitle(title);
+		vo.setPoster(poster);
+		//vo.setTrainer(vo.getTitle());''상품
 		
 		// db
 		uDao.basketInsert(vo);
