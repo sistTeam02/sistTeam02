@@ -40,6 +40,9 @@
 <script type="text/javascript">
 $(function(){
 	let pno=${gvo.no};
+	$('#jjim').click(function(){
+		$('#jjim').css('background-color','white')
+	})
 	$.ajax({
 		type:'POST',
 		url:'shop_detail_ok.do',
@@ -155,8 +158,18 @@ $(function(){
 								    <span style="color:white">장바구니에 담기</span>
 								</div> -->
 					  </c:if>
-						
-						<div class="product_favorite d-flex flex-column align-items-center justify-content-center"></div>
+						<c:if test="${sessionScope.id!=null }">
+							<c:if test="${result==0} ">
+								<a href=../mypage/like_list_insert.do?no=${vo.no }">
+									<!-- <div class="product_favorite d-flex flex-column align-items-center justify-content-center">찜하기</div> -->
+									<button class="red_button add_to_cart_button" style="color:white;border:none">찜하기</button>
+								</a>
+							</c:if>
+							<c:if test="${result!=0 }">
+									<!-- //<div class="product_favorite d-flex flex-column align-items-center justify-content-center">찜완료</div> -->
+							<button class="red_button add_to_cart_button" style="color:white;border:none" id="jjim">찜완료</button>
+							</c:if>
+						</c:if>
 					  </form>
 					</div>
 				</div>
