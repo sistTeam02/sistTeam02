@@ -23,8 +23,26 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
-<script type="text/javascript">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+  $( function() {
+    $( "#slider-range" ).slider({
+      range: true,
+      min: 0,
+      max: 181400,
+      values: [ 111, 181400 ],
+      slide: function( event, ui ) {
+        $( "#amount" ).val( "￦" + ui.values[ 0 ] + " - ￦" + ui.values[ 1 ] );
+      }
+    });
+    $( "#amount" ).val( "￦" + $( "#slider-range" ).slider( "values", 0 ) +
+      " - ￦" + $( "#slider-range" ).slider( "values", 1 ) );
+  } );
+  </script>
+<!-- <script type="text/javascript">
 $(function(){
 	// 찜버튼 클릭시(추천 추가 또는 추천 제거)
 	$("#goodsJjimUpdate").click(function(){
@@ -53,27 +71,10 @@ $(function(){
             },
 		})
     };
-    recCount(); // 처음 시작했을 때 실행되도록 해당 함수 호출
-    
-    function initPriceSlider()
-    {
-    	$( "#slider-range" ).slider(
-    	{
-    		range: true,
-    		min: 0,
-    		max: 1000,
-    		values: [ 0, 580 ],
-    		slide: function( event, ui )
-    		{
-    			$( "#amount" ).val( "￦" + ui.values[ 0 ] + " - ￦" + ui.values[ 1 ] );
-    		}
-    	});
-    		
-    	$( "#amount" ).val( "￦" + $( "#slider-range" ).slider( "values", 0 ) + " - ￦" + $( "#slider-range" ).slider( "values", 1 ) );
-    }
+    recCount(); // 처음 시작했을 때 실행되도록 해당 함수 호출 
 });
 
-</script>
+</script> -->
 <style type="text/css">
 .checkBtn{
 	background-color: gray;
@@ -90,8 +91,8 @@ $(function(){
             <div class="row">
                 <div class="col-lg-12">
                     <div class="breadcrumb-text">
-                        <a href="../main/main.do"><i class="fa fa-home"></i> Home</a>
-                        <span class="active">Shop</span>
+                        <a href="../main/main.do"><i class="fa fa-home"></i> 홈</a>
+                        <span class="active">운동기구&용품</span>
                     </div>
                 </div>
             </div>
@@ -114,30 +115,46 @@ $(function(){
                         </ul>
                     </div>
                     <div class="filter-widget">
-                        <h4 class="fw-title" id="price">가격대별</h4>
-                        <div class="filter-range-wrap">
-                            <div class="range-slider">
-                                <div class="price-input">
-                                    <input type="text" id="minamount">
-                                    <input type="text" id="maxamount">
-                                </div>
+                        <h4 class="fw-title">가격대별</h4>
+                        <div class="fw-brand-check">
+                            <div class="bc-item">
+                                <ul class="filter-catagories">
+                                	<input type="checkbox" id="min0">
+                                    <span class="checkmark"></span>
+                                    1만원 이하
+                                </ul>
                             </div>
-                            <div class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"
-                                data-min="0" data-max="300">
-                                <div class="ui-slider-range ui-corner-all ui-widget-header"></div>
-                                <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span>
-                                <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span>
+                            <div class="bc-item">
+                                <ul class="filter-catagories">
+                                	<input type="checkbox" id="min1">
+                                    <span class="checkmark"></span>
+                                    1만원-2만원 이하
+                                </ul>
                             </div>
-                        </div>
+                            <div class="bc-item">
+                                <ul class="filter-catagories">
+                                	<input type="checkbox" id="min5">
+                                    <span class="checkmark"></span>
+                                    5만원-10만원 이하
+                                </ul>
+                            </div>
+                            <div class="bc-item">
+                                <ul class="filter-catagories">
+                                	<input type="checkbox" id="min10">
+                                    <span class="checkmark"></span>
+                                    10만원 이상
+                                </ul>
+                            </div>
+                        </div><br>
                         <a href="#" class="filter-btn">찾기</a>
                     </div>
-                    <div class="filter-widget">
+                    <div class="filter-widget row">
                         <h4 class="fw-title">최근 본 상품</h4>
                         <div class="fw-brand-check">
                             <div class="bc-item"><!--  vo-for="gvo in goods" -->
-                               <%-- <c:forEach var="poster" items="${gvo.list }"> --%>
-                                  <img :src="gvo.poster" width=100px height=100px>
-                               <%-- </c:forEach> --%>
+                                 <c:forEach var="poster" items="${cList }">
+							       <img src="${poster }" width=70px height=70px>&nbsp;&nbsp;&nbsp;
+							     </c:forEach>
                             </div>
                         </div>
                     </div>
@@ -148,10 +165,10 @@ $(function(){
                         <div class="row">
                             <div class="col-lg-7 col-md-7">
                                 <div class="select-option" style="weight:30px">
-                                    <select class="sorting">
+                                    <!-- <select class="sorting">
                                         <option value="">최신순</option>
                                         <option value="">가격순</option>
-                                    </select>
+                                    </select> -->
                                     <!-- <select class="p-show">
                                         <option value="">Show:</option>
                                     </select> -->
@@ -169,7 +186,9 @@ $(function(){
                              <div class="col-lg-4">
                                <div class="product-item" style="width:262.5px;height:410.5px">
                                      <div class="pi-pic" style="width:262.5px;height:262.5px">
-                                        <img src="${gvo.poster }">
+                                        <a href="shop_detail_before.do?no=${gvo.no }">
+                                           <img src="${gvo.poster }">
+                                        </a>
                                         <!-- <div class="sale pp-sale">Sale</div> -->
                                         <div class="icon product_favorite">
                                           <!-- 찜으로 이동 -->
