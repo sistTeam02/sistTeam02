@@ -96,7 +96,10 @@ a:hover{
                         	<table class=table>
 	                            <tr v-for="(ke, index) in list">
 	                            	<th width="20%">{{index+1}}</th>
-	                            	<td width="80%"><a :href="'../main/search.do?no=0&search='+ke.title">{{ke.title}}</a></td>
+	                            	<td width="80%">
+	                            	<a v-if="isSearch" :href="'../main/search.do?no=0&search='+ke.title">{{ke.title}}</a>
+	                            	<a v-else :href="'../shop/dfood_detail.do?no='+ke.no">{{ke.title}}</a>
+	                            	</td>
 	                            </tr>
                             </table>
                         </div>
@@ -279,7 +282,9 @@ a:hover{
     			list:[],
     			curvalue:1,
     			isSearch:true,
-    			isBuy:false
+    			isBuy:false,
+    			searchLink:"../main/search.do?no=0&search=",
+    			buyLink:"../shop/dfood_detail.do?no="
     		},
     		mounted:function(){
     			axios.get("http://localhost/web/main/rank.do",{
