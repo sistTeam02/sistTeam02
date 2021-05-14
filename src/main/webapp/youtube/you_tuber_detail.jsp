@@ -86,21 +86,20 @@
                                 </div>
                             </div>
                             <div class="col-lg-7 col-md-7">
-                            <form method="post" action="../youtube/input.do">
-                            <div class="select-option">
-                                
-								  <a style="float: left" href="../youtube/you_tuber_detail.do?cno=${youtuberName.cno }">
-								<h3>${youtuberName.channeltitle } </h3>
-								</a>
-								  <div class="filter-widget">
-								<input type=hidden name="cno" value="${youtuberName.cno }">
-								<input type="submit" style="float: left"  value="수강찜" class="filter-btn">
-								</div>
-                            </div>
-                            </form>
-                            <div class="col-lg-5 col-md-7">
-                        </div>
-                    </div>
+	                            <form method="post" action="../youtube/input.do">
+	                            <div class="select-option">
+	                                
+									  <a style="float: left" href="../youtube/you_tuber_detail.do?cno=${youtuberName.cno }">
+									<h3>${youtuberName.channeltitle } </h3>
+									</a>
+									  <div class="filter-widget">
+									<input type=hidden name="cno" value="${youtuberName.cno }">
+									<input type="submit" style="float: left"  value="수강찜" class="filter-btn">
+									</div>
+	                            </div>
+	                            </form>
+                    		</div>
+                    	</div>
                     <div class="product-list">
                         <div class="row">
                            <c:forEach var="vo" items="${ylist }">
