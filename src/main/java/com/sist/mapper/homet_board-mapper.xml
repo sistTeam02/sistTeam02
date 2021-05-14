@@ -70,7 +70,7 @@
 
 
 <delete id="homet_boardReplyDelete" parameterType="int">
-  DELETE FROM homet_board
+  DELETE FROM homet_board_reply
   WHERE bno=#{bno}
 </delete>
 

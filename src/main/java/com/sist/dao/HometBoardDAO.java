@@ -87,7 +87,7 @@ public class HometBoardDAO extends SqlSessionDaoSupport{
 	    		 /*
 	    		  *   conn.setAutoCommit(false)
 	    		  */
-	    		 getSqlSession().delete("homet_replyDelete",no);
+	    		 getSqlSession().delete("homet_boardReplyDelete",no);
 	    		 getSqlSession().delete("homet_boardDelete",no);
 	    		 /*
 	    		  *  conn.commit()  => @Around
