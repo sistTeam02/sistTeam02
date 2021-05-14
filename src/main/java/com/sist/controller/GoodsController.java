@@ -1,5 +1,6 @@
 package com.sist.controller;
 
+import org.apache.commons.lang.math.IntRange;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -110,37 +111,44 @@ public class GoodsController {
 		return "main/main";
 	}
 	// 찜하기
-	@PostMapping("mypage/like_list_insert.do")
-	public ActionForward goodsJjimUpdate(Model model,HttpServletRequest request, HttpServletResponse response) throws Exception 
+	@PostMapping("goods/goodsJjim.do")
+	public String goodsJjimUpdate(Model model,HttpSession session,int cno) throws Exception 
 	{
-		Map<String, Object> map = new HashMap<>();
-		map.put("pno", request.getParameter("pno"));
-		map.put("id", request.getParameter("id"));
+		String id=(String)session.getAttribute("id");
+		System.out.println(id);
 		
-		GoodsDAO gdao = GoodsDAO.getInstance();
-		// 찜 확인
-		int result = gdao.goodsJjimCheck(map);
+		Map map=new HashMap();
+		map.put("id", id);
+		map.put("cno", cno);
 		
-		if(result == 0){ // 찜하기
-			gdao.goodsJjimUpdate(map);
-		}else{ // 찜 취소
-			gdao.goodsJjimDelete(map);
-		}
-		model.addAttribute("main_jsp", "../mypage/like_list.jsp");
-		return null;
+		//저장
+		gDao.goodsJjimUpdate(map);
+		
+		model.addAttribute("id",id);
+		model.addAttribute("cno",cno);
+		model.addAttribute("main_jsp", "../shop/shop_detail.jsp");
+		return	"redirect:../shop/shop_detail.do?no="+cno;
 	}
-	// 찜 수량
-	@PostMapping("mypage/like_list_count.do")
-	public ActionForward goodsJjimCount(Model model,HttpServletRequest request, HttpServletResponse response) throws Exception 
+	// 찜 수량(개수)
+	@PostMapping("goods/goodsJjimCount")
+	public ActionForward goodsJjimCount(Model model,HttpSession session,int cno) throws Exception 
 	{
-		PrintWriter out = response.getWriter();
+		String id=(String)session.getAttribute("id");
+		System.out.println(id);
+		Map map=new HashMap();
+		map.put("id", id);
+		map.put("cno", cno);
+		int count=0;
+		Goods_JjimVO vo=new Goods_JjimVO();
+		count=vo.getCno();
 		
-		int no = Integer.parseInt(request.getParameter("no"));
 		
-		GoodsDAO gdao = GoodsDAO.getInstance();
-		int count = gdao.goodsJjimCount(no);
-		out.println(count);
-		out.close();
+		
+		int gJjim=gDao.goodsJjimCount(map);
+		
+		
+		model.addAttribute("count",count);
+		model.addAttribute("gJjim",gJjim);
 		model.addAttribute("main_jsp", "../mypage/like_list.jsp");
 		return null;
 	}

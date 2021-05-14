@@ -44,22 +44,9 @@ public class GoodsDAO extends SqlSessionDaoSupport {
 	public static GoodsDAO getInstance() {
 		return instance;
 	}
-	// 상품 찜 확인
-	public int goodsJjimCheck(Map<String, Object> map)
-	{
-		int result=0;
-		try 
-		{
-			result=(Integer) getSqlSession().selectOne("goodsJjimCheck", map);
-		}catch (Exception ex) {
-			System.out.println("goodsJjimCheck:"+ex);
-			ex.printStackTrace();
-		}
-		return result;
-	}
 		
-	// 상품 찜 추가
-	public void goodsJjimUpdate(Map<String, Object> map)
+	// 상품 찜하기
+	public void goodsJjimUpdate(Map map)
 	{
 		try 
 		{
@@ -69,29 +56,22 @@ public class GoodsDAO extends SqlSessionDaoSupport {
 			ex.printStackTrace();
 		}
 	}
-	
+	// 찜 수량
+		public int goodsJjimCount(Map map)
+		{
+			return getSqlSession().selectOne("goodsJjimCount",map);
+		}
 	// 상품 찜 삭제
-	public void goodsJjimDelete(Map<String, Object> map)
+	public void goodsJjimDelete(Map map)
 	{
 		try 
 		{
-			getSqlSession().insert("goodsJjimDelete", map);
+			getSqlSession().delete("goodsJjimDelete", map);
 		} catch (Exception ex) {
 			System.out.println("goodsJjimDelete:"+ex);
 			ex.printStackTrace();
 		}
 	}
-	// 찜 수
-	public int goodsJjimCount(int no)
-	{
-		int count = 0;
-		try {
-			count = (Integer) getSqlSession().selectOne("goodsJjimCount", no);
-		} catch (Exception ex) {
-			System.out.println("goodsJjimCount:" + ex);
-			ex.printStackTrace();
-		}
-		return count;
-	}
+	
 	
 }

@@ -43,35 +43,26 @@
   </select>
   
   <!-- ================ 찜하기 ================== -->
-  <!-- 찜 확인 -->
-  <select id="goodsJjimCheck" resultType="int" parameterType="hashmap" >
-	SELECT COUNT(*) FROM goods_jjim gj,goods_list gl
-	WHERE gj.pno=gl.no
-	  AND pno=#{pno} 
-	  AND id = #{id}
-  </select>
-	
+
   <!-- 찜하기 -->
   <insert id="goodsJjimUpdate" parameterType="hashmap">
 	INSERT INTO goods_jjim VALUES(
-		#{pno}, #{id}
-	)
+		dfj_no_seq.nextval,#{cno}, #{id} )
   </insert>
-	
-  <!-- 찜 취소 -->
+ <!-- 찜 개수 확인 -->
+  <select id="goodsJjimCheck" resultType="int" parameterType="hashmap" >
+	SELECT COUNT(*) FROM goods_jjim gj,goods_list gl
+	WHERE gj.cno=gl.no
+	AND cno=#{cno} 
+	AND id = #{id}
+  </select>
+  <!-- 찜 취소(삭제) -->
   <delete id="goodsJjimDelete" parameterType="hashmap">
 	DELETE FROM goods_jjim gj,goods_list gl
-	WHERE gj.pno=gl.no
-	  AND pno = #{pno} 
-	  AND id = #{id}
+	WHERE gj.cno=gl.no
+	AND cno = #{cno} 
+	AND id = #{id}
   </delete>
-  
-  <!-- 찜 수량 goodsJjimCount -->
-  <select id="goodsJjimCount" parameterType="int" resultType="int">
-	SELECT COUNT(*) FROM goods_jjim gj,goods_list gl
-	WHERE gj.pno=gl.no
-	  AND pno = #{pno}
-  </select>
   
   <!-- ================ 리뷰  ================== -->
   <!-- 리뷰 조회  -->

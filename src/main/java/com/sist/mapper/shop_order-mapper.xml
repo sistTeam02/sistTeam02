@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sist.mapper.shop_order-mapper">
+  <!-- 주문 정보 -->
+  <insert id="orderInfo" parameterType="ShopOrderVO">
+    <selectKey keyProperty="no" resultType="int" order="BEFORE">
+      SELECT NVL(MAX(ono)+1,1) as ono FROM shop_order
+    </selectKey>
+    INSERT INTO shop_order(ono,id,name,post,addr1,addr2,tel,amount)	
+    VALUES(#{ono},
+    	   #{id},
+    	   #{name},
+    	   #{post},
+    	   #{addr1},
+    	   #{addr2},
+    	   #{tel},
+    	   #{amount}
+    )
+  </insert>
+  
+  <!-- 주문 상세 정보 -->
+  <insert id="orderInfoDetail">
+    INSERT INTO shop_order_detail(odno,id,pno,stock)
+    	SELECT sod_odno_seq.nextval,#{id},pno,stock
+    	FROM user_basket
+    )
+  </insert>
+</mapper>
