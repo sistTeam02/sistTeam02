@@ -119,9 +119,9 @@
 	</select>
 	
 	<select id="orderList" resultType="com.sist.vo.KeywordVO">
-		SELECT title as keyword, no FROM
-		(SELECT title, no, rownum FROM
-		(SELECT title, pno as no, count(*) as c FROM user_order_basket GROUP BY pno, title)
+		SELECT title as keyword, no, cno FROM
+		(SELECT title, no, cno, rownum FROM
+		(SELECT title, pno as no, cno, count(*) as c FROM user_order_basket GROUP BY pno, title, cno)
 		ORDER BY c desc)
 		WHERE <![CDATA[rownum <= 10]]>
 	</select>

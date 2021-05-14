@@ -249,7 +249,7 @@
                     <div class="single-latest-blog">
                         <img src="${fvo.poster }" alt="">
                         <div class="latest-text">
-                            <a href="#">
+                            <a href="../shop/dfood_detail.do?no=${fvo.no }">
                                 <sub>${fvo.title }</sub>
                             </a>
                         </div>

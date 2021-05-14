@@ -98,7 +98,7 @@ $(function(){
 		<%-- <c:forEach var="gvo" items="${list }"> --%>
 			<div class="col-lg-6">
 				<div class="product_details">
-				  <form name="add" method="post" action="${path }/shop/basket_insert.do">
+				  <form name="add" method="post" action="../shop/basket_insert.do">
 					<div class="product_details_title" style="width:580px">
 						<h2>${gvo.title }</h2>
 						<p>Nam tempus turpis at metus scelerisque placerat nulla deumantos solicitud felis. Pellentesque diam dolor, elementum etos lobortis des mollis ut...</p>
@@ -146,8 +146,11 @@ $(function(){
 							<span class="plus"><i class="fa fa-plus" aria-hidden="true"></i></span>
 						</div>
 					  </tr>
-					  <input type="hidden" name="no" value="${gvo.no }">
+			
+					  <input type="hidden" name="pno" value="${gvo.no }">
 					  <input type="hidden" name="price" value="${gvo.price }">
+					  <input type="hidden" name="poster" value="${gvo.poster }">
+					  <input type="hidden" name="title" value="${gvo.title }">
 					  <c:if test="${sessionScope.id!=null }">
 					    <input type="submit" class="red_button add_to_cart_button" value="장바구니에 담기" style="color:white;border:none">
 								<!-- <div class="red_button add_to_cart_button">

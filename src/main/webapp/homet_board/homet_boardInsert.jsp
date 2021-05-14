@@ -24,10 +24,9 @@ h1 {
     <form method="post" action="../homet_board/homet_boardInsert_ok.do"><!-- .do : BoardController -->
     <table class="table table-hover">
      <tr>
-       <td width=15% class="text-right info">이름</td>
+       <td width=15% class="text-right info">작성자</td>
        <td width=85%>
-        <input type=text name=name size=15 class="input-sm">
-       </td>
+<input type=text name=name size=15 class="input-sm" value="${name}" readonly style="border: none;">       </td>
      </tr>
      <tr>
        <td width=15% class="text-right info">제목</td>

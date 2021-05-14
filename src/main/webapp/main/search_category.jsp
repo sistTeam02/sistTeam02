@@ -84,7 +84,7 @@
                         <a href="../main/main.do"><i class="fa fa-home"></i> Home</a>
                         <span>'${search }'의 
             <c:if test="${no==1 }">무료 홈 트레이닝</c:if>
-            <c:if test="${no==4 }">유튜브 홈 트레이닝</c:if>
+            <c:if test="${no==4 }">유료 홈 트레이닝</c:if>
             <c:if test="${no==2 }">건강 식품</c:if>            
             <c:if test="${no==3 }">운동 기구 /용품</c:if>       
                          검색 결과</span>

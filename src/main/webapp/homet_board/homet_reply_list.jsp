@@ -61,7 +61,7 @@ $(function(){
 		}
 		$.ajax({
 			type:'POST',
-			url:'reply_insert.do',
+			url:'homet_reply_insert.do',
 			data:{"bno":bno,"msg":msg},
 			success:function(result)
 			{
@@ -83,7 +83,7 @@ $(function(){
 		}
 		$.ajax({
 			type:'post',
-			url:'reply_update.do',
+			url:'homet_reply_update.do',
 			data:{"no":no,"bno":bno,"msg":msg},
 			success:function(result)
 			{
@@ -105,7 +105,7 @@ $(function(){
 		}
 		$.ajax({
 			type:'post',
-			url:'reply_to_reply_insert.do',
+			url:'homet_reply_to_reply_insert.do',
 			data:{"pno":pno,"bno":bno,"msg":msg},
 			success:function(result)
 			{
@@ -121,7 +121,7 @@ $(function(){
 		let page=$(this).attr("data-page");
 		$.ajax({
 			type:'get',
-			url:'reply_delete.do',
+			url:'homet_reply_delete.do',
 			data:{"no":no,"bno":bno},
 			success:function(result)
 			{

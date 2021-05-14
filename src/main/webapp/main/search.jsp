@@ -84,7 +84,7 @@ a:hover{
                         <ul class="filter-catagories">
                         	<li><a href="../main/search.do?no=0&search=${search }">카테고리 전체</a></li>
                             <li><a href="../main/search_category.do?no=1&search=${search }">무료 홈 트레이닝</a></li>
-                            <li><a href="../main/search_category.do?no=4&search=${search }">유튜브 홈 트레이닝</a></li>
+                            <li><a href="../main/search_category.do?no=4&search=${search }">유료 홈 트레이닝</a></li>
                             <li><a href="../main/search_category.do?no=3&search=${search }">운동 기구/용품</a></li>
                             <li><a href="../main/search_category.do?no=2&search=${search }">건강 식품</a></li>
                         </ul>
@@ -98,7 +98,9 @@ a:hover{
 	                            	<th width="20%">{{index+1}}</th>
 	                            	<td width="80%">
 	                            	<a v-if="isSearch" :href="'../main/search.do?no=0&search='+ke.title">{{ke.title}}</a>
-	                            	<a v-else :href="'../shop/dfood_detail.do?no='+ke.no">{{ke.title}}</a>
+	                            	<a v-else-if="ke.cno===1" :href="'../shop/dfood_detail.do?no='+ke.no">{{ke.title}}</a>
+	                            	<a v-else-if="ke.cno===2" :href="'../shop/shop_detail_before.do?no='+ke.no">{{ke.title}}</a>
+	                            	<a v-else-if="ke.cno===3" :href="'../youtube/you_detail.do?no='+ke.no">{{ke.title}}</a>
 	                            	</td>
 	                            </tr>
                             </table>
@@ -151,7 +153,7 @@ a:hover{
                      	 <div class="height:50px"></div>
                     <hr>
                     <div class="product-list">
-         				<h4>유튜브 홈 트레이닝 검색 결과</h4>
+         				<h4>유료 홈 트레이닝 검색 결과</h4>
          				<div style="height:30px"></div>
                         <div class="row">
                         	<c:forEach var="yvo" items="${ylist }">
@@ -163,7 +165,7 @@ a:hover{
 	                                    </div>
 	                                    </a>
 	                                    <div class="pi-text">
-	                                        <div class="catagory-name">유튜브</div>
+	                                        <div class="catagory-name">유료</div>
 	                                        <a href="../youtube/you_detail.do?no=${yvo.no }">
 	                                            <h5>${yvo.title }</h5>
 	                                        </a>
@@ -177,7 +179,7 @@ a:hover{
 	                    <div class="loading-more">
 	                        <i class="icon_loading"></i>
 	                        <a href="../main/search_category.do?no=4&search=${search }">
-	                           		유튜브 홈 트레이닝 더 보기
+	                           		유료 홈 트레이닝 더 보기
 	                        </a>
 	                    </div>
                     </c:if>
@@ -283,7 +285,6 @@ a:hover{
     			curvalue:1,
     			isSearch:true,
     			isBuy:false,
-
     		},
     		mounted:function(){
     			axios.get("http://localhost/web/main/rank.do",{

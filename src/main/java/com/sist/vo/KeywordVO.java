@@ -4,6 +4,13 @@ public class KeywordVO {
 	private int no;
 	private String keyword;
 	private int cnt;
+	private int cno;
+	public int getCno() {
+		return cno;
+	}
+	public void setCno(int cno) {
+		this.cno = cno;
+	}
 	public int getNo() {
 		return no;
 	}
