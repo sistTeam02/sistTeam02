@@ -14,7 +14,6 @@
 }
 .row1{
 	height: 900px;
-	border: 1px solid black;
 	margin: 0px auto;
 	width: 84em;
 }
@@ -242,6 +241,28 @@ display: block;
     margin-left: 41px;
     padding-top: 20px;
 }
+.foodBtn{
+    background-color: white;
+    border: #e6ae2b 2.5px solid;
+    border-radius: 7px;
+}
+.foodBtn:hover{
+	background-color:#e6ae2b;
+	color: white;
+}
+.timeBtn:hover{
+	background-color:#e6ae2b;
+	color: white;
+}
+#img_dBtn,#img_IBtn{
+	    width: 7em;
+    height: 2em;
+}
+.button_td{
+    display: block;
+    margin: 7px 0px;
+    position: relative;
+    top: 5em;
 }
 </style>
 <script type="text/javascript" src="https://code.jquery.com/jquery.js"></script>
@@ -517,7 +538,7 @@ $(function(){
     $('.timeBtn').click(function() {
     	$('.timeBtn').attr('value','0');
     	$('.timeBtn').css('background-color','rgb(84 91 99 / 14%)'); 
-    	$(this).css("background-color", "#fdf3f4");
+    	$(this).css("background-color", "#e6ae2b");
     	$(this).attr('value','1');
     });
     /* 이미지삭제버튼 */
@@ -1134,7 +1155,7 @@ function makecontent(content,poster){
 			  		<tr>
 			  			<td>
 			  			<input type="text" size=20 id="input_search">
-			  			<button type="button" id="searchBtn">검색</button>
+			  			<button type="button" id="searchBtn" class="foodBtn">검색</button>
 			  			</td>
 			  		</tr>
 			  	</table>
@@ -1173,9 +1194,11 @@ function makecontent(content,poster){
 			    		<td width="40%">
 			    			<div id="img_span" name="image" style="border-radius: 7px;"></div>
 			    		</td>
-				  		<td>
-				  			<input type="button" value="삭제" id="img_dBtn">
-				  			<input type="button" value="식단기록" id="img_IBtn">
+				  		<td class="button_td">
+				  			<input type="button" value="삭제" id="img_dBtn" class="foodBtn">
+				  		</td>
+				  		<td class="button_td">
+				  			<input type="button" value="식단기록" id="img_IBtn" class="foodBtn">
 				  			<input type="file"  id="img_fBtn" style="display: none;" multiple="multiple">
 				  		</td>
 			  	    </tr>
