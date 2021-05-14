@@ -394,7 +394,6 @@ public class AdminRestController {
 	}
 	@GetMapping("admin/redbar.do")
 	public String admin_redbar(int month,int cno,int year){
-		System.out.println(1);
 		String json="";
 		String result="";
 		String strmonth="";
@@ -430,7 +429,6 @@ public class AdminRestController {
 	}
 	@GetMapping("admin/yearbar.do")
 	public String admin_yearbar(int month,int cno,int year){
-		System.out.println(2);
 		String json="";
 		String result="";
 		int k=4;
@@ -456,6 +454,27 @@ public class AdminRestController {
 				k--;
 			}
 		json=jArr.toJSONString();
+		return json;
+	}
+	@PostMapping("admin/items_data.do")
+	public String admin_items_data(String date){
+		System.out.println(22);
+		String json="";
+		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM");
+		String thisDate=sdf.format(new Date());
+		if(date==null){
+			date=thisDate;
+		}	
+		List<User_order_basketVO> list=dao.itemsSalesRank(date);
+		JSONArray arr=new JSONArray();
+		for(User_order_basketVO vo:list){
+			JSONObject obj=new JSONObject();
+			obj.put("title", vo.getTitle());
+			obj.put("total", vo.getTotal());
+			arr.add(obj);
+		}
+		json=arr.toJSONString();
+		
 		return json;
 	}
 }

@@ -287,7 +287,7 @@ a:hover{
     			isBuy:false,
     		},
     		mounted:function(){
-    			axios.get("http://localhost/web/main/rank.do",{
+    			axios.get("http://211.238.142.200/web/main/rank.do",{
     				params:{
     					value:this.curvalue
     				}
@@ -298,7 +298,7 @@ a:hover{
     		methods:{
     			showSearchRank(){
     				this.curvalue=1;
-    				axios.get("http://localhost/web/main/rank.do",{
+    				axios.get("http://211.238.142.200/web/main/rank.do",{
         				params:{
         					value:this.curvalue
         				}
@@ -310,7 +310,7 @@ a:hover{
     			},
     			showBuyRank(){
     				this.curvalue=2;
-    				axios.get("http://localhost/web/main/rank.do",{
+    				axios.get("http://211.238.142.200/web/main/rank.do",{
         				params:{
         					value:this.curvalue
         				}

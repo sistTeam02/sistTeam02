@@ -199,4 +199,15 @@
 	GROUP by TO_char(paydate,'yyyy')
 	HAVING TO_char(paydate,'yyyy')=#{stryear}
 	</select>
+	<!-- 상품별 매출 순위 -->
+	<select id="itemsSalesRank" parameterType="String" resultType="User_order_basketVO">
+		Select title,total,rownum from(
+		SELECT max(title) title,count(pno) total
+		from user_order_basket
+		where to_char(paydate,'yyyy-MM')=#{date}
+		GROUP by title
+		ORDER by count(pno) desc)
+		where rownum BETWEEN 1 and 10
+	</select>
+	
 </mapper>

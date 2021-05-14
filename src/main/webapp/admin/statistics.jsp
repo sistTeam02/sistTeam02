@@ -11,11 +11,11 @@ let i=0;
 $(document).ready(function(){
 	$('#qna_allData').text('월매출');
 	$('#qna_allData').attr('id','month');
-	$('#qna_UpdateData').text('테스트2');
-	$('#qna_UpdateData').attr('id','test2');
-	$('#qna_search').text('테스트3');
+	$('#qna_UpdateData').text('상품별');
+	$('#qna_UpdateData').attr('id','items');
+	$('#qna_search').text('버튼');
 	$('#qna_search').attr('id','test3');
-	$('#temp').text('테스트4');
+	$('#temp').text('버튼');
 	$('#temp').attr('id','test4');
 });
 $(document).on('click','#changeBtn',function(){
@@ -28,9 +28,63 @@ $(document).on('click','#changeBtn',function(){
 		$('.td_month').show();
 		i--;
 	}
-	
-	
 });
+$(document).on('click','#month',function(){
+	page1show();
+})
+
+$(document).on('click','#items',function(){
+	$('.monthItem_tr').remove();
+	page1hide();
+	let date="2021-05"
+	itemsData(date);
+	
+})
+function page1hide(){
+	$('.statistics_box').hide();
+	$('#ystate').hide();
+	$('#barText').hide();
+}
+function page1show(){
+	$('.statistics_box').show();
+	$('#ystate').show();
+	$('#barText').show();
+}
+function page2hide(){
+	$('.items_Btntable').hide();
+	$('.items_table').hide();
+}
+function page2show(){
+	$('.items_Btntable').show();
+	$('.items_table').show();
+}
+/* 상품 데이터가져오기 */
+function itemsData(date){
+	
+	$.ajax({
+		type:'post',
+		data:{'date':date},
+		url:'../admin/items_data.do',
+		success:function(result){
+			let json=JSON.parse(result);
+			make_tr(json);
+		},error:function(error){
+			alert("상품데이터 호출오류");
+		}
+	
+	})
+}
+/* 상품 테이블 생성 */
+function make_tr(json){
+	for(i=0;i<json.length;i++){
+		$('.items_table').append(
+			"<tr class='monthItem_tr'><td>"+json[i].title+"</td>"+
+			"<td>"+json[i].total+"</td></tr>"
+		)
+	}
+	
+}
+
 </script>
 <style type="text/css">
 .statistics_box{
@@ -171,9 +225,17 @@ position: absolute;
 			<td class="td_year">{{year}}월</td>
 		<tr>
 	</table>
-	<template id="drowbar">
-		
-	</template>
+	<table class="items_Btntable" style="margin: 1em 0px 0px 5em;font-size: 22pt;">
+		<tr style="text-align: center">
+			<td>월별 판매량 Rank</td>
+		</tr>
+	</table>
+	<table class="items_table" style="margin: 4em;">
+		<tr>
+			<th>상품명</th>
+			<th>판매량</th>
+		</tr>
+	</table>
 
 	<script>
 	let em="em";
@@ -189,13 +251,13 @@ position: absolute;
 			arrheight: [{height:'',no:''}],
 			arrheight2: [{height:'',no:''}],
 			arrheight3: [{height:'',no:''}],
-			url:'http://localhost/web/admin/redbar.do',
+			url:'http://211.238.142.200/web/admin/redbar.do',
 			index:1
 			
 		  } 
 		  ,mounted:function(){
 			  _this=this
-				 axios.get("http://localhost/web/admin/redbar.do",{
+				 axios.get("http://211.238.142.200/web/admin/redbar.do",{
 	    				params:{
 	    					month:this.month,
 	    					cno:1,
@@ -204,7 +266,7 @@ position: absolute;
 	    			}).then(function(response){			
 	    				_this.arrheight=response.data
 	    			});
-			  axios.get("http://localhost/web/admin/redbar.do",{
+			  axios.get("http://211.238.142.200/web/admin/redbar.do",{
   				params:{
   					month:this.month,
   					cno:2,
@@ -213,7 +275,7 @@ position: absolute;
   			}).then(function(response){			
   				_this.arrheight2=response.data
   			});
-			  axios.get("http://localhost/web/admin/redbar.do",{
+			  axios.get("http://211.238.142.200/web/admin/redbar.do",{
 	  				params:{
 	  					month:this.month,
 	  					cno:3,year:2021 
@@ -242,12 +304,12 @@ position: absolute;
 			  },
 			  getdata: function(url){
 				  if(this.index===1){
-						this.url="http://localhost/web/admin/yearbar.do"
-						url="http://localhost/web/admin/yearbar.do"
+						this.url="http://211.238.142.200/web/admin/yearbar.do"
+						url="http://211.238.142.200/web/admin/yearbar.do"
 						this.index=2;
 					}else{
-						this.url="http://localhost/web/admin/redbar.do"
-						url="http://localhost/web/admin/redbar.do"
+						this.url="http://211.238.142.200/web/admin/redbar.do"
+						url="http://211.238.142.200/web/admin/redbar.do"
 						this.index=1;
 					}
 				  _this=this
