@@ -83,4 +83,10 @@
   	insert INTO user_order_basket(no,id,pno,title,price,ordercount,cno)
   	VALUES(#{no},#{id},#{pno},#{title},#{price},#{ordercount},#{cno})
   </insert>
+  <select id="userPurchaseData" resultType="User_order_basketVO" parameterType="hashmap">
+   SELECT no,title,price,ordercount,state,paydate
+  from user_order_basket
+  where id='shim' and TO_CHAR(paydate,'yyyy-mm')=#{date}
+  order by state asc
+  </select>
 </mapper>

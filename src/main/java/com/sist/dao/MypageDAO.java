@@ -54,4 +54,10 @@ public class MypageDAO extends SqlSessionDaoSupport{
 	public int mypageGoodsJjimCount(String id){
 		return getSqlSession().selectOne("mypageGoodsJjimCount",id);
 	}
+	public List<DietFoodVO> mypageFoodJjimList(Map map){
+		return getSqlSession().selectList("mypageFoodJjimList",map);
+	}
+	public int mypageFoodJjimCount(String id){
+		return getSqlSession().selectOne("mypageFoodJjimCount",id);
+	}
 }

@@ -38,4 +38,8 @@ public class User_basketDAO extends SqlSessionDaoSupport{
 	public void orderbasketInsert(User_order_basketVO vo){
 		getSqlSession().insert("orderbasketInsert",vo);
 	}
+	/*결제상태 확인*/
+	public List<User_order_basketVO> userPurchaseData(Map map){
+		return getSqlSession().selectList("userPurchaseData",map);
+	}
 }

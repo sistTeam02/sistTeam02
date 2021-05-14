@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import com.sist.dao.*;
 import com.sist.vo.Homet_pay_inputVO;
+import com.sist.vo.User_basketVO;
 import com.sist.vo.YoutubeVO;
 
 @Controller
@@ -145,9 +146,22 @@ public class YoutubeController {
 		
 		return "main/main";
 	}
-	
+	/*
+	 * ID                  VARCHAR2(40)   
+NO         NOT NULL NUMBER         
+PNO                 NUMBER         
+TITLE               VARCHAR2(1000) 
+POSTER              VARCHAR2(400)  
+PRICE               VARCHAR2(100)  
+ORDERCOUNT          NUMBER         
+CNO                 NUMBER         
+ORDDATE             DATE           
+STATE               NUMBER         
+ADDRESS             VARCHAR2(500)  
+TRAINER             VARCHAR2(200)  
+	 */
 	//수강신청
-	@PostMapping("youtube/input.do")
+	/*@PostMapping("youtube/input.do")
 	public String youtube_input(int cno,HttpSession session,Model model)
 	{	
 		
@@ -160,8 +174,25 @@ public class YoutubeController {
 		yDao.hometPayInputInsert(vo);
 	
 		return "redirect:../youtube/you_tuber_detail.do?cno="+cno;
-	}
+	}*/
+	@PostMapping("youtube/input.do")
+	public String youtube_input(int cno,HttpSession session,Model model)
+	{	
+		
+		String id=(String)session.getAttribute("id");
+		
+		User_basketVO vo = new User_basketVO();
+		YoutubeVO title = yDao.youtuberName(cno);
+		vo.setId(id);
+		vo.setPno(cno);
+		vo.setTitle(title.getChanneltitle());
+		vo.setTrainer(title.getChanneltitle());
+		vo.setPoster(title.getPoster());
+		
+		yDao.youtubeBasketInsert(vo);
 	
+		return "redirect:../youtube/you_tuber_detail.do?cno="+cno;
+	}
 	
 	
 	

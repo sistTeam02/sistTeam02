@@ -114,7 +114,7 @@
 							      </tr>
 							    </thead>
 							    <tbody>
-							      <%-- <c:forEach var="gvo" items="${list }">
+							       <c:forEach var="gvo" items="${gList }">
 							      <tr onclick="location.href='http://localhost/web/shop/shop_detail.do?no=${gvo.no}'" style="cursor:pointer;">
 							        <td>
 							        	<img src="${gvo.poster}" width="100px" height="100">
@@ -122,8 +122,8 @@
 							        <td>${gvo.title }</td>
 							        <td><fmt:formatNumber value="${gvo.price }"/>&nbsp;원</td>
 							      </tr>
-							      </c:forEach> --%>
-							      <tr>
+							      </c:forEach> 
+							      <!-- <tr>
 							        <td class="si-pic"><img src="../img/shop_001.jpg" width=80px height=80px></td>
 							        <td>홈트레이닝 룰루레몬 요가매트 필라테스 5mm 경량메트</td>
 							        <td>80,600원</td>
@@ -137,11 +137,11 @@
 							        <td class="si-pic"><img src="../img/shop_085.jpg" width=80px height=80px></td>
 							        <td>다기능 스트레칭 요가 로프 요가봉 탄 필라테스기구 헬스 소품 용품 홈트...</td>
 							        <td>10,170 원</td>
-							      </tr>
+							      </tr> -->
 							    </tbody>
 							  </table>
 							</div>
-							<%-- <table class="table">
+							<table class="table">
 							  	<tr>
 							  		<td class="text-center">
 							  			<ul class="pagination">
@@ -153,7 +153,7 @@
 							  			</ul>
 							  		</td>
 							  	</tr>
-							  </table> --%>
+							  </table>
 							<div class="container" align="right">
 							  <button type="button" class="btn btn-lg btn-default" onclick="location.href='../shop/shop_list.do'">다른 제품 구경하러 가기</button>
 							</div>
@@ -171,7 +171,16 @@
 							      </tr>
 							    </thead>
 							    <tbody>
-							      <tr>
+							   <c:forEach var="dvo" items="${dList }">
+							      <tr onclick="location.href='http://localhost/web/shop/dfood_detail.do?no=${dvo.no}'" style="cursor: pointer;">
+							        <td>
+							        	<img src="${dvo.poster}" width="100px" height="100px">
+							        </td>
+							        <td>${dvo.title }</td>
+							        <td>${dvo.price}&nbsp;원</td>
+							      </tr>
+							  </c:forEach>
+							      <!-- <tr>
 							        <td class="si-pic"><img src="../img/dfood_001.jpeg" width=80px height=80px></td>
 							        <td>2개사면 +2개더/이지퀵다이어트식품/뱃살감량/S라인</td>
 							        <td>41,900원</td>
@@ -185,10 +194,23 @@
 							        <td class="si-pic"><img src="../img/dfood_160.jpeg" width=80px height=80px></td>
 							        <td>깔라만씨 원액100% (1L) 1+1+1</td>
 							        <td>10,900원</td>
-							      </tr>
+							      </tr> -->
 							    </tbody>
 							  </table>
 							</div>
+							<table class="table">
+							  	<tr>
+							  		<td class="text-center">
+							  			<ul class="pagination">
+							  				<li><a href="#">&lt;</a></li>
+							  				<c:forEach var="j" begin="${startPageF }" end="${endPageF }">
+							  					<li><a href="../mypage/like_list.do?pageF=${j }">${j }</a></li>
+							  				</c:forEach>
+							  					<li><a href="#">&gt;</a>
+							  			</ul>
+							  		</td>
+							  	</tr>
+							  </table>
 							<div class="container" align="right">
 							  <button type="button" class="btn btn-lg btn-default" onclick="location.href='../shop/dfood_list.do'">다른 제품 구경하러 가기</button>
 							</div>

@@ -27,7 +27,7 @@ public class MypageController {
 	//메인으로 전송
 	//관심목록(찜목록 불러오기)
 	@GetMapping("mypage/like_list.do")
-	public String mypage_like_list(String page,HttpSession session,Model model){
+	public String mypage_like_list(String page,String pageF,HttpSession session,Model model){
 		//세션에 저장된 정보 가져오기
 		String id=(String)session.getAttribute("id");
 		System.out.println(id);
@@ -55,14 +55,44 @@ public class MypageController {
 		if(endPage>allpage){
 			endPage=totalpage;
 		}
-		
-		
 		model.addAttribute("id",id);
 		model.addAttribute("gList",gList);
 		model.addAttribute("startPage",startPage);
 		model.addAttribute("endPage",endPage);
 		model.addAttribute("BLOCK",BLOCK);
 		model.addAttribute("allpage",allpage);
+		
+		//식품 찜목록
+		if(pageF==null)
+			pageF="1";
+		int curpageF=Integer.parseInt(pageF);
+		int rowSizeF=10;
+		int startF=(curpageF*rowSizeF)-(rowSizeF-1);
+		int endF=(rowSizeF*curpageF);
+		Map mapF=new HashMap();
+		mapF.put("startF", startF);
+		mapF.put("endF", endF);
+		mapF.put("id", id);
+		
+		List<DietFoodVO> dList=fdao.mypageFoodJjimList(mapF);
+		int totalpageF=fdao.mypageFoodJjimCount(id);
+		
+		final int BLOCKF=10;
+		int startPageF=((curpageF-1)/BLOCKF*BLOCKF)+1;
+		int endPageF=((curpageF-1)/BLOCKF*BLOCKF)+BLOCKF;
+		int allpageF=totalpageF;
+		if(endPageF>allpageF){
+			endPageF=totalpageF;
+		}
+		
+		model.addAttribute("id",id);
+		model.addAttribute("dList",dList);
+		model.addAttribute("startPageF",startPageF);
+		model.addAttribute("endPageF",endPageF);
+		model.addAttribute("BLOCKF",BLOCKF);
+		model.addAttribute("allpageF",allpageF);
+		
+		
 		model.addAttribute("bread_jsp","../mypage/bread1.jsp");
 		model.addAttribute("mypage_jsp","../mypage/like_list.jsp");
 		model.addAttribute("main_jsp","../mypage/mypage_main.jsp");
@@ -203,21 +233,3 @@ public class MypageController {
 	
 	
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
