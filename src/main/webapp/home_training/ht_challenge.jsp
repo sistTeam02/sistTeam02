@@ -107,7 +107,7 @@ h1 {
 				    		 totalpage:1
 				    	 },
 				    	 mounted:function(){
-				    		 axios.get("http://localhost/web/home_training/homet/homet_ht_challenge.do",{
+				    		 axios.get("http://211.238.142.200/web/home_training/homet/homet_ht_challenge.do",{
 				    			 params:{
 				    				 page:this.curpage
 				    			 }
@@ -115,7 +115,7 @@ h1 {
 				    			 this.homet_challenge=response.data
 				    		 });
 				    		 
-				    		 axios.get("http://localhost/web/home_training/homet_challenge_total.do").then(response=>{
+				    		 axios.get("http://211.238.142.200/web/home_training/homet_challenge_total.do").then(response=>{
 				    			 console.log(response)
 				    			 this.totalpage=response.data
 				    		 })
@@ -123,7 +123,7 @@ h1 {
 				    	 methods:{
 				    		 showPrevPage(){
 				    			 this.curpage=this.curpage>1?this.curpage-1:this.curpage;
-				    			 axios.get("http://localhost/web/home_training/homet/homet_ht_challenge.do",{
+				    			 axios.get("http://211.238.142.200/web/home_training/homet/homet_ht_challenge.do",{
 				    				 params:{
 				    					 page:this.curpage
 				    				 }
@@ -134,7 +134,7 @@ h1 {
 				    		 },
 				    		 showNextPage(){
 				    			 this.curpage=this.curpage<this.totalpage?this.curpage+1:this.curpage;
-				    			 axios.get("http://localhost/web/home_training/homet/homet_ht_challenge.do",{
+				    			 axios.get("http://211.238.142.200/web/home_training/homet/homet_ht_challenge.do",{
 				    				 params:{
 				    					 page:this.curpage
 				    				 }
