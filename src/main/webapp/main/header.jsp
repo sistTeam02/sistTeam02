@@ -249,7 +249,7 @@ $(function(){
                         <li><a href="#">쇼핑</a>
                             <ul class="dropdown">
                                 <li><a href="../shop/user_basket.do">장바구니</a></li>
-                                <li><a href="./shopping-cart.html">주문확인</a></li>
+                                <li><a href="../shop/user_basket_ok.do">주문확인</a></li>
                             </ul>
                         </li>
                        

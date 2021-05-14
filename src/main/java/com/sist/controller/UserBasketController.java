@@ -1,8 +1,10 @@
 package com.sist.controller;
 
+import org.apache.commons.collections.map.HashedMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +17,7 @@ import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 import javax.annotation.Resource;
@@ -74,6 +77,26 @@ public class UserBasketController {
 		String id=(String)session.getAttribute("id");
 		model.addAttribute("id", id);
 		model.addAttribute("main_jsp", "../shop/user_basket.jsp");
+		return "main/main";
+	}
+	/*결제확인 목록*/
+	@GetMapping("shop/user_basket_ok.do")
+	public String user_basket_okMain(HttpSession session,Model model,String year,String month){
+		System.out.println(year+"-"+month);
+		Map map=new HashedMap();
+		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM");
+		String date=year+"-"+month;
+		String thisdate=sdf.format(new Date());
+		if(year==null){//첫번째 현재달
+			date=thisdate;
+		}
+		map.put("date", date);
+		System.out.println(date);
+		map.put("id", session.getAttribute("id"));
+		List<User_order_basketVO> list=uDao.userPurchaseData(map);
+		System.out.println(list.size());
+		model.addAttribute("list", list);
+		model.addAttribute("main_jsp", "../shop/user_basket_ok.jsp");
 		return "main/main";
 	}
 	

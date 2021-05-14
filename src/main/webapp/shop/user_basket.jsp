@@ -199,14 +199,11 @@ function deleteList(){
 	let row=$('tr[id^=table_tr]').length;
 	for(i=0;i<row; i++){
 		arr[i]=$('#dBtn'+i).attr('no');
-		console.log(arr[i]);
-	}
-	console.log(arr);
-	for(j=0;j<arr.length;j++){
-		console.log(arr[0]); 
-		del_order_basket(arr[j]);
+		del_order_basket(arr[i]);
 	}
 	$('tr[id^=table_tr]').remove();
+	$('#sumprice').text('결제 요청 완료');
+	
 }
 </script>
 <style type="text/css">
