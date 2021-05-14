@@ -177,7 +177,7 @@
 							        	<img src="${dvo.poster}" width="100px" height="100px">
 							        </td>
 							        <td>${dvo.title }</td>
-							        <td>${dvo.price}&nbsp;원!</td>
+							        <td>${dvo.price}&nbsp;원</td>
 							      </tr>
 							  </c:forEach>
 							      <!-- <tr>
