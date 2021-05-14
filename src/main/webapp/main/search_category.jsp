@@ -64,6 +64,12 @@
   text-decoration: none;
   color: #ffffff;
 }
+.empty{
+	text-align: center;
+	color:darkgray;
+	justify-content: center;
+	font-size: 13pt;
+}
 </style>
 
 </head>
@@ -93,7 +99,58 @@
     <section class="product-shop spad">
         <div class="container">
         	
-            <div class="row">         
+            <div class="row">
+            	<c:if test="${empty list}">
+            		<div style="margin: 0px auto">
+            			<div class="empty" style="margin: 0px auto">검색 결과가 없습니다.</div>
+            			<div style="height:100px"></div>
+            			<span style="margin: 0px auto;">찾으시는 것이 있나요?</span>
+            			<hr>
+            			<br>
+            			<div class="product-list">
+                        <div class="row">
+                           <c:forEach var="vo" items="${elist }">
+                               <div class="col-lg-3">
+                               <c:if test="${no==2 }">
+                                  <a href="../shop/dfood_detail.do?no=${vo.no }">     
+                               </c:if>
+                               <c:if test="${no==3 }">
+                                  <a href="../shop/shop_detail_before.do?no=${vo.no }">
+                               </c:if>
+                               <c:if test="${no==1 }">
+                                  <a href="../home_training/ht_detail_free.do?no=${vo.no}">
+                               </c:if>
+                                <c:if test="${no==4 }">
+                                  <a href="../youtube/you_detail.do?no=${vo.no }">
+                               </c:if>
+                               		<c:if test="${no!=4 }">
+                                     <img src="${vo.poster }">
+                                    </c:if>
+                                    <c:if test="${no==4 }">
+                                     <img src="${vo.thumbnails }">
+                                    </c:if>
+ 
+                                        <div class="pi-text text-center">
+	                                       <p>${vo.title }</p>
+	                                    </div>
+	                              </a>
+	                          
+	                              <c:if test="${no!=1 && no!=4 }">
+	                              <div class="product-price text-center" style="font-size:13pt;font-weight:bold;color:#648cff;height:55px">
+	                              	<c:if test="${no!=3 }">
+	                                  <span>${vo.price }&nbsp;원</span>
+	                                 </c:if>
+	                                 <c:if test="${no==3 }">
+	                                 	<span><fmt:formatNumber type="number" maxFractionDigits="3" value="${vo.price}" />&nbsp;원</span>
+	                                 </c:if>
+	                              </div>
+	                              </c:if>
+                               </div>
+                            </c:forEach>    
+                         </div>
+                     </div>
+            		</div>
+            	</c:if>         
                     <div class="product-list">
                         <div class="row">
                            <c:forEach var="vo" items="${list }">

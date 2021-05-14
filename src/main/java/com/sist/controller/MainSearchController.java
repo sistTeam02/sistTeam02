@@ -70,6 +70,11 @@ public class MainSearchController {
 			totalpage=sdao.searchHometAllPage(search);
 		
 			model.addAttribute("list",hlist);
+			if(hlist.isEmpty()){
+				int num=(int)(Math.random()*500);
+				List<HometMainVO> elist=sdao.searchEmptyHomet(num);
+				model.addAttribute("elist",elist);
+			}
 			startPage=((curpage-1)/BLOCK*BLOCK)+1;
 			endPage=((curpage-1)/BLOCK*BLOCK)+BLOCK;
 			allPage=totalpage;
@@ -81,6 +86,11 @@ public class MainSearchController {
 			totalpage=sdao.searchDietfoodAllPage(search);
 			
 			model.addAttribute("list",dlist);
+			if(dlist.isEmpty()){
+				int num=(int)(Math.random()*500);
+				List<DietFoodVO> elist=sdao.searchEmptyDietfood(num);
+				model.addAttribute("elist",elist);
+			}
 			startPage=((curpage-1)/BLOCK*BLOCK)+1;
 			endPage=((curpage-1)/BLOCK*BLOCK)+BLOCK;
 			allPage=totalpage;
@@ -92,6 +102,11 @@ public class MainSearchController {
 			totalpage=sdao.searchGoodsAllPage(search);
 	
 			model.addAttribute("list",glist);
+			if(glist.isEmpty()){
+				int num=(int)(Math.random()*500);
+				List<GoodsVO> elist=sdao.searchEmptyGoods(num);
+				model.addAttribute("elist",elist);
+			}
 			startPage=((curpage-1)/BLOCK*BLOCK)+1;
 			endPage=((curpage-1)/BLOCK*BLOCK)+BLOCK;
 			allPage=totalpage;
@@ -103,6 +118,11 @@ public class MainSearchController {
 			totalpage=sdao.searchYoutubeAllPage(search);
 	
 			model.addAttribute("list",ylist);
+			if(ylist.isEmpty()){
+				int num=(int)(Math.random()*500);
+				List<YoutubeVO> elist=sdao.searchEmptyYoutube(num);
+				model.addAttribute("elist",elist);
+			}
 			startPage=((curpage-1)/BLOCK*BLOCK)+1;
 			endPage=((curpage-1)/BLOCK*BLOCK)+BLOCK;
 			allPage=totalpage;
