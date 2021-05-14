@@ -187,6 +187,7 @@ TRAINER             VARCHAR2(200)
 		vo.setPno(cno);
 		vo.setTitle(title.getChanneltitle());
 		vo.setTrainer(title.getChanneltitle());
+		vo.setPoster(title.getPoster());
 		
 		yDao.youtubeBasketInsert(vo);
 	

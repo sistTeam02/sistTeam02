@@ -22,7 +22,7 @@
                             	<span class="boo">내방</span>에서 <span class="boo">스마트</span>하게 <span class="boo">홈트레이닝</span>하자!
                             </h1>
                             &nbsp;
-                            <a href="#" class="primary-btn">바로가기</a>
+                            <a href="../home_training/ht_main.do" class="primary-btn">바로가기</a>
                         </div>
                     </div>
                    <!--  <div class="off-card">
