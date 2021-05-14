@@ -30,7 +30,7 @@
                		<div style="height:50px"></div>
                        <div class="container">
                        <h2>찜한 클래스</h2>
- 						<p>찜한 운동 프로그램 목록을 보여줍니다d</p>            
+ 						<p>찜한 운동 프로그램 목록을 보여줍니다</p>            
 							  <table class="table table-hover">
 							    <thead>
 							      <tr>

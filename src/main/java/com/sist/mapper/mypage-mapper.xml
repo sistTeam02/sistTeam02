@@ -70,7 +70,7 @@
           from (
                     SELECT gl.no, title, poster, price, id, rownum as num
                       FROM goods_jjim gj,goods_list gl
-                     WHERE gj.pno=gl.no
+                     WHERE gj.cno=gl.no
                        AND id =#{id}
                 ) 
         WHERE num BETWEEN #{start} AND #{end}
@@ -79,7 +79,7 @@
    <!--운동기구 찜 수량 데이터 가져오기-->
   <select id="mypageGoodsJjimCount" resultType="int" parameterType="string">
 		SELECT CEIL(COUNT(*)/10.0) FROM goods_jjim gj,goods_list gl
-		WHERE gj.pno=gl.no
+		WHERE gj.cno=gl.no
 	    AND id=#{id}
   </select>
   <!-- 식품 찜목록 데이터 가져오기 -->
@@ -88,7 +88,7 @@
           from (
                     SELECT dl.no, title, poster, price, id, rownum as num
                       FROM dietfood_jjim dj,dietfood_list dl
-                     WHERE dj.pno=dl.no
+                     WHERE dj.cno=dl.no
                        AND id =#{id}
                 ) 
         WHERE num BETWEEN #{startF} AND #{endF}
@@ -96,7 +96,7 @@
   <!-- 식품 찜 수량 데이터 가져오기 -->
   <select id="mypageFoodJjimCount" resultType="int" parameterType="string">
 	  SELECT CEIL(COUNT(*)/10.0) FROM dietfood_jjim dj,dietfood_list dl
-	  WHERE dj.pno=dl.no
+	  WHERE dj.cno=dl.no
 	  AND id=#{id}
   </select>
 </mapper>
