@@ -44,6 +44,11 @@ h1 {
        </td>
      </tr>
      <tr>
+     <tr>
+       <td width=15% class="text-right info">첨부파일</td>
+       <td width=85%>${vo.filename }</td>
+     </tr>
+     <tr>
        <td width=15% class="text-right info">비밀번호</td>
        <td width=85%>
         <input type=password name=pwd size=10 class="input-sm">

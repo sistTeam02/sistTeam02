@@ -86,6 +86,10 @@
   DELETE FROM freeboard
   WHERE no=#{no}
 </delete>
+  <delete id="freeboardReplyDelete" parameterType="int">
+    DELETE FROM reply
+    WHERE bno=#{bno}
+  </delete>
 
 <!-- ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
 
@@ -216,8 +220,7 @@
 </update>
 <!-- 상세보기 -->
 <select id="noticeboardDetailData" resultType="NoticeBoardVO" parameterType="int">
-  SELECT no,name,subject,content,regdate,hit
-  FROM noticeboard
+  SELECT * FROM noticeboard
   WHERE no=#{no}
 </select>
 <!-- 찾기 -->
