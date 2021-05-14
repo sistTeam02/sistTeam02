@@ -167,7 +167,7 @@ public class HometBoardController {
 	   hrDao.homet_replyUpdate(vo);
 	   // 수정 후에 데이터를 보내준다 
 	   ra.addAttribute("bno",bno);
-	   return "redirect:reply_list.do";
+	   return "redirect:homet_reply_list.do";
    }
    
    @PostMapping("homet_board/homet_reply_to_reply_insert.do")
@@ -183,16 +183,18 @@ public class HometBoardController {
 	   vo.setMsg(msg);
 	   hrDao.homet_replyToReplyInsert(pno, vo);
 	   ra.addAttribute("bno", vo.getBno());
-	   return "redirect:reply_list.do";
+	   return "redirect:homet_reply_list.do";
    }
    
    @GetMapping("homet_board/homet_reply_delete.do")
    public String board_reply_delete(int no,int bno,RedirectAttributes ra)
    {
+	   System.out.println("-----------------"+no);
+	   System.out.println("-----------------"+bno);
 	   // 삭제 처리 ==> DAO(service)
 	   hrDao.homet_replyDelete(no);
 	   ra.addAttribute("bno", bno);
-	   return "redirect:reply_list.do";
+	   return "redirect:homet_reply_list.do";
    }
    
    @GetMapping("homet_board/homet_reply_list.do")
@@ -201,7 +203,7 @@ public class HometBoardController {
 	   List<HometBoardReplyVO> rList=hrDao.homet_replyListData(bno);
 	   model.addAttribute("rList", rList);
 	   model.addAttribute("no", bno);
-	   return "board/reply_list";
+	   return "homet_board/homet_reply_list";
    }
    
    
