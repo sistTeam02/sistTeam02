@@ -96,10 +96,10 @@
                            <c:forEach var="vo" items="${list }">
                                <div class="col-lg-3">
                                	   <a href="../youtube/you_tuber_detail.do?cno=${vo.cno }">
-                                     
+                                      <img style="border-radius: 70px" src="${vo.poster }">
                                         <div class="pi-text text-center">
-	                                       <p>${vo.channeltitle }</p>
-	                                       <p>${vo.cno }</p>
+	                                       <h4>${vo.channeltitle }</h4>
+	                                     
 	                                    </div>
 	                              </a>
 	                    
